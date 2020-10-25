@@ -36,7 +36,7 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
-  //ONLY IF password is updated, then salt/encrypt updatedPassword
+  //ONLY IF password is being updated/created, then salt/encrypt updatedPassword
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
