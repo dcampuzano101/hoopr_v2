@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const runSchema = mongoose.model.Schema(
+const runSchema = mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
