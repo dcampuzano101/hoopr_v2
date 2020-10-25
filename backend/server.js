@@ -1,10 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
-
-import express from "express";
-import dotenv from "dotenv";
-import colors from "colors";
 import userRoutes from "./routes/userRoutes.js";
 
 import connectDB from "./config/db.js";
