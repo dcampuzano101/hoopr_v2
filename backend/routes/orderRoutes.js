@@ -10,7 +10,7 @@ router.route("/myorders").get(protect, getMyOrders);
 
 router.route("/:id/pay").put(protect, updateOrderToPaid);
 
-//manually edit order
-router.route("/:id/update").put(protect, admin, updateOrder);
+// //manually edit order
+// router.route("/:id/update").put(protect, admin, updateOrder);
 
 export default router;

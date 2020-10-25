@@ -6,7 +6,6 @@ import asyncHandler from "express-async-handler";
 // @access: admin/private
 const createRun = asyncHandler(async (req, res) => {
   const {
-    userId,
     name,
     location,
     date,
@@ -22,7 +21,7 @@ const createRun = asyncHandler(async (req, res) => {
   //verify if runExists (location && startTime / overlap)
 
   const run = await Run.create({
-    userId,
+    userId: req.user._id,
     name,
     location,
     date,
