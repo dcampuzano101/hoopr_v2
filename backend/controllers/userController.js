@@ -11,13 +11,12 @@ const registerUser = asyncHandler(async (req, res) => {
   const userExists = await User.findOne({ email });
 
   if (userExists) {
+    if (userExists.username === username) {
+      res.status(400);
+      throw new Error("Choose new username, already exists");
+    }
     res.status(400);
     throw new Error("User already exists");
-  }
-
-  if (userExists.username === username) {
-    res.status(400);
-    throw new Error("Choose new username, already exists");
   }
 
   //using Mongoose.model.pre('save') to encrypt in userModel.js
@@ -131,7 +130,7 @@ const getUsers = asyncHandler(async (req, res) => {
 // @route: GET /api/users/:id
 // @access: admin/private
 const getUserById = asyncHandler(async (req, res) => {
-  const user = await user.findById(req.params.id);
+  const user = await User.findById(req.params.id);
 
   if (user) {
     res.json(user);

@@ -10,18 +10,14 @@ const protect = asyncHandler(async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
-      // authToken === 'Bearer absurdAssortmentOfLettersNumbers'
       token = req.headers.authorization.split(" ")[1];
-
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-      //no sense in passing the password in a request to db, even though it's hashed
-      req.user = await User.findById(decoded.id.select("-password"));
+      req.user = await User.findById(decoded.id).select("-password");
 
       next();
     } catch (error) {
       console.error(error);
-      res.status(402);
+      res.status(401);
       throw new Error("Not authorized, token failed");
     }
   }
@@ -33,7 +29,7 @@ const protect = asyncHandler(async (req, res, next) => {
 });
 
 const admin = (req, res, next) => {
-  if (req.user && req.userIsAdmin) {
+  if (req.user && req.user.isAdmin) {
     next();
   } else {
     res.status(401);

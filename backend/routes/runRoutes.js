@@ -7,7 +7,7 @@ import {
   getRunById,
   updateRun,
   deleteRun,
-} from "../controllers/orderControler.js";
+} from "../controllers/runController.js";
 
 router.route("/").post(protect, admin, createRun).get(protect, listRuns);
 
@@ -16,3 +16,5 @@ router
   .get(protect, getRunById)
   .put(protect, admin, updateRun)
   .delete(protect, admin, deleteRun);
+
+export default router;

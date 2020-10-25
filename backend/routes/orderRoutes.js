@@ -2,6 +2,14 @@ import express from "express";
 import { protect, admin } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
+import {
+  addOrderItems,
+  getOrders,
+  getOrderById,
+  getMyOrders,
+  updateOrderToPaid,
+} from "../controllers/orderController.js";
+
 router.route("/").post(protect, addOrderItems).get(protect, admin, getOrders);
 
 router.route("/:id").get(protect, getOrderById);
