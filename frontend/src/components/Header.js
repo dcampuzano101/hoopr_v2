@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "../theme.js";
-import { Paper } from "@material-ui/core";
 
 const { heading } = theme.text;
 
 const HeaderEl = styled.header`
   padding: 1.5rem;
-  grid-column: 1 / 6;
+  ${"" /* grid-column: 1 / 6; */}
   background-color: ${theme.palette.primary.main};
   box-shadow: 0 8px 6px -5px rgba(0, 0, 0, 0.34);
   margin-bottom: 1rem;

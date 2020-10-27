@@ -7,7 +7,7 @@ import theme from "./theme.js";
 
 const Main = styled.div`
   background: ${theme.palette.primary.light};
-  grid-column: 1 / 3;
+  ${"" /* grid-column: 1 / 3; */}
   max-width: 1300px;
   display: grid;
   place-items: center;
