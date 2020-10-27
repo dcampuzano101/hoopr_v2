@@ -95,16 +95,6 @@ video {
   /* Hide scrollbars */
 }
 
-header {
-  padding: 2rem;
-  grid-column: 1 / 6;
-}
-
-.left-sidebar {
-  background: lightblue;
-  grid-column: 1 / 2;
-}
-
 .main {
   background: coral;
   grid-column: 1 / 3;
@@ -116,23 +106,6 @@ header {
   margin: 0 auto;
 }
 
-.right-sidebar {
-  background: yellow;
-  grid-column: 3 / 4;
-}
-
-.footer {
-  background: wheat;
-  padding: 2rem;
-  text-align: center;
-  grid-column: 1 / 4;
-}
-
 body {
   font-family: system-ui, sans-serif;
-}
-
-.left-sidebar,
-.right-sidebar {
-  padding: 1rem;
 }

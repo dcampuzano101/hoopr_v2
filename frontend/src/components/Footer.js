@@ -4,10 +4,11 @@ import theme from "../theme.js";
 
 const { subText } = theme.text;
 
-const FooterEl = styled.header`
+const FooterEl = styled.footer`
   padding: 2rem;
   grid-column: 1 / 4;
   background-color: ${theme.palette.primary.main};
+  margin-top: 1rem;
 `;
 
 const Copyright = styled.h3`
