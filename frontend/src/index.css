@@ -95,9 +95,7 @@ video {
   /* Hide scrollbars */
 }
 
-
 header {
-  background: lightpink;
   padding: 2rem;
   grid-column: 1 / 6;
 }
@@ -107,9 +105,15 @@ header {
   grid-column: 1 / 2;
 }
 
-main {
+.main {
   background: coral;
-  grid-column: 2 / 3;
+  grid-column: 1 / 3;
+  max-width: 1300px;
+  /* height: 100%; */
+  display: grid;
+  place-items: center;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .right-sidebar {
@@ -117,7 +121,7 @@ main {
   grid-column: 3 / 4;
 }
 
-footer {
+.footer {
   background: wheat;
   padding: 2rem;
   text-align: center;

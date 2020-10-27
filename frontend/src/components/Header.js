@@ -1,47 +1,32 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import styled from "styled-components";
+import theme from "../theme.js";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  appBar: {
-    backgroundColor: "#bfc6ed",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    fontFamily: "Helvetica",
-  },
-}));
+const { heading } = theme.text;
+
+const HeaderEl = styled.header`
+  padding: 1.5rem;
+  grid-column: 1 / 6;
+  background-color: ${theme.palette.primary.main};
+`;
+
+const Logo = styled.h1`
+  font-size: ${heading.size};
+  text-align: left;
+  line-height: ${heading.lineHeight};
+  text-transform: ${heading.transform};
+  opacity: ${heading.opacity};
+  letter-spacing: ${heading.spacing};
+  color: ${heading.color};
+  font-family: ${heading.font};
+  font-weight: ${heading.weight};
+`;
 
 const Header = () => {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Hoopr
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <HeaderEl>
+      <Logo>Hoopr</Logo>
+    </HeaderEl>
   );
 };
 
