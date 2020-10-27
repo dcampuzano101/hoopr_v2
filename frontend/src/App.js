@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import styled from "styled-components";
 import theme from "./theme.js";
 import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 
 const Main = styled.div`
   background: ${theme.palette.primary.light};
@@ -24,7 +25,7 @@ const App = () => {
       <Header />
       <Main>
         <Route path="/login" component={LoginScreen} />
-        {/* <Route path="/register" component={RegisterScreen} /> */}
+        <Route path="/register" component={RegisterScreen} />
       </Main>
       <Footer />
     </Router>
