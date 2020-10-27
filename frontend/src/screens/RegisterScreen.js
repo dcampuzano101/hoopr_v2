@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../actions/userActions";
-
-//ALERT && LOADER
-
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
+import {
+  Avatar,
+  Button,
+  CircularProgress,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Typography,
+  Container,
+  makeStyles,
+} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginScreen = ({ location, history }) => {
+const RegisterScreen = ({ location, history }) => {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -57,9 +58,6 @@ const LoginScreen = ({ location, history }) => {
     e.preventDefault();
     dispatch(register(username, email, password));
   };
-  console.log(username);
-  console.log(email);
-  console.log(password);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -70,6 +68,8 @@ const LoginScreen = ({ location, history }) => {
         <Typography component="h1" variant="h5">
           Sign up!
         </Typography>
+        {error && <Alert severity="error">{error}</Alert>}
+        {loading && <CircularProgress />}
         <form className={classes.form} noValidate onSubmit={submitHandler}>
           <TextField
             variant="outlined"
@@ -132,4 +132,4 @@ const LoginScreen = ({ location, history }) => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
