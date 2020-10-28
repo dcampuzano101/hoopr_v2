@@ -20,7 +20,6 @@ export const login = (email, password) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-
     const { data } = await axios.post(
       "/api/users/login",
       { email, password },
@@ -43,30 +42,27 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const googleLogin = () => async (dispatch) => {
+export const googleLogin = (id) => async (dispatch) => {
   try {
-    // dispatch({
-    //   type: USER_LOGIN_REQUEST,
-    // });
-
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
-    await axios({
-      method: "get",
-      baseURL: "http://localhost:5000",
-      url: "/api/users/google",
+    dispatch({
+      type: USER_LOGIN_REQUEST,
     });
-    // await axios.get("/api/users/google", config);
 
-    debugger;
-    // dispatch({
-    //   type: USER_LOGIN_SUCCESS,
-    //   payload: data,
-    // });
-    // localStorage.setItem("userInfo", JSON.stringify(data));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.post(
+      "/api/users/login/google",
+      { id },
+      config
+    );
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    });
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,

@@ -2,7 +2,6 @@ import googlePassport from "passport-google-oauth20";
 import User from "./models/userModel.js";
 
 const passportFunction = (passport) => {
-  // debugger;
   passport.use(
     new googlePassport.Strategy(
       {
@@ -11,14 +10,11 @@ const passportFunction = (passport) => {
         callbackURL: "http://localhost:5000/api/users/google/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
-        debugger;
         const googleUser = profile._json;
         const newUser = {
           username: googleUser.name,
           email: googleUser.email,
         };
-        // debugger;
 
         try {
           let user = await User.findOne({ email: googleUser.email });
@@ -26,7 +22,7 @@ const passportFunction = (passport) => {
           if (user) {
             done(null, user);
           } else {
-            user = await User.create(googleUser);
+            user = await User.create(newUser);
             done(null, user);
           }
         } catch (err) {

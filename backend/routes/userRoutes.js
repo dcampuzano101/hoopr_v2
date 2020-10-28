@@ -11,10 +11,10 @@ import {
   getUserById,
   updateUser,
   deleteUser,
+  googleAuthUser,
 } from "../controllers/userController.js";
 
 router.route("/google").get(async (req, res) => {
-  debugger;
   passport.authenticate("google", { scope: ["profile", "email"] })(req, res);
 });
 
@@ -25,12 +25,13 @@ router
   .get(
     passport.authenticate("google", { failureRedirect: "/login" }),
     (req, res) => {
-      res.redirect("http://localhost:3000");
+      res.redirect(`http://localhost:3000/oauth/callback?uid=${req.user.id}`);
     }
   );
 router.route("/").post(registerUser).get(protect, admin, getUsers);
 
 router.route("/login").post(authUser);
+router.route("/login/google").post(googleAuthUser);
 router
   .route("/profile")
   .get(protect, getUserProfile)

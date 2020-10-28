@@ -62,6 +62,25 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
+const googleAuthUser = asyncHandler(async (req, res) => {
+  const { id } = req.body;
+
+  const user = await User.findById(id);
+
+  if (user) {
+    res.json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error("Could not authenticate through google");
+  }
+});
+
 // @description: gets current user profile
 // @route: GET /api/users/profile
 // @access: private
@@ -189,4 +208,5 @@ export {
   getUserById,
   updateUser,
   deleteUser,
+  googleAuthUser,
 };

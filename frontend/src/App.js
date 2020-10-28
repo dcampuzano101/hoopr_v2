@@ -7,6 +7,7 @@ import theme from "./theme.js";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import MainScreen from "./screens/MainScreen";
+import Oauth from "./components/Oauth";
 
 const Main = styled.div`
   background: ${theme.palette.primary.light};
@@ -27,6 +28,7 @@ const App = () => {
       <Main>
         <Route path="/login" component={LoginScreen} />
         <Route path="/register" component={RegisterScreen} />
+        <Route path="/oauth/callback" component={Oauth} />
         <Route path="/" component={MainScreen} exact />
       </Main>
       <Footer />

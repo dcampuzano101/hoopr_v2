@@ -4,7 +4,7 @@ import {
   RUN_LIST_SUCCESS,
 } from "../constants/runConstants";
 
-export const runListReducer = (state = {}, action) => {
+export const runListReducer = (state = { loading: true }, action) => {
   switch (action.type) {
     case RUN_LIST_REQUEST:
       return { loading: true };
