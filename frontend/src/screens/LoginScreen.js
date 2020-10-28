@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../actions/userActions";
+import { login, googleLogin } from "../actions/userActions";
 import {
   Avatar,
   Button,
@@ -56,6 +56,11 @@ const LoginScreen = ({ location, history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
+  };
+
+  const googleHandler = (e) => {
+    e.preventDefault();
+    dispatch(googleLogin());
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -113,6 +118,24 @@ const LoginScreen = ({ location, history }) => {
             <Grid item>
               <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+            <Grid item>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={googleHandler}
+              >
+                Sign In With Google
+              </Button>
+              <Link
+                href="http:/localhost:5000/api/users/google"
+                variant="body2"
+              >
+                {"Sign In with go0gle"}
               </Link>
             </Grid>
           </Grid>
