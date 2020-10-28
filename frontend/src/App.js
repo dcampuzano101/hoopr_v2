@@ -6,6 +6,7 @@ import styled from "styled-components";
 import theme from "./theme.js";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import MainScreen from "./screens/MainScreen";
 
 const Main = styled.div`
   background: ${theme.palette.primary.light};
@@ -26,6 +27,7 @@ const App = () => {
       <Main>
         <Route path="/login" component={LoginScreen} />
         <Route path="/register" component={RegisterScreen} />
+        <Route path="/" component={MainScreen} exact />
       </Main>
       <Footer />
     </Router>
