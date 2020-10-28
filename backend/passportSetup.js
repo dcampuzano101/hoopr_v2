@@ -1,7 +1,4 @@
-// import passport from "passport";
 import googlePassport from "passport-google-oauth20";
-// import asyncHandler from "express-async-handler";
-// import generateToken from "./utils/generateToken.js";
 import User from "./models/userModel.js";
 
 const passportFunction = (passport) => {
@@ -15,36 +12,37 @@ const passportFunction = (passport) => {
       },
       async (accessToken, refreshToken, profile, done) => {
         console.log(profile);
+        debugger;
+        const googleUser = profile._json;
+        const newUser = {
+          username: googleUser.name,
+          email: googleUser.email,
+        };
         // debugger;
-        // const newUser = {
-        //   googleId: profile.id,
-        //   displayName: profile.displayName,
-        //   firstName: profile.name.givenName,
-        //   lastName: profile.name.familyName,
-        //   image: profile.photos[0].value,
-        // };
 
-        // try {
-        //   let user = await User.findOne({ googleId: profile.id });
+        try {
+          let user = await User.findOne({ email: googleUser.email });
 
-        //   if (user) {
-        //     done(null, user);
-        //   } else {
-        //     user = await User.create(newUser);
-        //     done(null, user);
-        //   }
-        // } catch (err) {
-        //   console.error(err);
-        // }
+          if (user) {
+            done(null, user);
+          } else {
+            user = await User.create(googleUser);
+            done(null, user);
+          }
+        } catch (err) {
+          console.error(err);
+        }
       }
     )
   );
 
   passport.serializeUser(function (user, done) {
+    debugger;
     done(null, user.id);
   });
 
   passport.deserializeUser(function (id, done) {
+    debugger;
     User.findById(id, function (err, user) {
       done(err, user);
     });

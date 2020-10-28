@@ -101,10 +101,6 @@ const LoginScreen = ({ location, history }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
           <Button
             type="submit"
             fullWidth
@@ -114,28 +110,25 @@ const LoginScreen = ({ location, history }) => {
           >
             Sign In
           </Button>
+          <Typography component="h6" variant="h6" align="center">
+            - OR -
+          </Typography>
+          <Button
+            type="submit"
+            component="a"
+            fullWidth
+            variant="contained"
+            color="primary"
+            href="http://localhost:5000/api/users/google"
+            className={classes.submit}
+            // onClick={googleHandler}
+          >
+            Sign In With Google
+          </Button>
           <Grid container>
             <Grid item>
               <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-            <Grid item>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={googleHandler}
-              >
-                Sign In With Google
-              </Button>
-              <Link
-                href="http:/localhost:5000/api/users/google"
-                variant="body2"
-              >
-                {"Sign In with go0gle"}
               </Link>
             </Grid>
           </Grid>

@@ -12,13 +12,11 @@ import {
   updateUser,
   deleteUser,
 } from "../controllers/userController.js";
+
 router.route("/google").get(async (req, res) => {
   debugger;
   passport.authenticate("google", { scope: ["profile", "email"] })(req, res);
 });
-// router
-//   .route("/google")
-//   .get(passport.authenticate("google", { scope: ["profile", "email"] }));
 
 // @desc    Google auth callback
 // @route   GET /auth/google/callback
@@ -27,7 +25,7 @@ router
   .get(
     passport.authenticate("google", { failureRedirect: "/login" }),
     (req, res) => {
-      res.redirect("/");
+      res.redirect("http://localhost:3000");
     }
   );
 router.route("/").post(registerUser).get(protect, admin, getUsers);

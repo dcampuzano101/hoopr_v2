@@ -54,7 +54,12 @@ export const googleLogin = () => async (dispatch) => {
     //     "Content-Type": "application/json",
     //   },
     // };
-    await axios.get("/api/users/google");
+    await axios({
+      method: "get",
+      baseURL: "http://localhost:5000",
+      url: "/api/users/google",
+    });
+    // await axios.get("/api/users/google", config);
 
     debugger;
     // dispatch({
