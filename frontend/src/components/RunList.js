@@ -10,6 +10,7 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Map from "./Map";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
+
+const location = {
+  address: "100 Dobbin St, Brooklyn, NY 11222",
+  lat: 40.7251474,
+  lng: -73.9566612,
+};
 
 const RunList = () => {
   const classes = useStyles();
@@ -123,10 +130,7 @@ const RunList = () => {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography>
-                    Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-                    feugiat. Aliquam eget maximus est, id dignissim quam.
-                  </Typography>
+                  <Map location={location} zoomLevel={13} />
                 </AccordionDetails>
               </Accordion>
             </>
