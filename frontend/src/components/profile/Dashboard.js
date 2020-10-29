@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
+    width: "100%",
+    justifyContent: "center",
   },
   fixedHeight: {
     height: 240,
@@ -52,7 +54,13 @@ export default function Dashboard() {
               </Paper>
             </Grid>
             {/* Recent Deposits */}
-            <Grid item xs={12} md={6} lg={6}>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={6}
+              style={{ display: "flex", width: "100%" }}
+            >
               <Paper className={classes.paper}>
                 <Deposits />
               </Paper>

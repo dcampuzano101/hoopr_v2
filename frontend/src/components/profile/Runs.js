@@ -70,7 +70,7 @@ export default function Runs() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Recent Runs</Title>
+      <Title>Past Runs</Title>
       <Table size="small">
         <TableHead>
           <TableRow>

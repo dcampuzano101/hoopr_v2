@@ -179,7 +179,6 @@ export default function Chart() {
               </form>
             </Paper>
           </Grid>
-          {/* Recent Runs  */}
           <Grid item xs={12}>
             <Paper className={classes.paper}></Paper>
           </Grid>
