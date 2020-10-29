@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { listRuns } from "../actions/runActions";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import Alert from "@material-ui/lab/Alert";
 import {
   Accordion,
   AccordionDetails,
@@ -84,6 +85,7 @@ const RunList = () => {
   };
   return (
     <div className={classes.root}>
+      {error && <Alert severity="error">{error}</Alert>}
       {loading ? (
         <CircularProgress />
       ) : (
@@ -102,11 +104,10 @@ const RunList = () => {
             </AccordionSummary>
           </Accordion>
           {runs.map((run) => (
-            <>
+            <React.Fragment key={run._id}>
               <Accordion
                 expanded={expanded === run._id}
                 onChange={handleChange(run._id)}
-                key={run._id}
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -133,7 +134,7 @@ const RunList = () => {
                   <Map location={location} zoomLevel={13} name={run.location} />
                 </AccordionDetails>
               </Accordion>
-            </>
+            </React.Fragment>
           ))}
 
           {/* <Accordion

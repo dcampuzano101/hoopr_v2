@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Header from "./components/Header";
+import MaterialHeader from "./components/MaterialHeader";
 import Footer from "./components/Footer";
 import styled from "styled-components";
 import theme from "./theme.js";
@@ -11,10 +11,8 @@ import Oauth from "./components/Oauth";
 
 const Main = styled.div`
   background: ${theme.palette.primary.light};
-  ${"" /* grid-column: 1 / 3; */}
   max-width: 1300px;
   display: grid;
-  ${"" /* place-items: center; */}
   width: 100%;
   margin: 0 auto;
   border-radius: 4px;
@@ -24,7 +22,7 @@ const Main = styled.div`
 const App = () => {
   return (
     <Router>
-      <Header />
+      <MaterialHeader />
       <Main>
         <Route path="/login" component={LoginScreen} />
         <Route path="/register" component={RegisterScreen} />

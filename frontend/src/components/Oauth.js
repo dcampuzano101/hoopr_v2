@@ -6,7 +6,7 @@ const Oauth = ({ location, history }) => {
   const userId = location.search.split("=")[1];
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const { userInfo } = userLogin;
 
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ const Oauth = ({ location, history }) => {
     if (userInfo) {
       history.push("/");
     }
-  }, [history, userInfo]);
+  }, [history, userId, dispatch, userInfo]);
 
   return <div></div>;
 };
