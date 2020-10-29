@@ -111,8 +111,8 @@ video {
 }
 
 .google-map {
-  width: 50%;
-  height: 50vh;
+  width: 60%;
+  height: 30vh;
 }
 
 .pin {
@@ -132,7 +132,7 @@ video {
 
 @media screen and (min-width: 799px) {
   .google-map {
-    height: 50vh;
+    height: 30vh;
   }
 
   .map-h2 {

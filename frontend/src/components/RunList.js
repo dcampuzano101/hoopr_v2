@@ -14,8 +14,8 @@ import Map from "./Map";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "80%",
-    height: "80%",
+    width: "50%",
+    height: "100%",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -130,7 +130,7 @@ const RunList = () => {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Map location={location} zoomLevel={13} />
+                  <Map location={location} zoomLevel={13} name={run.location} />
                 </AccordionDetails>
               </Accordion>
             </>

@@ -14,7 +14,7 @@ const Main = styled.div`
   ${"" /* grid-column: 1 / 3; */}
   max-width: 1300px;
   display: grid;
-  place-items: center;
+  ${"" /* place-items: center; */}
   width: 100%;
   margin: 0 auto;
   border-radius: 4px;
