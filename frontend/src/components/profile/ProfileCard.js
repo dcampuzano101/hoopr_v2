@@ -100,16 +100,10 @@ const ProfileCard = ({ location, history }) => {
   const [profileSuccess, setProfileSuccess] = useState(null);
 
   const classes = useStyles();
-
-  //maybe setMessage for success
-
   const dispatch = useDispatch();
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
-
-  // console.log(userDetails);
-  // console.log(user);
 
   const updateProfileHandler = (e) => {
     e.preventDefault();
@@ -143,7 +137,6 @@ const ProfileCard = ({ location, history }) => {
       }
     }
   }, [dispatch, history, location, userInfo, user, success, error]);
-  console.log(`success === ${success}`);
   return (
     <React.Fragment>
       {/* <Title>Welcome {user.username}</Title> */}
