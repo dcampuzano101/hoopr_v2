@@ -129,9 +129,7 @@ const ProfileCard = ({ location, history }) => {
       }
 
       if (successDetails) {
-        console.log(user);
-        console.log(`successDetails consolelog`);
-        setUsername(user.name);
+        setUsername(user.username);
         setEmail(user.email);
       }
 
@@ -142,16 +140,12 @@ const ProfileCard = ({ location, history }) => {
       if (success) {
         setProfileSuccess("Successfully updated profile!");
       }
-      // } else {
-      //   setUsername(user.name);
-      //   setEmail(user.email);
-      // }
     }
   }, [dispatch, history, location, userInfo, user, success, error]);
   console.log(`success === ${success}`);
   return (
     <React.Fragment>
-      <Title>Username's Profile</Title>
+      <Title>Welcome {user.username}</Title>
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
           {/* Chart */}
@@ -163,8 +157,6 @@ const ProfileCard = ({ location, history }) => {
                   alt="avatar"
                   style={{
                     width: "100%",
-                    marginBottom: "24%",
-                    marginTop: "10%",
                     borderRadius: "5px",
                   }}
                 />
@@ -174,7 +166,7 @@ const ProfileCard = ({ location, history }) => {
                   variant="contained"
                   color="primary"
                   onClick={() => setOpen(true)}
-                  style={{ width: "100%" }}
+                  style={{ width: "100%", marginBottom: "9%" }}
                 >
                   Change Photo
                 </Button>
@@ -207,7 +199,7 @@ const ProfileCard = ({ location, history }) => {
                   color="primary"
                   className={classes.submit}
                   disabled={btnDisabled}
-                  style={{ marginTop: "18%" }}
+                  style={{ marginTop: "7%" }}
                 >
                   SAVE PHOTO
                 </Button>
@@ -298,7 +290,12 @@ const ProfileCard = ({ location, history }) => {
           {profileSuccess ? (
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Alert severity="success" onClose={() => {setProfileSuccess(null)}}>
+                <Alert
+                  severity="success"
+                  onClose={() => {
+                    setProfileSuccess(null);
+                  }}
+                >
                   {profileSuccess}
                 </Alert>
               </Paper>
