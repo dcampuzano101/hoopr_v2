@@ -95,6 +95,8 @@ const ProfileCard = ({ location, history }) => {
     true
   );
   const [alert, setAlert] = useState(null);
+  const [detailsError, setDetailsError] = useState(null);
+  const [profileSuccess, setProfileSuccess] = useState(null);
 
   const classes = useStyles();
 
@@ -132,12 +134,20 @@ const ProfileCard = ({ location, history }) => {
         setUsername(user.name);
         setEmail(user.email);
       }
+
+      if (error) {
+        setDetailsError(error);
+      }
+
+      if (success) {
+        setProfileSuccess("Successfully updated profile!");
+      }
       // } else {
       //   setUsername(user.name);
       //   setEmail(user.email);
       // }
     }
-  }, [dispatch, history, location, userInfo, user]);
+  }, [dispatch, history, location, userInfo, user, success, error]);
   console.log(`success === ${success}`);
   return (
     <React.Fragment>
@@ -217,10 +227,10 @@ const ProfileCard = ({ location, history }) => {
                   margin="normal"
                   fullWidth
                   id="username"
-                  label="Username"
+                  // label="Username"
+                  placeholder="Username"
                   name="username"
                   // autoComplete="username"
-                  // autoFocus
                   value={username}
                   onChange={(e) => {
                     setUsername(e.target.value);
@@ -235,7 +245,6 @@ const ProfileCard = ({ location, history }) => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  // autoFocus
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -286,24 +295,40 @@ const ProfileCard = ({ location, history }) => {
               </form>
             </Paper>
           </Grid>
-          {success ? (
+          {profileSuccess ? (
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Alert severity="success">Profile successfully updated!</Alert>
+                <Alert severity="success" onClose={() => {setProfileSuccess(null)}}>
+                  {profileSuccess}
+                </Alert>
               </Paper>
             </Grid>
           ) : null}
-          {error ? (
+          {detailsError ? (
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Alert severity="error">{error}</Alert>
+                <Alert
+                  severity="error"
+                  onClose={() => {
+                    setDetailsError(null);
+                  }}
+                >
+                  {detailsError}
+                </Alert>
               </Paper>
             </Grid>
           ) : null}
           {alert ? (
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Alert severity="error">{alert}</Alert>
+                <Alert
+                  severity="error"
+                  onClose={() => {
+                    setAlert(null);
+                  }}
+                >
+                  {alert}
+                </Alert>
               </Paper>
             </Grid>
           ) : null}
