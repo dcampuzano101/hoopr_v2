@@ -6,7 +6,7 @@ import styled from "styled-components";
 import theme from "./theme.js";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-import Dashboard from "./components/profile/Dashboard";
+import ProfileDashboard from "./components/profile/ProfileDashboard";
 import MainScreen from "./screens/MainScreen";
 import Oauth from "./components/Oauth";
 
@@ -26,7 +26,7 @@ const App = () => {
       <MaterialHeader />
       <Main>
         <Route path="/login" component={LoginScreen} />
-        <Route path="/profile" component={Dashboard} />
+        <Route path="/profile" component={ProfileDashboard} />
         <Route path="/register" component={RegisterScreen} />
         <Route path="/oauth/callback" component={Oauth} />
         <Route path="/" component={MainScreen} exact />

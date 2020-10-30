@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Chart from "./Chart";
+import ProfileCard from "./ProfileCard";
 import Deposits from "./Deposits";
 import Runs from "./Runs";
 
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+const ProfileDashboard = () => {
   const classes = useStyles();
 
   return (
@@ -47,10 +47,10 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
+            {/* ProfileCard */}
             <Grid item xs={12} md={6} lg={6}>
               <Paper className={classes.paper}>
-                <Chart />
+                <ProfileCard />
               </Paper>
             </Grid>
             {/* Recent Deposits */}
@@ -76,4 +76,6 @@ export default function Dashboard() {
       </main>
     </div>
   );
-}
+};
+
+export default ProfileDashboard;
