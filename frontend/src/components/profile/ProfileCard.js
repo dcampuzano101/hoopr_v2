@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails, updateUserProfile } from "../../actions/userActions";
 import { USER_UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import avatar from "../../assets/user-avatar.png";
+import { withRouter } from "react-router-dom";
 
 import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -145,7 +146,7 @@ const ProfileCard = ({ location, history }) => {
   console.log(`success === ${success}`);
   return (
     <React.Fragment>
-      <Title>Welcome {user.username}</Title>
+      {/* <Title>Welcome {user.username}</Title> */}
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
           {/* Chart */}
@@ -335,4 +336,4 @@ const ProfileCard = ({ location, history }) => {
   );
 };
 
-export default ProfileCard;
+export default withRouter(ProfileCard);

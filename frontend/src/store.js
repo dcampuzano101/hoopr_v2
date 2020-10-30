@@ -8,6 +8,7 @@ import {
   userUpdateProfileReducer,
 } from "./reducers/userReducers";
 import { runListReducer } from "./reducers/runReducers";
+import { cartReducer } from "./reducers/cartReducers";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -15,14 +16,22 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   runList: runListReducer,
+  cart: cartReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
+const cartItemsFromStorage = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems"))
+  : [];
+
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
+  cart: {
+    cartItems: cartItemsFromStorage,
+  },
 };
 
 const composeEnhancers = composeWithDevTools({

@@ -10,6 +10,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload;
+      console.log(`item =${item}`);
 
       const existItem = state.cartItems.find((x) => x.run === item.run);
 
@@ -30,11 +31,6 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       return {
         ...state,
         cartItems: state.cartItems.filter((x) => x.run !== action.payload),
-      };
-    case CART_SAVE_SHIPPING_ADDRESS:
-      return {
-        ...state,
-        shippingAddress: action.payload,
       };
     case CART_RESET:
       return { cartItems: [] };

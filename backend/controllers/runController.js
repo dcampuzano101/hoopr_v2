@@ -68,7 +68,8 @@ const listRuns = asyncHandler(async (req, res) => {
 // @route: GET /api/runs/:id
 // @access: private
 const getRunById = asyncHandler(async (req, res) => {
-  const run = Run.findById(req.params.id);
+  debugger;
+  const run = await Run.findById(req.params.id);
 
   if (run) {
     res.json(run);

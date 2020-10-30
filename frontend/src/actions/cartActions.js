@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
@@ -6,9 +5,19 @@ import {
   CART_SAVE_PAYMENT_METHOD,
   CART_RESET,
 } from "../constants/cartConstants";
+import axios from "axios";
 
 export const addToCart = (id) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/api/runs/${id}`);
+  const {
+    userLogin: { userInfo },
+  } = getState();
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  };
+  const { data } = await axios.get(`/api/runs/${id}`, config);
 
   dispatch({
     type: CART_ADD_ITEM,
@@ -22,6 +31,7 @@ export const addToCart = (id) => async (dispatch, getState) => {
   });
 
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+  console.log("addedtolocal");
 };
 
 export const removeFromCart = (id) => async (dispatch, getState) => {

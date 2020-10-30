@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Map from "./Map";
+import { addToCart } from "../actions/cartActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    // margin: theme.spacing(3, 0, 2),
+    width: "35%",
+    height: "10%",
+    display: "flex",
+    margin: "0 auto",
   },
 }));
 
@@ -87,6 +92,11 @@ const RunList = () => {
     let numericalDay = date.split("-")[1];
     return `${day}, ${month} ${numericalDay}`;
   };
+
+  const addToCartHandler = (runId) => {
+    // const runId = e.target.value;
+    dispatch(addToCart(runId));
+  };
   return (
     <div className={classes.root}>
       {error && <Alert severity="error">{error}</Alert>}
@@ -142,6 +152,8 @@ const RunList = () => {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
+                    // value={run._id}
+                    onClick={() => addToCartHandler(run._id)}
                     // disabled={updateProfileBtnDisabled}
                   >
                     ADD TO CART
