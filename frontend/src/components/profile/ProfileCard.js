@@ -146,7 +146,6 @@ const ProfileCard = ({ location, history }) => {
   }, [dispatch, history, location, userInfo, user, success, error]);
   return (
     <React.Fragment>
-      {/* <Title>Welcome {user.username}</Title> */}
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
           {/* Chart */}

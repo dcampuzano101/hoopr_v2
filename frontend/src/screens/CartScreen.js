@@ -6,6 +6,7 @@ import { addToCart, removeFromCart } from "../actions/cartActions";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+
 import Paper from "@material-ui/core/Paper";
 import ProfileCard from "../components/profile/ProfileCard";
 import CartSummary from "../components/CartSummary";
@@ -45,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     display: "flex",
-    overflow: "auto",
     flexDirection: "column",
     width: "100%",
     justifyContent: "center",
@@ -145,7 +145,7 @@ const CartScreen = ({ history, match }) => {
             style={{ display: "flex", width: "100%" }}
           >
             <Paper className={classes.paper}>
-              <CartSummary />
+              <CartSummary cartItems={cartItems} />
             </Paper>
           </Grid>
         </Grid>
