@@ -8,8 +8,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import ProfileCard from "../components/profile/ProfileCard";
-import Deposits from "../components/profile/Deposits";
-import Title from "../components/profile/Title";
+import CartSummary from "../components/CartSummary";
 
 import { ExpandMore, Delete } from "@material-ui/icons";
 
@@ -37,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: "20%",
+    flexShrink: 0,
   },
   paper: {
     padding: theme.spacing(2),
@@ -76,92 +80,77 @@ const CartScreen = ({ history, match }) => {
   // };
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <>
       <CssBaseline />
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={6}>
-              <Paper className={classes.paper}>
-                {/* <Title>CART ITEMS</Title> */}
-                {/* <Paper className={classes.paper}> */}
-                <Accordion disabled>
-                  <AccordionSummary
-                    aria-controls="panel3a-content"
-                    id="panel3a-header"
-                    expandIcon={<ExpandMore />}
-                  >
-                    <Typography className={classes.heading}>DATE</Typography>
-                    <Typography className={classes.heading}>
-                      LOCATION
-                    </Typography>
-                    <Typography className={classes.heading}>
-                      START TIME
-                    </Typography>
-                    <Typography className={classes.heading}>
-                      END TIME
-                    </Typography>
-                    <Typography className={classes.heading}>PRICE</Typography>
-                  </AccordionSummary>
-                </Accordion>
-                {cartItems.map((run) => (
-                  <React.Fragment key={run._id}>
-                    <Accordion>
-                      <AccordionSummary
-                        className={classes.noHover}
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header"
-                        expandIcon={<ExpandMore />}
-                      >
-                        <Typography className={classes.heading}>
-                          {run.date}
-                        </Typography>
-                        <Typography className={classes.heading}>
-                          {run.location}
-                        </Typography>
-                        <Typography className={classes.heading}>
-                          {run.startTime}
-                        </Typography>
-                        <Typography className={classes.heading}>
-                          {run.endTime}
-                        </Typography>
-                        <Typography className={classes.heading}>
-                          ${run.price}
-                        </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Button>
-                          <Delete onClick={console.log("delete")} />
-                        </Button>
-                      </AccordionDetails>
-                    </Accordion>
-                  </React.Fragment>
-                ))}
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid
-              item
-              xs={12}
-              md={6}
-              lg={6}
-              style={{ display: "flex", width: "100%" }}
-            >
-              <Paper className={classes.paper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Runs */}
-            {/* <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Runs />
-              </Paper>
-            </Grid> */}
+      {/* <div className={classes.appBarSpacer} /> */}
+      <Container maxWidth="lg" className={classes.container}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={8} lg={8}>
+            <Paper className={classes.paper}>
+              <Accordion disabled>
+                <AccordionSummary
+                  aria-controls="panel3a-content"
+                  id="panel3a-header"
+                  expandIcon={<ExpandMore />}
+                >
+                  <Typography className={classes.heading}>DATE</Typography>
+                  <Typography className={classes.heading}>LOCATION</Typography>
+                  <Typography className={classes.heading}>
+                    START TIME
+                  </Typography>
+                  <Typography className={classes.heading}>END TIME</Typography>
+                  <Typography className={classes.heading}>PRICE</Typography>
+                </AccordionSummary>
+              </Accordion>
+              {cartItems.map((run) => (
+                <React.Fragment key={run._id}>
+                  <Accordion>
+                    <AccordionSummary
+                      className={classes.noHover}
+                      aria-controls="panel1bh-content"
+                      id="panel1bh-header"
+                      expandIcon={<Delete />}
+                    >
+                      <Typography className={classes.heading}>
+                        {run.date}
+                      </Typography>
+                      <Typography className={classes.heading}>
+                        {run.location}
+                      </Typography>
+                      <Typography className={classes.heading}>
+                        {run.startTime}
+                      </Typography>
+                      <Typography className={classes.heading}>
+                        {run.endTime}
+                      </Typography>
+                      <Typography className={classes.heading}>
+                        ${run.price}
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Button>
+                        <Delete onClick={console.log("delete")} />
+                      </Button>
+                    </AccordionDetails>
+                  </Accordion>
+                </React.Fragment>
+              ))}
+            </Paper>
           </Grid>
-        </Container>
-      </main>
-    </div>
+          <Grid
+            item
+            xs={12}
+            md={4}
+            lg={4}
+            style={{ display: "flex", width: "100%" }}
+          >
+            <Paper className={classes.paper}>
+              <CartSummary />
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
 };
 export default CartScreen;
@@ -200,7 +189,6 @@ export default CartScreen;
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} lg={8} style={{ display: "flex" }}>
-            <Title>CART ITEMS</Title>
             <Paper className={classes.paper}>
               <Accordion disabled>
                 <AccordionSummary

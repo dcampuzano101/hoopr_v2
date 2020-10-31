@@ -9,24 +9,28 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Title from "./Title";
-import Runs from "./Runs";
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   depositContext: {
     flex: 1,
   },
-});
+  heading: {
+    fontSize: theme.typography.pxToRem(24),
+    flexBasis: "20%",
+    flexShrink: 0,
+  },
+}));
 
-export default function Deposits() {
+const UpcomingRuns = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Upcoming Runs</Title>
+      {/* style heading in makeStyles */}
+      <Typography className={classes.heading}>Upcoming Runs</Typography>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -51,4 +55,6 @@ export default function Deposits() {
       </Table>
     </React.Fragment>
   );
-}
+};
+
+export default UpcomingRuns;

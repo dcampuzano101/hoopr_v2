@@ -5,7 +5,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import ProfileCard from "./ProfileCard";
-import Deposits from "./Deposits";
+import UpcomingRuns from "./UpcomingRuns";
 import Runs from "./Runs";
 
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +53,7 @@ const ProfileDashboard = () => {
                 <ProfileCard />
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
+            {/* Recent UpcomingRuns */}
             <Grid
               item
               xs={12}
@@ -62,7 +62,7 @@ const ProfileDashboard = () => {
               style={{ display: "flex", width: "100%" }}
             >
               <Paper className={classes.paper}>
-                <Deposits />
+                <UpcomingRuns />
               </Paper>
             </Grid>
             {/* Recent Runs */}
