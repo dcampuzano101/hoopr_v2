@@ -27,6 +27,8 @@ export const addToCart = (id) => async (dispatch, getState) => {
       price: data.price,
       location: data.location,
       date: data.date,
+      startTime: data.startTime,
+      endTime: data.endTime,
     },
   });
 

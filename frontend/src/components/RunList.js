@@ -14,6 +14,7 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Map from "./Map";
 import { addToCart } from "../actions/cartActions";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +45,7 @@ const location = {
   lng: -73.9566612,
 };
 
-const RunList = () => {
+const RunList = ({ history }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -93,9 +94,13 @@ const RunList = () => {
     return `${day}, ${month} ${numericalDay}`;
   };
 
-  const addToCartHandler = (runId) => {
-    // const runId = e.target.value;
-    dispatch(addToCart(runId));
+  const addToCartHandler = async (runId) => {
+    try {
+      dispatch(addToCart(runId));
+      history.push(`/cart/${runId}?`);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className={classes.root}>
@@ -168,4 +173,4 @@ const RunList = () => {
   );
 };
 
-export default RunList;
+export default withRouter(RunList);

@@ -8,6 +8,7 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ProfileDashboard from "./components/profile/ProfileDashboard";
 import MainScreen from "./screens/MainScreen";
+import CartScreen from "./screens/CartScreen";
 import Oauth from "./components/Oauth";
 
 const Main = styled.div`
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/register" component={RegisterScreen} />
         <Route path="/oauth/callback" component={Oauth} />
         <Route path="/" component={MainScreen} exact />
+        <Route path="/cart/:id?" component={CartScreen} />
       </Main>
       <Footer />
     </Router>

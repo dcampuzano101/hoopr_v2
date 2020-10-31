@@ -78,6 +78,14 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  paperProfileCard: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
+    width: "100%",
+    justifyContent: "space-between",
+  },
 }));
 
 const ProfileCard = ({ location, history }) => {
