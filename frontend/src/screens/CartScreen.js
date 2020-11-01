@@ -98,6 +98,7 @@ const CartScreen = ({ history, match }) => {
   // };
   const classes = useStyles();
   console.log(deleteAlert);
+  console.log(cartItems);
   return (
     <>
       <CssBaseline />
@@ -118,7 +119,7 @@ const CartScreen = ({ history, match }) => {
                   </TableRow>
                   {cartItems.map((run) => (
                     <>
-                      <TableRow key={run.id}>
+                      <TableRow key={run.run}>
                         <TableCell colSpan={2}>{run.date}</TableCell>
                         <TableCell colSpan={4}>{run.location}</TableCell>
                         <TableCell colSpan={2}>{run.startTime}</TableCell>
@@ -128,14 +129,14 @@ const CartScreen = ({ history, match }) => {
                           {" "}
                           <IconButton
                             aria-label="delete"
-                            onClick={() => setDeleteAlert(true)}
+                            onClick={() => setDeleteAlert(run.run)}
                           >
                             <Delete />
                           </IconButton>
                         </TableCell>
                       </TableRow>
 
-                      {deleteAlert ? (
+                      {deleteAlert === run.run ? (
                         <TableRow>
                           <Alert
                             severity="warning"
