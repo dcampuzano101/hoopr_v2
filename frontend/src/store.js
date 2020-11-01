@@ -6,8 +6,17 @@ import {
   userDetailsReducer,
   userRegisterReducer,
   userUpdateProfileReducer,
+  userListReducer,
+  userUpdateReducer,
+  userDeleteReducer,
 } from "./reducers/userReducers";
-import { runListReducer } from "./reducers/runReducers";
+import {
+  runListReducer,
+  runCreateReducer,
+  runDeleteReducer,
+  runDetailsReducer,
+  runUpdateReducer,
+} from "./reducers/runReducers";
 import { cartReducer } from "./reducers/cartReducers";
 
 const reducer = combineReducers({
@@ -15,6 +24,13 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  userList: userListReducer,
+  userUpdate: userUpdateReducer,
+  userDelete: userDeleteReducer,
+  runCreate: runCreateReducer,
+  runDetails: runDetailsReducer,
+  runDelete: runDeleteReducer,
+  runUpdate: runUpdateReducer,
   runList: runListReducer,
   cart: cartReducer,
 });
