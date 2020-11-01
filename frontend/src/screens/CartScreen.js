@@ -150,7 +150,10 @@ const CartScreen = ({ history, match }) => {
                               variant="contained"
                               color="secondary"
                               className={classes.button}
-                              onClick={() => setDeleteAlert(null)}
+                              onClick={() => {
+                                dispatch(removeFromCart(run.run));
+                                setDeleteAlert(null);
+                              }}
                               startIcon={<Delete />}
                             >
                               Delete
