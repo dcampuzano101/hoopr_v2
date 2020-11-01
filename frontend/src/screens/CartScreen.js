@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../actions/cartActions";
@@ -12,8 +12,9 @@ import ProfileCard from "../components/profile/ProfileCard";
 import CartSummary from "../components/CartSummary";
 
 import { ExpandMore, Delete } from "@material-ui/icons";
+import IconButton from "@material-ui/core/IconButton";
 
-// import Alert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/lab/Alert";
 import {
   Accordion,
   AccordionDetails,
@@ -21,6 +22,11 @@ import {
   Typography,
   CircularProgress,
   Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
 } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +59,16 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  alertMessage: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  alertIcon: {
+    display: "flex",
+    alignItems: "center",
+  },
 }));
 
 const CartScreen = ({ history, match }) => {
@@ -62,6 +78,8 @@ const CartScreen = ({ history, match }) => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+
+  const [deleteAlert, setDeleteAlert] = useState(null);
 
   useEffect(() => {
     console.log(runId);
@@ -79,6 +97,7 @@ const CartScreen = ({ history, match }) => {
   //   history.push("/login?redirect=shipping");
   // };
   const classes = useStyles();
+  console.log(deleteAlert);
   return (
     <>
       <CssBaseline />
@@ -87,54 +106,61 @@ const CartScreen = ({ history, match }) => {
         <Grid container spacing={3}>
           <Grid item xs={12} md={8} lg={8}>
             <Paper className={classes.paper}>
-              <Accordion disabled>
-                <AccordionSummary
-                  aria-controls="panel3a-content"
-                  id="panel3a-header"
-                  expandIcon={<ExpandMore />}
-                >
-                  <Typography className={classes.heading}>DATE</Typography>
-                  <Typography className={classes.heading}>LOCATION</Typography>
-                  <Typography className={classes.heading}>
-                    START TIME
-                  </Typography>
-                  <Typography className={classes.heading}>END TIME</Typography>
-                  <Typography className={classes.heading}>PRICE</Typography>
-                </AccordionSummary>
-              </Accordion>
-              {cartItems.map((run) => (
-                <React.Fragment key={run._id}>
-                  <Accordion>
-                    <AccordionSummary
-                      className={classes.noHover}
-                      aria-controls="panel1bh-content"
-                      id="panel1bh-header"
-                      expandIcon={<Delete />}
-                    >
-                      <Typography className={classes.heading}>
-                        {run.date}
-                      </Typography>
-                      <Typography className={classes.heading}>
-                        {run.location}
-                      </Typography>
-                      <Typography className={classes.heading}>
-                        {run.startTime}
-                      </Typography>
-                      <Typography className={classes.heading}>
-                        {run.endTime}
-                      </Typography>
-                      <Typography className={classes.heading}>
-                        ${run.price}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Button>
-                        <Delete onClick={console.log("delete")} />
-                      </Button>
-                    </AccordionDetails>
-                  </Accordion>
-                </React.Fragment>
-              ))}
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell colSpan={2}>Date</TableCell>
+                    <TableCell colSpan={4}>Location</TableCell>
+                    <TableCell colSpan={2}>Start Time</TableCell>
+                    <TableCell colSpan={2}>End Time</TableCell>
+                    <TableCell colSpan={2}>Price</TableCell>
+                    <TableCell colSpan={2}>*</TableCell>
+                  </TableRow>
+                  {cartItems.map((run) => (
+                    <>
+                      <TableRow key={run.id}>
+                        <TableCell colSpan={2}>{run.date}</TableCell>
+                        <TableCell colSpan={4}>{run.location}</TableCell>
+                        <TableCell colSpan={2}>{run.startTime}</TableCell>
+                        <TableCell colSpan={2}>{run.endTime}</TableCell>
+                        <TableCell colSpan={2}>{run.price}</TableCell>
+                        <TableCell colSpan={2}>
+                          {" "}
+                          <IconButton
+                            aria-label="delete"
+                            onClick={() => setDeleteAlert(true)}
+                          >
+                            <Delete />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+
+                      {deleteAlert ? (
+                        <TableRow>
+                          <Alert
+                            severity="warning"
+                            classes={{ message: classes.alertMessage }}
+                            onClose={() => {
+                              setDeleteAlert(null);
+                            }}
+                          >
+                            Are you sure?
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              className={classes.button}
+                              onClick={() => setDeleteAlert(null)}
+                              startIcon={<Delete />}
+                            >
+                              Delete
+                            </Button>
+                          </Alert>
+                        </TableRow>
+                      ) : null}
+                    </>
+                  ))}
+                </TableHead>
+              </Table>
             </Paper>
           </Grid>
           <Grid
@@ -157,167 +183,17 @@ export default CartScreen;
 
 /*
 
+deleteAlert ? (<TableRow>
+                      <Alert classes={{ message: classes.alertMessage }} onClose={() => {setAlert(null)}}>Are you sure?       <Button
+        variant="contained"
+        color="secondary"
+        className={classes.button}
+        startIcon={<DeleteIcon />}
+      >
+        Delete
+      </Button></Alert>
+                    </TableRow>
 
-
-                <Grid item xs={12} md={6}>
-          <Typography variant="h6" className={classes.title}>
-            Avatar with text and icon
-          </Typography>
-          <div className={classes.demo}>
-            <List>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <FolderIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Single-line item"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-                <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            </List>
-          </div>
-        </Grid>
-
- <React.Fragment>
-      <Container maxWidth="lg" className={classes.container}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={12} lg={8} style={{ display: "flex" }}>
-            <Paper className={classes.paper}>
-              <Accordion disabled>
-                <AccordionSummary
-                  aria-controls="panel3a-content"
-                  id="panel3a-header"
-                  expandIcon={<ExpandMore />}
-                >
-                  <Typography className={classes.heading}>DATE</Typography>
-                  <Typography className={classes.heading}>LOCATION</Typography>
-                  <Typography className={classes.heading}>
-                    START TIME
-                  </Typography>
-                  <Typography className={classes.heading}>END TIME</Typography>
-                  <Typography className={classes.heading}>PRICE</Typography>
-                </AccordionSummary>
-              </Accordion>
-              {cartItems.map((run) => (
-                <React.Fragment key={run._id}>
-                  <Accordion>
-                    <AccordionSummary
-                      className={classes.noHover}
-                      aria-controls="panel1bh-content"
-                      id="panel1bh-header"
-                      expandIcon={<ExpandMoreIcon />}
-                    >
-                      <Typography className={classes.heading}>
-                        {run.date}
-                      </Typography>
-                      <Typography className={classes.heading}>
-                        {run.location}
-                      </Typography>
-                      <Typography className={classes.heading}>
-                        {run.startTime}
-                      </Typography>
-                      <Typography className={classes.heading}>
-                        {run.endTime}
-                      </Typography>
-                      <Typography className={classes.heading}>
-                        ${run.price}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Button>
-                        <DeleteIcon onClick={console.log("delete")} />
-                      </Button>
-                    </AccordionDetails>
-                  </Accordion>
-                </React.Fragment>
-              ))}
-            </Paper>
-          </Grid>
-          <Grid item xs={12} md={6} lg={6} style={{ display: "flex" }}>
-            <Paper className={classes.paper}>
-              <form
-                className={classes.form}
-                noValidate
-                // onSubmit={updateProfileHandler}
-              >
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  id="username"
-                  // label="Username"
-                  placeholder="Username"
-                  name="username"
-                  // autoComplete="username"
-                  // value={username}
-                  // onChange={(e) => {
-                  //   setUsername(e.target.value);
-                  //   setUpdateProfileBtnDisabled(false);
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  // value={email}
-                  // onChange={(e) => {
-                  //   setEmail(e.target.value);
-                  //   setUpdateProfileBtnDisabled(false);
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  // value={password}
-                  // onChange={(e) => {
-                  //   setPassword(e.target.value);
-                  //   setUpdateProfileBtnDisabled(false);
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  type="password"
-                  id="confirmPassword"
-                  autoComplete="current-password"
-                  // value={confirmPassword}
-                  // onChange={(e) => {
-                  // setConfirmPassword(e.target.value);
-                  // setUpdateProfileBtnDisabled(false);
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                  // disabled={updateProfileBtnDisabled}
-                >
-                  UPDATE PROFILE
-                </Button>
-              </form>
-            </Paper>
-          </Grid>
-        </Grid>
-      </Container>
-    </React.Fragment>
 
 
 */
