@@ -118,9 +118,11 @@ const updateRun = asyncHandler(async (req, res) => {
 // @route: PUT /api/runs/:id
 // @access: admin/private
 const deleteRun = asyncHandler(async (req, res) => {
-  const run = Run.findById(req.params.id);
+  debugger;
+  const run = await Run.findById(req.params.id);
 
   if (run) {
+    debugger;
     run.remove();
     res.json({ message: "Run removed" });
   } else {

@@ -232,7 +232,7 @@ export const listUsers = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-
+    debugger;
     const { data } = await axios.get("/api/users", config);
     console.log(data);
     debugger;

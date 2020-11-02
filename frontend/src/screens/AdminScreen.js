@@ -2,19 +2,74 @@ import React from "react";
 import AdminRuns from "../components/AdminRuns";
 import AdminUsers from "../components/AdminUsers";
 
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
+// import Container from "@material-ui/core/Container";
+// import Paper from "@material-ui/core/Paper";
+// import Grid from "@material-ui/core/Grid";
+// import makeStyles from "@material-ui/core/MakeStyles";
+
+import {
+  Container,
+  Paper,
+  Grid,
+  CssBaseline,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  title: {
+    flexGrow: 1,
+  },
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
+    width: "100%",
+    justifyContent: "center",
+  },
+  fixedHeight: {
+    height: 240,
+  },
+}));
 
 const AdminScreen = () => {
+  const classes = useStyles();
   return (
-    <>
-      <Container>
-        <Paper>
-          <AdminUsers />
-          <AdminRuns />
-        </Paper>
-      </Container>
-    </>
+    <div className={classes.root}>
+      <CssBaseline />
+      <main className={classes.content}>
+        {/* CAN PROBABLY DO WITHOUT APPBARSPACER */}
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
+          {/* Grid Container === MuiGrid-root*/}
+          <Grid Container spacing={3}>
+            <Grid item xs={12} md={12} lg={12}>
+              <Paper>
+                <AdminUsers />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={12} lg={12}>
+              <Paper>
+                <AdminRuns />
+              </Paper>
+            </Grid>
+          </Grid>
+        </Container>
+      </main>
+    </div>
   );
 };
 

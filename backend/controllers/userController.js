@@ -134,6 +134,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @access: admin/private
 
 const getUsers = asyncHandler(async (req, res) => {
+  debugger;
   const users = await User.find({});
   //maybe just res.json(users)
 

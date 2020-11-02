@@ -89,16 +89,15 @@ const CartScreen = ({ history, match }) => {
     }
   }, [dispatch, runId]);
 
-  const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id));
+  const removeFromCartHandler = (runId) => {
+    dispatch(removeFromCart(runId));
   };
 
   // const checkoutHandler = () => {
   //   history.push("/login?redirect=shipping");
   // };
   const classes = useStyles();
-  console.log(deleteAlert);
-  console.log(cartItems);
+
   return (
     <>
       <CssBaseline />
@@ -151,7 +150,7 @@ const CartScreen = ({ history, match }) => {
                               color="secondary"
                               className={classes.button}
                               onClick={() => {
-                                dispatch(removeFromCart(run.run));
+                                removeFromCartHandler(run.run);
                                 setDeleteAlert(null);
                               }}
                               startIcon={<Delete />}

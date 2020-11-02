@@ -3,6 +3,8 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import { useDispatch, useSelector } from "react-redux";
 import { listRuns } from "../actions/runActions";
+import { withRouter } from "react-router-dom";
+import { deleteRun } from "../actions/runActions";
 
 import {
   Table,
@@ -11,39 +13,157 @@ import {
   TableHead,
   TableRow,
   Typography,
+  makeStyles,
+  Grid,
+  CircularProgress,
+  IconButton,
+  Button,
 } from "@material-ui/core";
 
-const AdminRuns = () => {
+import { Delete, Edit } from "@material-ui/icons";
+
+import Alert from "@material-ui/lab/Alert";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+  },
+  alertMessage: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  alertIcon: {
+    display: "flex",
+    alignItems: "center",
+  },
+}));
+
+const AdminRuns = ({ history, match, location }) => {
+  const classes = useStyles();
+  const [runsError, setRunsError] = useState(null);
+
+  const [deleteAlert, setDeleteAlert] = useState(null);
+
   const runList = useSelector((state) => state.runList);
-  const { runs } = runList;
+  const { runs, loading, error } = runList;
+
+  const runDelete = useSelector((state) => state.runDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = runDelete;
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listRuns());
-  }, [dispatch]);
+  }, [dispatch, successDelete]);
+
+  const deleteRunHandler = (runId) => {
+    dispatch(deleteRun(runId));
+  };
   console.log(runs);
   return (
     <>
-      <Container>
-        <Typography>ALL RUNS</Typography>
-        <Paper>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Location</TableCell>
-                <TableCell>Start Time</TableCell>
-                <TableCell>End Time</TableCell>
-                <TableCell>Price</TableCell>
-                <TableCell>Capacity</TableCell>
-                <TableCell align="right">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-          </Table>
-        </Paper>
-      </Container>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <Container maxWidth="lg" className={classes.container}>
+          <Typography>ALL RUNS</Typography>
+          <Paper className={classes.paper}>
+            {error && (
+              <Alert
+                severity="error"
+                onClose={() => {
+                  setRunsError(null);
+                }}
+              >
+                {error}
+              </Alert>
+            )}
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell colSpan={2}>Date</TableCell>
+                  <TableCell colSpan={4}>Location</TableCell>
+                  <TableCell colSpan={2}>Start Time</TableCell>
+                  <TableCell colSpan={2}>End Time</TableCell>
+                  <TableCell colSpan={2}>Price</TableCell>
+                  <TableCell colSpan={2}>Capacity</TableCell>
+                  <TableCell colSpan={2} align="right">
+                    Actions
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              {runs.map((run) => (
+                <React.Fragment key={run._id}>
+                  <TableRow>
+                    <TableCell colSpan={2}>{run.date}</TableCell>
+                    <TableCell colSpan={4}>{run.location}</TableCell>
+                    <TableCell colSpan={2}>{run.startTime}</TableCell>
+                    <TableCell colSpan={2}>{run.endTime}</TableCell>
+                    <TableCell colSpan={2}>{run.price}</TableCell>
+                    <TableCell colSpan={2}>{run.capacity}</TableCell>
+                    <TableCell colSpan={2} align="right">
+                      {" "}
+                      <IconButton
+                        aria-label="edit"
+                        onClick={() => {
+                          history.push(`/runs/${run._id}/edit`);
+                        }}
+                      >
+                        <Edit />
+                      </IconButton>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => setDeleteAlert(run._id)}
+                      >
+                        <Delete />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+
+                  {deleteAlert === run._id ? (
+                    <TableRow>
+                      <Alert
+                        severity="warning"
+                        classes={{ message: classes.alertMessage }}
+                        onClose={() => {
+                          setDeleteAlert(null);
+                        }}
+                      >
+                        Are you sure?
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          className={classes.button}
+                          onClick={() => {
+                            deleteRunHandler(run._id);
+                            setDeleteAlert(null);
+                          }}
+                          startIcon={<Delete />}
+                        >
+                          Delete
+                        </Button>
+                      </Alert>
+                    </TableRow>
+                  ) : null}
+                </React.Fragment>
+              ))}
+            </Table>
+          </Paper>
+        </Container>
+      )}
     </>
   );
 };
 
-export default AdminRuns;
+export default withRouter(AdminRuns);

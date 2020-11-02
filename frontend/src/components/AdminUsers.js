@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import { listUsers } from "../actions/userActions";
@@ -11,11 +11,30 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Grid,
+  makeStyles,
+  CircularProgress,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+  },
+}));
 
 const AdminUsers = () => {
+  const classes = useStyles();
+
+  const [usersError, setUsersError] = useState(null);
   const userList = useSelector((state) => state.userList);
-  const { users } = userList;
+  const { users, error, loading } = userList;
   const dispatch = useDispatch();
   useEffect(() => {
     if (!users) {
@@ -25,22 +44,36 @@ const AdminUsers = () => {
   console.log(users);
   return (
     <>
-      <Container>
-        <Typography>ALL USERS</Typography>
-        <Paper>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>username</TableCell>
-                <TableCell>email</TableCell>
-                <TableCell>isAdmin</TableCell>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <>
+          <Typography>ALL USERS</Typography>
+          <Paper className={classes.paper}>
+            {error && (
+              <Alert
+                severity="error"
+                onClose={() => {
+                  setUsersError(null);
+                }}
+              >
+                {error}
+              </Alert>
+            )}
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>username</TableCell>
+                  <TableCell>email</TableCell>
+                  <TableCell>isAdmin</TableCell>
 
-                <TableCell align="right">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-          </Table>
-        </Paper>
-      </Container>
+                  <TableCell align="right">Actions</TableCell>
+                </TableRow>
+              </TableHead>
+            </Table>
+          </Paper>
+        </>
+      )}
     </>
   );
 };
