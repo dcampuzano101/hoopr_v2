@@ -32,6 +32,12 @@ const runs = [
   {
     name: "Monday Night Run",
     location: "The Post",
+    addressLineOne: "",
+    addressLineTwo: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    country: "",
     date: "10-26-2020",
     price: 10,
     capacity: 15,

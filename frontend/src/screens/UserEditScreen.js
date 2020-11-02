@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails, updateUser } from "../actions/userActions";
-import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
-import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -11,18 +9,12 @@ import Paper from "@material-ui/core/Paper";
 import Alert from "@material-ui/lab/Alert";
 
 import {
-  Avatar,
   Button,
-  CircularProgress,
-  CssBaseline,
   TextField,
-  Link,
-  Typography,
   FormGroup,
   FormControlLabel,
   Switch,
 } from "@material-ui/core";
-import { userUpdateReducer } from "../reducers/userReducers";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,16 +74,13 @@ const useStyles = makeStyles((theme) => ({
 const UserEditScreen = ({ history, match }) => {
   const userId = match.params.id;
   const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user, success: successDetails } = userDetails;
+  const { error, user, success: successDetails } = userDetails;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [isAdmin, setIsAdmin] = useState("");
-  const [btnDisabled, setBtnDisabled] = useState(true);
   const [updateUserBtnDisabled, setUpdateUserBtnDisabled] = useState(true);
   const [alert, setAlert] = useState(null);
   const [detailsError, setDetailsError] = useState(null);

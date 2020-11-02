@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRunDetails, updateRun } from "../actions/runActions";
 import MomentUtils from "@date-io/moment";
-import { RUN_DETAILS_RESET } from "../constants/runConstants";
 import {
   DatePicker,
   KeyboardTimePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
-import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Container from "@material-ui/core/Container";
@@ -16,20 +14,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Alert from "@material-ui/lab/Alert";
 
-import {
-  Avatar,
-  Button,
-  CircularProgress,
-  CssBaseline,
-  TextField,
-  Link,
-  Typography,
-  FormGroup,
-  Switch,
-  Checkbox,
-  FormControlLabel,
-} from "@material-ui/core";
-import { userUpdateReducer } from "../reducers/userReducers";
+import { Button, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -90,7 +75,7 @@ const RunEditScreen = ({ history, match }) => {
   const runId = match.params.id;
 
   const runDetails = useSelector((state) => state.runDetails);
-  const { loading, error, run, success: successDetails } = runDetails;
+  const { error, run, success: successDetails } = runDetails;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -106,7 +91,7 @@ const RunEditScreen = ({ history, match }) => {
   const [alert, setAlert] = useState(null);
   const [users, setUsers] = useState(null);
 
-  const [btnDisabled, setBtnDisabled] = useState(true);
+  const [] = useState(true);
   const [updateRunBtnDisabled, setUpdateRunBtnDisabled] = useState(true);
   const [detailsError, setDetailsError] = useState(null);
   const [runUpdateSuccess, setRunUpdateSuccess] = useState(null);

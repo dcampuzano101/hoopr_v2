@@ -8,22 +8,15 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
 import Paper from "@material-ui/core/Paper";
-import ProfileCard from "../components/profile/ProfileCard";
 import CartSummary from "../components/CartSummary";
 
-import { ExpandMore, Delete } from "@material-ui/icons";
+import { Delete } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 
 import Alert from "@material-ui/lab/Alert";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography,
-  CircularProgress,
   Button,
   Table,
-  TableBody,
   TableCell,
   TableHead,
   TableRow,
@@ -71,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CartScreen = ({ history, match }) => {
+const CartScreen = ({ match }) => {
   const runId = match.params.id;
 
   const dispatch = useDispatch();
@@ -183,20 +176,3 @@ const CartScreen = ({ history, match }) => {
   );
 };
 export default CartScreen;
-
-/*
-
-deleteAlert ? (<TableRow>
-                      <Alert classes={{ message: classes.alertMessage }} onClose={() => {setAlert(null)}}>Are you sure?       <Button
-        variant="contained"
-        color="secondary"
-        className={classes.button}
-        startIcon={<DeleteIcon />}
-      >
-        Delete
-      </Button></Alert>
-                    </TableRow>
-
-
-
-*/
