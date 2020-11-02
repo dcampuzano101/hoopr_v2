@@ -25,6 +25,9 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
   USER_UPDATE_RESET,
+  USER_UPDATE_PROFILE_PHOTO_REQUEST,
+  USER_UPDATE_PROFILE_PHOTO_FAIL,
+  USER_UPDATE_PROFILE_PHOTO_SUCCESS,
 } from "../constants/userConstants";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -128,6 +131,23 @@ export const userUpdateReducer = (state = { user: {} }, action) => {
       return {
         user: {},
       };
+    default:
+      return state;
+  }
+};
+
+export const userUpdateProfilePhotoReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_UPDATE_PROFILE_PHOTO_REQUEST:
+      return { loading: true, success: false };
+    case USER_UPDATE_PROFILE_PHOTO_SUCCESS:
+      return { loading: false, success: true, photoUrl: action.payload };
+    case USER_UPDATE_PROFILE_PHOTO_FAIL:
+      return { loading: false, success: false, error: action.payload };
+      case USER_UPDATE_RESET:
+        return {
+          user: {},
+        };
     default:
       return state;
   }

@@ -7,6 +7,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 import runRoutes from "./routes/runRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import uploadRoute from "./routes/uploadRoute.js";
 import googleStrategy from "./passportSetup.js";
 import cors from "cors";
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/runs", runRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/upload/", uploadRoute);
 app.use(notFound);
 app.use(errorHandler);
 

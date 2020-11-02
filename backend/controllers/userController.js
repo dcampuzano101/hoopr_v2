@@ -93,6 +93,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       username: user.username,
       email: user.email,
       isAdmin: user.isAdmin,
+      profilePhoto: user.profilePhoto,
       token: generateToken(user._id),
     });
   } else {
@@ -108,6 +109,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user) {
     user.username = req.body.username || user.username;
+    user.profilePhoto = req.body.profilePhoto || user.profilePhoto;
     user.email = req.body.email || user.email;
     if (req.body.password) {
       user.password = req.body.password;
@@ -120,6 +122,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.username,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      profilePhoto: updatedUser.profilePhoto,
       token: generateToken(updatedUser._id),
     });
   } else {

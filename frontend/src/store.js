@@ -9,6 +9,7 @@ import {
   userListReducer,
   userUpdateReducer,
   userDeleteReducer,
+  userUpdateProfilePhotoReducer,
 } from "./reducers/userReducers";
 import {
   runListReducer,
@@ -33,6 +34,7 @@ const reducer = combineReducers({
   runUpdate: runUpdateReducer,
   runList: runListReducer,
   cart: cartReducer,
+  userUpdateProfilePhoto: userUpdateProfilePhotoReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

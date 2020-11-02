@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserDetails, updateUserProfile } from "../../actions/userActions";
+import {
+  getUserDetails,
+  updateUserProfile,
+  updateUserProfilePhoto,
+} from "../../actions/userActions";
+import { mediaToAWS } from "../../actions/awsAction";
+
 import { USER_UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import avatar from "../../assets/user-avatar.png";
 import { withRouter } from "react-router-dom";
@@ -13,12 +19,6 @@ import Paper from "@material-ui/core/Paper";
 import { DropzoneDialog } from "material-ui-dropzone";
 import Alert from "@material-ui/lab/Alert";
 
-// import { Table, Form, Button, Row, Col } from "react-bootstrap";
-// import { LinkContainer } from "react-router-bootstrap";
-// import Message from "../components/Message";
-// import Loader from "../components/Loader";
-// import { listMyOrders } from "../actions/orderActions";
-
 import {
   Avatar,
   Button,
@@ -26,10 +26,7 @@ import {
   CssBaseline,
   TextField,
   Link,
-  // Grid,
   Typography,
-  //   Container,
-  //   makeStyles,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -93,11 +90,17 @@ const ProfileCard = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userUpdateProfilePhoto = useSelector(
+    (state) => state.userUpdateProfilePhoto
+  );
+  const { success: successProfilePhoto, photoUrl } = userUpdateProfilePhoto;
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [imgSrc, setImgSrc] = useState("" || avatar);
+  const [profilePhotoFile, setProfilePhotoFile] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState("" || avatar);
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [updateProfileBtnDisabled, setUpdateProfileBtnDisabled] = useState(
     true
@@ -112,12 +115,22 @@ const ProfileCard = ({ location, history }) => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
 
-  const updateProfileHandler = (e) => {
+  const updateProfileHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setAlert("Passwords do not match");
     } else {
       dispatch(updateUserProfile({ id: user._id, username, email, password }));
+    }
+  };
+
+  const imgUploadHandler = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    if (profilePhotoFile) {
+      formData.append("media", profilePhotoFile);
+      dispatch(updateUserProfilePhoto(formData));
     }
   };
 
@@ -133,6 +146,19 @@ const ProfileCard = ({ location, history }) => {
       if (successDetails) {
         setUsername(user.username);
         setEmail(user.email);
+        setProfilePhoto(user.profilePhoto);
+      }
+
+      if (successProfilePhoto && user) {
+        dispatch(
+          updateUserProfile({
+            id: user._id,
+            username,
+            email,
+            password,
+            profilePhoto: photoUrl,
+          })
+        );
       }
 
       if (error) {
@@ -144,6 +170,9 @@ const ProfileCard = ({ location, history }) => {
       }
     }
   }, [dispatch, history, location, userInfo, user, success, error]);
+
+  console.log(profilePhotoFile);
+  console.log(profilePhoto);
   return (
     <React.Fragment>
       <Container maxWidth="lg" className={classes.container}>
@@ -153,7 +182,7 @@ const ProfileCard = ({ location, history }) => {
             <Paper className={classes.paperProfileCard}>
               <div>
                 <img
-                  src={imgSrc}
+                  src={profilePhoto}
                   alt="avatar"
                   style={{
                     width: "100%",
@@ -180,10 +209,11 @@ const ProfileCard = ({ location, history }) => {
                   onSave={(files) => {
                     const file = files[0];
                     const reader = new FileReader();
-                    const url = reader.readAsDataURL(file);
+                    reader.readAsDataURL(file);
                     reader.onloadend = () => {
                       setBtnDisabled(false);
-                      setImgSrc(reader.result);
+                      setProfilePhotoFile(file);
+                      setProfilePhoto(reader.result);
                     };
 
                     console.log("Files:", files);
@@ -200,6 +230,7 @@ const ProfileCard = ({ location, history }) => {
                   className={classes.submit}
                   disabled={btnDisabled}
                   style={{ marginTop: "7%" }}
+                  onClick={imgUploadHandler}
                 >
                   SAVE PHOTO
                 </Button>
