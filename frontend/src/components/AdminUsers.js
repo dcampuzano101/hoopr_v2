@@ -80,7 +80,7 @@ const AdminUsers = ({ history }) => {
         <CircularProgress />
       ) : (
         <>
-          <Container maxWidth="lg" className={classes.container}>
+          <Container className={classes.container}>
             <Typography>ALL USERS</Typography>
             <Paper className={classes.paper}>
               {error && (

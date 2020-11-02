@@ -61,20 +61,13 @@ const AdminScreen = ({ history }) => {
     <div className={classes.root}>
       <CssBaseline />
       <main className={classes.content}>
-        {/* CAN PROBABLY DO WITHOUT APPBARSPACER */}
-        <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          {/* Grid Container === MuiGrid-root*/}
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             <Grid item xs={12} md={12} lg={12}>
-              <Paper>
-                <AdminUsers />
-              </Paper>
+              <AdminUsers />
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
-              <Paper>
-                <AdminRuns />
-              </Paper>
+              <AdminRuns />
             </Grid>
           </Grid>
         </Container>
