@@ -106,7 +106,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @access: private
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
-
+  debugger;
   if (user) {
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
@@ -134,7 +134,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @access: admin/private
 
 const getUsers = asyncHandler(async (req, res) => {
-  debugger;
   const users = await User.find({});
   //maybe just res.json(users)
 
@@ -151,7 +150,6 @@ const getUsers = asyncHandler(async (req, res) => {
 // @access: admin/private
 const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
-
   if (user) {
     res.json(user);
   } else {
@@ -164,10 +162,12 @@ const getUserById = asyncHandler(async (req, res) => {
 // @route: PUT /api/users/:id
 // @access: admin/private
 const updateUser = asyncHandler(async (req, res) => {
+  debugger;
   //main difference between updateUserProfile vs updateUser (req.params.id vs. req.user._id [currentUser])
-  const user = await user.findById(req.params.id);
-
+  const user = await User.findById(req.body.id);
+  debugger;
   if (user) {
+    debugger;
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
     user.isAdmin = req.body.isAdmin;
@@ -190,8 +190,6 @@ const updateUser = asyncHandler(async (req, res) => {
 // @access: admin/private
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
-  // console.log(user);
-  debugger;
   if (user) {
     await user.remove();
     res.json({ message: "User removed" });

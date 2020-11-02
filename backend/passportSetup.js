@@ -33,12 +33,10 @@ const passportFunction = (passport) => {
   );
 
   passport.serializeUser(function (user, done) {
-    debugger;
     done(null, user.id);
   });
 
   passport.deserializeUser(function (id, done) {
-    debugger;
     User.findById(id, function (err, user) {
       done(err, user);
     });

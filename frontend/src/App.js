@@ -10,6 +10,7 @@ import ProfileDashboard from "./components/profile/ProfileDashboard";
 import MainScreen from "./screens/MainScreen";
 import CartScreen from "./screens/CartScreen";
 import AdminScreen from "./screens/AdminScreen";
+import UserEditScreen from "./screens/UserEditScreen";
 import Oauth from "./components/Oauth";
 
 const Main = styled.div`
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/login" component={LoginScreen} />
         <Route path="/profile" component={ProfileDashboard} />
         <Route path="/register" component={RegisterScreen} />
+        <Route path="/users/:id/edit" component={UserEditScreen} />
         <Route path="/admin" component={AdminScreen} />
 
         <Route path="/oauth/callback" component={Oauth} />

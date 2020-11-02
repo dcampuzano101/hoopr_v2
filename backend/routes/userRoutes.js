@@ -39,8 +39,8 @@ router
 router
   .route("/:id")
   .get(protect, admin, getUserById)
-  .put(protect, admin, updateUser)
-  .delete(protect, admin, deleteUser);
+  .delete(protect, admin, deleteUser)
+  .put(protect, admin, updateUser);
 
 // @desc    Auth with Google
 // @route   GET /auth/google

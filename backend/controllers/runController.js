@@ -68,7 +68,6 @@ const listRuns = asyncHandler(async (req, res) => {
 // @route: GET /api/runs/:id
 // @access: private
 const getRunById = asyncHandler(async (req, res) => {
-  debugger;
   const run = await Run.findById(req.params.id);
 
   if (run) {
@@ -118,11 +117,9 @@ const updateRun = asyncHandler(async (req, res) => {
 // @route: PUT /api/runs/:id
 // @access: admin/private
 const deleteRun = asyncHandler(async (req, res) => {
-  debugger;
   const run = await Run.findById(req.params.id);
 
   if (run) {
-    debugger;
     run.remove();
     res.json({ message: "Run removed" });
   } else {

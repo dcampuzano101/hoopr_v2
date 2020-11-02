@@ -112,7 +112,6 @@ export const deleteRun = (id) => async (dispatch, getState) => {
     dispatch({
       type: RUN_DELETE_REQUEST,
     });
-    debugger;
     const {
       userLogin: { userInfo },
     } = getState();
@@ -123,9 +122,7 @@ export const deleteRun = (id) => async (dispatch, getState) => {
         "Content-Type": "application/json",
       },
     };
-    debugger;
     const { data } = await axios.delete(`/api/runs/${id}`, config);
-    debugger;
     dispatch({
       type: RUN_DELETE_SUCCESS,
     });
