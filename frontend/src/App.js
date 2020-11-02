@@ -12,6 +12,7 @@ import CartScreen from "./screens/CartScreen";
 import AdminScreen from "./screens/AdminScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import RunEditScreen from "./screens/RunEditScreen";
+import CheckoutScreen from "./screens/CheckoutScreen";
 import Oauth from "./components/Oauth";
 
 const Main = styled.div`
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/users/:id/edit" component={UserEditScreen} />
         <Route path="/runs/:id/edit" component={RunEditScreen} />
         <Route path="/admin" component={AdminScreen} />
+        <Route path="/checkout/:id?" component={CheckoutScreen} />
 
         <Route path="/oauth/callback" component={Oauth} />
         <Route path="/" component={MainScreen} exact />

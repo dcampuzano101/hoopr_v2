@@ -75,8 +75,6 @@ const CartScreen = ({ match }) => {
   const [deleteAlert, setDeleteAlert] = useState(null);
 
   useEffect(() => {
-    console.log(runId);
-
     if (runId) {
       dispatch(addToCart(runId));
     }

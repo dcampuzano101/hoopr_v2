@@ -23,7 +23,6 @@ const upload = multer({
       cb(null, { fieldName: "TESTING_META_DATA!" });
     },
     key: function (req, file, cb) {
-      debugger;
       cb(null, file.originalname);
     },
   }),

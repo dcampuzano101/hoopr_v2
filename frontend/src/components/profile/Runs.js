@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const Runs = () => {
-  console.log(runs);
   const classes = useStyles();
   return (
     <React.Fragment>

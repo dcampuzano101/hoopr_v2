@@ -72,8 +72,6 @@ const AdminUsers = ({ history }) => {
     dispatch(deleteUser(userId));
   };
 
-  console.log(users);
-
   return (
     <>
       {loading || loadingDelete ? (

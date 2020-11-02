@@ -13,6 +13,8 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../actions/orderActions";
+import { withRouter } from "react-router-dom";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -32,11 +34,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CartSummary = () => {
+const CartSummary = ({ history }) => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+
+  const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
+
+  cart.totalPrice = addDecimals(
+    cart.cartItems.reduce((acc, item) => acc + item.price, 0)
+  );
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
+
+  const placeOrderHandler = async () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        totalPrice: cart.totalPrice,
+      })
+    );
+
+    history.push(`/checkout/${order._id}`);
+  };
+
+  useEffect(() => {}, [history, success]);
 
   const classes = useStyles();
   return (
@@ -62,7 +87,7 @@ const CartSummary = () => {
                 </TableCell>
               </TableRow>
             ))}
-            <TableRow>
+            {/* <TableRow>
               <TableCell rowSpan={3} colSpan={1} />
               <TableCell colSpan={3}>Subtotal</TableCell>
               <TableCell colSpan={3} align="right">
@@ -72,10 +97,10 @@ const CartSummary = () => {
             <TableRow>
               <TableCell colSpan={3}>Tax</TableCell>
               <TableCell align="right">$69</TableCell>
-            </TableRow>
+            </TableRow> */}
             <TableRow>
               <TableCell colSpan={3}>Total</TableCell>
-              <TableCell align="right">$42069</TableCell>
+              <TableCell align="right">${cart.totalPrice}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -84,6 +109,7 @@ const CartSummary = () => {
           color="primary"
           fullWidth
           className={classes.submit}
+          onClick={placeOrderHandler}
         >
           Proceed to checkout
         </Button>
@@ -92,4 +118,4 @@ const CartSummary = () => {
   );
 };
 
-export default CartSummary;
+export default withRouter(CartSummary);

@@ -70,7 +70,6 @@ const AdminRuns = ({ history, match, location }) => {
   const deleteRunHandler = (runId) => {
     dispatch(deleteRun(runId));
   };
-  console.log(runs);
   return (
     <>
       {loading || loadingDelete ? (

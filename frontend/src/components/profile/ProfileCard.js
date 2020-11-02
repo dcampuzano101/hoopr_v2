@@ -126,11 +126,21 @@ const ProfileCard = ({ location, history }) => {
 
   const imgUploadHandler = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     if (profilePhotoFile) {
       formData.append("media", profilePhotoFile);
-      dispatch(updateUserProfilePhoto(formData));
+      const { data } = await mediaToAWS(formData);
+      setProfilePhoto(data.mediaUrl);
+
+      dispatch(
+        updateUserProfile({
+          id: user._id,
+          username,
+          email,
+          password,
+          profilePhoto: data.mediaUrl,
+        })
+      );
     }
   };
 
@@ -149,17 +159,6 @@ const ProfileCard = ({ location, history }) => {
         setProfilePhoto(user.profilePhoto);
       }
 
-      if (successProfilePhoto && user) {
-        dispatch(
-          updateUserProfile({
-            id: user._id,
-            username,
-            email,
-            password,
-            profilePhoto: photoUrl,
-          })
-        );
-      }
 
       if (error) {
         setDetailsError(error);
@@ -171,8 +170,6 @@ const ProfileCard = ({ location, history }) => {
     }
   }, [dispatch, history, location, userInfo, user, success, error]);
 
-  console.log(profilePhotoFile);
-  console.log(profilePhoto);
   return (
     <React.Fragment>
       <Container maxWidth="lg" className={classes.container}>
