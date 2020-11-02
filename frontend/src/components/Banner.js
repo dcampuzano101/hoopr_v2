@@ -27,7 +27,6 @@ const Banner = () => {
   return (
     <>
       <Grid item xs={12} md={4} lg={4}>
-        {/* <Card> */}
         <CardMedia
           component="img"
           alt="Hoopr Logo"
@@ -35,7 +34,6 @@ const Banner = () => {
           image={hooprLogo}
           title="Hoopr Logo"
         ></CardMedia>
-        {/* </Card> */}
       </Grid>
       <Grid item xs={12} md={8} lg={8} className={classes.bannerTextContainer}>
         <Typography variant="h5" gutterBottom>
@@ -47,7 +45,6 @@ const Banner = () => {
         <Typography variant="body1" gutterBottom>
           Lace up your kicks, break a sweat, stay safe, and play ball.
         </Typography>
-        {/* </Card> */}
       </Grid>
     </>
   );

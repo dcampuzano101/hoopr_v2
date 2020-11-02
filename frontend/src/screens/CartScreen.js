@@ -132,7 +132,10 @@ const CartScreen = ({ match }) => {
                         <TableCell colSpan={15}>
                           <Alert
                             severity="warning"
-                            classes={{ message: classes.alertMessage }}
+                            classes={{
+                              icon: classes.alertIcon,
+                              message: classes.alertMessage,
+                            }}
                             onClose={() => {
                               setDeleteAlert(null);
                             }}
