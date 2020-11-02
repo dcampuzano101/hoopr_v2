@@ -57,7 +57,7 @@ const AdminUsers = ({ history }) => {
   const { users, error, loading } = userList;
 
   const userDelete = useSelector((state) => state.userDelete);
-  const {
+  let {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
@@ -65,9 +65,7 @@ const AdminUsers = ({ history }) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!users) {
-      dispatch(listUsers());
-    }
+    dispatch(listUsers());
   }, [dispatch, successDelete, errorDelete, loadingDelete]);
 
   const deleteUserHandler = (userId) => {
