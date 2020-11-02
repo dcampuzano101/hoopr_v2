@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AdminRuns from "../components/AdminRuns";
 import AdminUsers from "../components/AdminUsers";
+import { useDispatch, useSelector } from "react-redux";
 
 // import Container from "@material-ui/core/Container";
 // import Paper from "@material-ui/core/Paper";
@@ -45,8 +46,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminScreen = () => {
+const AdminScreen = ({ history }) => {
   const classes = useStyles();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
+  }, [history]);
   return (
     <div className={classes.root}>
       <CssBaseline />

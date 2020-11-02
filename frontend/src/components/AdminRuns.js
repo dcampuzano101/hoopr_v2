@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   alertMessage: {
     display: "flex",
     width: "100%",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     alignItems: "center",
   },
   alertIcon: {
@@ -65,7 +65,7 @@ const AdminRuns = ({ history, match, location }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listRuns());
-  }, [dispatch, successDelete]);
+  }, [dispatch, successDelete, errorDelete, loadingDelete]);
 
   const deleteRunHandler = (runId) => {
     dispatch(deleteRun(runId));
@@ -73,7 +73,7 @@ const AdminRuns = ({ history, match, location }) => {
   console.log(runs);
   return (
     <>
-      {loading ? (
+      {loading || loadingDelete ? (
         <CircularProgress />
       ) : (
         <Container maxWidth="lg" className={classes.container}>
@@ -87,6 +87,16 @@ const AdminRuns = ({ history, match, location }) => {
                 }}
               >
                 {error}
+              </Alert>
+            )}
+            {errorDelete && (
+              <Alert
+                severity="error"
+                onClose={() => {
+                  setRunsError(null);
+                }}
+              >
+                {errorDelete}
               </Alert>
             )}
             <Table>
@@ -103,61 +113,65 @@ const AdminRuns = ({ history, match, location }) => {
                   </TableCell>
                 </TableRow>
               </TableHead>
-              {runs.map((run) => (
-                <React.Fragment key={run._id}>
-                  <TableRow>
-                    <TableCell colSpan={2}>{run.date}</TableCell>
-                    <TableCell colSpan={4}>{run.location}</TableCell>
-                    <TableCell colSpan={2}>{run.startTime}</TableCell>
-                    <TableCell colSpan={2}>{run.endTime}</TableCell>
-                    <TableCell colSpan={2}>{run.price}</TableCell>
-                    <TableCell colSpan={2}>{run.capacity}</TableCell>
-                    <TableCell colSpan={2} align="right">
-                      {" "}
-                      <IconButton
-                        aria-label="edit"
-                        onClick={() => {
-                          history.push(`/runs/${run._id}/edit`);
-                        }}
-                      >
-                        <Edit />
-                      </IconButton>
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => setDeleteAlert(run._id)}
-                      >
-                        <Delete />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-
-                  {deleteAlert === run._id ? (
+              <TableBody>
+                {runs.map((run) => (
+                  <React.Fragment key={run._id}>
                     <TableRow>
-                      <Alert
-                        severity="warning"
-                        classes={{ message: classes.alertMessage }}
-                        onClose={() => {
-                          setDeleteAlert(null);
-                        }}
-                      >
-                        Are you sure?
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          className={classes.button}
+                      <TableCell colSpan={2}>{run.date}</TableCell>
+                      <TableCell colSpan={4}>{run.location}</TableCell>
+                      <TableCell colSpan={2}>{run.startTime}</TableCell>
+                      <TableCell colSpan={2}>{run.endTime}</TableCell>
+                      <TableCell colSpan={2}>{run.price}</TableCell>
+                      <TableCell colSpan={2}>{run.capacity}</TableCell>
+                      <TableCell colSpan={2} align="right">
+                        {" "}
+                        <IconButton
+                          aria-label="edit"
                           onClick={() => {
-                            deleteRunHandler(run._id);
+                            history.push(`/runs/${run._id}/edit`);
+                          }}
+                        >
+                          <Edit />
+                        </IconButton>
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => setDeleteAlert(run._id)}
+                        >
+                          <Delete />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                    {deleteAlert === run._id ? (
+                      <TableCell colSpan={15}>
+                        <Alert
+                          severity="warning"
+                          classes={{
+                            message: classes.alertMessage,
+                            icon: classes.alertIcon,
+                          }}
+                          onClose={() => {
                             setDeleteAlert(null);
                           }}
-                          startIcon={<Delete />}
                         >
-                          Delete
-                        </Button>
-                      </Alert>
-                    </TableRow>
-                  ) : null}
-                </React.Fragment>
-              ))}
+                          Are you sure?
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            className={classes.button}
+                            onClick={() => {
+                              deleteRunHandler(run._id);
+                              setDeleteAlert(null);
+                            }}
+                            startIcon={<Delete />}
+                          >
+                            Delete
+                          </Button>
+                        </Alert>
+                      </TableCell>
+                    ) : null}
+                  </React.Fragment>
+                ))}
+              </TableBody>
             </Table>
           </Paper>
         </Container>

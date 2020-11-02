@@ -189,8 +189,9 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route: DELETE /api/users/:id
 // @access: admin/private
 const deleteUser = asyncHandler(async (req, res) => {
-  const user = await user.findById(req.params.id);
-
+  const user = await User.findById(req.params.id);
+  // console.log(user);
+  debugger;
   if (user) {
     await user.remove();
     res.json({ message: "User removed" });
