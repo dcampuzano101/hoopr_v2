@@ -16,6 +16,7 @@ import {
   RUN_UPDATE_SUCCESS,
   RUN_UPDATE_FAIL,
   RUN_UPDATE_RESET,
+  RUN_DETAILS_RESET,
 } from "../constants/runConstants";
 
 export const runListReducer = (state = { loading: true }, action) => {
@@ -31,7 +32,13 @@ export const runListReducer = (state = { loading: true }, action) => {
   }
 };
 
-export const runDetailsReducer = (state = { run: {} }, action) => {
+export const runDetailsReducer = (
+  state = {
+    success: false,
+    run: {},
+  },
+  action
+) => {
   switch (action.type) {
     case RUN_DETAILS_REQUEST:
       return {
@@ -40,6 +47,7 @@ export const runDetailsReducer = (state = { run: {} }, action) => {
     case RUN_DETAILS_SUCCESS:
       return {
         loading: false,
+        success: true,
         run: action.payload,
       };
     case RUN_DETAILS_FAIL:
@@ -47,6 +55,8 @@ export const runDetailsReducer = (state = { run: {} }, action) => {
         loading: false,
         error: action.payload,
       };
+    case RUN_DETAILS_RESET:
+      return {};
     default:
       return state;
   }
@@ -97,7 +107,7 @@ export const runDeleteReducer = (state = {}, action) => {
   }
 };
 
-export const runUpdateReducer = (state = { run: {} }, action) => {
+export const runUpdateReducer = (state = {}, action) => {
   switch (action.type) {
     case RUN_UPDATE_REQUEST:
       return { loading: true };
@@ -106,7 +116,7 @@ export const runUpdateReducer = (state = { run: {} }, action) => {
     case RUN_UPDATE_FAIL:
       return { loading: false, error: action.payload };
     case RUN_UPDATE_RESET:
-      return { product: {} };
+      return {};
     default:
       return state;
   }

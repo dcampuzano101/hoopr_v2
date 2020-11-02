@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserEditScreen = ({ location, history, match }) => {
+const UserEditScreen = ({ history, match }) => {
   const userId = match.params.id;
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user, success: successDetails } = userDetails;
@@ -139,7 +139,6 @@ const UserEditScreen = ({ location, history, match }) => {
   }, [
     dispatch,
     history,
-    location,
     userInfo,
     user,
     success,

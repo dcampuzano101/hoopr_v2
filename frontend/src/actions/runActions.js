@@ -15,6 +15,7 @@ import {
   RUN_UPDATE_REQUEST,
   RUN_UPDATE_SUCCESS,
   RUN_UPDATE_FAIL,
+  RUN_DETAILS_RESET,
 } from "../constants/runConstants";
 
 export const listRuns = () => async (dispatch) => {
@@ -40,7 +41,7 @@ export const listRuns = () => async (dispatch) => {
   }
 };
 
-export const listRunDetails = (id) => async (dispatch, getState) => {
+export const getRunDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: RUN_DETAILS_REQUEST,
@@ -159,6 +160,9 @@ export const updateRun = (run) => async (dispatch, getState) => {
     dispatch({
       type: RUN_UPDATE_SUCCESS,
       payload: data,
+    });
+    dispatch({
+      type: RUN_DETAILS_RESET,
     });
   } catch (error) {
     dispatch({
