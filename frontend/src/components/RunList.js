@@ -10,6 +10,7 @@ import {
   Typography,
   CircularProgress,
   Button,
+  Paper,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Map from "./Map";
@@ -18,8 +19,7 @@ import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "50%",
-    height: "100%",
+    // height: "100%",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -109,64 +109,70 @@ const RunList = ({ history }) => {
         <CircularProgress />
       ) : (
         <>
-          <Accordion disabled>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel3a-content"
-              id="panel3a-header"
-            >
-              <Typography className={classes.heading}>DATE</Typography>
-              <Typography className={classes.heading}>LOCATION</Typography>
-              <Typography className={classes.heading}>TIME</Typography>
-              <Typography className={classes.heading}>PRICE</Typography>
-              <Typography className={classes.heading}>SPOTS</Typography>
-            </AccordionSummary>
-          </Accordion>
-          {runs.map((run) => (
-            <React.Fragment key={run._id}>
-              <Accordion
-                expanded={expanded === run._id}
-                onChange={handleChange(run._id)}
+          <Paper>
+            <Accordion disabled>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel3a-content"
+                id="panel3a-header"
               >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1bh-content"
-                  id="panel1bh-header"
+                <Typography className={classes.heading}>DATE</Typography>
+                <Typography className={classes.heading}>LOCATION</Typography>
+                <Typography className={classes.heading}>TIME</Typography>
+                <Typography className={classes.heading}>PRICE</Typography>
+                <Typography className={classes.heading}>SPOTS</Typography>
+              </AccordionSummary>
+            </Accordion>
+            {runs.map((run) => (
+              <React.Fragment key={run._id}>
+                <Accordion
+                  expanded={expanded === run._id}
+                  onChange={handleChange(run._id)}
                 >
-                  <Typography className={classes.heading}>
-                    {parseDate(run.date)}
-                  </Typography>
-                  <Typography className={classes.heading}>
-                    {run.location}
-                  </Typography>
-                  <Typography className={classes.heading}>
-                    {`${run.startTime} - ${run.endTime}`}
-                  </Typography>
-                  <Typography className={classes.heading}>
-                    ${run.price}
-                  </Typography>
-                  <Typography className={classes.heading}>
-                    {`${run.users.length}/${run.capacity}`}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Map location={location} zoomLevel={13} name={run.location} />
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    // value={run._id}
-                    onClick={() => addToCartHandler(run._id)}
-                    // disabled={updateProfileBtnDisabled}
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1bh-content"
+                    id="panel1bh-header"
                   >
-                    ADD TO CART
-                  </Button>
-                </AccordionDetails>
-              </Accordion>
-            </React.Fragment>
-          ))}
+                    <Typography className={classes.heading}>
+                      {parseDate(run.date)}
+                    </Typography>
+                    <Typography className={classes.heading}>
+                      {run.location}
+                    </Typography>
+                    <Typography className={classes.heading}>
+                      {`${run.startTime} - ${run.endTime}`}
+                    </Typography>
+                    <Typography className={classes.heading}>
+                      ${run.price}
+                    </Typography>
+                    <Typography className={classes.heading}>
+                      {`${run.users.length}/${run.capacity}`}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Map
+                      location={location}
+                      zoomLevel={13}
+                      name={run.location}
+                    />
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className={classes.submit}
+                      // value={run._id}
+                      onClick={() => addToCartHandler(run._id)}
+                      // disabled={updateProfileBtnDisabled}
+                    >
+                      ADD TO CART
+                    </Button>
+                  </AccordionDetails>
+                </Accordion>
+              </React.Fragment>
+            ))}
+          </Paper>
         </>
       )}
     </div>

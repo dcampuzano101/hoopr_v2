@@ -80,101 +80,99 @@ const AdminUsers = ({ history }) => {
         <CircularProgress />
       ) : (
         <>
-          <Container className={classes.container}>
-            <Typography>ALL USERS</Typography>
-            <Paper className={classes.paper}>
-              {error && (
-                <Alert
-                  severity="error"
-                  onClose={() => {
-                    setUsersError(null);
-                  }}
-                >
-                  {error}
-                </Alert>
-              )}
-              {errorDelete && (
-                <Alert
-                  severity="error"
-                  onClose={() => {
-                    setUsersError(null);
-                  }}
-                >
-                  {errorDelete}
-                </Alert>
-              )}
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell colSpan={3}>username</TableCell>
-                    <TableCell colSpan={4}>email</TableCell>
-                    <TableCell colSpan={2}>isAdmin</TableCell>
-                    {/* possibly display # of runs */}
-                    <TableCell colSpan={3} align="right">
-                      Actions
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {users.map((user) => (
-                    <React.Fragment key={user._id}>
-                      <TableRow>
-                        <TableCell colSpan={3}>{user.username}</TableCell>
-                        <TableCell colSpan={4}>{user.email}</TableCell>
-                        <TableCell colSpan={2}>{`${user.isAdmin}`}</TableCell>
-                        <TableCell colSpan={3} align="right">
-                          {" "}
-                          <IconButton
-                            aria-label="edit"
-                            onClick={() => {
-                              history.push(`/users/${user._id}/edit`);
-                            }}
-                          >
-                            <Edit />
-                          </IconButton>
-                          <IconButton
-                            aria-label="delete"
-                            onClick={() => setDeleteAlert(user._id)}
-                          >
-                            <Delete />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
+          <Typography>ALL USERS</Typography>
+          <Paper className={classes.paper}>
+            {error && (
+              <Alert
+                severity="error"
+                onClose={() => {
+                  setUsersError(null);
+                }}
+              >
+                {error}
+              </Alert>
+            )}
+            {errorDelete && (
+              <Alert
+                severity="error"
+                onClose={() => {
+                  setUsersError(null);
+                }}
+              >
+                {errorDelete}
+              </Alert>
+            )}
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell colSpan={3}>username</TableCell>
+                  <TableCell colSpan={4}>email</TableCell>
+                  <TableCell colSpan={2}>isAdmin</TableCell>
+                  {/* possibly display # of runs */}
+                  <TableCell colSpan={3} align="right">
+                    Actions
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {users.map((user) => (
+                  <React.Fragment key={user._id}>
+                    <TableRow>
+                      <TableCell colSpan={3}>{user.username}</TableCell>
+                      <TableCell colSpan={4}>{user.email}</TableCell>
+                      <TableCell colSpan={2}>{`${user.isAdmin}`}</TableCell>
+                      <TableCell colSpan={3} align="right">
+                        {" "}
+                        <IconButton
+                          aria-label="edit"
+                          onClick={() => {
+                            history.push(`/users/${user._id}/edit`);
+                          }}
+                        >
+                          <Edit />
+                        </IconButton>
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => setDeleteAlert(user._id)}
+                        >
+                          <Delete />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
 
-                      {deleteAlert === user._id ? (
-                        <TableCell colSpan={15}>
-                          <Alert
-                            severity="warning"
-                            classes={{
-                              message: classes.alertMessage,
-                              icon: classes.alertIcon,
-                            }}
-                            onClose={() => {
+                    {deleteAlert === user._id ? (
+                      <TableCell colSpan={15}>
+                        <Alert
+                          severity="warning"
+                          classes={{
+                            message: classes.alertMessage,
+                            icon: classes.alertIcon,
+                          }}
+                          onClose={() => {
+                            setDeleteAlert(null);
+                          }}
+                        >
+                          Are you sure?
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            className={classes.button}
+                            onClick={() => {
+                              deleteUserHandler(user._id);
                               setDeleteAlert(null);
                             }}
+                            startIcon={<Delete />}
                           >
-                            Are you sure?
-                            <Button
-                              variant="contained"
-                              color="secondary"
-                              className={classes.button}
-                              onClick={() => {
-                                deleteUserHandler(user._id);
-                                setDeleteAlert(null);
-                              }}
-                              startIcon={<Delete />}
-                            >
-                              Delete
-                            </Button>
-                          </Alert>
-                        </TableCell>
-                      ) : null}
-                    </React.Fragment>
-                  ))}
-                </TableBody>
-              </Table>
-            </Paper>
-          </Container>
+                            Delete
+                          </Button>
+                        </Alert>
+                      </TableCell>
+                    ) : null}
+                  </React.Fragment>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper>
         </>
       )}
     </>

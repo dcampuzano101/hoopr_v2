@@ -176,7 +176,6 @@ const RunEditScreen = ({ history, match }) => {
     runId,
     updatedRun,
   ]);
-  debugger;
   console.log(run);
   return (
     <React.Fragment>

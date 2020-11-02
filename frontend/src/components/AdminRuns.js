@@ -76,7 +76,7 @@ const AdminRuns = ({ history, match, location }) => {
       {loading || loadingDelete ? (
         <CircularProgress />
       ) : (
-        <Container className={classes.container}>
+        <>
           <Typography>ALL RUNS</Typography>
           <Paper className={classes.paper}>
             {error && (
@@ -174,7 +174,7 @@ const AdminRuns = ({ history, match, location }) => {
               </TableBody>
             </Table>
           </Paper>
-        </Container>
+        </>
       )}
     </>
   );

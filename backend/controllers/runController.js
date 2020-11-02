@@ -83,7 +83,6 @@ const getRunById = asyncHandler(async (req, res) => {
 // @access: admin/private
 const updateRun = asyncHandler(async (req, res) => {
   const run = await Run.findById(req.body.id);
-  debugger;
   if (run) {
     run.name = req.body.name || run.name;
     run.location = req.body.location || run.location;

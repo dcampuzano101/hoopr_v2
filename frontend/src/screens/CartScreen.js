@@ -129,7 +129,7 @@ const CartScreen = ({ match }) => {
                       </TableRow>
 
                       {deleteAlert === run.run ? (
-                        <TableRow>
+                        <TableCell colSpan={15}>
                           <Alert
                             severity="warning"
                             classes={{ message: classes.alertMessage }}
@@ -151,7 +151,7 @@ const CartScreen = ({ match }) => {
                               Delete
                             </Button>
                           </Alert>
-                        </TableRow>
+                        </TableCell>
                       ) : null}
                     </>
                   ))}

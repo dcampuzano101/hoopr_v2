@@ -60,18 +60,16 @@ const AdminScreen = ({ history }) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <main className={classes.content}>
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={12} lg={12}>
-              <AdminUsers />
-            </Grid>
-            <Grid item xs={12} md={12} lg={12}>
-              <AdminRuns />
-            </Grid>
+      <Container maxWidth="lg" className={classes.container}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={12} lg={12}>
+            <AdminUsers />
           </Grid>
-        </Container>
-      </main>
+          <Grid item xs={12} md={12} lg={12}>
+            <AdminRuns />
+          </Grid>
+        </Grid>
+      </Container>
     </div>
   );
 };
