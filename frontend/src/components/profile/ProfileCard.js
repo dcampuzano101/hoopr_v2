@@ -156,7 +156,7 @@ const ProfileCard = ({ location, history, match }) => {
       if (successDetails) {
         setUsername(user.username);
         setEmail(user.email);
-        setProfilePhoto(user.profilePhoto);
+        setProfilePhoto(user.profilePhoto || avatar);
       }
 
       if (error) {
