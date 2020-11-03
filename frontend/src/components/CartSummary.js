@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../actions/orderActions";
 import { withRouter } from "react-router-dom";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -63,6 +64,9 @@ const CartSummary = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/checkout/${order._id}`);
+      dispatch({
+        type: ORDER_CREATE_RESET,
+      });
     }
   }, [history, success]);
 

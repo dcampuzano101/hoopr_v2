@@ -27,24 +27,8 @@ const CheckoutScreen = ({ match, history }) => {
     }
   }, [dispatch, orderId]);
 
-  const getTotalPrice = (order) => {
-    console.log(order);
-  };
-
-  const addUserToRuns = (order) => {
-    if (order) {
-      order.orderItems.forEach((run) => {
-        debugger;
-        console.log(`runb4 =${run}`);
-        run.users = [...run.users, userInfo._id];
-        console.log(run);
-        dispatch(updateRun(run));
-      });
-    }
-  };
-
   const successCheckout = () => {
-    history.push("/profile/");
+    history.push("/profile/?stripe=success");
   };
   return (
     <div>

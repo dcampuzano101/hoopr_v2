@@ -11,8 +11,10 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Alert from "@material-ui/lab/Alert";
+
 import { getUserDetails } from "../../actions/userActions";
-// import { useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
 function preventDefault(event) {
   event.preventDefault();
 }
@@ -28,24 +30,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpcomingRuns = () => {
+const UpcomingRuns = ({ location }) => {
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user, success: successDetails } = userDetails;
   const [myRuns, setMyRuns] = useState(null);
+  const [successfulCheckout, setSuccessfulCheckout] = useState(null);
   const runList = useSelector((state) => state.runList);
   const { runs } = runList;
 
   useEffect(() => {
     if (successDetails) {
       setMyRuns(getMyRuns());
+      if (location.search.split("=")[1] === "success") {
+        debugger;
+        console.log("inside location.search");
+        setSuccessfulCheckout(`Successfully purchase made!`);
+        location.search = "";
+      }
     }
-  }, [successDetails]);
+  }, [successDetails, successfulCheckout]);
   const getMyRuns = () => {
     const runIds = [];
     user.runs.forEach((runObj) => {
       const runId = runObj["runId"];
-      runIds.push(runId);
+      if (runIds.indexOf(runId) === -1) {
+        runIds.push(runId);
+      }
     });
 
     const myRuns = [];
@@ -63,6 +74,8 @@ const UpcomingRuns = () => {
   };
   console.log(user);
   console.log(myRuns);
+  console.log(location.search);
+  console.log(location.search.split("=")[1]);
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -98,8 +111,18 @@ const UpcomingRuns = () => {
           </TableBody>
         )}
       </Table>
+      {successfulCheckout ? (
+        <Alert
+          severity="success"
+          onClose={() => {
+            setSuccessfulCheckout(null);
+          }}
+        >
+          {successfulCheckout}
+        </Alert>
+      ) : null}
     </React.Fragment>
   );
 };
 
-export default UpcomingRuns;
+export default withRouter(UpcomingRuns);
