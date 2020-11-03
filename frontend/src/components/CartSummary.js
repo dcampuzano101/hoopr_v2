@@ -57,11 +57,14 @@ const CartSummary = ({ history }) => {
         totalPrice: cart.totalPrice,
       })
     );
-
-    history.push(`/checkout/${order._id}`);
+    // debugger;
   };
 
-  useEffect(() => {}, [history, success]);
+  useEffect(() => {
+    if (success) {
+      history.push(`/checkout/${order._id}`);
+    }
+  }, [history, success]);
 
   const classes = useStyles();
   return (

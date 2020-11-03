@@ -15,7 +15,7 @@ import {
   ORDER_LIST_MY_RESET,
 } from "../constants/orderConstants";
 
-export const orderCreateReducer = (state = {}, action) => {
+export const orderCreateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case ORDER_CREATE_REQUEST:
       return {

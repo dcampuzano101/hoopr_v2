@@ -90,8 +90,6 @@ const RunEditScreen = ({ history, match }) => {
   const [price, setPrice] = useState("");
   const [alert, setAlert] = useState(null);
   const [users, setUsers] = useState(null);
-
-  const [] = useState(true);
   const [updateRunBtnDisabled, setUpdateRunBtnDisabled] = useState(true);
   const [detailsError, setDetailsError] = useState(null);
   const [runUpdateSuccess, setRunUpdateSuccess] = useState(null);
@@ -115,7 +113,6 @@ const RunEditScreen = ({ history, match }) => {
 
   const updateRunHandler = (e) => {
     e.preventDefault();
-    //NEEDSWORK
     dispatch(
       updateRun({
         id: run._id,
@@ -209,9 +206,9 @@ const RunEditScreen = ({ history, match }) => {
                     margin="normal"
                     fullWidth
                     id="location"
-                    label="Location"
+                    // label="Location"
                     name="location"
-                    autoComplete="location"
+                    // autoComplete="location"
                     value={location}
                     onChange={(e) => {
                       setLocation(e.target.value);

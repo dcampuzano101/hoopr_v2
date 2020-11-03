@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProfileCard = ({ location, history }) => {
+const ProfileCard = ({ location, history, match }) => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user, success: successDetails } = userDetails;
   const userLogin = useSelector((state) => state.userLogin);
@@ -159,7 +159,6 @@ const ProfileCard = ({ location, history }) => {
         setProfilePhoto(user.profilePhoto);
       }
 
-
       if (error) {
         setDetailsError(error);
       }
@@ -169,7 +168,8 @@ const ProfileCard = ({ location, history }) => {
       }
     }
   }, [dispatch, history, location, userInfo, user, success, error]);
-
+  console.log(location.search.slice(1));
+  console.log(history, match, location);
   return (
     <React.Fragment>
       <Container maxWidth="lg" className={classes.container}>

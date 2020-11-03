@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 import runRoutes from "./routes/runRoutes.js";
+import stripeRoute from "./routes/stripeRoute.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoute from "./routes/uploadRoute.js";
 import googleStrategy from "./passportSetup.js";
@@ -27,6 +28,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/runs", runRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload/", uploadRoute);
+app.use("/api/payment_intents", stripeRoute);
 app.use(notFound);
 app.use(errorHandler);
 

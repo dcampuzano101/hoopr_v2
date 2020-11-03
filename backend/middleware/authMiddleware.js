@@ -39,4 +39,8 @@ const admin = (req, res, next) => {
   }
 };
 
+// const stripe = (req, res, next) => {
+
+// }
+
 export { protect, admin };

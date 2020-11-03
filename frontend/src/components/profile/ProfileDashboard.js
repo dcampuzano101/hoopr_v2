@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import ProfileCard from "./ProfileCard";
 import UpcomingRuns from "./UpcomingRuns";
 import Runs from "./Runs";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProfileDashboard = () => {
+const ProfileDashboard = ({ history, match, params }) => {
   const classes = useStyles();
 
   return (
@@ -78,4 +79,4 @@ const ProfileDashboard = () => {
   );
 };
 
-export default ProfileDashboard;
+export default withRouter(ProfileDashboard);

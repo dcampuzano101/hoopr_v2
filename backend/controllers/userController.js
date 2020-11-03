@@ -95,6 +95,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       profilePhoto: user.profilePhoto,
       token: generateToken(user._id),
+      runs: user.runs,
     });
   } else {
     res.status(400);

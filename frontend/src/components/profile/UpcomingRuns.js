@@ -7,9 +7,10 @@ import {
   TableHead,
   TableRow,
   Typography,
+  CircularProgress,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { useSelector } from "react-redux";
 function preventDefault(event) {
   event.preventDefault();
 }
@@ -26,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UpcomingRuns = () => {
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, user, success: successDetails } = userDetails;
+
+  const runList = useSelector((state) => state.runList);
+  const { runs } = runList;
+
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -40,18 +47,24 @@ const UpcomingRuns = () => {
             <TableCell>Players</TableCell>
           </TableRow>
         </TableHead>
-        {/*<TableBody>
-           LIST MY UPCOMING RUNS */}
-        {/* {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody> */}
+        {!runs ? (
+          <CircularProgress />
+        ) : (
+          <TableBody>
+            {runs.map((run) => (
+              <React.Fragment key={run._id}>
+                <TableRow>
+                  <TableCell>{run.date}</TableCell>
+                  <TableCell>{run.location}</TableCell>
+                  <TableCell>{`${run.startTime} - ${run.endTime}`}</TableCell>
+                  <TableCell>
+                    {run.users.length} / {run.capacity}
+                  </TableCell>
+                </TableRow>
+              </React.Fragment>
+            ))}
+          </TableBody>
+        )}
       </Table>
     </React.Fragment>
   );
