@@ -19,7 +19,11 @@ const updateRuns = async (orderItems, userId) => {
     const runId = run._id;
     user.runs.push({ runId });
 
-    run.users.push({ userId });
+    run.users.push({
+      userId,
+      username: user.username,
+      profilePhoto: user.profilePhoto,
+    });
     await user.save();
     await run.save();
   }

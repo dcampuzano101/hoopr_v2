@@ -3,6 +3,7 @@ import { listRuns } from "../actions/runActions";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
+import avatar from "../assets/user-avatar.png";
 import {
   Accordion,
   AccordionDetails,
@@ -11,6 +12,13 @@ import {
   CircularProgress,
   Button,
   Paper,
+  Grid,
+  Avatar,
+  TableRow,
+  TableHead,
+  Table,
+  TableBody,
+  TableCell,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Map from "./Map";
@@ -25,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: "20%",
     flexShrink: 0,
+    textAlign: "center",
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -36,6 +45,16 @@ const useStyles = makeStyles((theme) => ({
     height: "10%",
     display: "flex",
     margin: "0 auto",
+  },
+  userList: {
+    display: "flex",
+    width: "90%",
+    margin: "0 5% 0 5%",
+    justifyContent: "space-between",
+  },
+  userTable: {
+    margin: "0 5% 2%",
+    maxWidth: "90%",
   },
 }));
 
@@ -151,23 +170,80 @@ const RunList = ({ history }) => {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Map
-                      location={location}
-                      zoomLevel={13}
-                      name={run.location}
-                    />
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className={classes.submit}
-                      // value={run._id}
-                      onClick={() => addToCartHandler(run._id)}
-                      // disabled={updateProfileBtnDisabled}
-                    >
-                      ADD TO CART
-                    </Button>
+                    <Grid container>
+                      <Grid item xs={12} md={7} lg={7}>
+                        <Map
+                          location={location}
+                          zoomLevel={13}
+                          name={run.location}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={5} lg={5}>
+                        {run.users.length > 0 ? (
+                          <>
+                            <Table className={classes.userTable}>
+                              <TableHead>
+                                <TableRow colSpan={2}>
+                                  <TableCell align="right">
+                                    {run.users.length} Players
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
+                            </Table>
+
+                            <div className={classes.userList}>
+                              {run.users.map((user) => (
+                                <>
+                                  <div>
+                                    {user.profilePhoto ? (
+                                      <Avatar
+                                        alt={user.username}
+                                        src={user.profilePhoto}
+                                      />
+                                    ) : (
+                                      <Avatar
+                                        alt={user.username}
+                                        src={avatar}
+                                      />
+                                    )}
+                                  </div>
+                                  <div>
+                                    <Typography className={classes.heading}>
+                                      {user.username}
+                                    </Typography>
+                                  </div>
+                                </>
+                              ))}
+                            </div>
+                          </>
+                        ) : (
+                          <Table>
+                            <TableHead>
+                              <TableRow>
+                                <TableCell>
+                                  <Typography className={classes.heading}>
+                                    No players yet!
+                                  </Typography>
+                                </TableCell>
+                              </TableRow>
+                            </TableHead>
+                          </Table>
+                        )}
+
+                        <Button
+                          type="submit"
+                          // fullWidth
+                          variant="contained"
+                          color="primary"
+                          className={classes.submit}
+                          // value={run._id}
+                          onClick={() => addToCartHandler(run._id)}
+                          // disabled={updateProfileBtnDisabled}
+                        >
+                          ADD TO CART
+                        </Button>
+                      </Grid>
+                    </Grid>
                   </AccordionDetails>
                 </Accordion>
               </React.Fragment>
