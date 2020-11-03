@@ -37,10 +37,6 @@ const UpcomingRuns = () => {
   const { runs } = runList;
 
   useEffect(() => {
-    // if (!user) {
-    //   dispatch(getUserDetails("profile"));
-    // }
-
     if (successDetails) {
       setMyRuns(getMyRuns());
     }

@@ -7,6 +7,7 @@ import {
 } from "../constants/cartConstants";
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
+  debugger;
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload;
@@ -32,6 +33,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         cartItems: state.cartItems.filter((x) => x.run !== action.payload),
       };
     case CART_RESET:
+      localStorage.removeItem("cartItems");
       return { cartItems: [] };
     default:
       return state;

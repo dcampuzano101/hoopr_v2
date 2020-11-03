@@ -20,6 +20,7 @@ import {
 } from "../constants/runConstants";
 
 export const runListReducer = (state = { loading: true }, action) => {
+  debugger;
   switch (action.type) {
     case RUN_LIST_REQUEST:
       return { loading: true };

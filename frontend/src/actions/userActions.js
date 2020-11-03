@@ -27,6 +27,7 @@ import {
   USER_UPDATE_PROFILE_PHOTO_FAIL,
   USER_UPDATE_PROFILE_PHOTO_SUCCESS,
 } from "../constants/userConstants";
+import { RUN_LIST_SUCCESS, RUN_LIST_REQUEST } from "../constants/runConstants";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -148,12 +149,23 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
+    dispatch({
+      type: RUN_LIST_REQUEST,
+    });
+
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
+    const { data: runs } = await axios.get("/api/runs", config);
     const { data } = await axios.get(`/api/users/${id}`, config);
+
+    debugger;
+    dispatch({
+      type: RUN_LIST_SUCCESS,
+      payload: runs,
+    });
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data,
