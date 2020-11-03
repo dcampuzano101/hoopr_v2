@@ -44,7 +44,7 @@ const CheckoutScreen = ({ match, history }) => {
   };
 
   const successCheckout = () => {
-    history.push("/profile/?checkoutsuccess");
+    history.push("/");
   };
   return (
     <div>
