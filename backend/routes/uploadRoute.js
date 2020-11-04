@@ -5,7 +5,6 @@ import upload from "../utils/fileUpload.js";
 
 const singleUpload = upload.single("media");
 
-// TRY TO CONVERT INTO ASYNCHRONOUS FUNCTIONS
 router.post("/media-upload", function (req, res) {
   singleUpload(req, res, function (err) {
     if (err) {

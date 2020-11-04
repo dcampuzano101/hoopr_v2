@@ -121,7 +121,6 @@ const LoginScreen = ({ location, history }) => {
             color="primary"
             href="http://localhost:5000/api/users/google"
             className={classes.submit}
-            // onClick={googleHandler}
           >
             Sign In With Google
           </Button>

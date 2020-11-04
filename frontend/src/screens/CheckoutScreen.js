@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import Layout from "../components/Layout";
-// import CheckoutForm from "../components/CheckoutForm";
-import { getOrderDetails, updateOrder } from "../actions/orderActions";
-import { updateRun } from "../actions/runActions";
+import { getOrderDetails } from "../actions/orderActions";
 
 import Layout from "../components/Layout";
 import CheckoutForm from "../components/CheckoutForm";
@@ -13,7 +10,7 @@ const CheckoutScreen = ({ match, history }) => {
   const orderId = match.params.id;
 
   const orderDetails = useSelector((state) => state.orderDetails);
-  const { loading, error, order, success: successDetails } = orderDetails;
+  const { order } = orderDetails;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;

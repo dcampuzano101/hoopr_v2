@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { listRuns } from "../actions/runActions";
 import { useSelector, useDispatch } from "react-redux";
-// import { withRouter } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import avatar from "../assets/user-avatar.png";
@@ -28,7 +27,6 @@ import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // height: "100%",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -41,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   submit: {
-    // margin: theme.spacing(3, 0, 2),
     width: "35%",
     height: "10%",
     display: "flex",
@@ -52,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     width: "90%",
     margin: "0 5% 0 5%",
     justifyContent: "space-between",
+    flexDirection: "column",
   },
   userTable: {
     margin: "0 5% 2%",
@@ -82,6 +80,9 @@ const RunList = ({ history, location }) => {
 
   const runsList = useSelector((state) => state.runList);
   const { loading, error, runs } = runsList;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
@@ -250,13 +251,13 @@ const RunList = ({ history, location }) => {
 
                         <Button
                           type="submit"
-                          // fullWidth
                           variant="contained"
                           color="primary"
                           className={classes.submit}
-                          // value={run._id}
                           onClick={() => addToCartHandler(run._id)}
-                          // disabled={updateProfileBtnDisabled}
+                          disabled={run.users.some(
+                            (user) => user.userId === userInfo._id
+                          )}
                         >
                           ADD TO CART
                         </Button>

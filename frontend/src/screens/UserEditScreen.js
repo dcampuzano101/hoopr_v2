@@ -151,10 +151,8 @@ const UserEditScreen = ({ history, match }) => {
                   margin="normal"
                   fullWidth
                   id="username"
-                  // label="Username"
                   placeholder="Username"
                   name="username"
-                  // autoComplete="username"
                   value={username}
                   onChange={(e) => {
                     setUsername(e.target.value);

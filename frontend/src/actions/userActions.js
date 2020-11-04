@@ -284,16 +284,6 @@ export const updateUserProfilePhoto = (formData) => async (
       type: USER_UPDATE_PROFILE_PHOTO_REQUEST,
     });
 
-    // const {
-    //   userLogin: { userInfo },
-    // } = getState();
-
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${userInfo.token}`,
-    //   },
-    // };
     const { data } = await axios.post("/api/upload/media-upload", formData);
 
     dispatch({

@@ -42,11 +42,6 @@ const UpcomingRuns = ({ location }) => {
   useEffect(() => {
     if (successDetails) {
       setMyRuns(getMyRuns());
-      // if (location.search.split("=")[1] === "success") {
-      //   console.log("inside location.search");
-      //   setSuccessfulCheckout(`Successfully purchase made!`);
-      //   location.search = "";
-      // }
     }
   }, [successDetails, successfulCheckout]);
   const getMyRuns = () => {

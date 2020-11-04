@@ -1,5 +1,3 @@
-// import express from "express";
-// const router = express.Router();
 import Order from "../models/orderModel.js";
 import Run from "../models/runModel.js";
 import User from "../models/userModel.js";

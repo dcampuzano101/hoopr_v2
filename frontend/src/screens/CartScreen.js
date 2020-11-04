@@ -84,9 +84,6 @@ const CartScreen = ({ match }) => {
     dispatch(removeFromCart(runId));
   };
 
-  // const checkoutHandler = () => {
-  //   history.push("/login?redirect=shipping");
-  // };
   const classes = useStyles();
 
   return (
