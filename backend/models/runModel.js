@@ -53,6 +53,14 @@ const runSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    geoLocation: {
+      type: Map,
+      default: {
+        address: "100 Dobbin St, Brooklyn, NY 11222",
+        lat: 40.7251474,
+        lng: -73.9566612,
+      },
+    },
   },
   { timestamps: true }
 );

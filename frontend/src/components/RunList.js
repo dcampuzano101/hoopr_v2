@@ -173,8 +173,8 @@ const RunList = ({ history }) => {
                     <Grid container>
                       <Grid item xs={12} md={7} lg={7}>
                         <Map
-                          location={location}
-                          zoomLevel={13}
+                          location={run.geoLocation}
+                          zoomLevel={15}
                           name={run.location}
                         />
                       </Grid>
