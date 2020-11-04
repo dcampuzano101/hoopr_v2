@@ -12,6 +12,7 @@ const users = [
     email: "munya1386@gmail.com",
     password: bcrypt.hashSync("binx1986", 10),
     isAdmin: true,
+    profilePhoto: "https://hoopr2.s3.amazonaws.com/ana.jpg",
   },
   {
     username: "jane doe",
