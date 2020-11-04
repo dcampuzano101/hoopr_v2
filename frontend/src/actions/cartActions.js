@@ -17,10 +17,8 @@ export const addToCart = (id) => async (dispatch, getState) => {
       Authorization: `Bearer ${userInfo.token}`,
     },
   };
-  debugger;
   const { data } = await axios.get(`/api/runs/${id}`, config);
   console.log(data);
-  debugger;
 
   dispatch({
     type: CART_ADD_ITEM,

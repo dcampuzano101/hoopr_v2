@@ -101,7 +101,6 @@ export const payOrder = (orderId) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    debugger;
     const { data } = await axios.put(`/api/orders/${orderId}/pay`, config);
 
     dispatch({

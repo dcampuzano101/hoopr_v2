@@ -161,7 +161,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     const { data: runs } = await axios.get("/api/runs", config);
     const { data } = await axios.get(`/api/users/${id}`, config);
 
-    debugger;
     dispatch({
       type: RUN_LIST_SUCCESS,
       payload: runs,

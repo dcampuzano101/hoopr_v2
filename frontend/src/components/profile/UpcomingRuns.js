@@ -43,7 +43,6 @@ const UpcomingRuns = ({ location }) => {
     if (successDetails) {
       setMyRuns(getMyRuns());
       if (location.search.split("=")[1] === "success") {
-        debugger;
         console.log("inside location.search");
         setSuccessfulCheckout(`Successfully purchase made!`);
         location.search = "";

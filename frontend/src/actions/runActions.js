@@ -56,10 +56,8 @@ export const getRunDetails = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    debugger;
     const { data } = await axios.get(`/api/runs/${id}`, config);
     console.log(data);
-    debugger;
     dispatch({
       type: RUN_DETAILS_SUCCESS,
       payload: data,

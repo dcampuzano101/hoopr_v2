@@ -58,7 +58,6 @@ const CartSummary = ({ history }) => {
         totalPrice: cart.totalPrice,
       })
     );
-    // debugger;
   };
 
   useEffect(() => {
