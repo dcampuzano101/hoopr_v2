@@ -26,8 +26,7 @@ import { addToCart } from "../actions/cartActions";
 import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-  },
+  root: {},
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: "20%",
@@ -255,9 +254,15 @@ const RunList = ({ history, location }) => {
                           color="primary"
                           className={classes.submit}
                           onClick={() => addToCartHandler(run._id)}
-                          disabled={run.users.some(
-                            (user) => user.userId === userInfo._id
-                          )}
+                          disabled={
+                            userInfo
+                              ? run.users.some(
+                                  (user) => user.userId === userInfo._id
+                                )
+                                ? true
+                                : false
+                              : false
+                          }
                         >
                           ADD TO CART
                         </Button>
