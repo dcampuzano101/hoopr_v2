@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { listRuns } from "../actions/runActions";
 import { useSelector, useDispatch } from "react-redux";
+// import { withRouter } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import avatar from "../assets/user-avatar.png";
@@ -64,12 +65,19 @@ const location = {
   lng: -73.9566612,
 };
 
-const RunList = ({ history }) => {
+const RunList = ({ history, location }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [successfulCheckout, setSuccessfulCheckout] = useState(null);
 
   useEffect(() => {
     dispatch(listRuns());
+
+    if (location.search.split("=")[1] === "success") {
+      console.log("inside location.search");
+      setSuccessfulCheckout(`Successfully made purchase!`);
+      location.search = "";
+    }
   }, [dispatch]);
 
   const runsList = useSelector((state) => state.runList);
@@ -129,6 +137,16 @@ const RunList = ({ history }) => {
       ) : (
         <>
           <Paper>
+            {successfulCheckout ? (
+              <Alert
+                severity="success"
+                onClose={() => {
+                  setSuccessfulCheckout(null);
+                }}
+              >
+                {successfulCheckout}
+              </Alert>
+            ) : null}
             <Accordion disabled>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}

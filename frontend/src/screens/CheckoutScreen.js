@@ -28,7 +28,7 @@ const CheckoutScreen = ({ match, history }) => {
   }, [dispatch, orderId]);
 
   const successCheckout = () => {
-    history.push("/profile/?stripe=success");
+    history.push("/?stripe=success");
   };
   return (
     <div>
