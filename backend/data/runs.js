@@ -10,7 +10,7 @@ const runs = [
     endTime: "11:00 PM",
     geoLocation: {
       address: "100 Dobbin St, Brooklyn, NY 11222",
-      lat: 40.7251474,
+      lat: 40.7251514,
       lng: -73.9566612,
     },
   },
@@ -55,7 +55,7 @@ const runs = [
     endTime: "10:00 PM",
     geoLocation: {
       address: "100 Dobbin St, Brooklyn, NY 11222",
-      lat: 40.7251474,
+      lat: 40.7251514,
       lng: -73.9566612,
     },
   },
