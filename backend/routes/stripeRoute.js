@@ -7,7 +7,7 @@ const stripe = new Stripe(
   "sk_test_51Hi0CkCw3D7iMvxsxTGNxXXGNndJ6qnjlZCIuFnGNWmpYl5FL5ajlrGhwiZ3KYsgXfGS8WUuWgMpva2CY1DxEctB00JUHZcox1"
 );
 
-const updateRuns = async (orderItems, userId) => {
+const updateRunsAndUser = async (orderItems, userId) => {
   const user = await User.findById(userId);
 
   for (let i = 0; i < orderItems.length; i++) {
@@ -46,7 +46,7 @@ export default async (req, res) => {
         console.log(updatedOrder);
 
         const { orderItems, userId } = order;
-        await updateRuns(orderItems, userId);
+        await updateRunsAndUser(orderItems, userId);
       }
       res.status(200).send(paymentIntent.client_secret);
     } catch (err) {

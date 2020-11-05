@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "5fa436adf1047f07cc1af8cd"
+  },
+  "password": "$2a$10$ogzk9qNafAJna8rrLkOtC.QfAUkaCwB99CZb40ro4QXQGAQHaiDlS",
+  "isAdmin": true,
+  "username": "merkyoass",
+  "email": "dcampuzano101@gmail.com",
+  "runs": [
+    {
+      "_id": {
+        "$oid": "5fa43b9124b3da0a5d02797f"
+      },
+      "runId": {
+        "$oid": "5fa436adf1047f07cc1af8d1"
+      }
+    }
+  ],
+  "__v": 1,
+  "createdAt": {
+    "$date": "2020-11-05T17:30:21.037Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-05T17:51:13.627Z"
+  }
+}]
