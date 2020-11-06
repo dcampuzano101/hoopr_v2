@@ -1,10 +1,12 @@
-const theme = {
+import { createMuiTheme } from "@material-ui/core";
+
+const muiTheme = createMuiTheme({
   palette: {
     primary: {
-      main: "#cfd8dc",
-      light: "#ffffff",
-      dark: "#383b3c",
-      contrastText: "#000000",
+      main: "#546e7a",
+      light: "#819ca9",
+      dark: "#29434e",
+      contrastText: "#ffff",
     },
     secondary: {
       main: "#b0bec5",
@@ -13,22 +15,51 @@ const theme = {
       contrastText: "#000000",
     },
   },
-  text: {
-    heading: {
-      font: "Trispace, sans-serif",
+  typography: {
+    h1: {
+      fontFamily: "Lilita One",
       weight: 400,
-      size: "2rem",
+      fontSize: "3rem",
       spacing: "2px",
       transform: "lowercase",
-      opacity: 0.9,
-      color: "#3A3532",
-    },
-    subText: {
-      font: "Montserrat, sans-serif",
-      weight: 400,
-      size: "1.3rem",
+      opacity: 0.8,
+      letterSpacing: "1",
+      color: "#ffff",
     },
   },
-};
+});
 
-export default theme;
+// const theme = {
+//   palette: {
+//     primary: {
+//       main: "#cfd8dc",
+//       light: "#ffffff",
+//       dark: "#383b3c",
+//       contrastText: "#000000",
+//     },
+//     secondary: {
+//       main: "#b0bec5",
+//       light: "#e2f1f8",
+//       dark: "#808e95",
+//       contrastText: "#000000",
+//     },
+//   },
+//   text: {
+//     heading: {
+//       font: "Trispace, sans-serif",
+//       weight: 400,
+//       size: "2rem",
+//       spacing: "2px",
+//       transform: "lowercase",
+//       opacity: 0.9,
+//       color: "#3A3532",
+//     },
+//     subText: {
+//       font: "Montserrat, sans-serif",
+//       weight: 400,
+//       size: "1.3rem",
+//     },
+//   },
+// };
+
+export { muiTheme };

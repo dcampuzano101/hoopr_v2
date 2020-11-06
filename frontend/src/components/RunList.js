@@ -28,10 +28,23 @@ import { withRouter } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {},
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(22),
+    letterSpacing: "1.3px",
     flexBasis: "20%",
     flexShrink: 0,
-    textAlign: "center",
+    // textAlign: "center",
+    color: "#fff",
+    fontFamily: "Lilita One",
+  },
+  subHeading: {
+    fontFamily: "Open Sans, Helvetica, Arial, sans-serif",
+    fontSize: theme.typography.pxToRem(16),
+    fontStyle: "normal",
+    fontWeight: "normal",
+    flexBasis: "20%",
+    flexShrink: 0,
+    textTransform: "none",
+    color: "#34495E",
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -152,6 +165,7 @@ const RunList = ({ history, location }) => {
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel3a-content"
                 id="panel3a-header"
+                style={{ backgroundColor: "#819ca9" }}
               >
                 <Typography className={classes.heading}>DATE</Typography>
                 <Typography className={classes.heading}>LOCATION</Typography>
@@ -165,25 +179,26 @@ const RunList = ({ history, location }) => {
                 <Accordion
                   expanded={expanded === run._id}
                   onChange={handleChange(run._id)}
+                  styles={{ backgroundColor: "#eee" }}
                 >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                   >
-                    <Typography className={classes.heading}>
+                    <Typography className={classes.subHeading}>
                       {parseDate(run.date)}
                     </Typography>
-                    <Typography className={classes.heading}>
+                    <Typography className={classes.subHeading}>
                       {run.location}
                     </Typography>
-                    <Typography className={classes.heading}>
+                    <Typography className={classes.subHeading}>
                       {`${run.startTime} - ${run.endTime}`}
                     </Typography>
-                    <Typography className={classes.heading}>
+                    <Typography className={classes.subHeading}>
                       ${run.price}
                     </Typography>
-                    <Typography className={classes.heading}>
+                    <Typography className={classes.subHeading}>
                       {`${run.users.length}/${run.capacity}`}
                     </Typography>
                   </AccordionSummary>
@@ -226,7 +241,7 @@ const RunList = ({ history, location }) => {
                                     )}
                                   </div>
                                   <div>
-                                    <Typography className={classes.heading}>
+                                    <Typography className={classes.subHeading}>
                                       {user.username}
                                     </Typography>
                                   </div>
@@ -239,7 +254,7 @@ const RunList = ({ history, location }) => {
                             <TableHead>
                               <TableRow>
                                 <TableCell>
-                                  <Typography className={classes.heading}>
+                                  <Typography className={classes.subHeading}>
                                     No players yet!
                                   </Typography>
                                 </TableCell>

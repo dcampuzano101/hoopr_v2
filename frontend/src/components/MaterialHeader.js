@@ -8,6 +8,7 @@ import {
   MenuItem,
   Button,
   useMediaQuery,
+  Typography,
 } from "@material-ui/core";
 import {
   AccountCircle,
@@ -19,23 +20,19 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import { useTheme } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
-import customTheme from "../theme.js";
+import { muiTheme } from "../theme.js";
 import { useSelector } from "react-redux";
 
-const { heading } = customTheme.text;
 const useStyles = makeStyles((theme) => ({
   logoButton: {
     style: "none",
-    fontFamily: heading.font,
-    fontSize: heading.size,
-    lineHeight: heading.lineHeight,
-    textTransform: heading.transform,
-    letterSpacing: heading.spacing,
-    fontWeight: heading.weight,
-    color: customTheme.palette.primary.light,
     "&:hover": {
-      backgroundColor: customTheme.palette.primary.main,
+      backgroundColor: theme.palette.primary.main,
     },
+  },
+  logoText: {
+    // color: theme.palette.primary.contrastText,
+    // fontFamily: "Lilita One",
   },
   root: {},
   menuButton: {
@@ -86,12 +83,11 @@ const MaterialHeader = ({ history }) => {
       ) : null}
     </div>
   );
-
   return (
     <div className={classes.root}>
       <AppBar
         style={{
-          backgroundColor: customTheme.palette.primary.main,
+          backgroundColor: theme.palette.primary.main,
           marginBottom: "1rem",
         }}
         position="static"
@@ -101,7 +97,7 @@ const MaterialHeader = ({ history }) => {
             className={classes.logoButton}
             onClick={() => handleMenuClick("/")}
           >
-            Hoopr
+            <Typography variant="h1">Hoopr</Typography>
           </Button>
           {isMobile ? (
             <div>
