@@ -1,5 +1,48 @@
+On successful checkout on Stripe, during the same request and trip to the database.
+
+```
+const updateRunsAndUser = async (orderItems, userId) => {
+  const user = await User.findById(userId);
+
+  for (let i = 0; i < orderItems.length; i++) {
+    const item = orderItems[i];
+    console.log(item);
+    const run = await Run.findById(item.run);
+    const runId = run._id;
+    user.runs.push({ runId });
+
+    run.users.push({
+      userId,
+      username: user.username,
+      profilePhoto: user.profilePhoto,
+    });
+    await user.save();
+    await run.save();
+  }
+};
+```
+
+1. Update created order ( order.isPaid === true )
+2. Asynchronously call updateRunsAndUser(orderItems, userId)
+3. Add User to each Run in the order aka the orderItems
+   - const user = User.findById(userId)
+   - iterate through orderItems
+     - item = orderItem[i];
+     - run = Run.findById(item.run)
+     - user.runs.push({ run.\_id })
+     - ```
+        run.users.push({
+            userId,
+            username: user.username,
+            profilePhoto: user.profilePhoto,
+        });
+       ```
+     - await user.save(); await run.save()
+4. redirect to "/" with success message, order.isPaid == true, user is added to run, run contains user as well.
+
 Actual Behavior:
 
+```
     sampleOrder = {
         "_id": { "$oid": "5fa43b8624b3da0a5d02797d" },
         "totalPrice": 10,
@@ -47,7 +90,6 @@ Actual Behavior:
 
     sampleUserAfterCheckout = {
         "_id": { "$oid": "5fa436adf1047f07cc1af8cd" },
-        "password": "$2a$10$ogzk9qNafAJna8rrLkOtC.QfAUkaCwB99CZb40ro4QXQGAQHaiDlS",
         "isAdmin": true,
         "username": "merkyoass",
         "email": "dcampuzano101@gmail.com",
@@ -58,6 +100,7 @@ Actual Behavior:
             }
         ],
     }
+```
 
     runId found in all 3 documents,
         1. Order.orderItems[0].run === 5fa436adf1047f07cc1af8d1
@@ -79,21 +122,8 @@ Actual Behavior:
             }
         ]
 
-
-
-On successful checkout on stripe, during the same request and trip to the database. 1. Update created order ( order.isPaid === true ) 2. Asynchronously call updateRunsAndUser(orderItems, userId)
-2.a Add User to each Run
-a. const user = User.findById(userId)
-b. iterate through orderItems
-b.1. item = orderItem[i];
-b.2 run = Run.findById(item.run) **_ better understanding of why we call it item.run _**
-b.3 user.runs.push({ run.\_id })
-b.4 run.users.push({
-userId,
-username: user.username,
-profilePhoto: user.profilePhoto,
-});
-b.5 await user.save(); await run.save() 3. redirect to "/" with success message, user is added to run, run contains user as well.
+Ideal Behavior:
+**_ if order.isPaid === true, automatically add userId to each orderItem.users Array, and add each orderItem.run (runId) to User.runs Array. _**
 
 PROBLEMS: 1. manually adding documents / cross populating 2. making multiple queries to the DB. 3. must be a better more efficient method.
 
@@ -107,3 +137,5 @@ a. On deletion of data, npm run data:destroy, User is destroyed however, localSt
     3. fix userList on <RunList /> usernames not justified / aligned
 
     4. fix table margin on bottom, fix background color to make it pop, think eggshell for real rooms.
+
+    5. dynamically add geocoded lat + lng from NodeJs Google Map API client
