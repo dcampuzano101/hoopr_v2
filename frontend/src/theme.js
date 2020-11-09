@@ -26,6 +26,18 @@ const muiTheme = createMuiTheme({
       letterSpacing: "1",
       color: "#ffff",
     },
+    banner: {
+      h1: {
+        fontFamily: "Lilita One",
+        weight: 600,
+        fontSize: "5rem",
+        spacing: "2px",
+        transform: "lowercase",
+        opacity: 0.8,
+        letterSpacing: "1",
+        color: "#ffff",
+      },
+    },
   },
 });
 
