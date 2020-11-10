@@ -1,5 +1,6 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
+import Onboard from "./Onboard";
 
 import {
   Container,
@@ -8,6 +9,7 @@ import {
   CssBaseline,
   makeStyles,
   Card,
+  Typography,
 } from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -15,6 +17,20 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    border: "1px solid black",
+  },
+  springDiv: {
+    display: "flex",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cardGrid: {
+    display: "flex",
+    flexBasis: "33%",
+  },
+  cardContainer: {
+    margin: "2% 0%",
   },
 });
 
@@ -30,11 +46,32 @@ const Banner = () => {
   });
   return (
     <>
-      <Grid item xs={12} md={5} lg={5}></Grid>
-      <Grid item xs={12} md={7} lg={7} className={classes.bannerTextContainer}>
-        <animated.div style={props}>
-          <h1 className="bannerShadow">HOOPR</h1>
-        </animated.div>
+      <Grid container xs={12} md={12} lg={12}>
+        <Grid item xs={12} md={5} lg={5}>
+          <animated.div style={props} className={classes.springDiv}>
+            <h1 className="bannerShadow">HOOPR</h1>
+          </animated.div>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={7}
+          lg={7}
+          className={classes.bannerTextContainer}
+        >
+          <Typography variant="h5" gutterBottom>
+            Pickup basketball in a flash.
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            Find a run near you, sign up & get ready!
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Lace up your kicks, break a sweat, stay safe, and play ball.
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={12} lg={12} className={classes.cardContainer}>
+          <Onboard />
+        </Grid>
       </Grid>
     </>
   );
@@ -56,15 +93,3 @@ export default Banner;
 //     "0.03em 0.03em 0 #e1e2e1",
 //     "0.035em 0.035em 0 #e1e2e1",
 // },
-
-{
-  /* <Typography variant="h5" gutterBottom>
-    Pickup basketball in a flash.
-  </Typography>
-  <Typography variant="subtitle1" gutterBottom>
-    Find a run near you, sign up & get ready!
-  </Typography>
-  <Typography variant="body1" gutterBottom>
-    Lace up your kicks, break a sweat, stay safe, and play ball.
-  </Typography> */
-}
