@@ -103,7 +103,7 @@ video {
 
 .bannerShadow {
   color: #29434e;
-  font-size: calc(1em + 10vw);
+  font-size: calc(1em + 7vw);
   font-weight: 900;
   font-family: "Lilita One";
   text-shadow: -0.0075em 0.0075em 0 #e1e2e1,
