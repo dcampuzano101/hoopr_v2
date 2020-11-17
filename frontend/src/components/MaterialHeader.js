@@ -15,6 +15,7 @@ import {
   ShoppingCart,
   SupervisorAccount,
 } from "@material-ui/icons/";
+import hooprLogo from "../assets/hoopr_logo.png";
 
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -29,10 +30,11 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.primary.main,
     },
+    width: "7%",
   },
-  logoText: {
-    // color: theme.palette.primary.contrastText,
-    // fontFamily: "Lilita One",
+  iconFilter: {
+    filter:
+      "invert(100%) sepia(49%) saturate(3315%) hue-rotate(177deg) brightness(112%) contrast(94%)",
   },
   root: {},
   menuButton: {
@@ -42,7 +44,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
-  title: {},
+  logoImg: {
+    width: "125%",
+    height: "50%",
+    filter:
+      "invert(100%) sepia(49%) saturate(3315%) hue-rotate(177deg) brightness(112%) contrast(94%)",
+  },
 }));
 
 const MaterialHeader = ({ history }) => {
@@ -71,14 +78,14 @@ const MaterialHeader = ({ history }) => {
       style={{ display: "flex", width: "18%", justifyContent: "space-evenly" }}
     >
       <IconButton onClick={() => handleMenuClick("/profile")}>
-        <AccountCircle fontSize="large" />
+        <AccountCircle className={classes.iconFilter} fontSize="large" />
       </IconButton>
       <IconButton onClick={() => handleMenuClick("/cart")}>
-        <ShoppingCart fontSize="large" />
+        <ShoppingCart className={classes.iconFilter} fontSize="large" />
       </IconButton>
       {isAdmin ? (
         <IconButton onClick={() => handleMenuClick("/admin")}>
-          <SupervisorAccount fontSize="large" />
+          <SupervisorAccount className={classes.iconFilter} fontSize="large" />
         </IconButton>
       ) : null}
     </div>
@@ -97,7 +104,8 @@ const MaterialHeader = ({ history }) => {
             className={classes.logoButton}
             onClick={() => handleMenuClick("/")}
           >
-            <Typography variant="h1">Hoopr</Typography>
+            {/* <Typography variant="h1">Hoopr</Typography> */}
+            <img src={hooprLogo} alt="" srcset="" className={classes.logoImg} />
           </Button>
           {isMobile ? (
             <div>

@@ -1,4 +1,10 @@
-html,
+html {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  background-color: #e1e2e1;
+}
+
 body,
 div,
 span,

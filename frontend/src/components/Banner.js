@@ -1,7 +1,7 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
 import Onboard from "./Onboard";
-
+import animatedDunk from "../assets/animated_dunk.gif";
 import {
   Container,
   Paper,
@@ -31,6 +31,9 @@ const useStyles = makeStyles({
   },
   cardContainer: {
     margin: "2% 0%",
+  },
+  imgCard: {
+    height: "100%",
   },
 });
 
@@ -68,6 +71,11 @@ const Banner = () => {
           <Typography variant="body1" gutterBottom>
             Lace up your kicks, break a sweat, stay safe, and play ball.
           </Typography>
+          {/* <img
+            src={animatedDunk}
+            alt="dunk animation"
+            className={classes.imgCard}
+          /> */}
         </Grid>
         <Grid item xs={12} md={12} lg={12} className={classes.cardContainer}>
           <Onboard />

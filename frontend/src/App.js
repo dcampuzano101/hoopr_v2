@@ -23,6 +23,7 @@ const Main = styled.div`
   display: grid;
   width: 100%;
   margin: 0 auto;
+  margin-top: 1%;
   border-radius: 4px;
   ${"" /* border: 1px solid rgba(0, 0, 0, 0.34); */}
 `;
@@ -45,7 +46,7 @@ const App = () => {
           <Route path="/" component={MainScreen} exact />
           <Route path="/cart/:id?" component={CartScreen} />
         </Main>
-        <Footer />
+        {/* <Footer /> */}
       </ThemeProvider>
     </Router>
   );

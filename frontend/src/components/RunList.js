@@ -26,7 +26,7 @@ import { addToCart } from "../actions/cartActions";
 import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: { marginBottom: "3%" },
   heading: {
     fontSize: theme.typography.pxToRem(22),
     letterSpacing: "1.3px",
