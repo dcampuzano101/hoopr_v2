@@ -60,9 +60,10 @@ const useStyles = makeStyles((theme) => ({
   userList: {
     display: "flex",
     width: "90%",
-    margin: "0 5% 0 5%",
+    margin: "1% 5% 1% 5%",
     justifyContent: "space-between",
-    flexDirection: "column",
+    flexDirection: "row",
+    alignItems: "center",
   },
   userTable: {
     margin: "0 5% 2%",
@@ -139,15 +140,10 @@ const RunList = ({ history, location }) => {
   };
 
   const displayUsersForRun = (userIds) => {
-    //users === array of userIds
-    //state.users === userObjs
-
     const result = [];
-
     userIds.forEach((id) => {
       result.push(users[id]);
     });
-
     return (
       <>
         <Table className={classes.userTable}>
@@ -161,18 +157,14 @@ const RunList = ({ history, location }) => {
         <div className={classes.userList}>
           {result.map((user) => (
             <>
-              <div>
-                {user.profilePhoto ? (
-                  <Avatar alt={user.username} src={user.profilePhoto} />
-                ) : (
-                  <Avatar alt={user.username} src={avatar} />
-                )}
-              </div>
-              <div>
-                <Typography className={classes.subHeading}>
-                  {user.username}
-                </Typography>
-              </div>
+              {user.profilePhoto ? (
+                <Avatar alt={user.username} src={user.profilePhoto} />
+              ) : (
+                <Avatar alt={user.username} src={avatar} />
+              )}
+              <Typography className={classes.subHeading}>
+                {user.username}
+              </Typography>
             </>
           ))}
         </div>
