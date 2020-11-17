@@ -17,8 +17,6 @@ const importData = async () => {
 
     const createdUsers = await User.insertMany(users);
 
-    //adminUser = createdUsers[0]._id
-    //re-watch video to create Products on MERN course
     const adminUserId = createdUsers[0]._id;
 
     const sampleRuns = runs.map((run) => {

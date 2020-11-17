@@ -39,14 +39,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     width: "100%",
   },
-  paperProfileCard: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    width: "100%",
-    justifyContent: "space-between",
-  },
   fixedHeight: {
     height: 240,
   },
@@ -157,9 +149,6 @@ const RunEditScreen = ({ history, match }) => {
       if (success) {
         setRunUpdateSuccess("Successfully updated run!");
       }
-      //   if (success && run !== updatedRun) {
-      //     dispatch(getRunDetails(runId));
-      //   }
     }
   }, [
     dispatch,
@@ -172,6 +161,7 @@ const RunEditScreen = ({ history, match }) => {
     successDetails,
     runId,
     updatedRun,
+    run,
   ]);
   console.log(run);
   return (
@@ -191,10 +181,8 @@ const RunEditScreen = ({ history, match }) => {
                     margin="normal"
                     fullWidth
                     id="name"
-                    // label="name"
                     placeholder="name"
                     name="name"
-                    // autoComplete="name"
                     value={name}
                     onChange={(e) => {
                       setName(e.target.value);
@@ -206,9 +194,7 @@ const RunEditScreen = ({ history, match }) => {
                     margin="normal"
                     fullWidth
                     id="location"
-                    // label="Location"
                     name="location"
-                    // autoComplete="location"
                     value={location}
                     onChange={(e) => {
                       setLocation(e.target.value);
@@ -216,7 +202,6 @@ const RunEditScreen = ({ history, match }) => {
                     }}
                   />
                   <DatePicker
-                    // key={date}
                     disablePast
                     label="Date"
                     value={date}
@@ -224,7 +209,6 @@ const RunEditScreen = ({ history, match }) => {
                     animateYearScrolling
                   />
                   <KeyboardTimePicker
-                    // key={startTime}
                     label="Start Time"
                     placeholder="08:00 AM"
                     mask="__:__ _M"
@@ -232,7 +216,6 @@ const RunEditScreen = ({ history, match }) => {
                     onChange={(date) => handleDateChange(date, "start")}
                   />
                   <KeyboardTimePicker
-                    // key={endTime}
                     label="End Time"
                     placeholder="10:00 AM"
                     mask="__:__ _M"

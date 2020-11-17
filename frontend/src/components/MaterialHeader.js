@@ -21,7 +21,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import { useTheme } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
-import { muiTheme } from "../theme.js";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -105,7 +104,7 @@ const MaterialHeader = ({ history }) => {
             onClick={() => handleMenuClick("/")}
           >
             {/* <Typography variant="h1">Hoopr</Typography> */}
-            <img src={hooprLogo} alt="" srcset="" className={classes.logoImg} />
+            <img src={hooprLogo} alt="" className={classes.logoImg} />
           </Button>
           {isMobile ? (
             <div>

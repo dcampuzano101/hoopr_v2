@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import { useDispatch, useSelector } from "react-redux";
 import { listRuns } from "../actions/runActions";
@@ -14,7 +13,6 @@ import {
   TableRow,
   Typography,
   makeStyles,
-  Grid,
   CircularProgress,
   IconButton,
   Button,
@@ -25,10 +23,6 @@ import { Delete, Edit } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
   paper: {
     padding: theme.spacing(2),
     display: "flex",

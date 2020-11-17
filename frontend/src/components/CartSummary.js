@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import {
-  Link,
   Container,
   Table,
   TableBody,
@@ -16,10 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../actions/orderActions";
 import { withRouter } from "react-router-dom";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
-
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles((theme) => ({
   depositContext: {
@@ -49,7 +44,7 @@ const CartSummary = ({ history }) => {
     cart.cartItems.reduce((acc, item) => acc + item.price, 0)
   );
   const orderCreate = useSelector((state) => state.orderCreate);
-  const { order, success, error } = orderCreate;
+  const { order, success } = orderCreate;
 
   const placeOrderHandler = async () => {
     dispatch(
@@ -67,7 +62,7 @@ const CartSummary = ({ history }) => {
         type: ORDER_CREATE_RESET,
       });
     }
-  }, [history, success]);
+  }, [history, success, dispatch, order._id]);
 
   const classes = useStyles();
   return (

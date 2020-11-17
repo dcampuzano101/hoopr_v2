@@ -1,13 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-// import theme from "../theme.js";
-
-// const { subText } = theme.text;
 
 const FooterEl = styled.footer`
   padding: 2rem;
-  ${"" /* grid-column: 1 / 4; */}
-  ${"" /* background-color: ${theme.palette.primary.main}; */}
   margin-top: 1rem;
 `;
 
@@ -15,7 +10,6 @@ const Copyright = styled.h3`
   font-size: 1.2em;
   text-align: center;
   color: black;
-  ${"" /* font-family: ${subText.font}; */}
 `;
 
 const Footer = () => {

@@ -18,7 +18,6 @@ import {
   TableRow,
   TableHead,
   Table,
-  TableBody,
   TableCell,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -33,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: "1.3px",
     flexBasis: "20%",
     flexShrink: 0,
-    // textAlign: "center",
     color: "#fff",
     fontFamily: "Lilita One",
   },
@@ -71,12 +69,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const location = {
-  address: "100 Dobbin St, Brooklyn, NY 11222",
-  lat: 40.7251474,
-  lng: -73.9566612,
-};
-
 const RunList = ({ history, location }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -90,10 +82,10 @@ const RunList = ({ history, location }) => {
       setSuccessfulCheckout(`Successfully made purchase!`);
       location.search = "";
     }
-  }, [dispatch]);
+  }, [dispatch, location]);
 
   const userList = useSelector((state) => state.userList);
-  const { users, error: errorUsers, loading: loadingUsers } = userList;
+  const { users, loading: loadingUsers } = userList;
 
   const runsList = useSelector((state) => state.runList);
   const { loading, error, runs } = runsList;
@@ -156,7 +148,7 @@ const RunList = ({ history, location }) => {
 
         <div className={classes.userList}>
           {result.map((user) => (
-            <>
+            <React.Fragment key={user._id}>
               {user.profilePhoto ? (
                 <Avatar alt={user.username} src={user.profilePhoto} />
               ) : (
@@ -165,7 +157,7 @@ const RunList = ({ history, location }) => {
               <Typography className={classes.subHeading}>
                 {user.username}
               </Typography>
-            </>
+            </React.Fragment>
           ))}
         </div>
       </>

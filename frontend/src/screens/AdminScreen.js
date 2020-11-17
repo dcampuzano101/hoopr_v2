@@ -1,16 +1,9 @@
 import React, { useEffect } from "react";
 import AdminRuns from "../components/AdminRuns";
 import AdminUsers from "../components/AdminUsers";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import {
-  Container,
-  Paper,
-  Grid,
-  CssBaseline,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
+import { Container, Grid, CssBaseline, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,7 +44,7 @@ const AdminScreen = ({ history }) => {
     if (!userInfo) {
       history.push("/login");
     }
-  }, [history]);
+  }, [history, userInfo]);
   return (
     <div className={classes.root}>
       <CssBaseline />

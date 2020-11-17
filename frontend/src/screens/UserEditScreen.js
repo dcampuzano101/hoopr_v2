@@ -39,14 +39,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     width: "100%",
   },
-  paperProfileCard: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    width: "100%",
-    justifyContent: "space-between",
-  },
   fixedHeight: {
     height: 240,
   },
@@ -94,7 +86,6 @@ const UserEditScreen = ({ history, match }) => {
 
   const updateUserHandler = (e) => {
     e.preventDefault();
-    //NEEDSWORK
     dispatch(updateUser({ id: user._id, username, email, isAdmin }));
   };
 

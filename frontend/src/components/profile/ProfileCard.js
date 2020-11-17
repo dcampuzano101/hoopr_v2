@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUserDetails,
-  updateUserProfile,
-  updateUserProfilePhoto,
-} from "../../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../../actions/userActions";
 import { mediaToAWS } from "../../actions/awsAction";
 
-import { USER_UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import avatar from "../../assets/user-avatar.png";
 import { withRouter } from "react-router-dom";
-
-import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -19,15 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import { DropzoneDialog } from "material-ui-dropzone";
 import Alert from "@material-ui/lab/Alert";
 
-import {
-  Avatar,
-  Button,
-  CircularProgress,
-  CssBaseline,
-  TextField,
-  Link,
-  Typography,
-} from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,14 +36,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     width: "100%",
-  },
-  paperProfileCard: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    width: "100%",
-    justifyContent: "space-between",
   },
   fixedHeight: {
     height: 240,
@@ -86,14 +63,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ProfileCard = ({ location, history, match }) => {
   const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user, success: successDetails } = userDetails;
+  const { error, user, success: successDetails } = userDetails;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  const userUpdateProfilePhoto = useSelector(
-    (state) => state.userUpdateProfilePhoto
-  );
-  const { success: successProfilePhoto, photoUrl } = userUpdateProfilePhoto;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -167,14 +139,20 @@ const ProfileCard = ({ location, history, match }) => {
         setProfileSuccess("Successfully updated profile!");
       }
     }
-  }, [dispatch, history, location, userInfo, user, success, error]);
-  console.log(location.search.slice(1));
-  console.log(history, match, location);
+  }, [
+    dispatch,
+    history,
+    location,
+    userInfo,
+    user,
+    success,
+    error,
+    successDetails,
+  ]);
   return (
     <React.Fragment>
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
-          {/* Chart */}
           <Grid item xs={12} md={6} lg={6} style={{ display: "flex" }}>
             <Paper className={classes.paperProfileCard}>
               <div>
@@ -247,10 +225,8 @@ const ProfileCard = ({ location, history, match }) => {
                   margin="normal"
                   fullWidth
                   id="username"
-                  // label="Username"
                   placeholder="Username"
                   name="username"
-                  // autoComplete="username"
                   value={username}
                   onChange={(e) => {
                     setUsername(e.target.value);

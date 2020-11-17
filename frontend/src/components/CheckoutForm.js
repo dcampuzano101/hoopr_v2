@@ -25,10 +25,6 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, userId, orderId }) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  // TIP
-  // use the cardElements onChange prop to add a handler
-  // for setting any errors:
-
   const handleCardDetailsChange = (ev) => {
     ev.error ? setCheckoutError(ev.error.message) : setCheckoutError();
   };
@@ -85,18 +81,6 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, userId, orderId }) => {
       setCheckoutError(err.message);
     }
   };
-
-  // Learning
-  // A common ask/bug that users run into is:
-  // How do you change the color of the card element input text?
-  // How do you change the font-size of the card element input text?
-  // How do you change the placeholder color?
-  // The answer to all of the above is to use the `style` option.
-  // It's common to hear users confused why the card element appears impervious
-  // to all their styles. No matter what classes they add to the parent element
-  // nothing within the card element seems to change. The reason for this is that
-  // the card element is housed within an iframe and:
-  // > styles do not cascade from a parent window down into its iframes
 
   const iframeStyles = {
     base: {

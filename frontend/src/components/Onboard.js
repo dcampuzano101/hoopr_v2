@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Grid, Container, makeStyles } from "@material-ui/core";
+import { Paper, Grid, makeStyles } from "@material-ui/core";
 import animatedDunk from "../assets/animated_dunk.gif";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +20,7 @@ const Onboard = () => {
   const classes = useStyles();
   return (
     <>
-      <Grid container xs={12} md={12} lg={12}>
+      <Grid container>
         <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
           <Paper elevation={3} className={classes.paperCard}>
             <img

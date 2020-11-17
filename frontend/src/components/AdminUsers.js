@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import { listUsers } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +12,6 @@ import {
   TableHead,
   TableRow,
   Typography,
-  Grid,
   makeStyles,
   CircularProgress,
   IconButton,

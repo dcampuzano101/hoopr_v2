@@ -1,15 +1,8 @@
 import React from "react";
 import RunList from "../components/RunList";
 import Banner from "../components/Banner";
-import Onboard from "../components/Onboard";
 
-import {
-  Container,
-  Grid,
-  makeStyles,
-  Paper,
-  useTheme,
-} from "@material-ui/core";
+import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   bannerContainer: {
@@ -30,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MainScreen = () => {
-  // const theme = useTheme();
   const classes = useStyles();
   return (
     <>

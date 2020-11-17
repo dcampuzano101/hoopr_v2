@@ -144,7 +144,6 @@ const getUsers = asyncHandler(async (req, res) => {
   users.forEach((user) => {
     userObj[user._id] = user;
   });
-  debugger;
   if (users) {
     res.json(userObj);
   } else {

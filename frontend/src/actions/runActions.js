@@ -122,7 +122,7 @@ export const deleteRun = (id) => async (dispatch, getState) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.delete(`/api/runs/${id}`, config);
+    await axios.delete(`/api/runs/${id}`, config);
     dispatch({
       type: RUN_DELETE_SUCCESS,
     });

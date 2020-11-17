@@ -33,9 +33,9 @@ const Runs = () => {
         <TableBody>
           <TableRow>
             {runs.map((run) => (
-              <>
+              <React.Fragment key={run.date}>
                 <TableCell>{run.location}</TableCell>
-              </>
+              </React.Fragment>
             ))}
           </TableRow>
         </TableBody>

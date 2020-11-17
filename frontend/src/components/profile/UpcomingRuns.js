@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
-  Link,
   Table,
   TableBody,
   TableCell,
@@ -9,15 +8,11 @@ import {
   TableRow,
   Typography,
   CircularProgress,
+  TableContainer,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
 
-import { getUserDetails } from "../../actions/userActions";
 import { withRouter } from "react-router-dom";
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles((theme) => ({
   depositContext: {
@@ -31,11 +26,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UpcomingRuns = ({ location }) => {
-  const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user, success: successDetails } = userDetails;
+  const { user, success: successDetails } = userDetails;
   const [myRuns, setMyRuns] = useState(null);
-  const [successfulCheckout, setSuccessfulCheckout] = useState(null);
   const runList = useSelector((state) => state.runList);
   const { runs } = runList;
 
@@ -43,7 +36,7 @@ const UpcomingRuns = ({ location }) => {
     if (successDetails) {
       setMyRuns(getMyRuns());
     }
-  }, [successDetails, successfulCheckout]);
+  }, [successDetails]);
   const getMyRuns = () => {
     const runIds = [];
     user.runs.forEach((runObj) => {
@@ -66,14 +59,9 @@ const UpcomingRuns = ({ location }) => {
     }
     return myRuns;
   };
-  console.log(user);
-  console.log(myRuns);
-  console.log(location.search);
-  console.log(location.search.split("=")[1]);
   const classes = useStyles();
   return (
     <React.Fragment>
-      {/* style heading in makeStyles */}
       <Typography className={classes.heading}>Upcoming Runs</Typography>
       <Table size="small">
         <TableHead>
@@ -85,7 +73,9 @@ const UpcomingRuns = ({ location }) => {
           </TableRow>
         </TableHead>
         {!user ? (
-          <CircularProgress />
+          <>
+            <CircularProgress />
+          </>
         ) : (
           <TableBody>
             {myRuns
@@ -105,16 +95,6 @@ const UpcomingRuns = ({ location }) => {
           </TableBody>
         )}
       </Table>
-      {/* {successfulCheckout ? (
-        <Alert
-          severity="success"
-          onClose={() => {
-            setSuccessfulCheckout(null);
-          }}
-        >
-          {successfulCheckout}
-        </Alert>
-      ) : null} */}
     </React.Fragment>
   );
 };

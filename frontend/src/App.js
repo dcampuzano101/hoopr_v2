@@ -1,9 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import MaterialHeader from "./components/MaterialHeader";
-import Footer from "./components/Footer";
 import styled from "styled-components";
-// import theme from "./theme.js";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ProfileDashboard from "./components/profile/ProfileDashboard";
@@ -46,7 +44,6 @@ const App = () => {
           <Route path="/" component={MainScreen} exact />
           <Route path="/cart/:id?" component={CartScreen} />
         </Main>
-        {/* <Footer /> */}
       </ThemeProvider>
     </Router>
   );
