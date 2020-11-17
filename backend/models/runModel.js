@@ -29,22 +29,11 @@ const runSchema = mongoose.Schema(
       required: true,
       default: 15,
     },
-    users: [
-      {
-        userId: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-          ref: "User",
-        },
-        username: {
-          type: String,
-          required: true,
-        },
-        profilePhoto: {
-          type: String,
-        },
-      },
-    ],
+    users: {
+      type: Array,
+      required: true,
+      default: [],
+    },
     startTime: {
       type: String,
       required: true,

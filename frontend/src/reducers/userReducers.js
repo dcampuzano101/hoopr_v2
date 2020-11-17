@@ -95,6 +95,7 @@ export const userListReducer = (state = { loading: true }, action) => {
     case USER_LIST_REQUEST:
       return { loading: true };
     case USER_LIST_SUCCESS:
+      debugger;
       return { loading: false, users: action.payload };
     case USER_LIST_FAIL:
       return { loading: false, error: action.payload };
@@ -142,10 +143,10 @@ export const userUpdateProfilePhotoReducer = (state = {}, action) => {
       return { loading: false, success: true, photoUrl: action.payload };
     case USER_UPDATE_PROFILE_PHOTO_FAIL:
       return { loading: false, success: false, error: action.payload };
-      case USER_UPDATE_RESET:
-        return {
-          user: {},
-        };
+    case USER_UPDATE_RESET:
+      return {
+        user: {},
+      };
     default:
       return state;
   }

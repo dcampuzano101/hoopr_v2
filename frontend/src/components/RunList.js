@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { listRuns } from "../actions/runActions";
+import { listUsers } from "../actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
@@ -82,13 +83,16 @@ const RunList = ({ history, location }) => {
 
   useEffect(() => {
     dispatch(listRuns());
-
+    dispatch(listUsers());
     if (location.search.split("=")[1] === "success") {
       console.log("inside location.search");
       setSuccessfulCheckout(`Successfully made purchase!`);
       location.search = "";
     }
   }, [dispatch]);
+
+  const userList = useSelector((state) => state.userList);
+  const { users, error: errorUsers, loading: loadingUsers } = userList;
 
   const runsList = useSelector((state) => state.runList);
   const { loading, error, runs } = runsList;
@@ -132,6 +136,48 @@ const RunList = ({ history, location }) => {
     let day = days[dateObj.getDay()];
     let numericalDay = date.split("-")[1];
     return `${day}, ${month} ${numericalDay}`;
+  };
+
+  const displayUsersForRun = (userIds) => {
+    //users === array of userIds
+    //state.users === userObjs
+
+    const result = [];
+
+    userIds.forEach((id) => {
+      result.push(users[id]);
+    });
+
+    return (
+      <>
+        <Table className={classes.userTable}>
+          <TableHead>
+            <TableRow colSpan={2}>
+              <TableCell align="right">{result.length} Players</TableCell>
+            </TableRow>
+          </TableHead>
+        </Table>
+
+        <div className={classes.userList}>
+          {result.map((user) => (
+            <>
+              <div>
+                {user.profilePhoto ? (
+                  <Avatar alt={user.username} src={user.profilePhoto} />
+                ) : (
+                  <Avatar alt={user.username} src={avatar} />
+                )}
+              </div>
+              <div>
+                <Typography className={classes.subHeading}>
+                  {user.username}
+                </Typography>
+              </div>
+            </>
+          ))}
+        </div>
+      </>
+    );
   };
 
   const addToCartHandler = async (runId) => {
@@ -212,43 +258,8 @@ const RunList = ({ history, location }) => {
                         />
                       </Grid>
                       <Grid item xs={12} md={5} lg={5}>
-                        {run.users.length > 0 ? (
-                          <>
-                            <Table className={classes.userTable}>
-                              <TableHead>
-                                <TableRow colSpan={2}>
-                                  <TableCell align="right">
-                                    {run.users.length} Players
-                                  </TableCell>
-                                </TableRow>
-                              </TableHead>
-                            </Table>
-
-                            <div className={classes.userList}>
-                              {run.users.map((user) => (
-                                <>
-                                  <div>
-                                    {user.profilePhoto ? (
-                                      <Avatar
-                                        alt={user.username}
-                                        src={user.profilePhoto}
-                                      />
-                                    ) : (
-                                      <Avatar
-                                        alt={user.username}
-                                        src={avatar}
-                                      />
-                                    )}
-                                  </div>
-                                  <div>
-                                    <Typography className={classes.subHeading}>
-                                      {user.username}
-                                    </Typography>
-                                  </div>
-                                </>
-                              ))}
-                            </div>
-                          </>
+                        {run.users.length > 0 && !loadingUsers ? (
+                          displayUsersForRun(run.users)
                         ) : (
                           <Table>
                             <TableHead>
@@ -295,3 +306,44 @@ const RunList = ({ history, location }) => {
 };
 
 export default withRouter(RunList);
+
+/*
+                          <>
+                            <Table className={classes.userTable}>
+                              <TableHead>
+                                <TableRow colSpan={2}>
+                                  <TableCell align="right">
+                                    {run.users.length} Players
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
+                            </Table>
+
+                            <div className={classes.userList}>
+                              {run.users.map((user) => (
+                                <>
+                                  <div>
+                                    {user.profilePhoto ? (
+                                      <Avatar
+                                        alt={user.username}
+                                        src={user.profilePhoto}
+                                      />
+                                    ) : (
+                                      <Avatar
+                                        alt={user.username}
+                                        src={avatar}
+                                      />
+                                    )}
+                                  </div>
+                                  <div>
+                                    <Typography className={classes.subHeading}>
+                                      {user.username}
+                                    </Typography>
+                                  </div>
+                                </>
+                              ))}
+                            </div>
+                          </>
+
+
+*/

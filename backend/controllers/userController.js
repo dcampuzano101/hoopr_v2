@@ -137,11 +137,16 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @access: admin/private
 
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({});
+  const users = await User.find({}).select("-password");
   //maybe just res.json(users)
+  const userObj = {};
 
+  users.forEach((user) => {
+    userObj[user._id] = user;
+  });
+  debugger;
   if (users) {
-    res.json(users);
+    res.json(userObj);
   } else {
     res.status(400);
     throw new Error("Could not fetch users");
