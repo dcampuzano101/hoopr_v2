@@ -282,9 +282,7 @@ const RunList = ({ history, location }) => {
                           onClick={() => addToCartHandler(run._id)}
                           disabled={
                             userInfo
-                              ? run.users.some(
-                                  (user) => user.userId === userInfo._id
-                                )
+                              ? run.users.some((id) => id === userInfo._id)
                                 ? true
                                 : false
                               : false
