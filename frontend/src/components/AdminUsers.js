@@ -113,7 +113,7 @@ const AdminUsers = ({ history }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.map((user) => (
+                {Object.values(users).map((user) => (
                   <React.Fragment key={user._id}>
                     <TableRow>
                       <TableCell colSpan={3}>{user.username}</TableCell>
