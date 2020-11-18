@@ -76,7 +76,9 @@ const AdminUsers = ({ history }) => {
         <CircularProgress />
       ) : (
         <>
-          <Typography>ALL USERS</Typography>
+          <h1 className="bannerShadow" style={{ fontSize: "35px" }}>
+            ALL USERS
+          </h1>
           <Paper className={classes.paper}>
             {error && (
               <Alert

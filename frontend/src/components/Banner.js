@@ -60,9 +60,3 @@ const Banner = () => {
 };
 
 export default Banner;
-
-/*
-      <Grid item xs={12} md={9} lg={9} className={classes.bannerTextContainer}>
-        <div className={classes.bannerImg}></div> 
-        </Grid>
-*/

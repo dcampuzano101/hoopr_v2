@@ -70,7 +70,9 @@ const AdminRuns = ({ history, match, location }) => {
         <CircularProgress />
       ) : (
         <>
-          <Typography>ALL RUNS</Typography>
+          <h1 className="bannerShadow" style={{ fontSize: "35px" }}>
+            ALL RUNS
+          </h1>
           <Paper className={classes.paper}>
             {error && (
               <Alert

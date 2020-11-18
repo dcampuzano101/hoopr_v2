@@ -98,38 +98,38 @@ const RunList = ({ history, location }) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const parseDate = (date) => {
-    let dateObj = new Date(date);
-    const months = {
-      0: "January",
-      1: "February",
-      2: "March",
-      3: "April",
-      4: "May",
-      5: "June",
-      6: "July",
-      7: "August",
-      8: "September",
-      9: "October",
-      10: "November",
-      11: "December",
-    };
+  // const parseDate = (date) => {
+  //   let dateObj = new Date(date);
+  //   const months = {
+  //     0: "January",
+  //     1: "February",
+  //     2: "March",
+  //     3: "April",
+  //     4: "May",
+  //     5: "June",
+  //     6: "July",
+  //     7: "August",
+  //     8: "September",
+  //     9: "October",
+  //     10: "November",
+  //     11: "December",
+  //   };
 
-    const days = {
-      0: "Sunday",
-      1: "Monday",
-      2: "Tuesday",
-      3: "Wednesday",
-      4: "Thursday",
-      5: "Friday",
-      6: "Saturday",
-    };
+  //   const days = {
+  //     0: "Sunday",
+  //     1: "Monday",
+  //     2: "Tuesday",
+  //     3: "Wednesday",
+  //     4: "Thursday",
+  //     5: "Friday",
+  //     6: "Saturday",
+  //   };
 
-    let month = months[dateObj.getMonth()];
-    let day = days[dateObj.getDay()];
-    let numericalDay = date.split("-")[1];
-    return `${day}, ${month} ${numericalDay}`;
-  };
+  //   let month = months[dateObj.getMonth()];
+  //   let day = days[dateObj.getDay()];
+  //   let numericalDay = date.split("-")[1];
+  //   return `${day}, ${month} ${numericalDay}`;
+  // };
 
   const displayUsersForRun = (userIds) => {
     const result = [];
@@ -217,7 +217,7 @@ const RunList = ({ history, location }) => {
                     id="panel1bh-header"
                   >
                     <Typography className={classes.subHeading}>
-                      {parseDate(run.date)}
+                      {run.date}
                     </Typography>
                     <Typography className={classes.subHeading}>
                       {run.location}
