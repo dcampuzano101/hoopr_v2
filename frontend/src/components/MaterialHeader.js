@@ -29,16 +29,12 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.primary.main,
     },
-    width: "7%",
   },
   iconFilter: {
     filter:
       "invert(100%) sepia(49%) saturate(3315%) hue-rotate(177deg) brightness(112%) contrast(94%)",
   },
   root: {},
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   toolBar: {
     display: "flex",
     justifyContent: "space-between",
@@ -103,8 +99,12 @@ const MaterialHeader = ({ history }) => {
             className={classes.logoButton}
             onClick={() => handleMenuClick("/")}
           >
-            {/* <Typography variant="h1">Hoopr</Typography> */}
-            <img src={hooprLogo} alt="" className={classes.logoImg} />
+            <h1
+              className="bannerShadow"
+              style={{ fontSize: "5rem", lineHeight: "5rem", height: "5rem" }}
+            >
+              HOOPR
+            </h1>
           </Button>
           {isMobile ? (
             <div>

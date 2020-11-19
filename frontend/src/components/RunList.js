@@ -68,6 +68,16 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 5% 2%",
     maxWidth: "90%",
   },
+  tableHeader: {
+    backgroundColor: theme.palette.primary.main,
+    opacity: ".93",
+    "& path": {
+      display: "none",
+    },
+  },
+  alertIcon: {
+    display: "none",
+  },
 }));
 
 const RunList = ({ history, location }) => {
@@ -163,7 +173,8 @@ const RunList = ({ history, location }) => {
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel3a-content"
                 id="panel3a-header"
-                style={{ backgroundColor: "#819ca9" }}
+                style={{ backgroundColor: "#546e7a", opacity: ".90" }}
+                className={classes.tableHeader}
               >
                 <Typography className={classes.heading}>DATE</Typography>
                 <Typography className={classes.heading}>LOCATION</Typography>
