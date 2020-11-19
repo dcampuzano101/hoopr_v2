@@ -1,17 +1,32 @@
 import Run from "../models/runModel.js";
 import asyncHandler from "express-async-handler";
+import axios from "axios";
 
 // @description: create run
 // @route: POST /api/runs
 // @access: admin/private
 const createRun = asyncHandler(async (req, res) => {
+  debugger;
+  console.log(req.body);
+
+  const { data } = await axios.get(
+    `https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.location}&key=${process.env.GOOGLE_MAP_API_KEY}`
+  );
+  console.log(data);
+  debugger;
+  const users = [];
+
+  const geoLocation = {
+    lat: data.results[0].geometry.location.lat,
+    lng: data.results[0].geometry.location.lng,
+  };
+
   const {
     name,
     location,
     date,
     price,
     capacity,
-    users,
     startTime,
     endTime,
   } = req.body;
@@ -25,8 +40,9 @@ const createRun = asyncHandler(async (req, res) => {
     name,
     location,
     date,
-    price,
-    capacity,
+    price: Number(price),
+    capacity: Number(capacity),
+    geoLocation,
     users,
     startTime,
     endTime,

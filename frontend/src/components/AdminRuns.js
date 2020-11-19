@@ -71,9 +71,12 @@ const AdminRuns = ({ history, match, location }) => {
         <CircularProgress />
       ) : (
         <>
-          <h1 className="bannerShadow" style={{ fontSize: "35px" }}>
-            ALL RUNS
-          </h1>
+          <div>
+            <h1 className="bannerShadow" style={{ fontSize: "35px" }}>
+              ALL RUNS
+            </h1>
+            <Button href="/runs/create">CREATE RUN</Button>
+          </div>
           <Paper className={classes.paper}>
             {error && (
               <Alert

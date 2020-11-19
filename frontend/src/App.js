@@ -10,6 +10,7 @@ import CartScreen from "./screens/CartScreen";
 import AdminScreen from "./screens/AdminScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import RunEditScreen from "./screens/RunEditScreen";
+import RunCreateScreen from "./screens/RunCreateScreen";
 import CheckoutScreen from "./screens/CheckoutScreen";
 import Oauth from "./components/Oauth";
 
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/users/:id/edit" component={UserEditScreen} />
           <Route path="/runs/:id/edit" component={RunEditScreen} />
           <Route path="/admin" component={AdminScreen} />
+          <Route path="/runs/create" component={RunCreateScreen} />
           <Route path="/checkout/:id?" component={CheckoutScreen} />
 
           <Route path="/oauth/callback" component={Oauth} />
