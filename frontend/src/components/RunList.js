@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import avatar from "../assets/user-avatar.png";
+import moment from "moment";
 import {
   Accordion,
   AccordionDetails,
@@ -98,39 +99,6 @@ const RunList = ({ history, location }) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  // const parseDate = (date) => {
-  //   let dateObj = new Date(date);
-  //   const months = {
-  //     0: "January",
-  //     1: "February",
-  //     2: "March",
-  //     3: "April",
-  //     4: "May",
-  //     5: "June",
-  //     6: "July",
-  //     7: "August",
-  //     8: "September",
-  //     9: "October",
-  //     10: "November",
-  //     11: "December",
-  //   };
-
-  //   const days = {
-  //     0: "Sunday",
-  //     1: "Monday",
-  //     2: "Tuesday",
-  //     3: "Wednesday",
-  //     4: "Thursday",
-  //     5: "Friday",
-  //     6: "Saturday",
-  //   };
-
-  //   let month = months[dateObj.getMonth()];
-  //   let day = days[dateObj.getDay()];
-  //   let numericalDay = date.split("-")[1];
-  //   return `${day}, ${month} ${numericalDay}`;
-  // };
-
   const displayUsersForRun = (userIds) => {
     const result = [];
     userIds.forEach((id) => {
@@ -223,7 +191,9 @@ const RunList = ({ history, location }) => {
                       {run.location}
                     </Typography>
                     <Typography className={classes.subHeading}>
-                      {`${run.startTime} - ${run.endTime}`}
+                      {`${moment(run.startTime).format("LT")} - ${moment(
+                        run.endTime
+                      ).format("LT")}`}
                     </Typography>
                     <Typography className={classes.subHeading}>
                       ${run.price}

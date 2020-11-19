@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listRuns } from "../actions/runActions";
 import { withRouter } from "react-router-dom";
 import { deleteRun } from "../actions/runActions";
+import moment from "moment";
 
 import {
   Table,
@@ -114,8 +115,12 @@ const AdminRuns = ({ history, match, location }) => {
                     <TableRow>
                       <TableCell colSpan={2}>{run.date}</TableCell>
                       <TableCell colSpan={4}>{run.location}</TableCell>
-                      <TableCell colSpan={2}>{run.startTime}</TableCell>
-                      <TableCell colSpan={2}>{run.endTime}</TableCell>
+                      <TableCell colSpan={2}>
+                        {moment(run.startTime).format("LT")}
+                      </TableCell>
+                      <TableCell colSpan={2}>
+                        {moment(run.endTime).format("LT")}
+                      </TableCell>
                       <TableCell colSpan={2}>{run.price}</TableCell>
                       <TableCell colSpan={2}>{run.capacity}</TableCell>
                       <TableCell colSpan={2} align="right">

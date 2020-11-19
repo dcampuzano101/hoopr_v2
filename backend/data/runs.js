@@ -7,8 +7,8 @@ const runs = [
     price: 10,
     capacity: 15,
     users: [],
-    startTime: moment("08:00", "h:mm a").format("h:mm a"),
-    endTime: moment("10:00", "h:mm a").format("h:mm a"),
+    startTime: moment("08:00", "h:mm a"),
+    endTime: moment("10:00", "h:mm a"),
     geoLocation: {
       address: "100 Dobbin St, Brooklyn, NY 11222",
       lat: 40.7251514,
@@ -22,8 +22,8 @@ const runs = [
     price: 10,
     capacity: 15,
     users: [],
-    startTime: moment("18:00", "h:mm a").format("h:mm a"),
-    endTime: moment("20:00", "h:mm a").format("h:mm a"),
+    startTime: moment("18:00", "h:mm a"),
+    endTime: moment("20:00", "h:mm a"),
     geoLocation: {
       address: "Cooper Park, Brooklyn, NY 11211",
       lat: 40.715946,
@@ -37,8 +37,8 @@ const runs = [
     price: 10,
     capacity: 15,
     users: [],
-    startTime: moment("08:00", "h:mm a").format("h:mm a"),
-    endTime: moment("10:00", "h:mm a").format("h:mm a"),
+    startTime: moment("08:00", "h:mm a"),
+    endTime: moment("10:00", "h:mm a"),
     geoLocation: {
       address: "Chrystie St &, Forsyth St, New York, NY 10002",
       lat: 40.7217448,
@@ -52,8 +52,8 @@ const runs = [
     price: 10,
     capacity: 15,
     users: [],
-    startTime: moment("18:00", "h:mm a").format("h:mm a"),
-    endTime: moment("20:00", "h:mm a").format("h:mm a"),
+    startTime: moment("18:00", "h:mm a"),
+    endTime: moment("20:00", "h:mm a"),
     geoLocation: {
       address: "100 Dobbin St, Brooklyn, NY 11222",
       lat: 40.7251514,

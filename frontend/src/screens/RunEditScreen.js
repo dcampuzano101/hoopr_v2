@@ -130,7 +130,6 @@ const RunEditScreen = ({ history, match }) => {
       }
 
       if ((successDetails || success) && run) {
-        console.log(`INSIDESUCCESSMOF`);
         setName(run.name);
         setLocation(run.location);
         setUsers(run.users);
