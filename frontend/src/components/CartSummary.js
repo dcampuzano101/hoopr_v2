@@ -62,7 +62,7 @@ const CartSummary = ({ history }) => {
         type: ORDER_CREATE_RESET,
       });
     }
-  }, [history, success, dispatch, order._id]);
+  }, [history, success, dispatch]);
 
   const classes = useStyles();
   return (
