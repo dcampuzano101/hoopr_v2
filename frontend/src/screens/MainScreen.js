@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     backgroundColor: theme.palette.primary.main,
     display: "flex",
-    marginBottom: "12%",
+    marginBottom: "10%",
     // marginTop: "1%",
     height: "25vh",
   },

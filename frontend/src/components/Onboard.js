@@ -22,23 +22,13 @@ const Onboard = () => {
     <>
       <Grid container>
         <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
-          <Paper elevation={3} className={classes.paperCard}>
-            <img
-              src={animatedDunk}
-              alt="dunk animation"
-              className={classes.imgCard}
-            />
-          </Paper>
+          <Paper elevation={3} className={classes.paperCard}></Paper>
         </Grid>
         <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
-          <Paper elevation={3} className={classes.paperCard}>
-            STEP 2
-          </Paper>
+          <Paper elevation={3} className={classes.paperCard}></Paper>
         </Grid>
         <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
-          <Paper elevation={3} className={classes.paperCard}>
-            STEP 3
-          </Paper>
+          <Paper elevation={3} className={classes.paperCard}></Paper>
         </Grid>
       </Grid>
     </>

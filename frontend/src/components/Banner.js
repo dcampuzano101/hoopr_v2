@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     flexBasis: "33%",
   },
   cardContainer: {
-    margin: "2% 0%",
+    margin: "-1% 0%",
   },
   bannerImg: {
     width: "102%",
