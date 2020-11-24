@@ -28,7 +28,7 @@ router
       res.redirect(`http://localhost:3000/oauth/callback?uid=${req.user.id}`);
     }
   );
-router.route("/").post(registerUser).get(protect, getUsers);
+router.route("/").post(registerUser).get(getUsers);
 
 router.route("/login").post(authUser);
 router.route("/login/google").post(googleAuthUser);

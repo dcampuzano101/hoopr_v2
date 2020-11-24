@@ -85,16 +85,6 @@ const RunList = ({ history, location }) => {
   const dispatch = useDispatch();
   const [successfulCheckout, setSuccessfulCheckout] = useState(null);
 
-  useEffect(() => {
-    dispatch(listRuns());
-    dispatch(listUsers());
-    if (location.search.split("=")[1] === "success") {
-      console.log("inside location.search");
-      setSuccessfulCheckout(`Successfully made purchase!`);
-      location.search = "";
-    }
-  }, [dispatch, location]);
-
   const userList = useSelector((state) => state.userList);
   const { users, loading: loadingUsers } = userList;
 
@@ -108,6 +98,15 @@ const RunList = ({ history, location }) => {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  useEffect(() => {
+    dispatch(listUsers());
+    dispatch(listRuns());
+    if (location.search.split("=")[1] === "success") {
+      console.log("inside location.search");
+      setSuccessfulCheckout(`Successfully made purchase!`);
+      location.search = "";
+    }
+  }, [dispatch, location]);
 
   const displayUsersForRun = (userIds) => {
     const result = [];
