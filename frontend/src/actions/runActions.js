@@ -89,9 +89,7 @@ export const createRun = (run) => async (dispatch, getState) => {
         "Content-Type": "application/json",
       },
     };
-    debugger;
     const { data } = await axios.post("/api/runs/create", run, config);
-    debugger;
     dispatch({
       type: RUN_CREATE_SUCCESS,
       payload: data,

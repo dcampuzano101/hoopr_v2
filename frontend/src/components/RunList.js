@@ -222,7 +222,7 @@ const RunList = ({ history, location }) => {
                         />
                       </Grid>
                       <Grid item xs={12} md={5} lg={5}>
-                        {run.users.length > 0 && !loadingUsers ? (
+                        {run.users.length > 0 && !loadingUsers && users ? (
                           displayUsersForRun(run.users)
                         ) : (
                           <Table>
