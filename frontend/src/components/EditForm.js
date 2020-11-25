@@ -44,7 +44,6 @@ const EditForm = ({
   setCapacity,
   details,
   setDetails,
-  updateRunHandler,
   setUpdateRunBtnDisabled,
 }) => {
   const classes = useStyles();

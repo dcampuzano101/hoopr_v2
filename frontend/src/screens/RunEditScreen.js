@@ -2,15 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRunDetails, updateRun } from "../actions/runActions";
 import { listUsers } from "../actions/userActions";
-import MomentUtils from "@date-io/moment";
 import avatar from "../assets/user-avatar.png";
 import EditForm from "../components/EditForm";
+import CurrentUsers from "../components/CurrentUsers";
 
-import {
-  DatePicker,
-  KeyboardTimePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
 import { Delete } from "@material-ui/icons";
 
 import Alert from "@material-ui/lab/Alert";
@@ -31,7 +26,6 @@ import {
   Grid,
   Container,
   Paper,
-  TextField,
   Avatar,
 } from "@material-ui/core";
 
@@ -148,91 +142,6 @@ const RunEditScreen = ({ history, match }) => {
 
   const runUpdate = useSelector((state) => state.runUpdate);
   const { success, run: updatedRun } = runUpdate;
-
-  // const handleDateChange = (date, field) => {
-  //   if (field === "date") {
-  //     setDate(date);
-  //   } else if (field === "start") {
-  //     setStartTime(date);
-  //   } else {
-  //     setEndTime(date);
-  //   }
-  //   setUpdateRunBtnDisabled(false);
-  // };
-
-  const deleteUserHandler = (userId) => {
-    console.log(userId);
-    debugger;
-  };
-  const displayUsers = () => {
-    const result = [];
-    run.users.forEach((id) => {
-      result.push(allUsers[id]);
-    });
-    return (
-      <>
-        {result.map((user) => (
-          <React.Fragment key={user._id}>
-            <TableRow style={{ height: "5%" }}>
-              <TableCell>
-                <div className={classes.userList}>
-                  {user.profilePhoto ? (
-                    <Avatar alt={user.username} src={user.profilePhoto} />
-                  ) : (
-                    <Avatar alt={user.username} src={avatar} />
-                  )}
-                  <Typography
-                    className={classes.subHeading}
-                    style={{ marginLeft: "5%" }}
-                  >
-                    {user.username}
-                  </Typography>
-                </div>
-              </TableCell>
-              <TableCell align="right">
-                <IconButton
-                  aria-label="delete"
-                  onClick={() => setDeleteAlert(user._id)}
-                >
-                  <Delete />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-            <TableRow style={{ height: "5%" }}>
-              {deleteAlert === user._id ? (
-                <TableCell colSpan={15}>
-                  <Alert
-                    severity="warning"
-                    classes={{
-                      message: classes.alertMessage,
-                      icon: classes.alertIcon,
-                    }}
-                    onClose={() => {
-                      setDeleteAlert(null);
-                    }}
-                  >
-                    Are you sure?
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      className={classes.button}
-                      onClick={() => {
-                        deleteUserHandler(user._id);
-                        setDeleteAlert(null);
-                      }}
-                      startIcon={<Delete />}
-                    >
-                      Delete
-                    </Button>
-                  </Alert>
-                </TableCell>
-              ) : null}
-            </TableRow>
-          </React.Fragment>
-        ))}
-      </>
-    );
-  };
 
   const displayAllUsers = () => {
     console.log(`hit again`);
@@ -369,23 +278,16 @@ const RunEditScreen = ({ history, match }) => {
             {loadingUsers ? (
               <CircularProgress />
             ) : (
-              <>
-                <Paper className={classes.paper}>
-                  <Grid item xs={12} md={12} lg={12}>
-                    <Table size="small">
-                      <TableHead>
-                        <TableCell>Current Users</TableCell>
-                        <TableCell align="right">Actions</TableCell>
-                      </TableHead>
-                      <TableBody>
-                        {run && run.users && run.users.length > 0
-                          ? displayUsers()
-                          : null}
-                      </TableBody>
-                    </Table>
-                  </Grid>
-                </Paper>
-              </>
+              <CurrentUsers
+                run={run}
+                allUsers={allUsers}
+                deleteAlert={deleteAlert}
+                setDeleteAlert={setDeleteAlert}
+                users={users}
+                setUsers={setUsers}
+                updateRunHandler={updateRunHandler}
+                success={success}
+              />
             )}
           </Grid>
           <Grid item container xs={12} md={4} lg={4}>
@@ -436,7 +338,7 @@ const RunEditScreen = ({ history, match }) => {
             </Paper>
           </Grid>
           {runUpdateSuccess ? (
-            <Grid item xs={12} style={{ display: "flex"}}>
+            <Grid item xs={12} style={{ display: "flex" }}>
               <Paper className={classes.paper}>
                 <Alert
                   severity="success"
