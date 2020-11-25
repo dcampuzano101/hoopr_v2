@@ -4,6 +4,7 @@ import { getRunDetails, updateRun } from "../actions/runActions";
 import { listUsers } from "../actions/userActions";
 import MomentUtils from "@date-io/moment";
 import avatar from "../assets/user-avatar.png";
+import EditForm from "../components/EditForm";
 
 import {
   DatePicker,
@@ -148,16 +149,16 @@ const RunEditScreen = ({ history, match }) => {
   const runUpdate = useSelector((state) => state.runUpdate);
   const { success, run: updatedRun } = runUpdate;
 
-  const handleDateChange = (date, field) => {
-    if (field === "date") {
-      setDate(date);
-    } else if (field === "start") {
-      setStartTime(date);
-    } else {
-      setEndTime(date);
-    }
-    setUpdateRunBtnDisabled(false);
-  };
+  // const handleDateChange = (date, field) => {
+  //   if (field === "date") {
+  //     setDate(date);
+  //   } else if (field === "start") {
+  //     setStartTime(date);
+  //   } else {
+  //     setEndTime(date);
+  //   }
+  //   setUpdateRunBtnDisabled(false);
+  // };
 
   const deleteUserHandler = (userId) => {
     console.log(userId);
@@ -334,225 +335,161 @@ const RunEditScreen = ({ history, match }) => {
   ]);
   return (
     <React.Fragment>
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={4} lg={4} style={{ display: "flex" }}>
-              <Paper className={classes.paper}>
-                <form
-                  className={classes.form}
-                  noValidate
-                  onSubmit={updateRunHandler}
-                >
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="name"
-                    placeholder="name"
-                    name="name"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                      setUpdateRunBtnDisabled(false);
-                    }}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="location"
-                    name="location"
-                    value={location}
-                    onChange={(e) => {
-                      setLocation(e.target.value);
-                      setUpdateRunBtnDisabled(false);
-                    }}
-                  />
-                  <DatePicker
-                    disablePast
-                    label="Date"
-                    value={date}
-                    onChange={(date) => handleDateChange(date, "date")}
-                    animateYearScrolling
-                  />
-                  <KeyboardTimePicker
-                    label="Start Time"
-                    // placeholder="08:00 AM"
-                    // mask="__:__ _M"
-                    value={startTime || ""}
-                    onChange={(date) => handleDateChange(date, "start")}
-                  />
-                  <KeyboardTimePicker
-                    label="End Time"
-                    // placeholder="10:00 AM"
-                    // mask="__:__ _M"
-                    value={endTime || ""}
-                    onChange={(date) => handleDateChange(date, "end")}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="capacity"
-                    label="Capacity"
-                    name="capacity"
-                    autoComplete="capacity"
-                    value={capacity}
-                    onChange={(e) => {
-                      setCapacity(e.target.value);
-                      setUpdateRunBtnDisabled(false);
-                    }}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="price"
-                    label="price"
-                    name="price"
-                    autoComplete="price"
-                    value={price}
-                    onChange={(e) => {
-                      setPrice(e.target.value);
-                      setUpdateRunBtnDisabled(false);
-                    }}
-                  />
+      <Container maxWidth="lg" className={classes.container}>
+        <Grid container spacing={3}>
+          <EditForm
+            run={run}
+            date={date}
+            setDate={setDate}
+            startTime={startTime}
+            setStartTime={setStartTime}
+            endTime={endTime}
+            setEndTime={setEndTime}
+            capacity={capacity}
+            setCapacity={setCapacity}
+            price={price}
+            setPrice={setPrice}
+            location={location}
+            setLocation={setLocation}
+            details={details}
+            setDetails={setDetails}
+            name={name}
+            setName={setName}
+            setUpdateRunBtnDisabled={setUpdateRunBtnDisabled}
+            updateRunHandler={updateRunHandler}
+          />
+          <Grid
+            item
+            container
+            xs={12}
+            md={4}
+            lg={4}
+            className={classes.usersContainer}
+          >
+            {loadingUsers ? (
+              <CircularProgress />
+            ) : (
+              <>
+                <Paper className={classes.paper}>
+                  <Grid item xs={12} md={12} lg={12}>
+                    <Table size="small">
+                      <TableHead>
+                        <TableCell>Current Users</TableCell>
+                        <TableCell align="right">Actions</TableCell>
+                      </TableHead>
+                      <TableBody>
+                        {run && run.users && run.users.length > 0
+                          ? displayUsers()
+                          : null}
+                      </TableBody>
+                    </Table>
+                  </Grid>
+                </Paper>
+              </>
+            )}
+          </Grid>
+          <Grid item container xs={12} md={4} lg={4}>
+            <Paper className={classes.paper}>
+              <Grid item xs={12} md={12} lg={12}>
+                {!addUsers && run && run.users && (
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                    disabled={updateRunBtnDisabled}
+                    disabled={run.users.length === run.capacity}
+                    onClick={() => setAddUsers(true)}
                   >
-                    UPDATE RUN
+                    Add Users
                   </Button>
-                </form>
-              </Paper>
-            </Grid>
-            <Grid
-              item
-              container
-              xs={12}
-              md={4}
-              lg={4}
-              className={classes.usersContainer}
-            >
-              {loadingUsers ? (
-                <CircularProgress />
-              ) : (
-                <>
-                  <Paper className={classes.paper}>
-                    <Grid item xs={12} md={12} lg={12}>
-                      <Table size="small">
-                        <TableHead>
-                          <TableCell>Current Users</TableCell>
-                          <TableCell align="right">Actions</TableCell>
-                        </TableHead>
-                        <TableBody>
-                          {run && run.users && run.users.length > 0
-                            ? displayUsers()
-                            : null}
-                        </TableBody>
-                      </Table>
-                    </Grid>
-                  </Paper>
-                </>
-              )}
-            </Grid>
-            <Grid item container xs={12} md={4} lg={4}>
-              <Paper className={classes.paper}>
-                <Grid item xs={12} md={12} lg={12}>
-                  {!addUsers && run && run.users && (
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className={classes.submit}
-                      disabled={run.users.length === run.capacity}
-                      onClick={() => setAddUsers(true)}
-                    >
-                      Add Users
-                    </Button>
-                  )}
-                  {addUsers && (
-                    <TableContainer>
-                      <Table size="small">
-                        <TableHead>
-                          <TableCell>All Users</TableCell>
-                          <TableCell align="right">Actions</TableCell>
-                        </TableHead>
-                        <TableBody>
-                          {allUsers && !loadingUsers ? displayAllUsers() : null}
-                          {/* {emptyRows > 0 && (
+                )}
+                {addUsers && (
+                  <TableContainer>
+                    <Table size="small">
+                      <TableHead>
+                        <TableCell>All Users</TableCell>
+                        <TableCell align="right">Actions</TableCell>
+                      </TableHead>
+                      <TableBody>
+                        {allUsers && !loadingUsers ? displayAllUsers() : null}
+                        {/* {emptyRows > 0 && (
                             <TableRow style={{ height: "5px" * emptyRows }}>
                               <TableCell colSpan={6} />
                             </TableRow>
                           )} */}
-                        </TableBody>
-                      </Table>
-                      <TablePagination
-                        rowsPerPageOptions={[5, 10, 25]}
-                        component="div"
-                        count={Object.values(allUsers).length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                        style={{ width: "100%" }}
-                      />
-                    </TableContainer>
-                  )}
-                </Grid>
+                      </TableBody>
+                    </Table>
+                    <TablePagination
+                      rowsPerPageOptions={[5, 10, 25]}
+                      component="div"
+                      count={Object.values(allUsers).length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      onChangePage={handleChangePage}
+                      onChangeRowsPerPage={handleChangeRowsPerPage}
+                      style={{ width: "100%" }}
+                    />
+                  </TableContainer>
+                )}
+              </Grid>
+            </Paper>
+          </Grid>
+          {runUpdateSuccess ? (
+            <Grid item xs={12} style={{ display: "flex"}}>
+              <Paper className={classes.paper}>
+                <Alert
+                  severity="success"
+                  onClose={() => {
+                    setRunUpdateSuccess(null);
+                  }}
+                >
+                  {runUpdateSuccess}
+                </Alert>
               </Paper>
             </Grid>
-            {runUpdateSuccess ? (
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Alert
-                    severity="success"
-                    onClose={() => {
-                      setRunUpdateSuccess(null);
-                    }}
-                  >
-                    {runUpdateSuccess}
-                  </Alert>
-                </Paper>
-              </Grid>
-            ) : null}
-            {detailsError ? (
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Alert
-                    severity="error"
-                    onClose={() => {
-                      setDetailsError(null);
-                    }}
-                  >
-                    {detailsError}
-                  </Alert>
-                </Paper>
-              </Grid>
-            ) : null}
-            {alert ? (
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Alert
-                    severity="error"
-                    onClose={() => {
-                      setAlert(null);
-                    }}
-                  >
-                    {alert}
-                  </Alert>
-                </Paper>
-              </Grid>
-            ) : null}
-          </Grid>
-        </Container>
-      </MuiPickersUtilsProvider>
+          ) : null}
+          {detailsError ? (
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Alert
+                  severity="error"
+                  onClose={() => {
+                    setDetailsError(null);
+                  }}
+                >
+                  {detailsError}
+                </Alert>
+              </Paper>
+            </Grid>
+          ) : null}
+          {alert ? (
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Alert
+                  severity="error"
+                  onClose={() => {
+                    setAlert(null);
+                  }}
+                >
+                  {alert}
+                </Alert>
+              </Paper>
+            </Grid>
+          ) : null}
+        </Grid>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          disabled={updateRunBtnDisabled}
+          onClick={updateRunHandler}
+        >
+          UPDATE RUN
+        </Button>
+      </Container>
     </React.Fragment>
   );
 };
