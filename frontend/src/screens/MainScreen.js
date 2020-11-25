@@ -27,9 +27,9 @@ const MainScreen = () => {
   return (
     <>
       <Container>
-        <Paper className={classes.paper}>
-          <Banner />
-        </Paper>
+        {/* <Paper className={classes.paper}> */}
+        <Banner />
+        {/* </Paper> */}
         <Grid item xs={12} md={12} lg={12}>
           <RunList />
         </Grid>

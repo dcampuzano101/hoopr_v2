@@ -27,13 +27,17 @@ const useStyles = makeStyles({
     margin: "-1% 0%",
   },
   bannerImg: {
-    width: "102%",
-    height: "100%",
+    width: "100%",
+    height: "40vh",
     backgroundImage: `url(${skyline})`,
-    // backgroundSize: "cover",
+    backgroundSize: "cover",
     opacity: "1",
-    position: "relative",
+    // position: "relative",
     backgroundPosition: "right 3%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    opacity: "1.5",
   },
 });
 
@@ -46,14 +50,8 @@ const Banner = () => {
   //   delay: "1000",
   // });
   return (
-    <Grid container className={classes.bannerImg}>
-      <Grid item xs={12} md={12} lg={12} style={{ height: "100%" }}>
-        <img src={hooprLogo}></img>
-      </Grid>
-
-      <Grid item xs={12} md={12} lg={12} className={classes.cardContainer}>
-        <Onboard />
-      </Grid>
+    <Grid item xs={12} md={12} lg={12} className={classes.bannerImg}>
+      <img src={hooprLogo} style={{ height: "65%" }}></img>
     </Grid>
   );
 };
