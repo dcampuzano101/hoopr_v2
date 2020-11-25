@@ -57,7 +57,6 @@ export const getRunDetails = (id) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(`/api/runs/${id}`, config);
-    console.log(data);
     dispatch({
       type: RUN_DETAILS_SUCCESS,
       payload: data,

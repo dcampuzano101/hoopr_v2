@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Paper, TextField, Button, makeStyles } from "@material-ui/core";
+import { updateRun } from "../actions/runActions";
+
 import { useDispatch, useSelector } from "react-redux";
 import MomentUtils from "@date-io/moment";
 
@@ -42,11 +44,10 @@ const EditForm = ({
   setPrice,
   capacity,
   setCapacity,
-  details,
-  setDetails,
-  setUpdateRunBtnDisabled,
 }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [updateRunBtnDisabled, setUpdateRunBtnDisabled] = useState(true);
 
   const handleDateChange = (date, field) => {
     if (field === "date") {
@@ -57,6 +58,22 @@ const EditForm = ({
       setEndTime(date);
     }
     setUpdateRunBtnDisabled(false);
+  };
+
+  const updateRunHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      updateRun({
+        id: run._id,
+        name,
+        location,
+        date,
+        startTime,
+        endTime,
+        capacity,
+        price,
+      })
+    );
   };
   return (
     <>
@@ -139,6 +156,17 @@ const EditForm = ({
                   setUpdateRunBtnDisabled(false);
                 }}
               />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                disabled={updateRunBtnDisabled}
+                onClick={updateRunHandler}
+              >
+                UPDATE RUN
+              </Button>
             </form>
           </Paper>
         </Grid>

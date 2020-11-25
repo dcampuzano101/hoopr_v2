@@ -17,8 +17,6 @@ const CheckoutScreen = ({ match, history }) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(orderId);
-
     if (orderId) {
       dispatch(getOrderDetails(orderId));
     }

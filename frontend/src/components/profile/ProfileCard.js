@@ -191,7 +191,6 @@ const ProfileCard = ({ location, history, match }) => {
                       setProfilePhoto(reader.result);
                     };
 
-                    console.log("Files:", files);
                     setOpen(false);
                   }}
                   showPreviews={true}
