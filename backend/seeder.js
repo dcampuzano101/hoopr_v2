@@ -10,6 +10,23 @@ import connectDB from "./config/db.js";
 dotenv.config();
 connectDB();
 
+const randomUsersForRuns = (createdUsers) => {
+  // let count = 0;
+  let result = new Set();
+  while (result.size <= 14) {
+    let randomIndex = Math.floor(
+      Math.random() * Math.floor(createdUsers.length)
+    );
+
+    let randomUser = createdUsers[randomIndex]._id;
+    while (!result.has(randomUser)) {
+      result.add(randomUser);
+    }
+  }
+  console.log(result);
+  return result;
+};
+
 const importData = async () => {
   try {
     await User.deleteMany();
@@ -19,8 +36,11 @@ const importData = async () => {
 
     const adminUserId = createdUsers[0]._id;
 
+    console.log(createdUsers);
+
     const sampleRuns = runs.map((run) => {
-      return { ...run, userId: adminUserId };
+      let usersArray = randomUsersForRuns(createdUsers);
+      return { ...run, userId: adminUserId, users: [...usersArray] };
     });
     await Run.insertMany(sampleRuns);
 
