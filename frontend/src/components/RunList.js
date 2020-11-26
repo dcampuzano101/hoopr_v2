@@ -114,28 +114,35 @@ const RunList = ({ history, location }) => {
     });
     return (
       <>
-        <Table className={classes.userTable}>
+        <Table size="small" className={classes.userTable}>
           <TableHead>
             <TableRow colSpan={2}>
               <TableCell align="right">{result.length} Players</TableCell>
             </TableRow>
           </TableHead>
-        </Table>
 
-        <div className={classes.userList}>
           {result.map((user) => (
             <React.Fragment key={user._id}>
-              {user.profilePhoto ? (
-                <Avatar alt={user.username} src={user.profilePhoto} />
-              ) : (
-                <Avatar alt={user.username} src={avatar} />
-              )}
-              <Typography className={classes.subHeading}>
-                {user.username}
-              </Typography>
+              <TableRow style={{ height: "5%" }}>
+                <TableCell>
+                  <div className={classes.userList}>
+                    {user.profilePhoto ? (
+                      <Avatar alt={user.username} src={user.profilePhoto} />
+                    ) : (
+                      <Avatar alt={user.username} src={avatar} />
+                    )}
+                    <Typography
+                      className={classes.subHeading}
+                      style={{ marginLeft: "5%" }}
+                    >
+                      {user.username}
+                    </Typography>
+                  </div>
+                </TableCell>
+              </TableRow>
             </React.Fragment>
           ))}
-        </div>
+        </Table>
       </>
     );
   };
@@ -267,44 +274,3 @@ const RunList = ({ history, location }) => {
 };
 
 export default withRouter(RunList);
-
-/*
-                          <>
-                            <Table className={classes.userTable}>
-                              <TableHead>
-                                <TableRow colSpan={2}>
-                                  <TableCell align="right">
-                                    {run.users.length} Players
-                                  </TableCell>
-                                </TableRow>
-                              </TableHead>
-                            </Table>
-
-                            <div className={classes.userList}>
-                              {run.users.map((user) => (
-                                <>
-                                  <div>
-                                    {user.profilePhoto ? (
-                                      <Avatar
-                                        alt={user.username}
-                                        src={user.profilePhoto}
-                                      />
-                                    ) : (
-                                      <Avatar
-                                        alt={user.username}
-                                        src={avatar}
-                                      />
-                                    )}
-                                  </div>
-                                  <div>
-                                    <Typography className={classes.subHeading}>
-                                      {user.username}
-                                    </Typography>
-                                  </div>
-                                </>
-                              ))}
-                            </div>
-                          </>
-
-
-*/

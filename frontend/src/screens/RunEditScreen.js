@@ -39,7 +39,12 @@ const RunEditScreen = ({ history, match }) => {
   const runId = match.params.id;
 
   const runDetails = useSelector((state) => state.runDetails);
-  const { error, run, success: successDetails } = runDetails;
+  const {
+    error,
+    run,
+    success: successDetails,
+    loading: loadingRun,
+  } = runDetails;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -67,6 +72,7 @@ const RunEditScreen = ({ history, match }) => {
   const { success, run: updatedRun } = runUpdate;
 
   useEffect(() => {
+    debugger;
     if (!userInfo.isAdmin) {
       history.push("/login");
     } else {
@@ -154,16 +160,8 @@ const RunEditScreen = ({ history, match }) => {
               />
             )}
           </Grid>
-          {allUsers &&
-          run &&
-          Object.values(allUsers).length === run.users.length ? (
-            <>
-              <Grid item container xs={12} md={4} lg={4}>
-                <Paper className={classes.paper}>
-                  <Typography> No Users Available to Add</Typography>
-                </Paper>
-              </Grid>
-            </>
+          {loadingRun ? (
+            <CircularProgress />
           ) : (
             <AddUsers
               allUsers={allUsers}
@@ -172,6 +170,7 @@ const RunEditScreen = ({ history, match }) => {
               success={success}
             />
           )}
+
           {runUpdateSuccess ? (
             <Grid item xs={12} style={{ display: "flex" }}>
               <Paper className={classes.paper}>
@@ -221,3 +220,32 @@ const RunEditScreen = ({ history, match }) => {
 };
 
 export default RunEditScreen;
+
+{
+  /* {allUsers &&
+          successDetails &&
+          Object.values(allUsers).length === run.users.length ? (
+            <>
+              <Grid item container xs={12} md={4} lg={4}>
+                <Paper className={classes.paper}>
+                  <Typography> No Users Available to Add</Typography>
+                </Paper>
+              </Grid>
+            </>
+          ) : (
+            <AddUsers
+              allUsers={allUsers}
+              run={run}
+              loadingUsers={loadingUsers}
+              success={success}
+            />
+          )} */
+}
+// : Object.values(allUsers).length === run.users.length ? (
+//   <>
+//     <Grid item container xs={12} md={4} lg={4}>
+//       <Paper className={classes.paper}>
+//         <Typography> No Users Available to Add</Typography>
+//       </Paper>
+//     </Grid>
+//   </>

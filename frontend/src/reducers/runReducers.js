@@ -34,6 +34,7 @@ export const runListReducer = (state = { loading: true }, action) => {
 
 export const runDetailsReducer = (
   state = {
+    loading: true,
     success: false,
     run: {},
   },

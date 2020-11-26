@@ -159,7 +159,7 @@ const AddUsers = ({ allUsers, run, loadingUsers, success }) => {
       );
     } else {
       setDisplayPagination(false);
-      return null;
+      return <Typography>No Users Available</Typography>;
     }
   };
   return (
@@ -182,7 +182,9 @@ const AddUsers = ({ allUsers, run, loadingUsers, success }) => {
             >
               Add Users
             </Button>
-          ) : null}
+          ) : (
+            <Typography>No Users Available To Add</Typography>
+          )}
           {addUsers && allUsers && (
             <TableContainer>
               <Table size="small">

@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { updateRun } from "../actions/runActions";
 import {
   makeStyles,
@@ -58,12 +58,20 @@ const CurrentUsers = ({
 }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  // const userList = useSelector((state) => state.userList);
+  // const { users: allUsers, loading: loadingUsers } = userList;
   const deleteUserHandler = (userId) => {
     let usersClone = [...users];
     usersClone = usersClone.filter((user) => user !== userId);
     dispatch(updateRun({ id: run._id, users: usersClone }));
   };
+
+  useEffect(() => {
+    debugger;
+    if (!allUsers) {
+      debugger;
+    }
+  }, [allUsers]);
 
   const displayUsers = () => {
     const result = [];
