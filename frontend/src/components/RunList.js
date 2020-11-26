@@ -139,6 +139,9 @@ const RunList = ({ history, location }) => {
       location.search = "";
     }
   }, [dispatch, location]);
+  const waitListHandler = (runId) => {
+    console.log(`runId == ${runId} & waitListHAndlerFUncTIon`);
+  };
 
   const displayUsersForRun = (userIds, run) => {
     const result = [];
@@ -181,24 +184,41 @@ const RunList = ({ history, location }) => {
         <div className={classes.rightSidebar}></div>
 
         <footer className={classes.userListFooter}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={() => addToCartHandler(run._id)}
-            disabled={
-              userInfo
-                ? run.users.some((id) => id === userInfo._id)
-                  ? true
-                    ? run.users.length !== run.capacity
+          {run.users.length === run.capacity ? (
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => waitListHandler(run._id)}
+              disabled={
+                userInfo
+                  ? run.users.some((id) => id === userInfo._id)
+                    ? true
                     : false
                   : false
-                : false
-            }
-          >
-            ADD TO CART
-          </Button>
+              }
+            >
+              JOIN WAITLIST
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => addToCartHandler(run._id)}
+              disabled={
+                userInfo
+                  ? run.users.some((id) => id === userInfo._id)
+                    ? true
+                    : false
+                  : false
+              }
+            >
+              ADD TO CART
+            </Button>
+          )}
         </footer>
       </div>
     );
@@ -246,7 +266,7 @@ const RunList = ({ history, location }) => {
               </AccordionSummary>
             </Accordion>
             {runs.map((run) => (
-              <React.Fragment key={run._id} id="parent?">
+              <React.Fragment key={run._id}>
                 <Accordion
                   expanded={expanded === run._id}
                   onChange={handleChange(run._id)}

@@ -51,10 +51,10 @@ const AdminScreen = ({ history }) => {
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={1}>
           <Grid item xs={12} md={12} lg={12}>
-            <AdminUsers />
+            <AdminRuns />
           </Grid>
           <Grid item xs={12} md={12} lg={12}>
-            <AdminRuns />
+            <AdminUsers />
           </Grid>
         </Grid>
       </Container>

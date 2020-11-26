@@ -66,13 +66,6 @@ const CurrentUsers = ({
     dispatch(updateRun({ id: run._id, users: usersClone }));
   };
 
-  useEffect(() => {
-    debugger;
-    if (!allUsers) {
-      debugger;
-    }
-  }, [allUsers]);
-
   const displayUsers = () => {
     const result = [];
     run.users.forEach((id) => {
@@ -145,7 +138,7 @@ const CurrentUsers = ({
   return (
     <>
       <Paper className={classes.paper}>
-        <Grid item xs={12} md={12} lg={12}>
+        <Grid item xs={12} md={12} lg={12} style={{ maxHeight: "50px" }}>
           <Table size="small">
             <TableHead>
               <TableCell>Current Users</TableCell>

@@ -39,6 +39,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
+  submit: {
+    height: "1.5rem",
+    display: "flex",
+  },
+  adminRunHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 }));
 
 const AdminRuns = ({ history, match, location }) => {
@@ -71,11 +80,18 @@ const AdminRuns = ({ history, match, location }) => {
         <CircularProgress />
       ) : (
         <>
-          <div>
+          <div className={classes.adminRunHeader}>
             <h1 className="bannerShadow" style={{ fontSize: "35px" }}>
               ALL RUNS
             </h1>
-            <Button href="/runs/create">CREATE RUN</Button>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              href="/runs/create"
+            >
+              CREATE RUN
+            </Button>
           </div>
           <Paper className={classes.paper}>
             {error && (

@@ -72,7 +72,6 @@ const RunEditScreen = ({ history, match }) => {
   const { success, run: updatedRun } = runUpdate;
 
   useEffect(() => {
-    debugger;
     if (!userInfo.isAdmin) {
       history.push("/login");
     } else {
