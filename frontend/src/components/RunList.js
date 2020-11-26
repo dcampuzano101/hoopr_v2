@@ -16,10 +16,6 @@ import {
   Paper,
   Grid,
   Avatar,
-  TableRow,
-  TableHead,
-  Table,
-  TableCell,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Map from "./Map";
@@ -29,7 +25,7 @@ import { withRouter } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: { marginBottom: "3%" },
   heading: {
-    fontSize: theme.typography.pxToRem(22),
+    fontSize: theme.typography.pxToRem(18),
     letterSpacing: "1.3px",
     flexBasis: "20%",
     flexShrink: 0,
@@ -38,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   subHeading: {
     fontFamily: "Open Sans, Helvetica, Arial, sans-serif",
-    fontSize: theme.typography.pxToRem(16),
+    fontSize: theme.typography.pxToRem(12),
     fontStyle: "normal",
     fontWeight: "normal",
     flexBasis: "20%",
@@ -52,18 +48,18 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     width: "35%",
-    height: "10%",
+    height: "1.5rem",
     display: "flex",
     margin: "0 auto",
   },
-  userList: {
-    display: "flex",
-    width: "90%",
-    margin: "1% 5% 1% 5%",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    alignItems: "center",
-  },
+  // userList: {
+  //   display: "flex",
+  //   width: "90%",
+  //   margin: "1% 5% 1% 5%",
+  //   justifyContent: "space-between",
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  // },
   userTable: {
     margin: "0 5% 2%",
     maxWidth: "90%",
@@ -77,6 +73,43 @@ const useStyles = makeStyles((theme) => ({
   },
   alertIcon: {
     display: "none",
+  },
+  userListContainer: {
+    display: "grid",
+    height: "30vh",
+    gridTemplate: "auto 1fr auto / auto 1fr auto",
+  },
+  userListHeader: {
+    padding: ".5rem 2rem",
+    gridColumn: "1 / 4",
+  },
+  userListFooter: {
+    textAlign: "center",
+    height: "2vh",
+    gridColumn: "1 / 4",
+    display: "flex",
+    alignItems: "center",
+  },
+  userList: {
+    display: "grid",
+    height: "21vh",
+    gridGap: ".5rem",
+    gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
+  },
+  userContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
+  leftSidebar: {
+    gridColumn: "1/2",
+    padding: "1rem",
+  },
+  rightSidebar: {
+    gridColumn: "3/4",
+    padding: "1rem",
+  },
+  entered: {
+    height: "550px",
   },
 }));
 
@@ -107,43 +140,67 @@ const RunList = ({ history, location }) => {
     }
   }, [dispatch, location]);
 
-  const displayUsersForRun = (userIds) => {
+  const displayUsersForRun = (userIds, run) => {
     const result = [];
     userIds.forEach((id) => {
       result.push(users[id]);
     });
     return (
-      <>
-        <Table size="small" className={classes.userTable}>
-          <TableHead>
-            <TableRow colSpan={2}>
-              <TableCell align="right">{result.length} Players</TableCell>
-            </TableRow>
-          </TableHead>
-
+      <div className={classes.userListContainer}>
+        <header className={classes.userListHeader}>
+          <Typography>{result.length} Players</Typography>
+        </header>
+        <div className={classes.leftSidebar}></div>
+        <main className={classes.userList}>
           {result.map((user) => (
             <React.Fragment key={user._id}>
-              <TableRow style={{ height: "5%" }}>
-                <TableCell>
-                  <div className={classes.userList}>
-                    {user.profilePhoto ? (
-                      <Avatar alt={user.username} src={user.profilePhoto} />
-                    ) : (
-                      <Avatar alt={user.username} src={avatar} />
-                    )}
-                    <Typography
-                      className={classes.subHeading}
-                      style={{ marginLeft: "5%" }}
-                    >
-                      {user.username}
-                    </Typography>
-                  </div>
-                </TableCell>
-              </TableRow>
+              <div className={classes.userContainer}>
+                {user.profilePhoto ? (
+                  <Avatar
+                    alt={user.username}
+                    src={user.profilePhoto}
+                    style={{ height: "30px", width: "30px" }}
+                  />
+                ) : (
+                  <Avatar
+                    alt={user.username}
+                    src={avatar}
+                    style={{ height: "30px", width: "30px" }}
+                  />
+                )}
+                <Typography
+                  className={classes.subHeading}
+                  style={{ marginLeft: "5px", fontSize: ".7rem" }}
+                >
+                  {user.username}
+                </Typography>
+              </div>
             </React.Fragment>
           ))}
-        </Table>
-      </>
+        </main>
+        <div className={classes.rightSidebar}></div>
+
+        <footer className={classes.userListFooter}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => addToCartHandler(run._id)}
+            disabled={
+              userInfo
+                ? run.users.some((id) => id === userInfo._id)
+                  ? true
+                    ? run.users.length !== run.capacity
+                    : false
+                  : false
+                : false
+            }
+          >
+            ADD TO CART
+          </Button>
+        </footer>
+      </div>
     );
   };
 
@@ -189,7 +246,7 @@ const RunList = ({ history, location }) => {
               </AccordionSummary>
             </Accordion>
             {runs.map((run) => (
-              <React.Fragment key={run._id}>
+              <React.Fragment key={run._id} id="parent?">
                 <Accordion
                   expanded={expanded === run._id}
                   onChange={handleChange(run._id)}
@@ -218,7 +275,12 @@ const RunList = ({ history, location }) => {
                       {`${run.users.length}/${run.capacity}`}
                     </Typography>
                   </AccordionSummary>
-                  <AccordionDetails>
+                  <AccordionDetails
+                    classes={{
+                      entered: classes.entered,
+                    }}
+                    id="yooooO"
+                  >
                     <Grid container>
                       <Grid item xs={12} md={7} lg={7}>
                         <Map
@@ -228,38 +290,10 @@ const RunList = ({ history, location }) => {
                         />
                       </Grid>
                       <Grid item xs={12} md={5} lg={5}>
-                        {run.users.length > 0 && !loadingUsers && users ? (
-                          displayUsersForRun(run.users)
-                        ) : (
-                          <Table>
-                            <TableHead>
-                              <TableRow>
-                                <TableCell>
-                                  <Typography className={classes.subHeading}>
-                                    No players yet!
-                                  </Typography>
-                                </TableCell>
-                              </TableRow>
-                            </TableHead>
-                          </Table>
-                        )}
-
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="primary"
-                          className={classes.submit}
-                          onClick={() => addToCartHandler(run._id)}
-                          disabled={
-                            userInfo
-                              ? run.users.some((id) => id === userInfo._id)
-                                ? true
-                                : false
-                              : false
-                          }
-                        >
-                          ADD TO CART
-                        </Button>
+                        {!loadingUsers &&
+                          users &&
+                          run &&
+                          displayUsersForRun(run.users, run)}
                       </Grid>
                     </Grid>
                   </AccordionDetails>
