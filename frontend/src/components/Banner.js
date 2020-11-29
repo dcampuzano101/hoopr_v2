@@ -10,7 +10,6 @@ const useStyles = makeStyles({
     backgroundImage: `url(${skyline})`,
     backgroundSize: "cover",
     opacity: "1",
-    // position: "relative",
     backgroundPosition: "right 3%",
     display: "flex",
     justifyContent: "center",

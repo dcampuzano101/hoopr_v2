@@ -52,14 +52,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     margin: "0 auto",
   },
-  // userList: {
-  //   display: "flex",
-  //   width: "90%",
-  //   margin: "1% 5% 1% 5%",
-  //   justifyContent: "space-between",
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  // },
   userTable: {
     margin: "0 5% 2%",
     maxWidth: "90%",

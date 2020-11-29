@@ -116,15 +116,11 @@ const EditForm = ({
               />
               <KeyboardTimePicker
                 label="Start Time"
-                // placeholder="08:00 AM"
-                // mask="__:__ _M"
                 value={startTime || ""}
                 onChange={(date) => handleDateChange(date, "start")}
               />
               <KeyboardTimePicker
                 label="End Time"
-                // placeholder="10:00 AM"
-                // mask="__:__ _M"
                 value={endTime || ""}
                 onChange={(date) => handleDateChange(date, "end")}
               />

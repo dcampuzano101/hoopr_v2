@@ -135,7 +135,6 @@ const RunEditScreen = ({ history, match }) => {
             setDetails={setDetails}
             name={name}
             setName={setName}
-            // setUpdateRunBtnDisabled={setUpdateRunBtnDisabled}
           />
           <Grid
             item
@@ -219,32 +218,3 @@ const RunEditScreen = ({ history, match }) => {
 };
 
 export default RunEditScreen;
-
-{
-  /* {allUsers &&
-          successDetails &&
-          Object.values(allUsers).length === run.users.length ? (
-            <>
-              <Grid item container xs={12} md={4} lg={4}>
-                <Paper className={classes.paper}>
-                  <Typography> No Users Available to Add</Typography>
-                </Paper>
-              </Grid>
-            </>
-          ) : (
-            <AddUsers
-              allUsers={allUsers}
-              run={run}
-              loadingUsers={loadingUsers}
-              success={success}
-            />
-          )} */
-}
-// : Object.values(allUsers).length === run.users.length ? (
-//   <>
-//     <Grid item container xs={12} md={4} lg={4}>
-//       <Paper className={classes.paper}>
-//         <Typography> No Users Available to Add</Typography>
-//       </Paper>
-//     </Grid>
-//   </>
