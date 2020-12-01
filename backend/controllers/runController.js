@@ -104,7 +104,7 @@ const updateRun = asyncHandler(async (req, res) => {
     run.startTime = req.body.startTime || run.startTime;
     run.endTime = req.body.endTime || run.endTime;
     run.waitList = req.body.waitList || run.waitList;
-
+    debugger;
     const updatedRun = await run.save();
     res.json({
       userId: updatedRun.userId,

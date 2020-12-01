@@ -3,6 +3,7 @@ import { listRuns } from "../actions/runActions";
 import { listUsers } from "../actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { updateRun } from "../actions/runActions";
 import Alert from "@material-ui/lab/Alert";
 import avatar from "../assets/user-avatar.png";
 import moment from "moment";
@@ -100,9 +101,6 @@ const useStyles = makeStyles((theme) => ({
     gridColumn: "3/4",
     padding: "1rem",
   },
-  entered: {
-    height: "550px",
-  },
 }));
 
 const RunList = ({ history, location }) => {
@@ -131,9 +129,6 @@ const RunList = ({ history, location }) => {
       location.search = "";
     }
   }, [dispatch, location]);
-  const waitListHandler = (runId) => {
-    console.log(`runId == ${runId} & waitListHAndlerFUncTIon`);
-  };
 
   const displayUsersForRun = (userIds, run) => {
     const result = [];
@@ -191,7 +186,7 @@ const RunList = ({ history, location }) => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={() => waitListHandler(run._id)}
+              onClick={() => waitListHandler(run._id, run)}
               disabled={
                 userInfo
                   ? run.users.some((id) => id === userInfo._id)
@@ -233,6 +228,20 @@ const RunList = ({ history, location }) => {
       console.log(error);
     }
   };
+  const waitListHandler = (runId, run) => {
+    console.log(`runId == ${runId} & waitListHAndlerFUncTIon`);
+    debugger;
+    const waitListCopy = [...run.waitList, runId];
+
+    dispatch(
+      updateRun({
+        id: run._id,
+        waitList: waitListCopy,
+      })
+    );
+  };
+
+  const buttonToDisplay = () => {};
   return (
     <div className={classes.root}>
       {error && <Alert severity="error">{error}</Alert>}
@@ -296,12 +305,7 @@ const RunList = ({ history, location }) => {
                       {`${run.users.length}/${run.capacity}`}
                     </Typography>
                   </AccordionSummary>
-                  <AccordionDetails
-                    classes={{
-                      entered: classes.entered,
-                    }}
-                    id="yooooO"
-                  >
+                  <AccordionDetails>
                     <Grid container>
                       <Grid item xs={12} md={7} lg={7}>
                         <Map
