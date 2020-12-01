@@ -18,12 +18,12 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User already exists");
   }
-
   //using Mongoose.model.pre('save') to encrypt in userModel.js
   const user = await User.create({
     username,
     email,
     password,
+    runs: [],
   });
 
   if (user) {
@@ -33,6 +33,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
+      runs: user.runs,
     });
   } else {
     res.status(400);

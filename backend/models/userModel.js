@@ -23,15 +23,11 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-    runs: [
-      {
-        runId: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-          ref: "Run",
-        },
-      },
-    ],
+    runs: {
+      type: Array,
+      required: true,
+      default: [],
+    },
     profilePhoto: {
       type: String,
     },

@@ -16,6 +16,8 @@ const createRun = asyncHandler(async (req, res) => {
     lng: data.results[0].geometry.location.lng,
   };
 
+  const waitList = [];
+
   const {
     name,
     location,
@@ -41,6 +43,7 @@ const createRun = asyncHandler(async (req, res) => {
     users,
     startTime,
     endTime,
+    waitList,
   });
 
   if (run) {
@@ -54,6 +57,7 @@ const createRun = asyncHandler(async (req, res) => {
       users: run.users,
       startTime: run.startTime,
       endTime: run.endTime,
+      waitList: run.waitList,
     });
   } else {
     res.status(400);
@@ -103,6 +107,7 @@ const updateRun = asyncHandler(async (req, res) => {
     run.users = req.body.users || run.users;
     run.startTime = req.body.startTime || run.startTime;
     run.endTime = req.body.endTime || run.endTime;
+    run.waitList = req.body.waitList || run.waitList;
 
     const updatedRun = await run.save();
     res.json({
@@ -115,6 +120,7 @@ const updateRun = asyncHandler(async (req, res) => {
       users: updatedRun.users,
       startTime: updatedRun.startTime,
       endTime: updatedRun.endTime,
+      waitList: updatedRun.waitList,
     });
   } else {
     res.status(404);

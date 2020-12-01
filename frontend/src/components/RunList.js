@@ -176,7 +176,16 @@ const RunList = ({ history, location }) => {
         <div className={classes.rightSidebar}></div>
 
         <footer className={classes.userListFooter}>
-          {run.users.length === run.capacity ? (
+          {run.users.length === run.capacity && run.waitList.length === 3 ? (
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled="true"
+            >
+              FULL!
+            </Button>
+          ) : run.users.length === run.capacity ? (
             <Button
               type="submit"
               variant="contained"
