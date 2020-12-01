@@ -28,10 +28,6 @@ const createRun = asyncHandler(async (req, res) => {
     endTime,
   } = req.body;
 
-  //think about validation on frontend
-  //can we search through our global.state.runs
-  //verify if runExists (location && startTime / overlap)
-
   const run = await Run.create({
     userId: req.user._id,
     name,

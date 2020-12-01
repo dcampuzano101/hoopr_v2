@@ -7,6 +7,7 @@ const runs = [
     price: 10,
     capacity: 15,
     users: [],
+    waitList: [],
     startTime: moment("08:00", "h:mm a"),
     endTime: moment("10:00", "h:mm a"),
     geoLocation: {
@@ -22,6 +23,7 @@ const runs = [
     price: 10,
     capacity: 15,
     users: [],
+    waitList: [],
     startTime: moment("18:00", "h:mm a"),
     endTime: moment("20:00", "h:mm a"),
     geoLocation: {
@@ -37,6 +39,7 @@ const runs = [
     price: 10,
     capacity: 15,
     users: [],
+    waitList: [],
     startTime: moment("08:00", "h:mm a"),
     endTime: moment("10:00", "h:mm a"),
     geoLocation: {
@@ -52,6 +55,7 @@ const runs = [
     price: 10,
     capacity: 15,
     users: [],
+    waitList: [],
     startTime: moment("18:00", "h:mm a"),
     endTime: moment("20:00", "h:mm a"),
     geoLocation: {

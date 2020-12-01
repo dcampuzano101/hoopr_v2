@@ -34,6 +34,11 @@ const runSchema = mongoose.Schema(
       required: true,
       default: [],
     },
+    waitList: {
+      type: Array,
+      required: true,
+      default: [],
+    },
     startTime: {
       type: String,
       required: true,

@@ -28,6 +28,11 @@ const userSchema = mongoose.Schema(
       required: true,
       default: [],
     },
+    waitList: {
+      type: Array,
+      required: true,
+      default: [],
+    },
     profilePhoto: {
       type: String,
     },

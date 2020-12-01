@@ -24,6 +24,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
     runs: [],
+    waitList: [],
   });
 
   if (user) {
@@ -34,6 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
       runs: user.runs,
+      waitList: user.waitList,
     });
   } else {
     res.status(400);
