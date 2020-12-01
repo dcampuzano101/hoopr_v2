@@ -182,9 +182,7 @@ const AddUsers = ({ allUsers, run, loadingUsers, success }) => {
             >
               Add Users
             </Button>
-          ) : (
-            <Typography>No Users Available To Add</Typography>
-          )}
+          ) : null}
           {addUsers && allUsers && (
             <TableContainer>
               <Table size="small">

@@ -130,6 +130,97 @@ const RunList = ({ history, location }) => {
     }
   }, [dispatch, location]);
 
+  const disableButton = (run, userInfo) => {
+    if (userInfo === null) {
+      debugger;
+      return false;
+    }
+    debugger;
+    return run.users.some((id) => id === userInfo._id) ||
+      run.waitList.some((id) => id === userInfo._id)
+      ? true
+      : false;
+  };
+
+  const buttonToDisplay = (run, userInfo) => {
+    if (userInfo !== null) {
+      if (
+        run.users.some((id) => id === userInfo._id) ||
+        run.waitList.some((id) => id === userInfo._id)
+      ) {
+        return (
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => cancelRunHandler(run, userInfo)}
+            // disabled={disableButton(run, userInfo)}
+          >
+            Cancel
+          </Button>
+        );
+      } else if (
+        run.capacity === run.users.length &&
+        run.waitList.length === 3
+      ) {
+        return (
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled="true"
+            className={classes.submit}
+          >
+            FULL!
+          </Button>
+        );
+      } else if (
+        run.capacity === run.users.length &&
+        run.waitList.length !== 3
+      ) {
+        return (
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => waitListHandler(run, userInfo)}
+            disabled={disableButton(run, userInfo)}
+          >
+            JOIN WAITLIST
+          </Button>
+        );
+      } else {
+        return (
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => addToCartHandler(run._id)}
+            disabled={disableButton(run, userInfo)}
+          >
+            ADD TO CART
+          </Button>
+        );
+      }
+    } else {
+      return (
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={() => addToCartHandler(run._id)}
+          disabled={disableButton(run, userInfo)}
+        >
+          ADD TO CART
+        </Button>
+      );
+    }
+  };
+
   const displayUsersForRun = (userIds, run) => {
     const result = [];
     userIds.forEach((id) => {
@@ -171,55 +262,16 @@ const RunList = ({ history, location }) => {
         <div className={classes.rightSidebar}></div>
 
         <footer className={classes.userListFooter}>
-          {run.users.length === run.capacity && run.waitList.length === 3 ? (
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled="true"
-            >
-              FULL!
-            </Button>
-          ) : run.users.length === run.capacity ? (
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={() => waitListHandler(run._id, run)}
-              disabled={
-                userInfo
-                  ? run.users.some((id) => id === userInfo._id)
-                    ? true
-                    : false
-                  : false
-              }
-            >
-              JOIN WAITLIST
-            </Button>
-          ) : (
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={() => addToCartHandler(run._id)}
-              disabled={
-                userInfo
-                  ? run.users.some((id) => id === userInfo._id)
-                    ? true
-                    : false
-                  : false
-              }
-            >
-              ADD TO CART
-            </Button>
-          )}
+          {buttonToDisplay(run, userInfo)}
         </footer>
       </div>
     );
   };
 
+  const cancelRunHandler = (run, userInfo) => {
+    console.log(run);
+    console.log(userInfo);
+  };
   const addToCartHandler = async (runId) => {
     try {
       dispatch(addToCart(runId));
@@ -228,10 +280,8 @@ const RunList = ({ history, location }) => {
       console.log(error);
     }
   };
-  const waitListHandler = (runId, run) => {
-    console.log(`runId == ${runId} & waitListHAndlerFUncTIon`);
-    debugger;
-    const waitListCopy = [...run.waitList, runId];
+  const waitListHandler = (run, userInfo) => {
+    const waitListCopy = [...run.waitList, userInfo._id];
 
     dispatch(
       updateRun({
@@ -241,7 +291,6 @@ const RunList = ({ history, location }) => {
     );
   };
 
-  const buttonToDisplay = () => {};
   return (
     <div className={classes.root}>
       {error && <Alert severity="error">{error}</Alert>}

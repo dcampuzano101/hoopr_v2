@@ -55,7 +55,7 @@ const runs = [
     price: 10,
     capacity: 15,
     users: [],
-    waitList: [],
+    waitList: [1, 2, 3],
     startTime: moment("18:00", "h:mm a"),
     endTime: moment("20:00", "h:mm a"),
     geoLocation: {
