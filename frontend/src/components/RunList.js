@@ -114,8 +114,14 @@ const RunList = ({ history, location }) => {
   const runsList = useSelector((state) => state.runList);
   const { loading, error, runs } = runsList;
 
+  // const runsList = useSelector((state) => state.runList);
+  // const { loading, error, runs } = runsList;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const runUpdate = useSelector((state) => state.runUpdate);
+  const { success, run: updatedRun } = runUpdate;
 
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
@@ -128,14 +134,16 @@ const RunList = ({ history, location }) => {
       setSuccessfulCheckout(`Successfully made purchase!`);
       location.search = "";
     }
-  }, [dispatch, location]);
+
+    // if (success) {
+    //   setRunUpdateSuccess("Successfully updated run!");
+    // }
+  }, [dispatch, location, success]);
 
   const disableButton = (run, userInfo) => {
     if (userInfo === null) {
-      debugger;
       return false;
     }
-    debugger;
     return run.users.some((id) => id === userInfo._id) ||
       run.waitList.some((id) => id === userInfo._id)
       ? true
