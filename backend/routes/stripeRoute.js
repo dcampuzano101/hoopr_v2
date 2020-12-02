@@ -3,9 +3,7 @@ import Run from "../models/runModel.js";
 import User from "../models/userModel.js";
 import Stripe from "stripe";
 
-const stripe = new Stripe(
-  "sk_test_51Hi0CkCw3D7iMvxsxTGNxXXGNndJ6qnjlZCIuFnGNWmpYl5FL5ajlrGhwiZ3KYsgXfGS8WUuWgMpva2CY1DxEctB00JUHZcox1"
-);
+const stripe = new Stripe(`${process.env.stripe_test}`);
 
 const updateRunsAndUser = async (orderItems, userId) => {
   const user = await User.findById(userId);
