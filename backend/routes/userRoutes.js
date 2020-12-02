@@ -40,7 +40,7 @@ router
   .route("/:id")
   .get(protect, admin, getUserById)
   .delete(protect, admin, deleteUser)
-  .put(protect, admin, updateUser);
+  .put(protect, updateUser);
 
 // @desc    Auth with Google
 // @route   GET /auth/google

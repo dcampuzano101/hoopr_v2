@@ -32,11 +32,12 @@ const Runs = () => {
         </TableHead>
         <TableBody>
           <TableRow>
-            {runs.map((run) => (
-              <React.Fragment key={run.date}>
-                <TableCell>{run.location}</TableCell>
-              </React.Fragment>
-            ))}
+            {runs &&
+              Object.values(runs).map((run) => (
+                <React.Fragment key={run.date}>
+                  <TableCell>{run.location}</TableCell>
+                </React.Fragment>
+              ))}
           </TableRow>
         </TableBody>
       </Table>

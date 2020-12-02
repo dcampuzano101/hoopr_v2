@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
+  Grid,
   Table,
   TableBody,
   TableCell,
@@ -27,75 +28,143 @@ const useStyles = makeStyles((theme) => ({
 
 const UpcomingRuns = ({ location }) => {
   const userDetails = useSelector((state) => state.userDetails);
-  const { user, success: successDetails } = userDetails;
+  const { user, success: successDetails, loading } = userDetails;
   const [myRuns, setMyRuns] = useState(null);
+  const [waitList, setWaitList] = useState(null);
   const runList = useSelector((state) => state.runList);
-  const { runs } = runList;
+  const { runs, loading: loadingRuns } = runList;
+  const classes = useStyles();
 
   useEffect(() => {
     if (successDetails) {
-      setMyRuns(getMyRuns());
+      setMyRuns(user.runs);
+      setWaitList(user.waitList);
     }
   }, [successDetails]);
-  const getMyRuns = () => {
-    const runIds = [];
-    user.runs.forEach((runObj) => {
-      const runId = runObj["runId"];
-      if (runIds.indexOf(runId) === -1) {
-        runIds.push(runId);
-      }
+  const displayRunsForUser = () => {
+    const userRuns = [];
+    user.runs.forEach((runId) => {
+      userRuns.push(runs[runId]);
     });
-
-    const myRuns = [];
-
-    for (let i = 0; i < runIds.length; i++) {
-      let runId = runIds[i];
-
-      for (let j = 0; j < runs.length; j++) {
-        if (runId === runs[j]._id) {
-          myRuns.push(runs[j]);
-        }
-      }
-    }
-    return myRuns;
-  };
-  const classes = useStyles();
-  return (
-    <React.Fragment>
-      <Typography className={classes.heading}>Upcoming Runs</Typography>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Location</TableCell>
-            <TableCell>Time</TableCell>
-            <TableCell>Players</TableCell>
-          </TableRow>
-        </TableHead>
-        {!user ? (
-          <>
-            <CircularProgress />
-          </>
-        ) : (
-          <TableBody>
-            {myRuns
-              ? myRuns.map((run) => (
+    if (user.runs.length === 0) {
+      return (
+        <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          No Upcoming Runs
+        </Typography>
+      );
+    } else {
+      return (
+        <>
+          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+            Upcoming Runs
+          </Typography>
+          <Table size="small">
+            <TableHead>
+              <TableCell colSpan={2}>Date</TableCell>
+              <TableCell colSpan={2}>Location</TableCell>
+              <TableCell colSpan={2}>Price</TableCell>
+              <TableCell colSpan={2}>Capacity</TableCell>
+            </TableHead>
+            <TableBody>
+              {user &&
+                runs &&
+                userRuns.map((run) => (
                   <React.Fragment key={run._id}>
                     <TableRow>
-                      <TableCell>{run.date}</TableCell>
-                      <TableCell>{run.location}</TableCell>
-                      <TableCell>{`${run.startTime} - ${run.endTime}`}</TableCell>
-                      <TableCell>
-                        {run.users.length} / {run.capacity}
-                      </TableCell>
+                      <TableCell colSpan={2}>{run.date}</TableCell>
+                      <TableCell colSpan={2}>{run.location}</TableCell>
+                      <TableCell colSpan={2}>${run.price}</TableCell>
+                      <TableCell colSpan={2}>{run.capacity}</TableCell>
                     </TableRow>
                   </React.Fragment>
-                ))
-              : null}
-          </TableBody>
+                ))}
+            </TableBody>
+          </Table>
+        </>
+      );
+    }
+  };
+
+  const displayWaitListForUser = () => {
+    const userWaitList = [];
+
+    user.waitList.forEach((runId) => {
+      userWaitList.push(runs[runId]);
+    });
+    if (user.waitList.length === 0) {
+      return (
+        <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          Wait list is empty
+        </Typography>
+      );
+    } else {
+      return (
+        <>
+          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+            Wait listed runs
+          </Typography>
+          <Table size="small">
+            <TableHead>
+              <TableCell colSpan={2}>Date</TableCell>
+              <TableCell colSpan={2}>Location</TableCell>
+              <TableCell colSpan={2}>Price</TableCell>
+              <TableCell colSpan={2}>Capacity</TableCell>
+            </TableHead>
+            <TableBody>
+              {user &&
+                runs &&
+                userWaitList.map((run) => (
+                  <React.Fragment key={run._id}>
+                    <TableRow>
+                      <TableCell colSpan={2}>{run.date}</TableCell>
+                      <TableCell colSpan={2}>{run.location}</TableCell>
+                      <TableCell colSpan={2}>${run.price}</TableCell>
+                      <TableCell colSpan={2}>{run.capacity}</TableCell>
+                    </TableRow>
+                  </React.Fragment>
+                ))}
+            </TableBody>
+          </Table>
+        </>
+      );
+    }
+  };
+  return (
+    <div
+      style={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+      }}
+    >
+      <Grid
+        item
+        xs={12}
+        md={12}
+        lg={12}
+        style={{ border: "1px solid black", height: "100%", width: "100%" }}
+      >
+        {!loading && !loadingRuns && user ? (
+          displayRunsForUser()
+        ) : (
+          <CircularProgress />
         )}
-      </Table>
-    </React.Fragment>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        md={12}
+        lg={12}
+        style={{ border: "1px solid green", height: "100%", width: "100%" }}
+      >
+        {!loading && !loadingRuns && user ? (
+          displayWaitListForUser()
+        ) : (
+          <CircularProgress />
+        )}
+      </Grid>
+    </div>
   );
 };
 

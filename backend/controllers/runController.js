@@ -66,9 +66,13 @@ const createRun = asyncHandler(async (req, res) => {
 // @access: private
 const listRuns = asyncHandler(async (req, res) => {
   const runs = await Run.find({});
+  const runsObj = {};
 
+  runs.forEach((run) => {
+    runsObj[run._id] = run;
+  });
   if (runs) {
-    res.json(runs);
+    res.json(runsObj);
   } else {
     res.status(404);
     throw new Error("Could not fetch all runs");

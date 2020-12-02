@@ -45,7 +45,6 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
-
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
@@ -256,6 +255,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.put(`/api/users/${user._id}`, user, config);
+
     dispatch({ type: USER_UPDATE_SUCCESS });
 
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });

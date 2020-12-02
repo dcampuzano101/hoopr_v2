@@ -58,6 +58,8 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
+      runs: user.runs,
+      waitList: user.waitList,
     });
   } else {
     res.status(401);
@@ -99,6 +101,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       profilePhoto: user.profilePhoto,
       token: generateToken(user._id),
       runs: user.runs,
+      waitList: user.waitList,
     });
   } else {
     res.status(400);
@@ -115,6 +118,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.username = req.body.username || user.username;
     user.profilePhoto = req.body.profilePhoto || user.profilePhoto;
     user.email = req.body.email || user.email;
+    user.runs = req.body.runs || user.runs;
+    user.waitList = req.body.waitList || user.waitList;
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -128,6 +133,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       isAdmin: updatedUser.isAdmin,
       profilePhoto: updatedUser.profilePhoto,
       token: generateToken(updatedUser._id),
+      runs: updatedUser.runs,
+      waitList: updatedUser.waitList,
     });
   } else {
     res.status(400);
@@ -175,9 +182,13 @@ const updateUser = asyncHandler(async (req, res) => {
   //main difference between updateUserProfile vs updateUser (req.params.id vs. req.user._id [currentUser])
   const user = await User.findById(req.body.id);
   if (user) {
+    if (req.body.addToWaitList) {
+      const waitListCopy = [...user.waitList, req.body.runId];
+      user.waitList = waitListCopy;
+    }
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
-    user.isAdmin = req.body.isAdmin;
+    user.isAdmin = req.body.isAdmin || user.isAdmin;
     const updatedUser = user.save();
 
     res.json({
@@ -185,6 +196,7 @@ const updateUser = asyncHandler(async (req, res) => {
       username: updatedUser.username,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      waitList: updatedUser.waitList,
     });
   } else {
     res.status(404);

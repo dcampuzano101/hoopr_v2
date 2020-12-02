@@ -129,67 +129,68 @@ const AdminRuns = ({ history, match, location }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {runs.map((run) => (
-                  <React.Fragment key={run._id}>
-                    <TableRow>
-                      <TableCell colSpan={2}>{run.date}</TableCell>
-                      <TableCell colSpan={4}>{run.location}</TableCell>
-                      <TableCell colSpan={2}>
-                        {moment(run.startTime).format("LT")}
-                      </TableCell>
-                      <TableCell colSpan={2}>
-                        {moment(run.endTime).format("LT")}
-                      </TableCell>
-                      <TableCell colSpan={2}>{run.price}</TableCell>
-                      <TableCell colSpan={2}>{run.capacity}</TableCell>
-                      <TableCell colSpan={2} align="right">
-                        {" "}
-                        <IconButton
-                          aria-label="edit"
-                          onClick={() => {
-                            history.push(`/runs/${run._id}/edit`);
-                          }}
-                        >
-                          <Edit />
-                        </IconButton>
-                        <IconButton
-                          aria-label="delete"
-                          onClick={() => setDeleteAlert(run._id)}
-                        >
-                          <Delete />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
-                    {deleteAlert === run._id ? (
-                      <TableCell colSpan={15}>
-                        <Alert
-                          severity="warning"
-                          classes={{
-                            message: classes.alertMessage,
-                            icon: classes.alertIcon,
-                          }}
-                          onClose={() => {
-                            setDeleteAlert(null);
-                          }}
-                        >
-                          Are you sure?
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            className={classes.button}
+                {runs &&
+                  Object.values(runs).map((run) => (
+                    <React.Fragment key={run._id}>
+                      <TableRow>
+                        <TableCell colSpan={2}>{run.date}</TableCell>
+                        <TableCell colSpan={4}>{run.location}</TableCell>
+                        <TableCell colSpan={2}>
+                          {moment(run.startTime).format("LT")}
+                        </TableCell>
+                        <TableCell colSpan={2}>
+                          {moment(run.endTime).format("LT")}
+                        </TableCell>
+                        <TableCell colSpan={2}>${run.price}</TableCell>
+                        <TableCell colSpan={2}>{run.capacity}</TableCell>
+                        <TableCell colSpan={2} align="right">
+                          {" "}
+                          <IconButton
+                            aria-label="edit"
                             onClick={() => {
-                              deleteRunHandler(run._id);
+                              history.push(`/runs/${run._id}/edit`);
+                            }}
+                          >
+                            <Edit />
+                          </IconButton>
+                          <IconButton
+                            aria-label="delete"
+                            onClick={() => setDeleteAlert(run._id)}
+                          >
+                            <Delete />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                      {deleteAlert === run._id ? (
+                        <TableCell colSpan={15}>
+                          <Alert
+                            severity="warning"
+                            classes={{
+                              message: classes.alertMessage,
+                              icon: classes.alertIcon,
+                            }}
+                            onClose={() => {
                               setDeleteAlert(null);
                             }}
-                            startIcon={<Delete />}
                           >
-                            Delete
-                          </Button>
-                        </Alert>
-                      </TableCell>
-                    ) : null}
-                  </React.Fragment>
-                ))}
+                            Are you sure?
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              className={classes.button}
+                              onClick={() => {
+                                deleteRunHandler(run._id);
+                                setDeleteAlert(null);
+                              }}
+                              startIcon={<Delete />}
+                            >
+                              Delete
+                            </Button>
+                          </Alert>
+                        </TableCell>
+                      ) : null}
+                    </React.Fragment>
+                  ))}
               </TableBody>
             </Table>
           </Paper>

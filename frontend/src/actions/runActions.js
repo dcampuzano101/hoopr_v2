@@ -25,7 +25,6 @@ export const listRuns = () => async (dispatch) => {
     });
 
     const { data } = await axios.get("/api/runs");
-
     dispatch({
       type: RUN_LIST_SUCCESS,
       payload: data,

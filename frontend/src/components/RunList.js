@@ -4,6 +4,7 @@ import { listUsers } from "../actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { updateRun } from "../actions/runActions";
+import { updateUser } from "../actions/userActions";
 import Alert from "@material-ui/lab/Alert";
 import avatar from "../assets/user-avatar.png";
 import moment from "moment";
@@ -297,8 +298,15 @@ const RunList = ({ history, location }) => {
         waitList: waitListCopy,
       })
     );
+    dispatch(
+      updateUser({
+        id: userInfo._id,
+        addToWaitList: true,
+        runId: run._id,
+      })
+    );
   };
-
+  console.log(runs);
   return (
     <div className={classes.root}>
       {error && <Alert severity="error">{error}</Alert>}
@@ -332,56 +340,57 @@ const RunList = ({ history, location }) => {
                 <Typography className={classes.heading}>SPOTS</Typography>
               </AccordionSummary>
             </Accordion>
-            {runs.map((run) => (
-              <React.Fragment key={run._id}>
-                <Accordion
-                  expanded={expanded === run._id}
-                  onChange={handleChange(run._id)}
-                  styles={{ backgroundColor: "#eee" }}
-                >
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
+            {runs &&
+              Object.values(runs).map((run) => (
+                <React.Fragment key={run._id}>
+                  <Accordion
+                    expanded={expanded === run._id}
+                    onChange={handleChange(run._id)}
+                    styles={{ backgroundColor: "#eee" }}
                   >
-                    <Typography className={classes.subHeading}>
-                      {run.date}
-                    </Typography>
-                    <Typography className={classes.subHeading}>
-                      {run.location}
-                    </Typography>
-                    <Typography className={classes.subHeading}>
-                      {`${moment(run.startTime).format("LT")} - ${moment(
-                        run.endTime
-                      ).format("LT")}`}
-                    </Typography>
-                    <Typography className={classes.subHeading}>
-                      ${run.price}
-                    </Typography>
-                    <Typography className={classes.subHeading}>
-                      {`${run.users.length}/${run.capacity}`}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Grid container>
-                      <Grid item xs={12} md={7} lg={7}>
-                        <Map
-                          location={run.geoLocation}
-                          zoomLevel={15}
-                          name={run.location}
-                        />
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1bh-content"
+                      id="panel1bh-header"
+                    >
+                      <Typography className={classes.subHeading}>
+                        {run.date}
+                      </Typography>
+                      <Typography className={classes.subHeading}>
+                        {run.location}
+                      </Typography>
+                      <Typography className={classes.subHeading}>
+                        {`${moment(run.startTime).format("LT")} - ${moment(
+                          run.endTime
+                        ).format("LT")}`}
+                      </Typography>
+                      <Typography className={classes.subHeading}>
+                        ${run.price}
+                      </Typography>
+                      <Typography className={classes.subHeading}>
+                        {`${run.users.length}/${run.capacity}`}
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Grid container>
+                        <Grid item xs={12} md={7} lg={7}>
+                          <Map
+                            location={run.geoLocation}
+                            zoomLevel={15}
+                            name={run.location}
+                          />
+                        </Grid>
+                        <Grid item xs={12} md={5} lg={5}>
+                          {!loadingUsers &&
+                            users &&
+                            run &&
+                            displayUsersForRun(run.users, run)}
+                        </Grid>
                       </Grid>
-                      <Grid item xs={12} md={5} lg={5}>
-                        {!loadingUsers &&
-                          users &&
-                          run &&
-                          displayUsersForRun(run.users, run)}
-                      </Grid>
-                    </Grid>
-                  </AccordionDetails>
-                </Accordion>
-              </React.Fragment>
-            ))}
+                    </AccordionDetails>
+                  </Accordion>
+                </React.Fragment>
+              ))}
           </Paper>
         </>
       )}
