@@ -55,7 +55,12 @@ const UpcomingRuns = ({ location }) => {
     } else {
       return (
         <>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          <Typography
+            component="h2"
+            variant="h6"
+            gutterBottom
+            style={{ color: "green" }}
+          >
             Upcoming Runs
           </Typography>
           <Table size="small">
@@ -93,14 +98,24 @@ const UpcomingRuns = ({ location }) => {
     });
     if (user.waitList.length === 0) {
       return (
-        <Typography component="h2" variant="h6" color="primary" gutterBottom>
+        <Typography
+          component="h2"
+          variant="h6"
+          style={{ color: "orange" }}
+          gutterBottom
+        >
           Wait list is empty
         </Typography>
       );
     } else {
       return (
         <>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          <Typography
+            component="h2"
+            variant="h6"
+            style={{ color: "orange" }}
+            gutterBottom
+          >
             Wait listed runs
           </Typography>
           <Table size="small">
