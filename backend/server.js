@@ -9,6 +9,7 @@ import runRoutes from "./routes/runRoutes.js";
 import stripeRoute from "./routes/stripeRoute.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoute from "./routes/uploadRoute.js";
+import emailRoutes from "./routes/emailRoutes.js";
 import googleStrategy from "./passportSetup.js";
 import cors from "cors";
 
@@ -29,6 +30,7 @@ app.use("/api/runs", runRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload/", uploadRoute);
 app.use("/api/payment_intents", stripeRoute);
+app.use("/api/email", emailRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
