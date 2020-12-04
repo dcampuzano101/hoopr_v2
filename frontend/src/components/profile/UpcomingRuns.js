@@ -42,6 +42,7 @@ const UpcomingRuns = ({ location }) => {
     }
   }, [successDetails]);
   const displayRunsForUser = () => {
+    debugger;
     const userRuns = [];
     user.runs.forEach((runId) => {
       userRuns.push(runs[runId]);
