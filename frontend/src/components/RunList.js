@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
   userListContainer: {
     display: "grid",
-    height: "30vh",
+    // height: "32vh",
     gridTemplate: "auto 1fr auto / auto 1fr auto",
   },
   userListHeader: {
@@ -371,16 +371,16 @@ const RunList = ({ history, location }) => {
                         {`${run.users.length}/${run.capacity}`}
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails style={{ overflow: "auto" }}>
                       <Grid container>
-                        <Grid item xs={12} md={7} lg={7}>
+                        <Grid item xs={12} md={12} lg={12}>
                           <Map
                             location={run.geoLocation}
                             zoomLevel={15}
                             name={run.location}
                           />
                         </Grid>
-                        <Grid item xs={12} md={5} lg={5}>
+                        <Grid item xs={12} md={12} lg={12}>
                           {!loadingUsers &&
                             users &&
                             run &&
