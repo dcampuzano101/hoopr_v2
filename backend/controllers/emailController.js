@@ -51,6 +51,7 @@ const confirmationEmail = asyncHandler(async (req, res) => {
       if (error) {
         console.log(error);
       } else {
+        // success res.json(info.response)
         console.log("Email sent: " + info.response);
       }
     });

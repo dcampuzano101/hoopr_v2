@@ -34,7 +34,7 @@ export default async (req, res) => {
 
       //UPDATE ORDER TO PAID
       const order = await Order.findById(orderId);
-
+      debugger;
       if (order) {
         order.isPaid = true;
         order.paidAt = Date.now();
@@ -42,6 +42,7 @@ export default async (req, res) => {
         console.log(updatedOrder);
 
         const { orderItems, userId } = order;
+        debugger;
         await updateRunsAndUser(orderItems, userId);
       }
       res.status(200).send(paymentIntent.client_secret);

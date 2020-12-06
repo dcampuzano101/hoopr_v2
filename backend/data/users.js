@@ -7,6 +7,7 @@ const users = [
     password: bcrypt.hashSync("Zeu$1987", 10),
     waitList: [],
     isAdmin: true,
+    profilePhoto: "https://hoopr2.s3.amazonaws.com/fallback.jpg",
   },
   {
     username: "ana furman",
