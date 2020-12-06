@@ -79,14 +79,13 @@ const useStyles = makeStyles((theme) => ({
   },
   userListFooter: {
     textAlign: "center",
-    height: "2vh",
+    marginTop: "2%",
     gridColumn: "1 / 4",
     display: "flex",
     alignItems: "center",
   },
   userList: {
     display: "grid",
-    height: "21vh",
     gridGap: ".5rem",
     gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
   },
