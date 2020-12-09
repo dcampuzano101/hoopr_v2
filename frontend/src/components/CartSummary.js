@@ -49,7 +49,7 @@ const CartSummary = ({ history }) => {
   const placeOrderHandler = async () => {
     dispatch(
       createOrder({
-        orderItems: cart.cartItems,
+        orderItems: cartItems,
         totalPrice: cart.totalPrice,
       })
     );

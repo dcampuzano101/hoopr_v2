@@ -63,9 +63,12 @@ export default async (req, res) => {
       //   payment_intent: paymentIntent
       // })
       //UPDATE ORDER TO PAID
+      debugger;
       const order = await Order.findById(orderId);
+      debugger;
       if (order) {
         order.isPaid = true;
+        order["paymentIntent"] = paymentIntent.id;
         order.paidAt = Date.now();
         const updatedOrder = await order.save();
         console.log(updatedOrder);

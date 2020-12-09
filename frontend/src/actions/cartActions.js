@@ -24,6 +24,7 @@ export const addToCart = (id) => async (dispatch, getState) => {
       startTime: data.startTime,
       endTime: data.endTime,
       users: data.users,
+      waitList: data.waitList,
     },
   });
 
