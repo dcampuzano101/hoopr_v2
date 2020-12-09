@@ -25,7 +25,7 @@ const updateRunsAndUser = async (order) => {
     debugger;
     user["orders"][item.run] = {
       runId: item.run,
-      price: item.price,
+      amountPaid: item.price,
       status: "paid",
     };
     debugger;
