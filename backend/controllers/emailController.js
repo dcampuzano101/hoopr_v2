@@ -56,7 +56,6 @@ const confirmationEmail = async (req, res) => {
       if (error) {
         console.log(error);
       } else {
-        // success res.json(info.response)
         console.log("Email sent: " + info.response);
         res.status(200).send(info);
       }

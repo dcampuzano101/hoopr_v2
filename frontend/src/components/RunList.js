@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { updateRun } from "../actions/runActions";
 import { updateUser } from "../actions/userActions";
+import { Delete } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
 import avatar from "../assets/user-avatar.png";
 import moment from "moment";
@@ -117,6 +118,8 @@ const RunList = ({ history, location }) => {
   // const runsList = useSelector((state) => state.runList);
   // const { loading, error, runs } = runsList;
 
+  const [deleteAlert, setDeleteAlert] = useState(null);
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -139,6 +142,11 @@ const RunList = ({ history, location }) => {
     //   setRunUpdateSuccess("Successfully updated run!");
     // }
   }, [dispatch, location, success]);
+  const deleteUserHandler = (run, userId) => {
+    let usersClone = [...run.users];
+    usersClone = usersClone.filter((user) => user !== userId);
+    dispatch(updateRun({ id: run._id, users: usersClone }));
+  };
 
   const disableButton = (run, userInfo) => {
     if (userInfo === null) {
@@ -162,7 +170,7 @@ const RunList = ({ history, location }) => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => cancelRunHandler(run, userInfo)}
+            onClick={() => setDeleteAlert(userInfo._id)}
             // disabled={disableButton(run, userInfo)}
           >
             Cancel
@@ -270,6 +278,32 @@ const RunList = ({ history, location }) => {
         <div className={classes.rightSidebar}></div>
 
         <footer className={classes.userListFooter}>
+          {deleteAlert === userInfo._id ? (
+            <Alert
+              severity="warning"
+              classes={{
+                message: classes.alertMessage,
+                icon: classes.alertIcon,
+              }}
+              onClose={() => {
+                setDeleteAlert(null);
+              }}
+            >
+              Are you sure?
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+                onClick={() => {
+                  deleteUserHandler(run, userInfo._id);
+                  setDeleteAlert(null);
+                }}
+                startIcon={<Delete />}
+              >
+                Delete
+              </Button>
+            </Alert>
+          ) : null}
           {buttonToDisplay(run, userInfo)}
         </footer>
       </div>

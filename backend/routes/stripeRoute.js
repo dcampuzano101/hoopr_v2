@@ -58,6 +58,10 @@ export default async (req, res) => {
         amount,
         currency: "usd",
       });
+      // const refund = await stripe.refunds.create({
+      //   amount: req.body.amount,
+      //   payment_intent: paymentIntent
+      // })
       //UPDATE ORDER TO PAID
       const order = await Order.findById(orderId);
       if (order) {
