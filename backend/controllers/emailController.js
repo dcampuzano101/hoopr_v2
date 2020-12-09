@@ -1,9 +1,6 @@
 import asyncHandler from "express-async-handler";
 import nodemailer from "nodemailer";
-
-// @description: sends confirmation email
-// @route: POST /api/email/confirm
-// @access: public
+import moment from "moment";
 
 const validateEmail = (email) => {
   if (!email) return false;
@@ -23,11 +20,15 @@ const validateEmail = (email) => {
 
   return true;
 };
-const confirmationEmail = asyncHandler(async (req, res) => {
-  const { email } = req.body;
-  console.log(email);
 
-  if (true) {
+// @description: sends confirmation email
+// @route: POST /api/email/confirm
+// @access: public
+
+const confirmationEmail = async (req, res) => {
+  const { user, run } = req.body;
+  debugger;
+  if (validateEmail(user.email)) {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -39,12 +40,16 @@ const confirmationEmail = asyncHandler(async (req, res) => {
         privateKey: process.env.GMAIL_PRIVATE_KEY,
       },
     });
-
+    debugger;
     const mailOptions = {
       from: "admin@hoopr.io",
-      to: "dcampuzano101@gmail.com",
-      subject: "Invoices due",
-      text: "Dudes, we really need your money. JP it works.",
+      to: user.email || "admin@hoopr.io",
+      subject: "Congrats! You're all signed up!",
+      text: `${user.username} get ready! Confirming your run @ ${
+        run.location
+      } on ${run.date} from ${moment(run.startTime).format("LT")} to ${moment(
+        run.endTime
+      ).format("LT")}.`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -53,13 +58,14 @@ const confirmationEmail = asyncHandler(async (req, res) => {
       } else {
         // success res.json(info.response)
         console.log("Email sent: " + info.response);
+        res.status(200).send(info);
       }
     });
   } else {
     res.status(400);
     throw new Error("Invalid email data");
   }
-});
+};
 
 const reminderEmail = asyncHandler(async (req, res) => {
   console.log(req);

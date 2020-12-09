@@ -23,7 +23,6 @@ const CheckoutScreen = ({ match, history }) => {
   }, [dispatch, orderId]);
 
   const successCheckout = () => {
-    debugger;
     history.push("/?stripe=success");
   };
   return (

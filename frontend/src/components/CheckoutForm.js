@@ -72,7 +72,6 @@ const CheckoutForm = ({
         setProcessingTo(false);
         return;
       }
-      debugger;
 
       const { paymentIntent, error } = await stripe.confirmCardPayment(
         clientSecret,
@@ -81,14 +80,11 @@ const CheckoutForm = ({
           receipt_email: billingDetails.email,
         }
       );
-      debugger;
-      console.log(paymentIntent);
       if (error) {
         setCheckoutError(paymentIntent.error.message);
         setProcessingTo(false);
         return;
       }
-      debugger;
       onSuccessfulCheckout();
     } catch (err) {
       setCheckoutError(err.message);
