@@ -33,6 +33,7 @@ const userSchema = mongoose.Schema(
       required: true,
       default: [],
     },
+    orders: {},
     profilePhoto: {
       type: String,
     },

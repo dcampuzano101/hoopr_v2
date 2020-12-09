@@ -8,8 +8,12 @@ const stripe = new Stripe(
   "sk_test_51Hi0CkCw3D7iMvxsxTGNxXXGNndJ6qnjlZCIuFnGNWmpYl5FL5ajlrGhwiZ3KYsgXfGS8WUuWgMpva2CY1DxEctB00JUHZcox1"
 );
 
-const updateRunsAndUser = async (orderItems, userId) => {
+const updateRunsAndUser = async (order) => {
+  const { orderItems, userId } = order;
   const user = await User.findById(userId);
+  if (user.orders === undefined) {
+    user.orders = {};
+  }
   debugger;
 
   for (let i = 0; i < orderItems.length; i++) {
@@ -18,6 +22,13 @@ const updateRunsAndUser = async (orderItems, userId) => {
     const run = await Run.findById(item.run);
     const runId = run._id;
     user.runs.push(runId);
+    debugger;
+    user["orders"][item.run] = {
+      runId: item.run,
+      price: item.price,
+      status: "paid",
+    };
+    debugger;
 
     run.users.push(userId);
     await user.save();
@@ -73,8 +84,7 @@ export default async (req, res) => {
         const updatedOrder = await order.save();
         console.log(updatedOrder);
 
-        const { orderItems, userId } = order;
-        await updateRunsAndUser(orderItems, userId);
+        await updateRunsAndUser(order);
       }
       res.status(200).send(paymentIntent.client_secret);
     } catch (err) {
