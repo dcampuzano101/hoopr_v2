@@ -115,9 +115,6 @@ const RunList = ({ history, location }) => {
   const runsList = useSelector((state) => state.runList);
   const { loading, error, runs } = runsList;
 
-  // const runsList = useSelector((state) => state.runList);
-  // const { loading, error, runs } = runsList;
-
   const [deleteAlert, setDeleteAlert] = useState(null);
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -137,11 +134,8 @@ const RunList = ({ history, location }) => {
       setSuccessfulCheckout(`Successfully made purchase!`);
       location.search = "";
     }
-
-    // if (success) {
-    //   setRunUpdateSuccess("Successfully updated run!");
-    // }
   }, [dispatch, location, success]);
+
   const deleteUserHandler = (run, userId) => {
     let usersClone = [...run.users];
     usersClone = usersClone.filter((user) => user !== userId);
@@ -171,7 +165,6 @@ const RunList = ({ history, location }) => {
             color="primary"
             className={classes.submit}
             onClick={() => setDeleteAlert(userInfo._id)}
-            // disabled={disableButton(run, userInfo)}
           >
             Cancel
           </Button>

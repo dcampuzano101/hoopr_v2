@@ -109,6 +109,10 @@ const updateRun = asyncHandler(async (req, res) => {
     run.endTime = req.body.endTime || run.endTime;
     run.waitList = req.body.waitList || run.waitList;
     const updatedRun = await run.save();
+
+    // initiate stripeRefund
+    // send emailCancellationConfirmation
+
     res.json({
       userId: updatedRun.userId,
       name: updatedRun.name,
