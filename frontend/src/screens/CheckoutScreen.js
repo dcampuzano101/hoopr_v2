@@ -23,6 +23,7 @@ const CheckoutScreen = ({ match, history }) => {
   }, [dispatch, orderId]);
 
   const successCheckout = () => {
+    debugger;
     history.push("/?stripe=success");
   };
   return (
@@ -37,6 +38,7 @@ const CheckoutScreen = ({ match, history }) => {
             onSuccessfulCheckout={() => successCheckout()}
             orderId={orderId}
             userId={userInfo._id}
+            email={userInfo.email}
           />
         </Layout>
       )}

@@ -18,7 +18,13 @@ const CardElementContainer = styled.div`
   }
 `;
 
-const CheckoutForm = ({ price, onSuccessfulCheckout, userId, orderId }) => {
+const CheckoutForm = ({
+  price,
+  onSuccessfulCheckout,
+  userId,
+  email,
+  orderId,
+}) => {
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState();
 
@@ -52,6 +58,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, userId, orderId }) => {
         amount: price * 100,
         orderId,
         userId,
+        email: billingDetails.email,
       });
 
       const paymentMethodReq = await stripe.createPaymentMethod({
@@ -65,17 +72,23 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, userId, orderId }) => {
         setProcessingTo(false);
         return;
       }
+      debugger;
 
-      const { error } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: paymentMethodReq.paymentMethod.id,
-      });
-
+      const { paymentIntent, error } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: paymentMethodReq.paymentMethod.id,
+          receipt_email: billingDetails.email,
+        }
+      );
+      debugger;
+      console.log(paymentIntent);
       if (error) {
-        setCheckoutError(error.message);
+        setCheckoutError(paymentIntent.error.message);
         setProcessingTo(false);
         return;
       }
-
+      debugger;
       onSuccessfulCheckout();
     } catch (err) {
       setCheckoutError(err.message);

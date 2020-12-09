@@ -26,12 +26,14 @@ const updateRunsAndUser = async (orderItems, userId) => {
 export default async (req, res) => {
   if (req.method === "POST") {
     try {
-      const { amount, orderId, userId } = req.body;
+      const { amount, orderId, email } = req.body;
+
+      debugger;
       const paymentIntent = await stripe.paymentIntents.create({
         amount,
         currency: "usd",
       });
-
+      debugger;
       //UPDATE ORDER TO PAID
       const order = await Order.findById(orderId);
       debugger;

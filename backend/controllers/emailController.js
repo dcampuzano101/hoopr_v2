@@ -35,14 +35,14 @@ const confirmationEmail = asyncHandler(async (req, res) => {
       auth: {
         type: "OAuth2",
         user: "admin@hoopr.io",
-        serviceClient: "CHECKJSONHOOPR",
-        privateKey: "CHECKJSON",
+        serviceClient: process.env.GMAIL_CLIENT_ID,
+        privateKey: process.env.GMAIL_PRIVATE_KEY,
       },
     });
 
     const mailOptions = {
       from: "admin@hoopr.io",
-      to: "mikeyenx@gmail.com",
+      to: "dcampuzano101@gmail.com",
       subject: "Invoices due",
       text: "Dudes, we really need your money. JP it works.",
     };
