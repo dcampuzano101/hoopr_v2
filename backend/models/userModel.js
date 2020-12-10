@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema(
     },
     isAdmin: {
       type: Boolean,
-      required: true,
+      // required: true,
       default: false,
     },
     runs: {
@@ -33,7 +33,9 @@ const userSchema = mongoose.Schema(
       required: true,
       default: [],
     },
-    orders: {},
+    orders: {
+      type: mongoose.SchemaTypes.Mixed,
+    },
     profilePhoto: {
       type: String,
     },

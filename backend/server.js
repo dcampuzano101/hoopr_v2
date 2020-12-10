@@ -4,6 +4,7 @@ import colors from "colors";
 import passport from "passport";
 import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+import { protect } from "./middleware/authMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 import runRoutes from "./routes/runRoutes.js";
 import stripeRoute from "./routes/stripeRoute.js";
@@ -33,6 +34,7 @@ app.use("/api/payment_intents", stripeRoute);
 app.use("/api/email", emailRoutes);
 app.use(notFound);
 app.use(errorHandler);
+app.use("/cart", protect);
 
 const PORT = process.env.PORT || 5000;
 

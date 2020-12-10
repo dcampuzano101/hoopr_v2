@@ -86,6 +86,7 @@ const UserEditScreen = ({ history, match }) => {
 
   const updateUserHandler = (e) => {
     e.preventDefault();
+    debugger;
     dispatch(updateUser({ id: user._id, username, email, isAdmin }));
   };
 

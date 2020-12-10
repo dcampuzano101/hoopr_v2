@@ -239,6 +239,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 };
 
 export const updateUser = (user) => async (dispatch, getState) => {
+  debugger;
   try {
     dispatch({
       type: USER_UPDATE_REQUEST,
@@ -254,8 +255,9 @@ export const updateUser = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
+    debugger;
     const { data } = await axios.put(`/api/users/${user._id}`, user, config);
-
+    debugger;
     dispatch({ type: USER_UPDATE_SUCCESS });
 
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });

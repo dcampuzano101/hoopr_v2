@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { listRuns } from "../actions/runActions";
 import { listUsers } from "../actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
@@ -139,12 +140,34 @@ const RunList = ({ history, location }) => {
   const deleteUserHandler = (run, userId) => {
     let usersClone = [...run.users];
     usersClone = usersClone.filter((user) => user !== userId);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    axios.put(
+      `/api/users/${userInfo._id}`,
+      {
+        id: userInfo._id,
+        cancelRun: true,
+        runId: run._id,
+      },
+      config
+    );
+    // dispatch(
+    //   updateUser({
+    //     id: userInfo._id,
+    //     cancelRun: true,
+    //     runId: run._id,
+    //   })
+    // );
     dispatch(updateRun({ id: run._id, users: usersClone }));
   };
 
   const disableButton = (run, userInfo) => {
     if (userInfo === null) {
-      return false;
+      return true;
     }
     return run.users.some((id) => id === userInfo._id) ||
       run.waitList.some((id) => id === userInfo._id)
@@ -271,7 +294,7 @@ const RunList = ({ history, location }) => {
         <div className={classes.rightSidebar}></div>
 
         <footer className={classes.userListFooter}>
-          {deleteAlert === userInfo._id ? (
+          {userInfo && deleteAlert === userInfo._id ? (
             <Alert
               severity="warning"
               classes={{

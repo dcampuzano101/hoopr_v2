@@ -19,15 +19,28 @@ const updateRunsAndUser = async (order) => {
   for (let i = 0; i < orderItems.length; i++) {
     const item = orderItems[i];
     // console.log(item);
+    item.status = "paid";
     const run = await Run.findById(item.run);
     const runId = run._id;
     user.runs.push(runId);
     debugger;
-    user["orders"][item.run] = {
-      runId: item.run,
+
+
+    // const orderItem = {
+    //   runId: JSON.stringify(item.run).slice(
+    //     1,
+    //     JSON.stringify(item.run).length - 1
+    //   ),
+    //   amountPaid: item.price,
+    //   status: "paid",
+    //   paymentIntent: order.paymentIntent,
+    // };
+    user.orders[runId] = {
+      runId: runId,
       amountPaid: item.price,
       status: "paid",
-    };
+      paymentIntent: order.paymentIntent,
+    }
     debugger;
 
     run.users.push(userId);
@@ -49,7 +62,6 @@ const confirmationEmail = async (options) => {
         "Content-Type": "application/json",
       },
     };
-    // axios.post(url[, data[, config]])
     const { data } = await axios.post(
       "http://localhost:5000/api/email/confirm",
       options,
