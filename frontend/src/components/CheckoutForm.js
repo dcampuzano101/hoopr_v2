@@ -54,7 +54,7 @@ const CheckoutForm = ({
     const cardElement = elements.getElement("card");
 
     try {
-      const { data: clientSecret } = await axios.post("/api/payment_intents", {
+      const { data: clientSecret } = await axios.post("/api/stripe/payment_intents", {
         amount: price * 100,
         orderId,
         userId,

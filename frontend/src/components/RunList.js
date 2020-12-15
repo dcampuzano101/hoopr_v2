@@ -403,7 +403,7 @@ const RunList = ({ history, location }) => {
                       id="panel1bh-header"
                     >
                       <Typography className={classes.subHeading}>
-                        {run.date}
+                        {`${moment(run.date).format("LL")}`}
                       </Typography>
                       <Typography className={classes.subHeading}>
                         {run.location}

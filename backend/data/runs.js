@@ -3,7 +3,7 @@ const runs = [
   {
     name: "Wednesday Night Run",
     location: "The Post",
-    date: moment("12-25-2020", "MM-DD-YYYY").format("LL"),
+    date: moment("12-25-2020", "MM-DD-YYYY"),
     price: 10,
     capacity: 15,
     users: [],
@@ -19,7 +19,7 @@ const runs = [
   {
     name: "Saturday Morning Run",
     location: "Cooper Park",
-    date: moment("12-25-2020", "MM-DD-YYYY").format("LL"),
+    date: moment("12-25-2020", "MM-DD-YYYY"),
     price: 10,
     capacity: 15,
     users: [],
@@ -35,7 +35,7 @@ const runs = [
   {
     name: "Sunday Morning Run",
     location: "Grand Street Basketball Courts",
-    date: moment("12-25-2020", "MM-DD-YYYY").format("LL"),
+    date: moment("12-25-2020", "MM-DD-YYYY"),
     price: 10,
     capacity: 15,
     users: [],
@@ -51,7 +51,7 @@ const runs = [
   {
     name: "Wednesday Night Run",
     location: "The Post",
-    date: moment("12-25-2020", "MM-DD-YYYY").format("LL"),
+    date: moment("12-25-2020", "MM-DD-YYYY"),
     price: 10,
     capacity: 15,
     users: [],

@@ -71,6 +71,43 @@ const reminderEmail = asyncHandler(async (req, res) => {
 });
 
 const cancellationEmail = asyncHandler(async (req, res) => {
-  console.log(req);
+  const { user, run } = req.body;
+  debugger;
+  if (validateEmail(user.email)) {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        type: "OAuth2",
+        user: "admin@hoopr.io",
+        serviceClient: process.env.GMAIL_CLIENT_ID,
+        privateKey: process.env.GMAIL_PRIVATE_KEY,
+      },
+    });
+    debugger;
+    const mailOptions = {
+      from: "admin@hoopr.io",
+      to: user.email || "admin@hoopr.io",
+      subject: "Reservation Cancellation",
+      text: `${user.username}, Confirming your cancellation: ${
+        run.location
+      } on ${moment(run.date).format("LL")} from ${moment(run.startTime).format(
+        "LT"
+      )} to ${moment(run.endTime).format("LT")}.`,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+        res.status(200).send(info);
+      }
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid email data");
+  }
 });
 export { confirmationEmail, reminderEmail, cancellationEmail };

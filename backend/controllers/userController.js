@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
+import axios from "axios";
 
 // @description: registers user
 // @route: POST /api/users
@@ -186,25 +187,38 @@ const refundOrder = (amount, paymentIntent, email) => {
 // @description: updates user
 // @route: PUT /api/users/:id
 // @access: admin/private
-const updateUser = async (req, res) => {
+const updateUser = asyncHandler(async (req, res) => {
   try {
     const user = await User.findById(req.body.id);
-
+    debugger;
     if (user) {
       if (req.body.addToWaitList) {
         const waitListCopy = [...user.waitList, req.body.runId];
         user.waitList = waitListCopy;
       }
-      debugger;
       if (req.body.cancelRun) {
         debugger;
+        console.log("cancelRun = true");
         const runId = req.body.runId;
-        user.isAdmin = user.isAdmin;
+        user.email = "cancelRun@hoopr.io";
+
+        let orders = { ...user.orders };
+
+        orders[runId].status = "refunded";
         debugger;
-        user.orders[runId].status = "refunded";
-        // await user.save();
+
+        user.orders = orders;
+        // if we flag refunded correctly, call handleRefund(order.paymentIntent, order.run, user, order.amountPaid)
+        debugger;
+        await axios.post("http://localhost:5000/api/stripe/refund", {
+          amountPaid: user.orders[runId].amountPaid,
+          run: user.orders[runId].run,
+          paymentIntent: user.orders[runId].paymentIntent,
+          user: user,
+        });
+        console.log(refundResponse);
+        debugger;
       }
-      debugger;
       user.username = req.body.username || user.username;
       user.email = req.body.email || user.email;
       if (req.body.isAdmin === undefined) {
@@ -212,20 +226,10 @@ const updateUser = async (req, res) => {
       } else {
         user.isAdmin = req.body.isAdmin;
       }
-      debugger;
-
-      console.log(user.orders);
       const updatedUser = await user.save();
-      console.log(updatedUser);
+      res.json(updatedUser);
+
       debugger;
-      res.json({
-        _id: updatedUser._id,
-        username: updatedUser.username,
-        email: updatedUser.email,
-        isAdmin: updatedUser.isAdmin,
-        waitList: updatedUser.waitList,
-        orders: updatedUser.orders,
-      });
     } else {
       res.status(404);
       throw new Error("User not found");
@@ -233,7 +237,7 @@ const updateUser = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-};
+});
 
 // @description: deletes user
 // @route: DELETE /api/users/:id
