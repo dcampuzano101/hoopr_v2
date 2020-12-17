@@ -207,7 +207,7 @@ const RunList = ({ history, location }) => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => addToCartHandler(run._id)}
+            onClick={() => addToCartHandler(run._id, userInfo)}
             disabled={disableButton(run, userInfo)}
           >
             ADD TO CART
@@ -221,7 +221,7 @@ const RunList = ({ history, location }) => {
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={() => addToCartHandler(run._id)}
+          onClick={() => addToCartHandler(run._id, userInfo)}
           disabled={disableButton(run, userInfo)}
         >
           ADD TO CART
@@ -271,7 +271,7 @@ const RunList = ({ history, location }) => {
         <div className={classes.rightSidebar}></div>
 
         <footer className={classes.userListFooter}>
-          {deleteAlert === userInfo._id ? (
+          {userInfo && deleteAlert === userInfo._id ? (
             <Alert
               severity="warning"
               classes={{
@@ -307,10 +307,14 @@ const RunList = ({ history, location }) => {
     console.log(run);
     console.log(userInfo);
   };
-  const addToCartHandler = async (runId) => {
+  const addToCartHandler = async (runId, userInfo) => {
     try {
-      dispatch(addToCart(runId));
-      history.push(`/cart/${runId}?`);
+      if (userInfo) {
+        dispatch(addToCart(runId));
+        history.push(`/cart/${runId}?`);
+      } else {
+        history.push(`/login`);
+      }
     } catch (error) {
       console.log(error);
     }
