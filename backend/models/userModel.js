@@ -33,7 +33,11 @@ const userSchema = mongoose.Schema(
       required: true,
       default: [],
     },
-    orders: {},
+    orders: {
+      type: mongoose.SchemaTypes.Mixed,
+      required: true,
+      default: {},
+    },
     profilePhoto: {
       type: String,
     },

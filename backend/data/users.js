@@ -8,6 +8,7 @@ const users = [
     waitList: [],
     isAdmin: true,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/fallback.jpg",
+    orders: {},
   },
   {
     username: "ana furman",
@@ -16,6 +17,7 @@ const users = [
     waitList: [],
     isAdmin: true,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/ana.jpg",
+    orders: {},
   },
   {
     username: "Chris Carr",
@@ -24,6 +26,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/chris.jpg",
+    orders: {},
   },
   {
     username: "Danan Capote",
@@ -32,6 +35,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/danan.jpg",
+    orders: {},
   },
   {
     username: "Darko Lukacevic",
@@ -40,6 +44,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/darko.jpg",
+    orders: {},
   },
   {
     username: "Ellis Chang",
@@ -48,6 +53,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/ellis.jpg",
+    orders: {},
   },
   {
     username: "Jared Schutz",
@@ -56,6 +62,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/jared.jpg",
+    orders: {},
   },
   {
     username: "Jason Caps",
@@ -64,6 +71,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/jason.jpg",
+    orders: {},
   },
   {
     username: "Jon Moreno",
@@ -72,6 +80,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/jonathan.jpg",
+    orders: {},
   },
   {
     username: "Jone Wong",
@@ -80,6 +89,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/jone.jpg",
+    orders: {},
   },
   {
     username: "Kareem Hartl",
@@ -88,6 +98,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/kareem.jpg",
+    orders: {},
   },
   {
     username: "Danny Kegel",
@@ -96,6 +107,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/danny.jpg",
+    orders: {},
   },
   {
     username: "Kenny L",
@@ -104,6 +116,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/kenny.jpg",
+    orders: {},
   },
   {
     username: "Lowg Racho",
@@ -112,6 +125,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/lowg.jpg",
+    orders: {},
   },
   {
     username: "Kevin Mersch",
@@ -120,6 +134,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/kevin.jpg",
+    orders: {},
   },
   {
     username: "Mike Yen",
@@ -128,6 +143,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/mike.jpg",
+    orders: {},
   },
   {
     username: "Radu Negu",
@@ -136,6 +152,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/radu.jpg",
+    orders: {},
   },
   {
     username: "Mike C",
@@ -144,6 +161,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/mikec.jpg",
+    orders: {},
   },
   {
     username: "Simon Leong",
@@ -152,6 +170,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/simon.jpg",
+    orders: {},
   },
   {
     username: "Steve Song",
@@ -160,6 +179,7 @@ const users = [
     waitList: [],
     isAdmin: false,
     profilePhoto: "https://hoopr2.s3.amazonaws.com/steve.jpg",
+    orders: {},
   },
 ];
 

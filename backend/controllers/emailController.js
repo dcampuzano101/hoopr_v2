@@ -27,7 +27,6 @@ const validateEmail = (email) => {
 
 const confirmationEmail = async (req, res) => {
   const { user, run } = req.body;
-  debugger;
   if (validateEmail(user.email)) {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -40,7 +39,6 @@ const confirmationEmail = async (req, res) => {
         privateKey: process.env.GMAIL_PRIVATE_KEY,
       },
     });
-    debugger;
     const mailOptions = {
       from: "admin@hoopr.io",
       to: user.email || "admin@hoopr.io",

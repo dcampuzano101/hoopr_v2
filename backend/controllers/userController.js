@@ -186,18 +186,22 @@ const updateUser = asyncHandler(async (req, res) => {
       const waitListCopy = [...user.waitList, req.body.runId];
       user.waitList = waitListCopy;
     }
+
+    if (req.body.cancelRun) {
+      const runId = req.body.runId;
+      const orders = user.orders;
+      const order = orders[String(runId)];
+      order.status = "cancelled";
+      user.markModified("orders");
+    }
+
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
     user.isAdmin = req.body.isAdmin || user.isAdmin;
-    const updatedUser = user.save();
+    console.log(user.orders);
+    await user.save();
 
-    res.json({
-      _id: updatedUser._id,
-      username: updatedUser.username,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
-      waitList: updatedUser.waitList,
-    });
+    res.json(user);
   } else {
     res.status(404);
     throw new Error("User not found");

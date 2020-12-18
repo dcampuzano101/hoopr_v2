@@ -140,6 +140,14 @@ const RunList = ({ history, location }) => {
     let usersClone = [...run.users];
     usersClone = usersClone.filter((user) => user !== userId);
     dispatch(updateRun({ id: run._id, users: usersClone }));
+
+    dispatch(
+      updateUser({
+        id: userInfo._id,
+        cancelRun: true,
+        runId: run._id,
+      })
+    );
   };
 
   const disableButton = (run, userInfo) => {
@@ -303,10 +311,6 @@ const RunList = ({ history, location }) => {
     );
   };
 
-  const cancelRunHandler = (run, userInfo) => {
-    console.log(run);
-    console.log(userInfo);
-  };
   const addToCartHandler = async (runId, userInfo) => {
     try {
       if (userInfo) {

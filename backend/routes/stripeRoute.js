@@ -8,31 +8,25 @@ const stripe = new Stripe(
   "sk_test_51Hi0CkCw3D7iMvxsxTGNxXXGNndJ6qnjlZCIuFnGNWmpYl5FL5ajlrGhwiZ3KYsgXfGS8WUuWgMpva2CY1DxEctB00JUHZcox1"
 );
 
-const updateRunsAndUser = async (order) => {
+const updateRunsAndUser = async (order, paymentIntent) => {
   const { orderItems, userId } = order;
   const user = await User.findById(userId);
-  if (user.orders === undefined) {
-    user.orders = {};
-  }
-  debugger;
-
   for (let i = 0; i < orderItems.length; i++) {
     const item = orderItems[i];
-    // console.log(item);
     const run = await Run.findById(item.run);
     const runId = run._id;
+
     user.runs.push(runId);
-    debugger;
-    user["orders"][item.run] = {
-      runId: item.run,
+    user.orders[`${String(runId)}`] = {
+      runId: String(item.run),
       amountPaid: item.price,
       status: "paid",
+      paymentIntent: paymentIntent.id,
     };
-    debugger;
 
     run.users.push(userId);
-    await user.save();
     await run.save();
+    await user.save();
     const emailOptions = {
       user: user,
       run: run,
@@ -42,7 +36,6 @@ const updateRunsAndUser = async (order) => {
 };
 
 const confirmationEmail = async (options) => {
-  debugger;
   try {
     const config = {
       headers: {
@@ -69,22 +62,15 @@ export default async (req, res) => {
         amount,
         currency: "usd",
       });
-      // const refund = await stripe.refunds.create({
-      //   amount: req.body.amount,
-      //   payment_intent: paymentIntent
-      // })
       //UPDATE ORDER TO PAID
-      debugger;
       const order = await Order.findById(orderId);
-      debugger;
       if (order) {
         order.isPaid = true;
         order["paymentIntent"] = paymentIntent.id;
         order.paidAt = Date.now();
         const updatedOrder = await order.save();
-        console.log(updatedOrder);
 
-        await updateRunsAndUser(order);
+        await updateRunsAndUser(order, paymentIntent);
       }
       res.status(200).send(paymentIntent.client_secret);
     } catch (err) {
