@@ -23,7 +23,7 @@ const updateRunsAndUser = async (order, paymentIntent) => {
       status: "paid",
       paymentIntent: paymentIntent.id,
     };
-
+    user.markModified("orders");
     run.users.push(userId);
     await run.save();
     await user.save();
@@ -81,6 +81,21 @@ const createPaymentIntent = async (req, res) => {
   }
 };
 
-const createRefund = async (req, res) => {};
+const createRefund = async (req, res) => {
+  if (req.method === "POST") {
+    try {
+      const refund = await stripe.refunds.create({
+        payment_intent: req.body.paymentIntent,
+        amount: req.body.amount,
+      });
+      res.status(200).send(paymentIntent.client_secret);
+    } catch (err) {
+      res.status(500).json({ statusCode: 500, message: err.message });
+    }
+  } else {
+    res.setHeader("Allow", "POST");
+    res.status(405).end("Method Not Allowed");
+  }
+};
 
 export { createPaymentIntent, createRefund };

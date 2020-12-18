@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
+import axios from "axios";
 
 // @description: registers user
 // @route: POST /api/users
@@ -191,8 +192,14 @@ const updateUser = asyncHandler(async (req, res) => {
       const runId = req.body.runId;
       const orders = user.orders;
       const order = orders[String(runId)];
+      debugger;
       order.status = "cancelled";
       user.markModified("orders");
+
+      // const data = await axios.post("/api/stripe/refund", {
+      //   amount: order.amountPaid * 100,
+      //   paymentIntent: order.paymentIntent,
+      // });
     }
 
     user.username = req.body.username || user.username;

@@ -26,6 +26,7 @@ const updateRunsAndUser = async (order, paymentIntent) => {
 
     run.users.push(userId);
     await run.save();
+    user.markModified("orders");
     await user.save();
     const emailOptions = {
       user: user,
