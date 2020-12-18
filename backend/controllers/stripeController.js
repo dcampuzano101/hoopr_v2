@@ -53,7 +53,7 @@ const confirmationEmail = async (options) => {
   }
 };
 
-export default async (req, res) => {
+const createPaymentIntent = async (req, res) => {
   if (req.method === "POST") {
     try {
       const { amount, orderId } = req.body;
@@ -80,3 +80,7 @@ export default async (req, res) => {
     res.status(405).end("Method Not Allowed");
   }
 };
+
+const createRefund = async (req, res) => {};
+
+export { createPaymentIntent, createRefund };
