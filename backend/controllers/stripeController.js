@@ -82,13 +82,16 @@ const createPaymentIntent = async (req, res) => {
 };
 
 const createRefund = async (req, res) => {
+  debugger;
+  // validate amountToRefund.
+  console.log(req);
   if (req.method === "POST") {
     try {
       const refund = await stripe.refunds.create({
         payment_intent: req.body.paymentIntent,
         amount: req.body.amount,
       });
-      res.status(200).send(paymentIntent.client_secret);
+      res.status(200).send(refund);
     } catch (err) {
       res.status(500).json({ statusCode: 500, message: err.message });
     }
