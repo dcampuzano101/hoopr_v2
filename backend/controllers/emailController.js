@@ -68,7 +68,49 @@ const reminderEmail = asyncHandler(async (req, res) => {
   console.log(req);
 });
 
-const cancellationEmail = asyncHandler(async (req, res) => {
-  console.log(req);
-});
+const cancellationEmail = async (req, res) => {
+  debugger;
+  const { user, run } = req.body;
+  console.log(user);
+  console.log(run);
+  if (validateEmail(user.email)) {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        type: "OAuth2",
+        user: "admin@hoopr.io",
+        serviceClient: process.env.GMAIL_CLIENT_ID,
+        privateKey: process.env.GMAIL_PRIVATE_KEY,
+      },
+    });
+    const mailOptions = {
+      from: "admin@hoopr.io",
+      to: user.email || "admin@hoopr.io",
+      subject: "Cancellation Confirmed",
+      text: `${
+        user.username
+      } We are sad to see you go! Confirming your cancellation, You are no longer registered for the run @ ${
+        run.location
+      } on ${run.date} from ${moment(run.startTime).format("LT")} to ${moment(
+        run.endTime
+      ).format(
+        "LT"
+      )}. You should be receiving an email via Stripe confirming your cancellation. If you do not please reach out to admin@hoopr.io`,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+        res.status(200).send(info);
+      }
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid email data");
+  }
+};
 export { confirmationEmail, reminderEmail, cancellationEmail };

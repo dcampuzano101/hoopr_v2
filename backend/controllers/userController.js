@@ -189,7 +189,7 @@ const updateUser = asyncHandler(async (req, res) => {
     }
 
     if (req.body.cancelRun) {
-      const runId = req.body.runId;
+      const runId = req.body.run._id;
       const orders = user.orders;
       const order = orders[String(runId)];
       debugger;
@@ -202,6 +202,8 @@ const updateUser = asyncHandler(async (req, res) => {
         {
           amount: order.amountPaid * 100,
           paymentIntent: order.paymentIntent,
+          user: user,
+          run: run,
         }
       );
       // call cancellationEmailConfirmation()

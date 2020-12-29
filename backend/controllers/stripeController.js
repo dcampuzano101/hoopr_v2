@@ -53,6 +53,25 @@ const confirmationEmail = async (options) => {
   }
 };
 
+const cancellationEmail = async (options) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    debugger;
+    const { data } = await axios.post(
+      "http://localhost:5000/api/email/cancel",
+      options,
+      config
+    );
+
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
 const createPaymentIntent = async (req, res) => {
   if (req.method === "POST") {
     try {
@@ -91,6 +110,15 @@ const createRefund = async (req, res) => {
         payment_intent: req.body.paymentIntent,
         amount: req.body.amount,
       });
+      const emailOptions = {
+        user: req.body.user,
+        run: req.body.run,
+      };
+      debugger;
+      if (refund) {
+        console.log(refund);
+        cancellationEmail(emailOptions);
+      }
       res.status(200).send(refund);
     } catch (err) {
       res.status(500).json({ statusCode: 500, message: err.message });

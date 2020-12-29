@@ -145,7 +145,7 @@ const RunList = ({ history, location }) => {
       updateUser({
         id: userInfo._id,
         cancelRun: true,
-        runId: run._id,
+        run: run,
       })
     );
   };
