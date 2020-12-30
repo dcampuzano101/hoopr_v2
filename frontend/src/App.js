@@ -5,6 +5,7 @@ import styled from "styled-components";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ProfileDashboard from "./components/profile/ProfileDashboard";
+import Modal from "./components/Modal";
 import MainScreen from "./screens/MainScreen";
 import CartScreen from "./screens/CartScreen";
 import AdminScreen from "./screens/AdminScreen";
@@ -41,7 +42,11 @@ const App = () => {
           <Route path="/admin" component={AdminScreen} />
           <Route path="/runs/create" component={RunCreateScreen} />
           <Route path="/checkout/:id?" component={CheckoutScreen} />
-
+          <Route
+            path="/login-modal"
+            render={(props) => <Modal {...props} />}
+            exact
+          />
           <Route path="/oauth/callback" component={Oauth} />
           <Route path="/" component={MainScreen} exact />
           <Route path="/cart/:id?" component={CartScreen} />

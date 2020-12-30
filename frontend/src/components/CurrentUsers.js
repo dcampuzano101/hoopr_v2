@@ -18,6 +18,7 @@ import {
 import avatar from "../assets/user-avatar.png";
 import { Delete } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
+import { openModal, closeModal } from "../actions/modalActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -92,7 +93,8 @@ const CurrentUsers = ({
               <TableCell align="right">
                 <IconButton
                   aria-label="delete"
-                  onClick={() => setDeleteAlert(user._id)}
+                  //onClick={() => setDeleteAlert(user._id)}
+                  onClick={() => dispatch(openModal("deleteUser"))}
                 >
                   <Delete />
                 </IconButton>

@@ -24,6 +24,7 @@ import {
   orderListMyReducer,
 } from "./reducers/orderReducers";
 import { cartReducer } from "./reducers/cartReducers";
+import { modalReducer } from "./reducers/modalReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -43,6 +44,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderListMy: orderListMyReducer,
+  modalReducer: modalReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
