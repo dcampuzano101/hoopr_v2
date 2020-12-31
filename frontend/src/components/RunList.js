@@ -9,6 +9,7 @@ import { Delete } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
 import avatar from "../assets/user-avatar.png";
 import moment from "moment";
+import { openModal, closeModal } from "../actions/modalActions";
 import {
   Accordion,
   AccordionDetails,
@@ -24,6 +25,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Map from "./Map";
 import { addToCart } from "../actions/cartActions";
 import { withRouter } from "react-router-dom";
+import Modal from "./Modal";
+import LoginScreen from "../screens/LoginScreen";
 
 const useStyles = makeStyles((theme) => ({
   root: { marginBottom: "3%" },
@@ -108,6 +111,7 @@ const RunList = ({ history, location }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [successfulCheckout, setSuccessfulCheckout] = useState(null);
+  const [toggleModal, setToggleModal] = useState(false);
 
   const userList = useSelector((state) => state.userList);
   const { users, loading: loadingUsers } = userList;
@@ -237,6 +241,14 @@ const RunList = ({ history, location }) => {
       );
     }
   };
+  const modal = useSelector((state) => state.modal);
+  const { isActive, modalType } = modal;
+
+  const modalHandler = (e) => {
+    e.preventDefault();
+    dispatch(openModal());
+    // setToggleModal(true);
+  };
 
   const displayUsersForRun = (userIds, run) => {
     const result = [];
@@ -258,12 +270,14 @@ const RunList = ({ history, location }) => {
                     alt={user.username}
                     src={user.profilePhoto}
                     style={{ height: "30px", width: "30px" }}
+                    onClick={modalHandler}
                   />
                 ) : (
                   <Avatar
                     alt={user.username}
                     src={avatar}
                     style={{ height: "30px", width: "30px" }}
+                    onClick={modalHandler}
                   />
                 )}
                 <Typography
@@ -348,6 +362,7 @@ const RunList = ({ history, location }) => {
         <CircularProgress />
       ) : (
         <>
+          {isActive && <Modal Component={<LoginScreen />} />}
           <Paper>
             {successfulCheckout ? (
               <Alert

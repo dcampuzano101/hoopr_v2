@@ -65,6 +65,15 @@ const CurrentUsers = ({
     dispatch(updateRun({ id: run._id, users: usersClone }));
   };
 
+  const modal = useSelector((state) => state.modal);
+  const { isActive, modalType } = modal;
+
+  // useEffect(() => {
+  //   if (isActive) {
+
+  //   }
+  // }, []);
+
   const displayUsers = () => {
     const result = [];
     run.users.forEach((id) => {
@@ -72,6 +81,12 @@ const CurrentUsers = ({
     });
     return (
       <>
+        {isActive && (
+          <>
+            <p>modal</p>
+            <button onClick={() => dispatch(closeModal())}>close</button>
+          </>
+        )}
         {result.map((user) => (
           <React.Fragment key={user._id}>
             <TableRow style={{ height: "5%" }}>

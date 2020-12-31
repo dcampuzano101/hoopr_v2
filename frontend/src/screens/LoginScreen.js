@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, googleLogin } from "../actions/userActions";
+import { withRouter } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -18,10 +19,11 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    // marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    padding: "10px",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -148,4 +150,4 @@ const LoginScreen = ({ location, history }) => {
   );
 };
 
-export default LoginScreen;
+export default withRouter(LoginScreen);

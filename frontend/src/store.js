@@ -44,7 +44,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderListMy: orderListMyReducer,
-  modalReducer: modalReducer,
+  modal: modalReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
