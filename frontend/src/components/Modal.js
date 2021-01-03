@@ -43,6 +43,7 @@ const Modal = (props) => {
     e.preventDefault();
     dispatch(closeModal());
   };
+  // const ChildComponent = props.Component;
 
   return (
     <div className={classes.modalOverlay} onClick={handleClose}>

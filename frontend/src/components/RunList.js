@@ -7,9 +7,11 @@ import { updateRun } from "../actions/runActions";
 import { updateUser } from "../actions/userActions";
 import { Delete } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
+// import avatar from "../../assets/user-avatar.png";
 import avatar from "../assets/user-avatar.png";
 import moment from "moment";
 import { openModal, closeModal } from "../actions/modalActions";
+import PublicProfile from "./PublicProfile";
 import {
   Accordion,
   AccordionDetails,
@@ -26,7 +28,7 @@ import Map from "./Map";
 import { addToCart } from "../actions/cartActions";
 import { withRouter } from "react-router-dom";
 import Modal from "./Modal";
-import LoginScreen from "../screens/LoginScreen";
+// import LoginScreen from "../screens/LoginScreen";
 
 const useStyles = makeStyles((theme) => ({
   root: { marginBottom: "3%" },
@@ -112,6 +114,7 @@ const RunList = ({ history, location }) => {
   const dispatch = useDispatch();
   const [successfulCheckout, setSuccessfulCheckout] = useState(null);
   const [toggleModal, setToggleModal] = useState(false);
+  const [user, setUser] = useState(null);
 
   const userList = useSelector((state) => state.userList);
   const { users, loading: loadingUsers } = userList;
@@ -244,9 +247,11 @@ const RunList = ({ history, location }) => {
   const modal = useSelector((state) => state.modal);
   const { isActive, modalType } = modal;
 
-  const modalHandler = (e) => {
-    e.preventDefault();
+  const modalHandler = (user) => {
+    // e.preventDefault();
+    setUser(user);
     dispatch(openModal());
+
     // setToggleModal(true);
   };
 
@@ -262,6 +267,7 @@ const RunList = ({ history, location }) => {
         </header>
         <div className={classes.leftSidebar}></div>
         <main className={classes.userList}>
+          {isActive && <Modal Component={<PublicProfile user={user} />} />}
           {result.map((user) => (
             <React.Fragment key={user._id}>
               <div className={classes.userContainer}>
@@ -270,14 +276,14 @@ const RunList = ({ history, location }) => {
                     alt={user.username}
                     src={user.profilePhoto}
                     style={{ height: "30px", width: "30px" }}
-                    onClick={modalHandler}
+                    onClick={() => modalHandler(user)}
                   />
                 ) : (
                   <Avatar
                     alt={user.username}
                     src={avatar}
                     style={{ height: "30px", width: "30px" }}
-                    onClick={modalHandler}
+                    onClick={() => modalHandler(user)}
                   />
                 )}
                 <Typography
@@ -362,7 +368,6 @@ const RunList = ({ history, location }) => {
         <CircularProgress />
       ) : (
         <>
-          {isActive && <Modal Component={<LoginScreen />} />}
           <Paper>
             {successfulCheckout ? (
               <Alert

@@ -49,11 +49,11 @@ const LoginScreen = ({ location, history }) => {
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
-  useEffect(() => {
-    if (userInfo) {
-      history.push(redirect);
-    }
-  }, [history, userInfo, redirect]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     history.push(redirect);
+  //   }
+  // }, [history, userInfo, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -125,17 +125,6 @@ const LoginScreen = ({ location, history }) => {
             className={classes.submit}
           >
             Sign In With Google
-          </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            href="http://localhost:5000/api/users/google"
-            className={classes.submit}
-            onClick={googleHandler}
-          >
-            AXIOS Google
           </Button>
           <Grid container>
             <Grid item>
