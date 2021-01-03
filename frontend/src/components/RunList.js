@@ -271,20 +271,12 @@ const RunList = ({ history, location }) => {
           {result.map((user) => (
             <React.Fragment key={user._id}>
               <div className={classes.userContainer}>
-                {user.profilePhoto ? (
-                  <Avatar
-                    alt={user.username}
-                    src={user.profilePhoto}
-                    style={{ height: "30px", width: "30px" }}
-                    onClick={() => modalHandler(user)}
-                  />
-                ) : (
-                  <Avatar
-                    alt={user.username}
-                    src={avatar}
-                    style={{ height: "30px", width: "30px" }}
-                    onClick={() => modalHandler(user)}
-                  />
+                <Avatar
+                  alt={user.username}
+                  src={user.profilePhoto || avatar}
+                  style={{ height: "30px", width: "30px" }}
+                  onClick={() => modalHandler(user)}
+                />
                 )}
                 <Typography
                   className={classes.subHeading}
