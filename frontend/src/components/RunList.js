@@ -277,7 +277,6 @@ const RunList = ({ history, location }) => {
                   style={{ height: "30px", width: "30px" }}
                   onClick={() => modalHandler(user)}
                 />
-                )}
                 <Typography
                   className={classes.subHeading}
                   style={{ marginLeft: "5px", fontSize: ".7rem" }}
