@@ -67,9 +67,7 @@ const PublicProfile = (props) => {
   const [profilePhoto, setProfilePhoto] = useState("");
 
   useEffect(() => {
-    debugger;
     const newUser = props.user;
-    // if (user.email !== )
     setUser((user) => newUser);
     setUsername((user) => newUser.username);
     setProfilePhoto((user) => newUser.profilePhoto);

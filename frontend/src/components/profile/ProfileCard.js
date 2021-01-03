@@ -155,16 +155,15 @@ const ProfileCard = ({ location, history, match }) => {
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={6} style={{ display: "flex" }}>
             <Paper className={classes.paperProfileCard}>
-              <div>
-                <img
-                  src={profilePhoto}
-                  alt="avatar"
-                  style={{
-                    width: "100%",
-                    borderRadius: "5px",
-                  }}
-                />
-              </div>
+              <img
+                src={profilePhoto}
+                alt="avatar"
+                style={{
+                  width: "100%",
+                  borderRadius: "5px",
+                  marginBottom: "2px",
+                }}
+              />
               <div>
                 <Button
                   variant="contained"
