@@ -4,6 +4,9 @@ import { listUsers } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser } from "../actions/userActions";
 import { withRouter } from "react-router-dom";
+import UserEditScreen from "../screens/UserEditScreen";
+import Modal from "./Modal";
+import { openModal } from "../actions/modalActions";
 
 import {
   Table,
@@ -70,12 +73,42 @@ const AdminUsers = ({ history }) => {
     dispatch(deleteUser(userId));
   };
 
+  const modal = useSelector((state) => state.modal);
+  const { isActive } = modal;
+
+  const [editUserId, setEditUserId] = useState(null);
+  const [removeUserId, setRemoveUserId] = useState(null);
+
+  const editUserHandler = (userId) => {
+    setEditUserId(userId);
+    dispatch(openModal());
+  };
+
+  const deleteModalHandler = (userId) => {
+    setRemoveUserId(userId);
+    dispatch(openModal());
+  };
+
   return (
     <>
       {loading || loadingDelete ? (
         <CircularProgress />
       ) : (
         <>
+          {isActive && editUserId !== null && (
+            <Modal
+              Component={<UserEditScreen userId={editUserId} />}
+              heading="Edit User"
+            />
+          )}
+          {removeUserId !== null && isActive && (
+            <Modal
+              type="delete"
+              id={removeUserId}
+              onConfirm={deleteUserHandler}
+              heading="Permanently Delete Run"
+            />
+          )}
           <h1 className="bannerShadow" style={{ fontSize: "35px" }}>
             ALL USERS
           </h1>
@@ -124,14 +157,14 @@ const AdminUsers = ({ history }) => {
                         <IconButton
                           aria-label="edit"
                           onClick={() => {
-                            history.push(`/users/${user._id}/edit`);
+                            editUserHandler(user._id);
                           }}
                         >
                           <Edit />
                         </IconButton>
                         <IconButton
                           aria-label="delete"
-                          onClick={() => setDeleteAlert(user._id)}
+                          onClick={() => deleteModalHandler(user._id)}
                         >
                           <Delete />
                         </IconButton>

@@ -63,8 +63,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserEditScreen = ({ history, match }) => {
-  const userId = match.params.id;
+const UserEditScreen = ({ history, match, userId }) => {
+  // const userId = match.params.id;
   const userDetails = useSelector((state) => state.userDetails);
   const { error, user, success: successDetails } = userDetails;
   const userLogin = useSelector((state) => state.userLogin);
@@ -126,6 +126,8 @@ const UserEditScreen = ({ history, match }) => {
     successDetails,
     userId,
   ]);
+
+
   return (
     <React.Fragment>
       <Container maxWidth="lg" className={classes.container}>

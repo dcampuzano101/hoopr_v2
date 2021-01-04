@@ -11,7 +11,7 @@ import { Delete } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   modalDialogBox: {
     width: "35%",
-    height: "50%",
+    height: "auto",
     backgroundColor: "#edfdff",
     borderRadius: "5px",
     display: "flex",
@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
     zIndex: "2000",
     alignItems: "center",
     flexDirection: "column",
+    left: "0",
+    right: "0",
+    height: "auto",
+    margin: "0 auto",
+    top: "10%",
+    bottom: "10%",
   },
   modalOverlay: {
     zIndex: "1000",
@@ -55,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
   },
   footerButton: {},
-  deleteWrapper: {
+  contentWrapper: {
     display: "flex",
     flexDirection: "column",
     marginBottom: "5%",
@@ -64,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  componentWrapper: {},
 }));
 
 //props.type === 'delete' ? props.id && props.onConfirm
@@ -71,13 +78,20 @@ const useStyles = makeStyles((theme) => ({
 const Modal = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+
   const handleClose = (e) => {
     e.preventDefault();
     dispatch(closeModal());
   };
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    props.onConfirm(props.id);
+    handleClose(e);
+  };
 
   return (
-    <div className={classes.modalOverlay} onClick={handleClose}>
+    <>
+      <div className={classes.modalOverlay} onClick={handleClose}></div>
       <div className={classes.modalDialogBox}>
         <div className={classes.headerButtons}>
           <IconButton aria-label="close" onClick={handleClose}>
@@ -85,7 +99,7 @@ const Modal = (props) => {
           </IconButton>
         </div>
         {props.type === "delete" ? (
-          <div className={classes.deleteWrapper}>
+          <div className={classes.contentWrapper}>
             <div className={classes.title}>{props.heading}</div>
             <div className={classes.bodyText}>
               <h3>Are you sure? This action is irreversible.</h3>
@@ -95,9 +109,7 @@ const Modal = (props) => {
                 variant="contained"
                 color="secondary"
                 className={classes.button}
-                onClick={() => {
-                  props.onConfirm(props.id);
-                }}
+                onClick={(e) => handleButtonClick(e)}
                 startIcon={<Delete />}
               >
                 Delete
@@ -105,10 +117,13 @@ const Modal = (props) => {
             </div>
           </div>
         ) : (
-          <>{props.Component}</>
+          <div className={classes.contentWrapper}>
+            <div className={classes.title}>{props.heading}</div>
+            {props.Component}
+          </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -66,13 +66,7 @@ const CurrentUsers = ({
   };
 
   const modal = useSelector((state) => state.modal);
-  const { isActive, modalType } = modal;
-
-  // useEffect(() => {
-  //   if (isActive) {
-
-  //   }
-  // }, []);
+  const { isActive } = modal;
 
   const displayUsers = () => {
     const result = [];

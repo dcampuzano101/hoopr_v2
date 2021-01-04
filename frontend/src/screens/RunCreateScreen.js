@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { createRun } from "../actions/runActions";
 import MomentUtils from "@date-io/moment";
 import {
@@ -61,6 +62,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     width: "100%",
     justifyContent: "space-between",
+  },
+  createFormWrapper: {
+    display: "flex",
+    maxWidth: "80%",
+    marginBottom: "5%",
   },
 }));
 
@@ -129,149 +135,131 @@ const RunCreateScreen = ({ history, match }) => {
   return (
     <React.Fragment>
       <MuiPickersUtilsProvider utils={MomentUtils}>
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={6} style={{ display: "flex" }}>
-              <Paper className={classes.paper}>
-                <form
-                  className={classes.form}
-                  noValidate
-                  onSubmit={createRunHandler}
-                >
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="name"
-                    placeholder="Name of run"
-                    name="name"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                      setCreateRunBtnDisabled(false);
-                    }}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="location"
-                    name="Name of Location/Address"
-                    value={location}
-                    onChange={(e) => {
-                      setLocation(e.target.value);
-                      setCreateRunBtnDisabled(false);
-                    }}
-                  />
-                  <DatePicker
-                    disablePast
-                    label="Date"
-                    value={date}
-                    onChange={(date) => handleDateChange(date, "date")}
-                    animateYearScrolling
-                  />
-                  <KeyboardTimePicker
-                    label="Start Time"
-                    // placeholder="08:00 AM"
-                    // mask="__:__ _M"
-                    value={startTime || ""}
-                    onChange={(date) => handleDateChange(date, "start")}
-                  />
-                  <KeyboardTimePicker
-                    label="End Time"
-                    // placeholder="10:00 AM"
-                    // mask="__:__ _M"
-                    value={endTime || ""}
-                    onChange={(date) => handleDateChange(date, "end")}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="capacity"
-                    label="Capacity"
-                    name="capacity"
-                    autoComplete="capacity"
-                    value={capacity}
-                    onChange={(e) => {
-                      setCapacity(e.target.value);
-                      setCreateRunBtnDisabled(false);
-                    }}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    id="price"
-                    label="price"
-                    name="price"
-                    autoComplete="price"
-                    value={price}
-                    onChange={(e) => {
-                      setPrice(e.target.value);
-                      setCreateRunBtnDisabled(false);
-                    }}
-                  />
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    disabled={createRunBtnDisabled}
-                  >
-                    Create RUN
-                  </Button>
-                </form>
-              </Paper>
-            </Grid>
-            {runCreateSuccess ? (
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Alert
-                    severity="success"
-                    onClose={() => {
-                      setRunCreateSuccess(null);
-                    }}
-                  >
-                    {runCreateSuccess}
-                  </Alert>
-                </Paper>
-              </Grid>
-            ) : null}
-            {/* {detailsError ? (
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Alert
-                    severity="error"
-                    onClose={() => {
-                      setDetailsError(null);
-                    }}
-                  >
-                    {detailsError}
-                  </Alert>
-                </Paper>
-              </Grid>
-            ) : null} */}
-            {alert ? (
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Alert
-                    severity="error"
-                    onClose={() => {
-                      setAlert(null);
-                    }}
-                  >
-                    {alert}
-                  </Alert>
-                </Paper>
-              </Grid>
-            ) : null}
+        <Grid item xs={12} md={6} lg={6} className={classes.createFormWrapper}>
+          <Paper className={classes.paper}>
+            <form
+              className={classes.form}
+              noValidate
+              onSubmit={createRunHandler}
+            >
+              <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="name"
+                placeholder="Name of run"
+                name="name"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setCreateRunBtnDisabled(false);
+                }}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="location"
+                name="Name of Location/Address"
+                value={location}
+                onChange={(e) => {
+                  setLocation(e.target.value);
+                  setCreateRunBtnDisabled(false);
+                }}
+              />
+              <DatePicker
+                disablePast
+                label="Date"
+                value={date}
+                onChange={(date) => handleDateChange(date, "date")}
+                animateYearScrolling
+              />
+              <KeyboardTimePicker
+                label="Start Time"
+                // placeholder="08:00 AM"
+                // mask="__:__ _M"
+                value={startTime || ""}
+                onChange={(date) => handleDateChange(date, "start")}
+              />
+              <KeyboardTimePicker
+                label="End Time"
+                // placeholder="10:00 AM"
+                // mask="__:__ _M"
+                value={endTime || ""}
+                onChange={(date) => handleDateChange(date, "end")}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="capacity"
+                label="Capacity"
+                name="capacity"
+                autoComplete="capacity"
+                value={capacity}
+                onChange={(e) => {
+                  setCapacity(e.target.value);
+                  setCreateRunBtnDisabled(false);
+                }}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="price"
+                label="price"
+                name="price"
+                autoComplete="price"
+                value={price}
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                  setCreateRunBtnDisabled(false);
+                }}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                disabled={createRunBtnDisabled}
+              >
+                Create RUN
+              </Button>
+            </form>
+          </Paper>
+        </Grid>
+        {runCreateSuccess ? (
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <Alert
+                severity="success"
+                onClose={() => {
+                  setRunCreateSuccess(null);
+                }}
+              >
+                {runCreateSuccess}
+              </Alert>
+            </Paper>
           </Grid>
-        </Container>
+        ) : null}
+        {alert ? (
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <Alert
+                severity="error"
+                onClose={() => {
+                  setAlert(null);
+                }}
+              >
+                {alert}
+              </Alert>
+            </Paper>
+          </Grid>
+        ) : null}
       </MuiPickersUtilsProvider>
     </React.Fragment>
   );
 };
 
-export default RunCreateScreen;
+export default withRouter(RunCreateScreen);

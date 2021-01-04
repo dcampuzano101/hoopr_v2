@@ -5,6 +5,9 @@ import { listRuns } from "../actions/runActions";
 import { withRouter } from "react-router-dom";
 import { deleteRun } from "../actions/runActions";
 import moment from "moment";
+import Modal from "./Modal";
+import { openModal } from "../actions/modalActions";
+import RunCreateScreen from "../screens/RunCreateScreen";
 
 import {
   Table,
@@ -53,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const AdminRuns = ({ history, match, location }) => {
   const classes = useStyles();
   const [runsError, setRunsError] = useState(null);
+  const [removeRunId, setRemoveRunId] = useState(null);
 
   const [deleteAlert, setDeleteAlert] = useState(null);
 
@@ -74,6 +78,19 @@ const AdminRuns = ({ history, match, location }) => {
   const deleteRunHandler = (runId) => {
     dispatch(deleteRun(runId));
   };
+
+  const modal = useSelector((state) => state.modal);
+  const { isActive } = modal;
+  console.log(isActive);
+  const createModalHandler = () => {
+    dispatch(openModal());
+  };
+
+  const deleteModalHandler = (runId) => {
+    setRemoveRunId(runId);
+    dispatch(openModal());
+  };
+
   return (
     <>
       {loading || loadingDelete ? (
@@ -81,6 +98,18 @@ const AdminRuns = ({ history, match, location }) => {
       ) : (
         <>
           <div className={classes.adminRunHeader}>
+            {isActive && removeRunId === null && (
+              <Modal Component={<RunCreateScreen />} heading="Create Run" />
+            )}
+            {removeRunId !== null && isActive && (
+              <Modal
+                type="delete"
+                id={removeRunId}
+                onConfirm={deleteRunHandler}
+                heading="Permanently Delete Run"
+              />
+            )}
+
             <h1 className="bannerShadow" style={{ fontSize: "35px" }}>
               ALL RUNS
             </h1>
@@ -88,7 +117,7 @@ const AdminRuns = ({ history, match, location }) => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              href="/runs/create"
+              onClick={createModalHandler}
             >
               CREATE RUN
             </Button>
@@ -155,7 +184,7 @@ const AdminRuns = ({ history, match, location }) => {
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                            onClick={() => setDeleteAlert(run._id)}
+                            onClick={() => deleteModalHandler(run._id)}
                           >
                             <Delete />
                           </IconButton>

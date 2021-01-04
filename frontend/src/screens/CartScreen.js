@@ -77,7 +77,7 @@ const CartScreen = ({ match }) => {
   const { cartItems } = cart;
 
   const modal = useSelector((state) => state.modal);
-  const { isActive, modalType } = modal;
+  const { isActive } = modal;
 
   const [deleteAlert, setDeleteAlert] = useState(null);
 
