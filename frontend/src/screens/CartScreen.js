@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../actions/cartActions";
+import { openModal } from "../actions/modalActions";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
@@ -9,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 
 import Paper from "@material-ui/core/Paper";
 import CartSummary from "../components/CartSummary";
+import Modal from "../components/Modal";
 
 import { Delete } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
@@ -20,7 +22,9 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Typography,
 } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -72,7 +76,12 @@ const CartScreen = ({ match }) => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+  const modal = useSelector((state) => state.modal);
+  const { isActive, modalType } = modal;
+
   const [deleteAlert, setDeleteAlert] = useState(null);
+
+  const [removeRunId, setRemoveRunId] = useState(null);
 
   useEffect(() => {
     if (runId) {
@@ -84,6 +93,11 @@ const CartScreen = ({ match }) => {
     dispatch(removeFromCart(runId));
   };
 
+  const modalHandler = (runId) => {
+    setRemoveRunId(runId);
+    dispatch(openModal());
+  };
+
   const classes = useStyles();
 
   return (
@@ -93,6 +107,14 @@ const CartScreen = ({ match }) => {
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={8} lg={8}>
+            {isActive && (
+              <Modal
+                type="delete"
+                id={removeRunId}
+                onConfirm={removeFromCartHandler}
+                heading="Remove Run From Cart"
+              />
+            )}
             <Paper className={classes.paper}>
               <Table>
                 <TableHead>
@@ -116,7 +138,7 @@ const CartScreen = ({ match }) => {
                           {" "}
                           <IconButton
                             aria-label="delete"
-                            onClick={() => setDeleteAlert(run.run)}
+                            onClick={() => modalHandler(run.run)}
                           >
                             <Delete />
                           </IconButton>

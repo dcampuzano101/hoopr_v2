@@ -5,17 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
 
+import { Button } from "@material-ui/core";
+import { Delete } from "@material-ui/icons";
+
 const useStyles = makeStyles((theme) => ({
   modalDialogBox: {
-    width: "400px",
-    height: "auto",
+    width: "35%",
+    height: "50%",
     backgroundColor: "#edfdff",
     borderRadius: "5px",
     display: "flex",
     position: "absolute",
-    zIndex: "1010",
+    zIndex: "2000",
     alignItems: "center",
-    justifyContent: "center",
     flexDirection: "column",
   },
   modalOverlay: {
@@ -30,11 +32,41 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     display: "flex",
   },
-  modalHeader: {
+  headerButtons: {
     display: "flex",
     alignSelf: "flex-end",
   },
+  title: {
+    fontFamily: "Lilita One",
+    weight: 400,
+    fontSize: "2rem",
+    spacing: "2px",
+    textTransform: "uppercase",
+    opacity: 0.8,
+    letterSpacing: "1",
+    color: "#29434e",
+  },
+  bodyText: {
+    // padding: "5%",
+    color: "#29434e",
+    fontSize: "1.125rem",
+    fontFamily: "Lilita One",
+    letterSpacing: "1.3px",
+    textTransform: "uppercase",
+  },
+  footerButton: {},
+  deleteWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: "5%",
+    height: "100%",
+    marginBottom: "5%",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 }));
+
+//props.type === 'delete' ? props.id && props.onConfirm
 
 const Modal = (props) => {
   const classes = useStyles();
@@ -43,17 +75,38 @@ const Modal = (props) => {
     e.preventDefault();
     dispatch(closeModal());
   };
-  // const ChildComponent = props.Component;
 
   return (
     <div className={classes.modalOverlay} onClick={handleClose}>
       <div className={classes.modalDialogBox}>
-        <div className={classes.modalHeader}>
+        <div className={classes.headerButtons}>
           <IconButton aria-label="close" onClick={handleClose}>
             <CloseIcon />
           </IconButton>
         </div>
-        {props.Component}
+        {props.type === "delete" ? (
+          <div className={classes.deleteWrapper}>
+            <div className={classes.title}>{props.heading}</div>
+            <div className={classes.bodyText}>
+              <h3>Are you sure? This action is irreversible.</h3>
+            </div>
+            <div className={classes.footerButton}>
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+                onClick={() => {
+                  props.onConfirm(props.id);
+                }}
+                startIcon={<Delete />}
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <>{props.Component}</>
+        )}
       </div>
     </div>
   );
