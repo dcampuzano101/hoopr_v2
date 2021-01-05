@@ -1,7 +1,9 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
+import Run from "../models/runModel.js";
 import axios from "axios";
+// import { updateRun } from './runController.js'
 
 // @description: registers user
 // @route: POST /api/users
@@ -228,7 +230,12 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route: DELETE /api/users/:id
 // @access: admin/private
 const deleteUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const userId = req.params.id;
+  const user = await User.findById(userId);
+  for (let i = 0; i < user.runs.length; i++) {
+    const runId = user.runs[i];
+    deleteUserFromRuns(runId, userId);
+  }
   if (user) {
     await user.remove();
     res.json({ message: "User removed" });
@@ -237,6 +244,24 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error();
   }
 });
+
+const deleteUserFromRuns = async (runId, userId) => {
+  try {
+    const run = await Run.findById(runId);
+    let usersClone = [...run.users];
+    usersClone = usersClone.filter((user) => {
+      console.log(user !== userId);
+      debugger;
+      return String(user) !== String(userId);
+    });
+    run.users = usersClone;
+    run.markModified("users");
+    const updatedRun = await run.save();
+    console.log(updatedRun);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export {
   registerUser,

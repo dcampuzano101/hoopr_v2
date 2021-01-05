@@ -258,7 +258,13 @@ const RunList = ({ history, location }) => {
   const displayUsersForRun = (userIds, run) => {
     const result = [];
     userIds.forEach((id) => {
-      result.push(users[id]);
+      console.log(users[id]);
+      // IN DEVELOPMENT MODE
+      // seeder.js does not all runIds to user.runs
+      // workaround --
+      if (users[id]) {
+        result.push(users[id]);
+      }
     });
     return (
       <div className={classes.userListContainer}>

@@ -13,7 +13,7 @@ connectDB();
 const randomUsersForRuns = (createdUsers) => {
   // let count = 0;
   let result = new Set();
-  while (result.size <= 13) {
+  while (result.size <= 10) {
     let randomIndex = Math.floor(
       Math.random() * Math.floor(createdUsers.length)
     );
