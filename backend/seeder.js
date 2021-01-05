@@ -27,6 +27,24 @@ const randomUsersForRuns = (createdUsers) => {
   return result;
 };
 
+const addRunToUser = async () => {
+  console.log("in function");
+  const runs = await Run.find({});
+  console.log(runs);
+  for (let i = 0; i < runs.length; i++) {
+    const run = runs[i];
+    console.log(run);
+    for (let j = 0; j < run.users.length; j++) {
+      const user = await User.findById(run.users[j]);
+      console.log(user);
+      user.runs.push(runs[i]._id);
+      user.markModified("runs");
+      console.log(user.runs);
+      await user.save();
+    }
+  }
+};
+
 const importData = async () => {
   try {
     await User.deleteMany();
@@ -36,14 +54,14 @@ const importData = async () => {
 
     const adminUserId = createdUsers[0]._id;
 
-    console.log(createdUsers);
+    // console.log(createdUsers);
 
     const sampleRuns = runs.map((run) => {
       let usersArray = randomUsersForRuns(createdUsers);
       return { ...run, userId: adminUserId, users: [...usersArray] };
     });
     await Run.insertMany(sampleRuns);
-
+    await addRunToUser();
     console.log("Data Imported!".green.inverse);
     process.exit();
   } catch (error) {

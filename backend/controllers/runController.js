@@ -97,6 +97,7 @@ const getRunById = asyncHandler(async (req, res) => {
 // @route: PUT /api/runs/:id
 // @access: admin/private
 const updateRun = asyncHandler(async (req, res) => {
+  debugger;
   const run = await Run.findById(req.body.id);
   if (run) {
     run.name = req.body.name || run.name;
@@ -108,6 +109,7 @@ const updateRun = asyncHandler(async (req, res) => {
     run.startTime = req.body.startTime || run.startTime;
     run.endTime = req.body.endTime || run.endTime;
     run.waitList = req.body.waitList || run.waitList;
+    run.markModified("users");
     const updatedRun = await run.save();
 
     // initiate stripeRefund

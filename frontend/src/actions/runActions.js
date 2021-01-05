@@ -149,6 +149,7 @@ export const updateRun = (run) => async (dispatch, getState) => {
         "Content-Type": "application/json",
       },
     };
+    debugger;
     const { data } = await axios.put(`/api/runs/${run._id}`, run, config);
     dispatch({
       type: RUN_UPDATE_SUCCESS,

@@ -9,17 +9,14 @@ import {
   deleteRun,
 } from "../controllers/runController.js";
 
-router.route("/")
-  .get(listRuns);
+router.route("/").get(listRuns);
 
-router.route("/create")
-  .post(protect, admin, createRun)
-
+router.route("/create").post(protect, admin, createRun);
 
 router
   .route("/:id")
   .get(protect, getRunById)
-  .put(protect, admin, updateRun)
+  .put(protect, updateRun)
   .delete(protect, admin, deleteRun);
 
 export default router;

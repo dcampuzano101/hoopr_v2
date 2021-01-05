@@ -198,24 +198,25 @@ const updateUser = asyncHandler(async (req, res) => {
       order.status = "cancelled";
       user.markModified("orders");
 
-      debugger;
-      const { data } = await axios.post(
-        "http://localhost:5000/api/stripe/refund",
-        {
-          amount: order.amountPaid * 100,
-          paymentIntent: order.paymentIntent,
-          user: user,
-          run: run,
-        }
-      );
-      // call cancellationEmailConfirmation()
+      // debugger;
+      // const { data } = await axios.post(
+      //   "http://localhost:5000/api/stripe/refund",
+      //   {
+      //     amount: order.amountPaid * 100,
+      //     paymentIntent: order.paymentIntent,
+      //     user: user,
+      //     run: run,
+      //   }
+      // );
+      // // call cancellationEmailConfirmation()
 
-      debugger;
+      // debugger;
     }
-
+    user.runs = req.body.runs || user.runs;
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
     user.isAdmin = req.body.isAdmin || user.isAdmin;
+    user.markModified("runs");
     console.log(user.orders);
     await user.save();
 
