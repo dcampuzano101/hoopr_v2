@@ -60,7 +60,7 @@ const cancellationEmail = async (options) => {
         "Content-Type": "application/json",
       },
     };
-    debugger;
+
     const { data } = await axios.post(
       "http://localhost:5000/api/email/cancel",
       options,
@@ -101,7 +101,6 @@ const createPaymentIntent = async (req, res) => {
 };
 
 const createRefund = async (req, res) => {
-  debugger;
   // validate amountToRefund.
   console.log(req);
   if (req.method === "POST") {
@@ -114,7 +113,7 @@ const createRefund = async (req, res) => {
         user: req.body.user,
         run: req.body.run,
       };
-      debugger;
+
       if (refund) {
         console.log(refund);
         cancellationEmail(emailOptions);

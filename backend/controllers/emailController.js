@@ -70,11 +70,8 @@ const reminderEmail = asyncHandler(async (req, res) => {
 });
 
 const cancellationEmail = async (req, res) => {
-  debugger;
   const { user, runId } = req.body;
   const run = await Run.findById(runId);
-  console.log(user);
-  console.log(run);
   if (validateEmail(user.email)) {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",

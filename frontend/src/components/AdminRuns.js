@@ -81,7 +81,6 @@ const AdminRuns = ({ history, match, location }) => {
 
   const modal = useSelector((state) => state.modal);
   const { isActive } = modal;
-  console.log(isActive);
   const createModalHandler = () => {
     dispatch(openModal());
   };

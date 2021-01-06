@@ -194,11 +194,10 @@ const updateUser = asyncHandler(async (req, res) => {
       const runId = req.body.run._id;
       const orders = user.orders;
       const order = orders[String(runId)];
-      debugger;
+
       order.status = "cancelled";
       user.markModified("orders");
 
-      debugger;
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -218,17 +217,12 @@ const updateUser = asyncHandler(async (req, res) => {
       } catch (error) {
         console.log(error);
       }
-      debugger;
-      // // call cancellationEmailConfirmation()
-
-      // debugger;
     }
     user.runs = req.body.runs || user.runs;
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
     user.isAdmin = req.body.isAdmin || user.isAdmin;
     user.markModified("runs");
-    console.log(user.orders);
     await user.save();
 
     res.json(user);
@@ -262,14 +256,12 @@ const deleteUserFromRuns = async (runId, userId) => {
     const run = await Run.findById(runId);
     let usersClone = [...run.users];
     usersClone = usersClone.filter((user) => {
-      console.log(user !== userId);
-      debugger;
+      //consider removing JS String() function
       return String(user) !== String(userId);
     });
     run.users = usersClone;
     run.markModified("users");
     const updatedRun = await run.save();
-    console.log(updatedRun);
   } catch (error) {
     console.log(error);
   }

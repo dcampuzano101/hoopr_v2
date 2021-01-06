@@ -97,7 +97,7 @@ const getRunById = asyncHandler(async (req, res) => {
 // @route: PUT /api/runs/:id
 // @access: admin/private
 const updateRun = asyncHandler(async (req, res) => {
-  debugger;
+  
   const run = await Run.findById(req.body.id);
   if (run) {
     run.name = req.body.name || run.name;
