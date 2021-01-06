@@ -3,6 +3,7 @@ import Run from "../models/runModel.js";
 import User from "../models/userModel.js";
 import Stripe from "stripe";
 import axios from "axios";
+import moment from "moment";
 
 const stripe = new Stripe(
   "sk_test_51Hi0CkCw3D7iMvxsxTGNxXXGNndJ6qnjlZCIuFnGNWmpYl5FL5ajlrGhwiZ3KYsgXfGS8WUuWgMpva2CY1DxEctB00JUHZcox1"
@@ -100,14 +101,36 @@ const createPaymentIntent = async (req, res) => {
   }
 };
 
+const amountToRefund = (run) => {
+  // percentages can always be modified
+  // run.start >= 48 hours = 100% refund
+  // run.start >= 24 hours = 75% refund
+  // run.start >= 12 hours = 25% refund
+  // run.start < 12 hours = 0% refund
+  let amount = run.price * 100;
+  let now = moment(new Date());
+  let runStartTime = moment(`${run.date} ${run.startTime.split(" ")[4]}`);
+  let hoursRemaining = moment.duration(runStartTime.diff(now)).asHours();
+  let percent;
+  if (hoursRemaining >= 48) {
+    percent = 1;
+  } else if (hoursRemaining >= 24) {
+    percent = 0.75;
+  } else if (hoursRemaining >= 12) {
+    percent = 0.25;
+  }
+  return amount * percent;
+};
+
 const createRefund = async (req, res) => {
   // validate amountToRefund.
   console.log(req);
   if (req.method === "POST") {
     try {
+      const amount = amountToRefund(req.body.run);
       const refund = await stripe.refunds.create({
         payment_intent: req.body.paymentIntent,
-        amount: req.body.amount,
+        amount: amount,
       });
       const emailOptions = {
         user: req.body.user,

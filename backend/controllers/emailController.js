@@ -70,8 +70,8 @@ const reminderEmail = asyncHandler(async (req, res) => {
 });
 
 const cancellationEmail = async (req, res) => {
-  const { user, runId } = req.body;
-  const run = await Run.findById(runId);
+  const { user, run } = req.body;
+  ;
   if (validateEmail(user.email)) {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -90,7 +90,7 @@ const cancellationEmail = async (req, res) => {
       subject: "Cancellation Confirmed",
       text: `${
         user.username
-      } We are sad to see you go! Confirming your cancellation, You are no longer registered for the run @ ${
+      }, we are sad to see you go! Confirming your cancellation, You are no longer registered for the run @ ${
         run.location
       } on ${run.date} from ${moment(run.startTime).format("LT")} to ${moment(
         run.endTime

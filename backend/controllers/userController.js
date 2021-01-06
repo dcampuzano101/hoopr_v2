@@ -204,16 +204,19 @@ const updateUser = asyncHandler(async (req, res) => {
         },
       };
       try {
+        ;
+        // const run = await Run.findById(runId);
         const { data } = await axios.post(
           "http://localhost:5000/api/stripe/refund",
           {
             amount: order.amountPaid * 100,
             paymentIntent: order.paymentIntent,
             user: user,
-            runId: runId,
+            run: req.body.run,
           },
           config
         );
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
