@@ -34,6 +34,18 @@ app.use("/api/email", emailRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
+import { CronJob } from "cron";
+
+const job = new CronJob(
+  "* * * * * *",
+  () => {
+    console.log("test test test test");
+  },
+  null,
+  true,
+  "America/Chicago"
+);
+// job.start();
 const PORT = process.env.PORT || 5000;
 
 app.listen(
