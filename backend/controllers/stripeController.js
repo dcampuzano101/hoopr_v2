@@ -124,7 +124,6 @@ const amountToRefund = (run) => {
 
 const createRefund = async (req, res) => {
   // validate amountToRefund.
-  console.log(req);
   if (req.method === "POST") {
     try {
       const amount = amountToRefund(req.body.run);
