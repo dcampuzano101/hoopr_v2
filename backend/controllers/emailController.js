@@ -2,6 +2,8 @@ import asyncHandler from "express-async-handler";
 import nodemailer from "nodemailer";
 import moment from "moment";
 import Run from "../models/runModel.js";
+import User from "../models/userModel.js";
+import { CronJob } from "cron";
 
 const validateEmail = (email) => {
   if (!email) return false;
@@ -20,6 +22,87 @@ const validateEmail = (email) => {
   if (domain.some((part) => part.length > 63)) return false;
 
   return true;
+};
+
+// @description: sends reminder emails daily to runs occurring the following day.
+
+const findRunsForTomorrow = async () => {
+  // date: moment("01-07-2021", "MM-DD-YYYY").format("LL"),
+  // const todaysDate = moment().format("LL")
+  const tomorrow = moment().add(1, "days").format("LL");
+  try {
+    const runs = await Run.find({ date: tomorrow });
+    for (let i = 0; i < runs.length; i++) {
+      let run = runs[i];
+
+      const runUsers = await User.find(
+        {
+          _id: { $in: run.users },
+        },
+        "email username"
+      ).select(["-_id"]);
+
+      runUsers.forEach(async (user) => {
+        try {
+          await setTimeout(reminderEmail(run, user), 5000);
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    }
+  } catch (error) {
+    console.error(`findRuns function failed: ${error}`);
+  }
+};
+
+const job = new CronJob(
+  "0 18 * * *",
+  findRunsForTomorrow,
+  null,
+  true,
+  "America/Chicago"
+);
+
+// job.start();
+
+const reminderEmail = async (run, user) => {
+  if (validateEmail(user.email)) {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        type: "OAuth2",
+        user: "admin@hoopr.io",
+        serviceClient: process.env.GMAIL_CLIENT_ID,
+        privateKey: process.env.GMAIL_PRIVATE_KEY,
+      },
+    });
+    const mailOptions = {
+      from: "admin@hoopr.io",
+      to: user.email,
+      subject: "Reminder: You're hooping tomorrow!",
+      text: `${
+        user.username
+      } get ready! Bring your A game, water, and lace up your kicks. You're signed up to run @ ${
+        run.location
+      } on ${run.date} from ${moment(run.startTime).format("LT")} to ${moment(
+        run.endTime
+      ).format("LT")}.`,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+        res.status(200).send(info);
+      }
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid email data");
+  }
 };
 
 // @description: sends confirmation email
@@ -42,7 +125,7 @@ const confirmationEmail = async (req, res) => {
     });
     const mailOptions = {
       from: "admin@hoopr.io",
-      to: user.email || "admin@hoopr.io",
+      to: user.email,
       subject: "Congrats! You're all signed up!",
       text: `${user.username} get ready! Confirming your run @ ${
         run.location
@@ -65,13 +148,8 @@ const confirmationEmail = async (req, res) => {
   }
 };
 
-const reminderEmail = asyncHandler(async (req, res) => {
-  console.log(req);
-});
-
 const cancellationEmail = async (req, res) => {
   const { user, run } = req.body;
-  ;
   if (validateEmail(user.email)) {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -86,7 +164,7 @@ const cancellationEmail = async (req, res) => {
     });
     const mailOptions = {
       from: "admin@hoopr.io",
-      to: user.email || "admin@hoopr.io",
+      to: user.email,
       subject: "Cancellation Confirmed",
       text: `${
         user.username
