@@ -27,8 +27,6 @@ const validateEmail = (email) => {
 // @description: sends reminder emails daily to runs occurring the following day.
 
 const findRunsForTomorrow = async () => {
-  // date: moment("01-07-2021", "MM-DD-YYYY").format("LL"),
-  // const todaysDate = moment().format("LL")
   const tomorrow = moment().add(1, "days").format("LL");
   try {
     const runs = await Run.find({ date: tomorrow });
@@ -41,14 +39,11 @@ const findRunsForTomorrow = async () => {
         },
         "email username"
       ).select(["-_id"]);
-
-      runUsers.forEach(async (user) => {
-        try {
-          await setTimeout(reminderEmail(run, user), 5000);
-        } catch (error) {
-          console.log(error);
-        }
-      });
+      try {
+        await reminderEmail(run, runUsers);
+      } catch (error) {
+        console.log(error);
+      }
     }
   } catch (error) {
     console.error(`findRuns function failed: ${error}`);
@@ -65,8 +60,9 @@ const job = new CronJob(
 
 // job.start();
 
-const reminderEmail = async (run, user) => {
-  if (validateEmail(user.email)) {
+const reminderEmail = async (run, users) => {
+  // CHECK WHAT USERS IS STRUCTURED LIKE
+  try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -80,11 +76,9 @@ const reminderEmail = async (run, user) => {
     });
     const mailOptions = {
       from: "admin@hoopr.io",
-      to: user.email,
+      to: users,
       subject: "Reminder: You're hooping tomorrow!",
-      text: `${
-        user.username
-      } get ready! Bring your A game, water, and lace up your kicks. You're signed up to run @ ${
+      text: `Get ready! Bring your A game, water, and lace up your kicks. You're signed up to run @ ${
         run.location
       } on ${run.date} from ${moment(run.startTime).format("LT")} to ${moment(
         run.endTime
@@ -99,7 +93,7 @@ const reminderEmail = async (run, user) => {
         res.status(200).send(info);
       }
     });
-  } else {
+  } catch (error) {
     res.status(400);
     throw new Error("Invalid email data");
   }
