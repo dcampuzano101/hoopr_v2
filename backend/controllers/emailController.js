@@ -1,4 +1,3 @@
-import asyncHandler from "express-async-handler";
 import nodemailer from "nodemailer";
 import moment from "moment";
 import Run from "../models/runModel.js";
@@ -37,7 +36,7 @@ const findRunsForTomorrow = async () => {
         {
           _id: { $in: run.users },
         },
-        "email username"
+        "email"
       ).select(["-_id"]);
       try {
         await reminderEmail(run, runUsers);
