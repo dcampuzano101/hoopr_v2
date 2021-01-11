@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateRun } from "../actions/runActions";
 import {
@@ -18,6 +18,8 @@ import {
 import avatar from "../assets/user-avatar.png";
 import { Delete } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
+import Modal from "./Modal";
+
 import { openModal, closeModal } from "../actions/modalActions";
 
 const useStyles = makeStyles((theme) => ({
@@ -67,6 +69,12 @@ const CurrentUsers = ({
 
   const modal = useSelector((state) => state.modal);
   const { isActive } = modal;
+  const [removeUserId, setRemoveUserId] = useState(null);
+
+  const deleteModalHandler = (userId) => {
+    setRemoveUserId(userId);
+    dispatch(openModal());
+  };
 
   const displayUsers = () => {
     const result = [];
@@ -80,6 +88,14 @@ const CurrentUsers = ({
             <p>modal</p>
             <button onClick={() => dispatch(closeModal())}>close</button>
           </>
+        )}
+        {removeUserId !== null && isActive && (
+          <Modal
+            type="delete"
+            id={removeUserId}
+            onConfirm={deleteUserHandler}
+            heading="Permanently Delete User"
+          />
         )}
         {result.map((user) => (
           <React.Fragment key={user._id}>
@@ -102,8 +118,7 @@ const CurrentUsers = ({
               <TableCell align="right">
                 <IconButton
                   aria-label="delete"
-                  //onClick={() => setDeleteAlert(user._id)}
-                  onClick={() => dispatch(openModal("deleteUser"))}
+                  onClick={() => deleteModalHandler(user._id)}
                 >
                   <Delete />
                 </IconButton>

@@ -219,7 +219,9 @@ const AddUsers = ({ allUsers, run, loadingUsers, success }) => {
               fullWidth
               variant="contained"
               color="primary"
-              disabled={newUsers.length === run.users.length}
+              disabled={
+                newUsers.length === run.users.length || run.users.length === 15
+              }
               className={classes.submit}
               onClick={() => handleRunUpdate()}
             >
