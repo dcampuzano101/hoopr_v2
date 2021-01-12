@@ -2,6 +2,8 @@
 node_modules
 node_modules/
 frontend/node_modules
+frontend_ts_v2/node_modules
+
 /.pnp
 .pnp.js
 
