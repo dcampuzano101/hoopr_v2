@@ -3,6 +3,7 @@ import moment from "moment";
 import Run from "../models/runModel.js";
 import User from "../models/userModel.js";
 import { CronJob } from "cron";
+import TinyURL from "tinyurl";
 
 const validateEmail = (email) => {
   if (!email) return false;
@@ -21,6 +22,11 @@ const validateEmail = (email) => {
   if (domain.some((part) => part.length > 63)) return false;
 
   return true;
+};
+
+const spacifyText = (string) => {
+  let result = string.split(" ").join("%20");
+  return result;
 };
 
 // @description: sends reminder emails daily to runs occurring the following day.
@@ -103,8 +109,52 @@ const reminderEmail = async (run, users) => {
 // @access: public
 
 const confirmationEmail = async (req, res) => {
-  const { user, run } = req.body;
-  if (validateEmail(user.email)) {
+  // const { user, run } = req.body;
+  // if (validateEmail(user.email)) {
+
+  const run = {
+    price: 10,
+    capacity: 15,
+    _id: "5ffb72c92c202312daa7c601",
+    name: "Wednesday Morning Run",
+    location: "The Post",
+    date: "January 11, 2021",
+    startTime: "Sun Jan 10 2021 08:00:00 GMT-0600",
+    endTime: "Sun Jan 10 2021 10:00:00 GMT-0600",
+    userId: "5ffb72c92c202312daa7c5ed",
+  };
+  // href={https://calendar.google.com/calendar/r/eventedit?text=${spacifyText(
+  // run.name
+  // )}&details=${spacifyText(run.name)}%20at%20${spacifyText(
+  //   run.location
+  // )}&location=${spacifyText(
+  //   run.location
+  // )}&dates=${dates}}
+  const startTime = `${moment(run.date).format("YYYYMMDD")}T${moment(
+    run.startTime
+  ).format("HHmmSS")}`;
+  const endTime = `${moment(run.date).format("YYYYMMDD")}T${moment(
+    run.endTime
+  ).format("HHmmSS")}`;
+  const dates = startTime + "/" + endTime;
+  // const data = {
+  //   url: `{https://calendar.google.com/calendar/r/eventedit?text=${spacifyText(
+  //     run.name
+  //   )}&details=${spacifyText(run.name)}%20at%20${spacifyText(
+  //     run.location
+  //   )}&location=${spacifyText(run.location)}&dates=${dates}`,
+  //   alias: "add-to-cal",
+  // };
+  let shortenedUrl = await TinyURL.shorten(
+    `https://calendar.google.com/calendar/r/eventedit?text=${spacifyText(
+      run.name
+    )}&details=${spacifyText(run.name)}%20at%20${spacifyText(
+      run.location
+    )}&location=${spacifyText(run.location)}&dates=${dates}`
+  );
+
+  debugger;
+  try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -116,16 +166,27 @@ const confirmationEmail = async (req, res) => {
         privateKey: process.env.GMAIL_PRIVATE_KEY,
       },
     });
+    const startTime = `${moment(run.date).format("YYYYMMDD")}T${moment(
+      run.startTime
+    ).format("HHmmSS")}`;
+    const endTime = `${moment(run.date).format("YYYYMMDD")}T${moment(
+      run.endTime
+    ).format("HHmmSS")}`;
+    const dates = startTime + "/" + endTime;
+    debugger;
     const mailOptions = {
       from: "admin@hoopr.io",
-      to: user.email,
+      to: "dcampuzano101@gmail.com",
       subject: "Congrats! You're all signed up!",
-      text: `${user.username} get ready! Confirming your run @ ${
-        run.location
-      } on ${run.date} from ${moment(run.startTime).format("LT")} to ${moment(
-        run.endTime
-      ).format("LT")}.`,
+      text: "plaintext fallback",
+      html: `<h3>${"merkyoass"} get ready!</h3>
+        <h5>Confirming your run @ ${run.location} on ${run.date} from ${moment(
+        run.startTime
+      ).format("LT")} to ${moment(run.endTime).format("LT")}.</h5>
+      <a href="${shortenedUrl}">Add to your Google Calendar</a>`,
     };
+    console.log(mailOptions);
+    debugger;
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -135,10 +196,13 @@ const confirmationEmail = async (req, res) => {
         res.status(200).send(info);
       }
     });
-  } else {
-    res.status(400);
-    throw new Error("Invalid email data");
+  } catch (error) {
+    console.log(error);
   }
+  // } else {
+  //   res.status(400);
+  //   throw new Error("Invalid email data");
+  // }
 };
 
 const cancellationEmail = async (req, res) => {
