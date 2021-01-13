@@ -1,6 +1,22 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-/*
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: "#ffffff",
+      main: "#fafafa",
+      dark: "#c7c7c7",
+      contrastText: "#000000",
+    },
+    secondary: {
+      light: "#2c2f48",
+      main: "#040521",
+      dark: "#000000",
+      contrastText: "#ffffff",
+    },
+  },
+
+  /*
 The typography object comes with 13 variants by default:
 h1
 h2
@@ -16,25 +32,15 @@ button
 caption
 overline
 */
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#FFFF",
-    },
-    secondary: {
-      main: "#FFFF",
-    },
-  },
   typography: {
-    subtitle1: {
-      fontSize: 12,
+    fontFamily: ["Rubik", "Karla", "serif"].join(","),
+    h1: {
+      fontFamily: "Rubik",
     },
     body1: {
-      fontWeight: 500,
-    },
-    button: {
-      fontStyle: "italic",
+      fontFamily: "Karla",
     },
   },
 });
+
+export default theme;
