@@ -9,7 +9,7 @@
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "server:debug": "nodemon --inspect backend/server.js",
-    "client": "npm start --prefix frontend",
+    "client": "npm start --prefix frontend_ts_v2",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
