@@ -55,7 +55,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
 
 const Dropdown: React.FC<DropdownProps> = ({ options, name }) => {
   const classes = useStyles()
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
     <div
@@ -72,8 +72,8 @@ const Dropdown: React.FC<DropdownProps> = ({ options, name }) => {
         raised={true}
         className={`${classes.optionsWrapper} ${isOpen ? classes.show : ''}`}
       >
-        {options.map((option) => (
-          <div className={classes.optionWrap}>
+        {options.map((option, idx) => (
+          <div key={idx} className={classes.optionWrap}>
             <Typography variant="body2">{option.title}</Typography>
             <Typography variant="subtitle1">{option.subTitle}</Typography>
           </div>
