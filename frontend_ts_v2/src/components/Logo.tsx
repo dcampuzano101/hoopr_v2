@@ -23,6 +23,9 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   },
   headerLogoWrapper: {
     borderRadius: '3px'
+  },
+  linkStyle: {
+    textDecoration: 'none'
   }
 }))
 
@@ -35,7 +38,7 @@ const Logo: React.FC<LogoProps> = ({ logoText }) => {
   return (
     <div className={classes.headerWrapper}>
       <div className={classes.headerLogoWrapper}>
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/" className={classes.linkStyle}>
           <Typography variant="h1">{logoText}</Typography>
         </Link>
       </div>

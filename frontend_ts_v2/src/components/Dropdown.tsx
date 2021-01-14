@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Typography, Paper, Button, Card } from '@material-ui/core'
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
-import { ArrowDropDown, ArrowDropUp } from '@material-ui/icons'
+import { ExpandMore } from '@material-ui/icons'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 
@@ -28,7 +27,8 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   optionsWrapper: {
     position: 'absolute',
     display: 'none',
-    top: '35px',
+    top: '45px',
+    left: '5px',
     flexDirection: 'column',
     width: 'max-content',
     border: '1px solid black',
@@ -44,10 +44,15 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
       cursor: 'pointer'
     }
   },
+  dropdownStyle: {
+    padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
+    display: 'flex',
+    alignItems: 'center'
+  },
 
   dropdownUp: {
-    top: 'calc(-.5rem + 2.45rem)',
-    left: '1.30rem',
+    top: 'calc(-.5rem + 3.09rem)',
+    left: '2.3rem',
     width: '8px',
     height: '8px',
     position: 'absolute',
@@ -61,15 +66,19 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
 
 const Dropdown: React.FC<DropdownProps> = ({ options, name }) => {
   const classes = useStyles()
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
     <div
       className={classes.dropdownWrapper}
-      // onMouseEnter={() => setIsOpen(true)}
-      // onMouseLeave={() => setIsOpen(false)}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+      tabIndex={-1}
     >
-      <Typography variant="body2">{name}</Typography>
+      <Typography variant="body2" className={classes.dropdownStyle}>
+        {name}
+        <ExpandMore style={{ fontSize: '1.1rem' }} />
+      </Typography>
       <div
         className={classes.dropdownUp}
         style={{ display: isOpen ? 'block' : 'none' }}
@@ -85,7 +94,6 @@ const Dropdown: React.FC<DropdownProps> = ({ options, name }) => {
           </div>
         ))}
       </Card>
-      <ArrowDropDown />
     </div>
   )
 }

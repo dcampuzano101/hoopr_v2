@@ -45,7 +45,8 @@ overline
     body2: {
       fontFamily: 'Karla',
       fontSize: '1.1rem',
-      lineHeight: 'calc(24 / 16)'
+      lineHeight: 'calc(24 / 16)',
+      color: '#040521'
     },
     subtitle1: {
       fontFamily: 'Karla',

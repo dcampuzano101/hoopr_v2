@@ -15,6 +15,27 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   secondaryLinks: {
     display: 'flex',
     justifyContent: 'flex-end'
+  },
+  linkStyle: {
+    textDecoration: 'none',
+    // padding: '0 5%',
+    display: 'flex',
+    alignItems: 'center',
+    '&:hover': {
+      backgroundColor: palette.primary.dark,
+      cursor: 'pointer'
+    },
+    borderRadius: '3px',
+    padding: 'calc(.625rem - 1px) calc(1rem - 1px)'
+  },
+  button: {
+    backgroundColor: '#2276fc',
+    marginLeft: '20px',
+    textDecoration: 'none',
+    '&:hover': {
+      backgroundColor: '#1e63d0',
+      cursor: 'pointer'
+    }
   }
 }))
 
@@ -39,13 +60,28 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
     <nav className={classes.navBarRoot}>
       <Grid item xs={2} md={4} className={classes.primaryLinks}>
         <Dropdown name="Platform" options={dropdownOptions} />
-        <Button>Link 2</Button>
-        <Button>Link 3</Button>
+        <Link to="/pricing" className={classes.linkStyle}>
+          <Typography variant="body2">Pricing</Typography>
+        </Link>
+        <Link to="/blog" className={classes.linkStyle}>
+          <Typography variant="body2">Blog</Typography>
+        </Link>
       </Grid>
       <Grid item xs={10} className={classes.secondaryLinks}>
-        <Button>Secondary Link 1</Button>
-        <Button>Secondary Link 2</Button>
-        <Button>Secondary Link 3</Button>
+        <Link to="/contact" className={classes.linkStyle}>
+          <Typography variant="body2">Contact</Typography>
+        </Link>
+        <Link to="/login" className={classes.linkStyle}>
+          <Typography variant="body2">Log in</Typography>
+        </Link>
+        <Button href="/demo" className={classes.button}>
+          <Typography
+            variant="body2"
+            style={{ color: '#fafafa', textTransform: 'none' }}
+          >
+            Get started
+          </Typography>
+        </Button>
       </Grid>
     </nav>
   )

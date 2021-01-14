@@ -1,8 +1,10 @@
 import React from 'react'
-import { Typography, Grid, Container } from '@material-ui/core'
+import { Grid, useMediaQuery } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
 import NavBar from './NavBar'
+import { useTheme } from '@material-ui/core/styles'
+import { Menu } from '@material-ui/icons'
+
 import Logo from './Logo'
 
 const useStyles = makeStyles(({ palette }: Theme) => ({
@@ -29,18 +31,32 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = ({}) => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
   const classes = useStyles()
   return (
-    <>
-      <Grid container className={classes.headerRoot}>
-        <Grid item xs={2} md={2} lg={2}>
-          <Logo logoText="Hoopr" />
+    <Grid container className={classes.headerRoot}>
+      <Grid item xs={2} md={2} lg={2}>
+        <Logo logoText="Hoopr" />
+      </Grid>
+
+      {isMobile ? (
+        <Grid
+          item
+          xs={10}
+          md={10}
+          lg={10}
+          style={{ display: 'flex', justifyContent: 'flex-end' }}
+        >
+          <Menu />
         </Grid>
+      ) : (
         <Grid item xs={10} md={10} lg={10}>
           <NavBar />
         </Grid>
-      </Grid>
-    </>
+      )}
+    </Grid>
   )
 }
 
