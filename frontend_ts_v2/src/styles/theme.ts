@@ -1,19 +1,19 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: "#ffffff",
-      main: "#fafafa",
-      dark: "#c7c7c7",
-      contrastText: "#000000",
+      light: '#ffffff',
+      main: '#fafafa',
+      dark: '#c7c7c7',
+      contrastText: '#000000'
     },
     secondary: {
-      light: "#2c2f48",
-      main: "#040521",
-      dark: "#000000",
-      contrastText: "#ffffff",
-    },
+      light: '#2c2f48',
+      main: '#040521',
+      dark: '#000000',
+      contrastText: '#ffffff'
+    }
   },
 
   /*
@@ -33,14 +33,24 @@ caption
 overline
 */
   typography: {
-    fontFamily: ["Rubik", "Karla", "serif"].join(","),
+    fontFamily: ['Rubik', 'Karla', 'serif'].join(','),
     h1: {
-      fontFamily: "Rubik",
+      fontFamily: 'Rubik',
+      fontSize: '3rem',
+      fontWeight: 500,
+      lineHeight: '1.167',
+      textTransform: 'lowercase',
+      letterSpacing: '-3.5px'
     },
-    body1: {
-      fontFamily: "Karla",
+    body2: {
+      fontFamily: 'Karla',
+      fontSize: '1.1rem'
     },
-  },
-});
+    subtitle1: {
+      fontFamily: 'Karla',
+      fontSize: '.8rem'
+    }
+  }
+})
 
-export default theme;
+export default theme
