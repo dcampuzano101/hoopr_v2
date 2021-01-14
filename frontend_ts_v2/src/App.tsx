@@ -1,27 +1,30 @@
-import React from "react";
-import { Typography } from "@material-ui/core";
-import { makeStyles, useTheme, Theme } from "@material-ui/core/styles";
-import theme from "./styles/theme";
+import React from 'react'
+import { Typography } from '@material-ui/core'
+import { makeStyles, Theme } from '@material-ui/core/styles'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Header from './components/Header'
 
-const useStyles = makeStyles(({ palette }: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    color: palette.secondary.light,
-  },
-}));
+    display: 'flex',
+    flexDirection: 'column',
+    color: theme.palette.secondary.light,
+    backgroundColor: theme.palette.primary.dark
+  }
+}))
 
 interface AppProps {}
 
 const App: React.FC<AppProps> = ({}) => {
-  const classes = useStyles(theme);
+  const classes = useStyles()
   return (
-    <>
-      <Typography className={classes.root} variant="h1">
+    <Router>
+      <Header />
+      {/* <Typography className={classes.root} variant="body1">
         Hello Welcome to My TS React App
-      </Typography>
-    </>
-  );
-};
+      </Typography> */}
+    </Router>
+  )
+}
 
-export default App;
+export default App
