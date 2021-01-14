@@ -28,15 +28,30 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   optionsWrapper: {
     position: 'absolute',
     display: 'none',
-    top: '30px',
+    top: '35px',
     flexDirection: 'column',
-    width: '150%'
+    width: '150%',
+    border: '1px solid black'
   },
   show: {
     display: 'flex'
   },
-  optionWrap: {}
+  optionWrap: {},
+
+  dropdownUp: {
+    top: 'calc(-.5rem + 2.3rem)',
+    left: '1.30rem',
+    width: '10px',
+    height: '10px',
+    position: 'absolute',
+    transform: 'rotate(225deg)',
+    borderBottom: '1px solid black',
+    borderRight: '1px solid black',
+    zIndex: 10000,
+    backgroundColor: 'white'
+  }
 }))
+// ${isOpen ? classes.showArrow : ''}
 
 const Dropdown: React.FC<DropdownProps> = ({ options, name }) => {
   const classes = useStyles()
@@ -49,6 +64,10 @@ const Dropdown: React.FC<DropdownProps> = ({ options, name }) => {
       onMouseLeave={() => setIsOpen(false)}
     >
       <Typography variant="body2">{name}</Typography>
+      <div
+        className={classes.dropdownUp}
+        style={{ display: isOpen ? 'block' : 'none' }}
+      ></div>
       <Card
         raised={true}
         className={`${classes.optionsWrapper} ${isOpen ? classes.show : ''}`}
@@ -60,7 +79,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options, name }) => {
           </div>
         ))}
       </Card>
-      {isOpen ? <ArrowDropUp /> : <ArrowDropDown />}
+      <ArrowDropDown />
     </div>
   )
 }
