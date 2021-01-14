@@ -30,19 +30,26 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     display: 'none',
     top: '35px',
     flexDirection: 'column',
-    width: '150%',
-    border: '1px solid black'
+    width: 'max-content',
+    border: '1px solid black',
+    padding: '5% 0'
   },
   show: {
     display: 'flex'
   },
-  optionWrap: {},
+  optionWrap: {
+    padding: '0 10%',
+    '&:hover': {
+      backgroundColor: palette.primary.dark,
+      cursor: 'pointer'
+    }
+  },
 
   dropdownUp: {
-    top: 'calc(-.5rem + 2.3rem)',
+    top: 'calc(-.5rem + 2.45rem)',
     left: '1.30rem',
-    width: '10px',
-    height: '10px',
+    width: '8px',
+    height: '8px',
     position: 'absolute',
     transform: 'rotate(225deg)',
     borderBottom: '1px solid black',
@@ -51,17 +58,16 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     backgroundColor: 'white'
   }
 }))
-// ${isOpen ? classes.showArrow : ''}
 
 const Dropdown: React.FC<DropdownProps> = ({ options, name }) => {
   const classes = useStyles()
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(true)
 
   return (
     <div
       className={classes.dropdownWrapper}
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+      // onMouseEnter={() => setIsOpen(true)}
+      // onMouseLeave={() => setIsOpen(false)}
     >
       <Typography variant="body2">{name}</Typography>
       <div

@@ -7,7 +7,6 @@ import Dropdown from './Dropdown'
 const useStyles = makeStyles(({ palette }: Theme) => ({
   navBarRoot: {
     display: 'flex',
-    border: '1px solid black',
     borderRadius: '3px'
   },
   primaryLinks: {

@@ -5,7 +5,7 @@ const theme = createMuiTheme({
     primary: {
       light: '#ffffff',
       main: '#fafafa',
-      dark: '#c7c7c7',
+      dark: '#edebeb',
       contrastText: '#000000'
     },
     secondary: {
@@ -44,7 +44,8 @@ overline
     },
     body2: {
       fontFamily: 'Karla',
-      fontSize: '1.1rem'
+      fontSize: '1.1rem',
+      lineHeight: 'calc(24 / 16)'
     },
     subtitle1: {
       fontFamily: 'Karla',
