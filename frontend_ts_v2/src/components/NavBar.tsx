@@ -74,7 +74,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
         <Link to="/login" className={classes.linkStyle}>
           <Typography variant="body2">Log in</Typography>
         </Link>
-        <Button href="/demo" className={classes.button}>
+        <Button href="/get-started" className={classes.button}>
           <Typography
             variant="body2"
             style={{ color: '#fafafa', textTransform: 'none' }}

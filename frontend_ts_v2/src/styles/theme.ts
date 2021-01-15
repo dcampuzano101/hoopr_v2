@@ -46,7 +46,7 @@ overline
       fontFamily: 'Karla',
       fontSize: '1.1rem',
       lineHeight: 'calc(24 / 16)',
-      color: '#040521'
+      color: '#2c2f48'
     },
     subtitle1: {
       fontFamily: 'Karla',
