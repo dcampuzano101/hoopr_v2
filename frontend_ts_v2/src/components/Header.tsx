@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, useMediaQuery } from '@material-ui/core'
+import { Grid, useMediaQuery, Card } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import NavBar from './NavBar'
 import { useTheme } from '@material-ui/core/styles'
@@ -47,34 +47,36 @@ const Header: React.FC<HeaderProps> = ({}) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const classes = useStyles()
   return (
-    <Grid container className={classes.headerRoot}>
-      <Grid item xs={2} md={2} lg={2}>
-        <Logo logoText="Hoopr" />
-      </Grid>
+    <Card raised={true}>
+      <Grid container className={classes.headerRoot}>
+        <Grid item xs={2} md={2} lg={2}>
+          <Logo logoText="Hoopr" />
+        </Grid>
 
-      {isMobile ? (
-        <Grid
-          item
-          xs={10}
-          md={10}
-          lg={10}
-          style={{ display: 'flex', justifyContent: 'flex-end' }}
-        >
-          <Menu onClick={() => setIsMenuOpen((prevState) => !prevState)} />
-          {isMenuOpen ? (
-            <Dropdown
-              mobile={true}
-              options={mobileDropdownOptions}
-              open={isMenuOpen}
-            />
-          ) : null}
-        </Grid>
-      ) : (
-        <Grid item xs={10} md={10} lg={10}>
-          <NavBar />
-        </Grid>
-      )}
-    </Grid>
+        {isMobile ? (
+          <Grid
+            item
+            xs={10}
+            md={10}
+            lg={10}
+            style={{ display: 'flex', justifyContent: 'flex-end' }}
+          >
+            <Menu onClick={() => setIsMenuOpen((prevState) => !prevState)} />
+            {isMenuOpen ? (
+              <Dropdown
+                mobile={true}
+                options={mobileDropdownOptions}
+                open={isMenuOpen}
+              />
+            ) : null}
+          </Grid>
+        ) : (
+          <Grid item xs={10} md={10} lg={10}>
+            <NavBar />
+          </Grid>
+        )}
+      </Grid>
+    </Card>
   )
 }
 

@@ -13,9 +13,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.dark
   },
   main: {
-    height: '100vh',
-    padding: '5%',
-    border: '1px solid green'
+    height: '100vh'
+    // padding: '5%',
+    // border: '1px solid green'
   }
 }))
 
@@ -25,8 +25,8 @@ const App: React.FC<AppProps> = ({}) => {
   const classes = useStyles()
   return (
     <Router>
-      <Header />
       <main className={classes.main}>
+        <Header />
         <Hero />
       </main>
     </Router>

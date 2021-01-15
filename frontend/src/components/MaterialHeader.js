@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import {
   AppBar,
   Toolbar,
@@ -8,100 +8,100 @@ import {
   MenuItem,
   Button,
   useMediaQuery,
-  Typography,
-} from "@material-ui/core";
+  Typography
+} from '@material-ui/core'
 import {
   AccountCircle,
   ShoppingCart,
-  SupervisorAccount,
-} from "@material-ui/icons/";
-import hooprLogo from "../assets/hoopr_logo.png";
+  SupervisorAccount
+} from '@material-ui/icons/'
+import hooprLogo from '../assets/hoopr_logo.png'
 
-import MenuIcon from "@material-ui/icons/Menu";
+import MenuIcon from '@material-ui/icons/Menu'
 
-import { useTheme } from "@material-ui/core/styles";
-import { withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useTheme } from '@material-ui/core/styles'
+import { withRouter } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
   logoButton: {
-    style: "none",
-    "&:hover": {
-      backgroundColor: theme.palette.primary.main,
-    },
+    style: 'none',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main
+    }
   },
   iconFilter: {
     filter:
-      "invert(100%) sepia(49%) saturate(3315%) hue-rotate(177deg) brightness(112%) contrast(94%)",
+      'invert(100%) sepia(49%) saturate(3315%) hue-rotate(177deg) brightness(112%) contrast(94%)'
   },
   root: {},
   toolBar: {
-    display: "flex",
-    justifyContent: "space-between",
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   logoImg: {
-    width: "125%",
-    height: "50%",
+    width: '125%',
+    height: '50%',
     filter:
-      "invert(100%) sepia(49%) saturate(3315%) hue-rotate(177deg) brightness(112%) contrast(94%)",
-  },
-}));
+      'invert(100%) sepia(49%) saturate(3315%) hue-rotate(177deg) brightness(112%) contrast(94%)'
+  }
+}))
 
 const MaterialHeader = ({ history }) => {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const classes = useStyles()
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
-  const isAdmin = userInfo ? (userInfo.isAdmin ? true : false) : false;
+  const isAdmin = userInfo ? (userInfo.isAdmin ? true : false) : false
 
   const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleMenuClick = (pageURL) => {
-    history.push(pageURL);
-    setAnchorEl(null);
-  };
+    history.push(pageURL)
+    setAnchorEl(null)
+  }
 
   const HeaderLinks = () => (
     <div
-      style={{ display: "flex", width: "18%", justifyContent: "space-evenly" }}
+      style={{ display: 'flex', width: '18%', justifyContent: 'space-evenly' }}
     >
-      <IconButton onClick={() => handleMenuClick("/profile")}>
+      <IconButton onClick={() => handleMenuClick('/profile')}>
         <AccountCircle className={classes.iconFilter} fontSize="large" />
       </IconButton>
-      <IconButton onClick={() => handleMenuClick("/cart")}>
+      <IconButton onClick={() => handleMenuClick('/cart')}>
         <ShoppingCart className={classes.iconFilter} fontSize="large" />
       </IconButton>
       {isAdmin ? (
-        <IconButton onClick={() => handleMenuClick("/admin")}>
+        <IconButton onClick={() => handleMenuClick('/admin')}>
           <SupervisorAccount className={classes.iconFilter} fontSize="large" />
         </IconButton>
       ) : null}
     </div>
-  );
+  )
   return (
     <div className={classes.root}>
       <AppBar
         style={{
           backgroundColor: theme.palette.primary.main,
-          marginBottom: "1rem",
+          marginBottom: '1rem'
         }}
         position="static"
       >
         <Toolbar className={classes.toolBar}>
           <Button
             className={classes.logoButton}
-            onClick={() => handleMenuClick("/")}
+            onClick={() => handleMenuClick('/')}
           >
             <h1
               className="bannerShadow"
-              style={{ fontSize: "5rem", lineHeight: "5rem", height: "5rem" }}
+              style={{ fontSize: '5rem', lineHeight: '5', height: '5rem' }}
             >
               HOOPR
             </h1>
@@ -121,25 +121,25 @@ const MaterialHeader = ({ history }) => {
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
+                  vertical: 'top',
+                  horizontal: 'right'
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
+                  vertical: 'top',
+                  horizontal: 'right'
                 }}
                 open={open}
                 onClose={() => setAnchorEl(null)}
               >
-                <MenuItem onClick={() => handleMenuClick("profile")}>
+                <MenuItem onClick={() => handleMenuClick('profile')}>
                   Profile
                 </MenuItem>
-                <MenuItem onClick={() => handleMenuClick("cart")}>
+                <MenuItem onClick={() => handleMenuClick('cart')}>
                   Cart
                 </MenuItem>
                 {isAdmin ? (
-                  <MenuItem onClick={() => handleMenuClick("admin")}>
+                  <MenuItem onClick={() => handleMenuClick('admin')}>
                     Admin
                   </MenuItem>
                 ) : null}
@@ -151,7 +151,7 @@ const MaterialHeader = ({ history }) => {
         </Toolbar>
       </AppBar>
     </div>
-  );
-};
+  )
+}
 
-export default withRouter(MaterialHeader);
+export default withRouter(MaterialHeader)

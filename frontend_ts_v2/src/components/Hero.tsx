@@ -1,14 +1,16 @@
 import React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Grid, Typography } from '@material-ui/core'
-import heroImg from '../assets/images/basketball_illustration_1.jpg'
+import heroImg from '../assets/images/illustration-hero.png'
 
 const useStyles = makeStyles(({ palette, breakpoints, typography }: Theme) => ({
   heroWrapper: {
-    maxWidth: '820px',
-    border: '1px solid black',
-    margin: '0 auto',
-    height: '75%'
+    height: '100%',
+    display: 'flex',
+    padding: '0 10%',
+    alignItems: 'center',
+    background:
+      'linear-gradient(to right, #556270, #4ECDC4)' /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   },
   heroImg: {
     width: '50%'

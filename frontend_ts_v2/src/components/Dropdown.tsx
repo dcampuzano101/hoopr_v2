@@ -27,7 +27,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     '&:hover': {
       cursor: 'pointer'
     },
-    position: 'relative'
+    position: 'absolute'
   },
   optionsWrapperLarge: {
     position: 'absolute',
@@ -109,7 +109,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
 
 const Dropdown: React.FC<DropdownProps> = ({ options, name, mobile, open }) => {
   const classes = useStyles()
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(true)
 
   const displaySubLinks = (subLinks: string[] | undefined) => {
     return (
@@ -172,8 +172,8 @@ const Dropdown: React.FC<DropdownProps> = ({ options, name, mobile, open }) => {
       ) : (
         <div
           className={classes.dropdownWrapper}
-          onMouseEnter={() => setIsOpen(true)}
-          onMouseLeave={() => setIsOpen(false)}
+          // onMouseEnter={() => setIsOpen(true)}
+          // onMouseLeave={() => setIsOpen(false)}
         >
           <Typography variant="body2" className={classes.dropdownStyle}>
             {name}
