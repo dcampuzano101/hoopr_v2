@@ -11,6 +11,7 @@ interface Option {
   heading?: string
   subLinks?: string[]
 }
+// mobileOptions vs regularOptions declare different types
 
 interface DropdownProps {
   options: Option[]
@@ -110,17 +111,20 @@ const Dropdown: React.FC<DropdownProps> = ({ options, name, mobile, open }) => {
   const classes = useStyles()
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const displaySubLinks = (subLinks: any) => {
-    return subLinks.map((link: string | undefined) => (
-      <Link
-        to={`/${link?.toLowerCase()}`}
-        style={{ textDecoration: 'none', color: '#2c2f48', padding: '3% 0' }}
-      >
-        <Typography variant="subtitle1" style={{ fontSize: '1.1rem' }}>
-          {link}
-        </Typography>
-      </Link>
-    ))
+  const displaySubLinks = (subLinks: string[] | undefined) => {
+    return (
+      subLinks &&
+      subLinks.map((link: string | undefined) => (
+        <Link
+          to={`/${link?.toLowerCase()}`}
+          style={{ textDecoration: 'none', color: '#2c2f48', padding: '3% 0' }}
+        >
+          <Typography variant="subtitle1" style={{ fontSize: '1.1rem' }}>
+            {link}
+          </Typography>
+        </Link>
+      ))
+    )
   }
 
   return (
