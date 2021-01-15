@@ -61,8 +61,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   optionWrapMobile: {
     padding: '5% 10%',
     '&:hover': {
-      backgroundColor: palette.primary.light,
-      cursor: 'pointer'
+      backgroundColor: palette.primary.light
     },
     display: 'flex',
     flexDirection: 'column',
