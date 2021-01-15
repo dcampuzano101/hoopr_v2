@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Paper, Button, Card } from '@material-ui/core'
+import { Typography, Paper, Button, Card, Grid } from '@material-ui/core'
 import { ExpandMore } from '@material-ui/icons'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
@@ -61,7 +61,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   optionWrapMobile: {
     padding: '5% 10%',
     '&:hover': {
-      backgroundColor: palette.primary.dark,
+      backgroundColor: palette.primary.light,
       cursor: 'pointer'
     },
     display: 'flex',
@@ -88,12 +88,11 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   },
   mobileButtonWrapper: {
     display: 'flex',
-    alignItems: 'center',
-    height: '20%'
+    alignItems: 'center'
+    // height: '20%'
   },
   button: {
     backgroundColor: '#2276fc',
-    height: '35%',
     width: '100%',
     margin: '0 5%',
 
