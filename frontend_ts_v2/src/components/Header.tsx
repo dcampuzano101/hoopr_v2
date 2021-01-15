@@ -10,7 +10,7 @@ import Logo from './Logo'
 
 const useStyles = makeStyles(({ palette }: Theme) => ({
   headerRoot: {
-    border: `1px solid ${palette.secondary.main}`,
+    // border: `1px solid ${palette.secondary.main}`,
     zIndex: 100,
     height: '5em',
     display: 'flex',
