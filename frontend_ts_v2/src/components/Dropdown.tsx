@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Typography, Paper, Button, Card, Grid } from '@material-ui/core'
 import { ExpandMore } from '@material-ui/icons'
 import { makeStyles, Theme } from '@material-ui/core/styles'
@@ -18,6 +18,9 @@ interface DropdownProps {
   name?: string
   mobile?: boolean
   open?: boolean
+  isOpen?: boolean
+  onChange?: any
+  // setIsOpen?: React.Dispatch<React.SetStateAction<boolean>> | undefined
 }
 
 const useStyles = makeStyles(({ palette }: Theme) => ({
@@ -53,10 +56,16 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     display: 'flex'
   },
   optionWrap: {
-    padding: '0 10%',
+    padding: '2% 10%',
     '&:hover': {
       backgroundColor: palette.primary.dark,
       cursor: 'pointer'
+    },
+    '&:first-child': {
+      marginTop: '5%'
+    },
+    '&:last-child': {
+      marginBottom: '5%'
     }
   },
   optionWrapMobile: {
@@ -107,9 +116,17 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
 //largeOptions: { path:<string>, title:<string>, subTitle:<string>}
 //mobileOptions: { heading:<string>, subLinks:String[]}
 
-const Dropdown: React.FC<DropdownProps> = ({ options, name, mobile, open }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  options,
+  name,
+  mobile,
+  open,
+  isOpen,
+  onChange
+}) => {
   const classes = useStyles()
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+
+  const handleChange = (value: boolean) => onChange(value)
 
   const displaySubLinks = (subLinks: string[] | undefined) => {
     return (
@@ -172,14 +189,9 @@ const Dropdown: React.FC<DropdownProps> = ({ options, name, mobile, open }) => {
       ) : (
         <div
           className={classes.dropdownWrapper}
-          // onMouseEnter={() => setIsOpen(true)}
-          // onMouseLeave={() => setIsOpen(false)}
+          onMouseEnter={() => handleChange(true)}
+          onMouseLeave={() => handleChange(false)}
         >
-          <Typography variant="body2" className={classes.dropdownStyle}>
-            {name}
-            <ExpandMore style={{ fontSize: '1.1rem' }} />
-          </Typography>
-
           <div
             className={classes.dropdownUp}
             style={{ display: isOpen ? 'block' : 'none' }}

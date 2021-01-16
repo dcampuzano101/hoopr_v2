@@ -2,12 +2,21 @@ import React, { useState } from 'react'
 import { Typography, Grid, Container, Button } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
+import { ExpandMore } from '@material-ui/icons'
 import Dropdown from './Dropdown'
 
 const useStyles = makeStyles(({ palette }: Theme) => ({
   navBarRoot: {
     display: 'flex',
     borderRadius: '3px'
+  },
+  dropdownWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    '&:hover': {
+      cursor: 'pointer'
+    }
+    // position: 'absolute'
   },
   primaryLinks: {
     display: 'flex'
@@ -56,10 +65,28 @@ interface NavBarProps {}
 
 const NavBar: React.FC<NavBarProps> = ({}) => {
   const classes = useStyles()
+  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const handleChange = (newValue: boolean) => {
+    setIsOpen(newValue)
+  }
   return (
     <nav className={classes.navBarRoot}>
       <Grid item xs={2} md={4} className={classes.primaryLinks}>
-        <Dropdown name="Platform" options={dropdownOptions} />
+        <div
+          className={classes.dropdownWrapper}
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
+        >
+          <Typography variant="body2">Platform</Typography>
+          <ExpandMore style={{ fontSize: '1.1rem' }} />
+        </div>
+
+        <Dropdown
+          name="Platform"
+          options={dropdownOptions}
+          isOpen={isOpen}
+          onChange={handleChange}
+        />
         <Link to="/pricing" className={classes.linkStyle}>
           <Typography variant="body2">Pricing</Typography>
         </Link>
