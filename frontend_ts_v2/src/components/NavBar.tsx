@@ -65,7 +65,7 @@ interface NavBarProps {}
 
 const NavBar: React.FC<NavBarProps> = ({}) => {
   const classes = useStyles()
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const handleChange = (newValue: boolean) => {
     setIsOpen(newValue)
   }
