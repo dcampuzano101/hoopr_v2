@@ -16,16 +16,16 @@ const useStyles = makeStyles(({ palette, breakpoints, typography }: Theme) => ({
     display: 'flex',
     padding: '0 10%',
     alignItems: 'center',
-      [breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    height: "90%"
-  },
-  [breakpoints.down('md')]: {
-    // flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    height: "90%"
-  },
+    [breakpoints.down('md')]: {
+      // flexDirection: 'column',
+      justifyContent: 'space-evenly',
+      height: "90%"
+    },
+    [breakpoints.down('sm')]: {
+  flexDirection: 'column',
+  justifyContent: 'center',
+  height: "90%"
+},
 
     background:
       'linear-gradient(to right, #556270, #4ECDC4)' /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -35,26 +35,25 @@ const useStyles = makeStyles(({ palette, breakpoints, typography }: Theme) => ({
     zIndex: 0,
     opacity: '90%',
     right: '0%',
-    [breakpoints.down('sm')]: {
-      width: '100%',
-      margin: '10% 0%'
-    },
     [breakpoints.down('md')]: {
       width: '75%',
       margin: '0% 0%'
+    },
+    [breakpoints.down('sm')]: {
+      width: '100%',
+      margin: '10% 0%'
     },
   },
   heroText: {
     width: '85%',
     zIndex: 1,
     fontWeight: 750,
-    [breakpoints.down('sm')]: {
-      margin: '10% 0%'
-    },
     [breakpoints.down('md')]: {
       width: '65%',
       margin: '0% 0%'
-
+    },
+    [breakpoints.down('sm')]: {
+      margin: '10% 0%'
     },
   }
 }))
