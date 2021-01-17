@@ -50,7 +50,8 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     display: 'none',
     padding: '5% 0',
     position: 'absolute',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    zIndex: 5
   },
   show: {
     display: 'flex'
