@@ -1,10 +1,6 @@
 import React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Grid, Typography, useMediaQuery } from '@material-ui/core'
-import heroImg from '../assets/images/illustration-hero.png'
-import brooklynIllustration from '../assets/images/brooklyn_blush.svg'
-import smallCityIllustration from '../assets/images/small_city_blush.svg'
-import hangingOutIllustration from '../assets/images/hanging_out_blush.svg'
 import happyPersonIllustration from '../assets/images/happy_person_blush.svg'
 
 

@@ -22,6 +22,7 @@
   "author": "David Campuzano",
   "license": "ISC",
   "dependencies": {
+    "@sanity/client": "^2.1.4",
     "aws-sdk": "^2.783.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",

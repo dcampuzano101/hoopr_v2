@@ -30,7 +30,8 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     '&:hover': {
       cursor: 'pointer'
     },
-    position: 'absolute'
+    position: 'absolute',
+    width: '15%'
   },
   optionsWrapperLarge: {
     position: 'absolute',
@@ -59,7 +60,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   },
   show: {
     display: 'flex',
-    borderRadius: '0px',
+    borderRadius: '3px',
     width: '102%',
   },
   optionWrap: {
@@ -68,12 +69,12 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
       backgroundColor: palette.primary.dark,
       cursor: 'pointer'
     },
-    '&:first-child': {
-      marginTop: '5%'
-    },
-    '&:last-child': {
-      marginBottom: '5%'
-    }
+    // '&:first-child': {
+    //   marginTop: '5%'
+    // },
+    // '&:last-child': {
+    //   marginBottom: '5%'
+    // }
   },
   optionWrapMobile: {
     padding: '0% 10%',
@@ -103,7 +104,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     transform: 'rotate(225deg)',
     borderBottom: '1px solid black',
     borderRight: '1px solid black',
-    zIndex: 10000,
+    zIndex: 1000,
     backgroundColor: 'white'
   },
   mobileButtonWrapper: {
