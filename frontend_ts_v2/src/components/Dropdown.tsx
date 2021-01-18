@@ -54,7 +54,9 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     zIndex: 5
   },
   show: {
-    display: 'flex'
+    display: 'flex',
+    borderRadius: '0px',
+    width: '102%',
   },
   optionWrap: {
     padding: '2% 10%',

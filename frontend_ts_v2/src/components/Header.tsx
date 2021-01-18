@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const classes = useStyles()
   return (
-    <Card raised={true}>
+    <Card style={{ borderRadius: '0px' }} raised={true}>
       <Grid container className={classes.headerRoot}>
         <Grid item xs={2} md={2} lg={2}>
           <Logo logoText="Hoopr" />

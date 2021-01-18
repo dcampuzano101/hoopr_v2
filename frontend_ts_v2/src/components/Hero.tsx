@@ -18,13 +18,13 @@ const useStyles = makeStyles(({ palette, breakpoints, typography }: Theme) => ({
     alignItems: 'center',
     [breakpoints.down('md')]: {
       // flexDirection: 'column',
-      justifyContent: 'space-evenly',
+      justifyContent: 'space-around',
       height: "90%"
     },
     [breakpoints.down('sm')]: {
-  flexDirection: 'column',
-  justifyContent: 'center',
-  height: "90%"
+      flexDirection: 'column',
+      justifyContent: 'space-evenly',
+      height: "90%"
 },
 
     background:
@@ -36,13 +36,18 @@ const useStyles = makeStyles(({ palette, breakpoints, typography }: Theme) => ({
     opacity: '90%',
     right: '0%',
     [breakpoints.down('md')]: {
-      width: '75%',
+      margin: '0% 0%',
+      width: '100%'
+
+    },
+    [breakpoints.up('sm')]: {
+      width: '60%',
       margin: '0% 0%'
     },
-    [breakpoints.down('sm')]: {
-      width: '100%',
-      margin: '10% 0%'
-    },
+    // [breakpoints.down('sm')]: {
+    //   width: '100%',
+    //   margin: '10% 0%'
+    // },
   },
   heroText: {
     width: '85%',
@@ -52,6 +57,10 @@ const useStyles = makeStyles(({ palette, breakpoints, typography }: Theme) => ({
       width: '65%',
       margin: '0% 0%'
     },
+    // [breakpoints.up('sm')]: {
+    //   width: '65%',
+    //   margin: '0% 0%'
+    // },
     [breakpoints.down('sm')]: {
       margin: '10% 0%'
     },
