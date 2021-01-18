@@ -23,7 +23,7 @@ interface DropdownProps {
   // setIsOpen?: React.Dispatch<React.SetStateAction<boolean>> | undefined
 }
 
-const useStyles = makeStyles(({ palette }: Theme) => ({
+const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   dropdownWrapper: {
     display: 'flex',
     alignItems: 'center',
@@ -46,12 +46,16 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     top: '80px',
     left: '-1px',
     width: '100%',
-    height: '100%',
+    // height: '100%',
     display: 'none',
     padding: '5% 0',
     position: 'absolute',
     flexDirection: 'column',
-    zIndex: 5
+    zIndex: 5,
+    [breakpoints.down('sm')]: {
+      height: '85%',
+      justifyContent: 'space-evenly'
+    },
   },
   show: {
     display: 'flex',
@@ -72,13 +76,17 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     }
   },
   optionWrapMobile: {
-    padding: '5% 10%',
+    padding: '0% 10%',
     '&:hover': {
       backgroundColor: palette.primary.light
     },
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    [breakpoints.up('sm')]: {
+      width: '60%',
+      margin: '0 auto'
+    },
   },
   dropdownStyle: {
     padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
@@ -100,8 +108,11 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   },
   mobileButtonWrapper: {
     display: 'flex',
-    alignItems: 'center'
-    // height: '20%'
+    alignItems: 'center',
+    [breakpoints.down('sm')]: {
+      padding: '5%',
+      margin: '5%'
+    }
   },
   button: {
     backgroundColor: '#2276fc',
@@ -137,7 +148,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       subLinks.map((link: string | undefined) => (
         <Link
           to={`/${link?.toLowerCase()}`}
-          style={{ textDecoration: 'none', color: '#2c2f48', padding: '3% 0' }}
+          style={{ textDecoration: 'none', color: '#2c2f48', padding: '1% 0' }}
         >
           <Typography variant="subtitle1" style={{ fontSize: '1.1rem' }}>
             {link}
