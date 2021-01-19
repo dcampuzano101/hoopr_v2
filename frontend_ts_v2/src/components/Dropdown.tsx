@@ -223,7 +223,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                   to={option.path}
                   style={{ textDecoration: 'none', color: '#2c2f48' }}
                 >
-                  <Typography variant="body2">{option.title}</Typography>
+                  <Typography variant="body2" onClick={() => handleChange(false)}>{option.title}</Typography>
                   <Typography variant="subtitle1">{option.subTitle}</Typography>
                 </Link>
               </div>

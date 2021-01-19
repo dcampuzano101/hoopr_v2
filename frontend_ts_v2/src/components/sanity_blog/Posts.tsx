@@ -9,7 +9,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         width: '90%',
         padding: '5%',
         margin: '0 auto',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
         position: 'relative',
         zIndex: -5
       },
