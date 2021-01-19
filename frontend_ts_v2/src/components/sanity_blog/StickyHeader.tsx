@@ -30,6 +30,13 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
       width: '100%',
       height: '100%',
       justifyContent: 'space-evenly'
+  },
+  stickyWrapper: {
+    borderRadius: '0px', 
+    borderBottom: `1px solid #808e95`, 
+    width: '100%', 
+    position: 'sticky', 
+    top: '0' 
   }
 }))
 const mobileDropdownOptions = [
@@ -52,7 +59,7 @@ const StickyHeader: React.FC<StickyHeaderProps> = ({}) => {
 //   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const classes = useStyles()
   return (
-    <Card style={{ borderRadius: '0px', borderBottom: `1px solid #808e95`, width: '100%' }}  elevation={0} >
+    <Card className={classes.stickyWrapper}  elevation={0} >
         <Grid container className={classes.stickyHeaderRoot}>
             <div className={classes.stickyNavBarWrapper}>
                 <Typography variant="h3" style={{ paddingTop: '2%'}}>Filter By Category</Typography>
