@@ -10,14 +10,11 @@ import Logo from './Logo'
 
 const useStyles = makeStyles(({ palette }: Theme) => ({
   headerRoot: {
-    // border: `1px solid ${palette.secondary.main}`,
-    // zIndex: 100,
     height: '6em',
     display: 'flex',
     alignItems: 'center',
     padding: '0 3%',
     margin: '0 3%',
-    // width: 'auto'
   },
   headerWrapper: {
     display: 'flex',
@@ -61,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
             lg={10}
             style={{ display: 'flex', justifyContent: 'flex-end' }}
           >
-            <Menu style={{ paddingRight: '5%'}} onClick={() => setIsMenuOpen((prevState) => !prevState)} />
+            <Menu style={{ paddingRight: '3%', marginRight: '3%'}} onClick={() => setIsMenuOpen((prevState) => !prevState)} />
             {isMenuOpen ? (
               <Dropdown
                 mobile={true}
