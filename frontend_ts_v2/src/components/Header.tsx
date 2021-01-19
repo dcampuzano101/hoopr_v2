@@ -32,7 +32,7 @@ const mobileDropdownOptions = [
   },
   {
     heading: 'Resources',
-    subLinks: ['Community', 'Guides', 'Testimonials']
+    subLinks: ['Community', 'Guides', 'Testimonials', 'Blog']
   }
 ]
 

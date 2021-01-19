@@ -39,16 +39,6 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     top: '0' 
   }
 }))
-const mobileDropdownOptions = [
-  {
-    heading: 'Platform',
-    subLinks: ['How it works', 'Demo', 'Pricing', 'FAQ']
-  },
-  {
-    heading: 'Resources',
-    subLinks: ['Community', 'Guides', 'Testimonials']
-  }
-]
 
 const blogCategories = ['All', 'Product', 'Tech', 'Hoops', ]
 interface StickyHeaderProps {}
