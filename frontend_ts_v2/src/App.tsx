@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.dark
   },
   main: {
-    height: '100vh'
+    height: '100vh',
     // padding: '5%',
     // border: '1px solid green'
   }

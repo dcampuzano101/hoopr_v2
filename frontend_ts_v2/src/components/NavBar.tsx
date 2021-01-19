@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { ExpandMore } from '@material-ui/icons'
 import Dropdown from './Dropdown'
 
-const useStyles = makeStyles(({ palette }: Theme) => ({
+const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   navBarRoot: {
     display: 'flex',
     borderRadius: '3px'
@@ -54,7 +54,12 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   linkWrapper: {
     width: '25%',
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    [breakpoints.down('sm')]: {
+      width: '100%',
+      paddingRight: '3%',
+      marginRight: '3%'
+    }
   }
 }))
 

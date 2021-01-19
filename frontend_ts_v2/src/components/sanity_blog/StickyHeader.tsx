@@ -14,7 +14,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     alignItems: 'center',
     padding: '0 3%',
     margin: '0 3%',
-    width: 'auto'
+    // width: 'auto'
   },
   headerWrapper: {
     display: 'flex',
@@ -52,7 +52,7 @@ const StickyHeader: React.FC<StickyHeaderProps> = ({}) => {
 //   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const classes = useStyles()
   return (
-    <Card style={{ borderRadius: '0px', borderBottom: `1px solid #808e95` }}  elevation={0} >
+    <Card style={{ borderRadius: '0px', borderBottom: `1px solid #808e95`, width: '100%' }}  elevation={0} >
         <Grid container className={classes.stickyHeaderRoot}>
             <div className={classes.stickyNavBarWrapper}>
                 <Typography variant="h3" style={{ paddingTop: '2%'}}>Filter By Category</Typography>
