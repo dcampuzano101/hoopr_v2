@@ -3,7 +3,8 @@ import { Typography } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/Header'
-import Hero from './components/Hero'
+import HomeScreen from './screens/HomeScreen'
+import BlogScreen from './screens/BlogScreen'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -27,7 +28,8 @@ const App: React.FC<AppProps> = ({}) => {
     <Router>
       <main className={classes.main}>
         <Header />
-        <Hero />
+        <Route path="/" component={HomeScreen} exact />
+        <Route path="/blog" component={BlogScreen} />
       </main>
     </Router>
   )

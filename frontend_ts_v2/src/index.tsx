@@ -6,6 +6,8 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./styles/theme";
 import "typeface-rubik";
 import "typeface-karla";
+import "typeface-roboto";
+
 
 ReactDOM.render(
   <React.StrictMode>

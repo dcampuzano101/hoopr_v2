@@ -45,6 +45,16 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
       backgroundColor: '#1e63d0',
       cursor: 'pointer'
     }
+  },
+  categoryWrapper: {
+    display: 'flex',
+    height: '100%',
+    alignItems: 'center'
+  },
+  linkWrapper: {
+    width: '25%',
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 }))
 
@@ -61,16 +71,38 @@ const dropdownOptions = [
   }
 ]
 
-interface NavBarProps {}
+interface NavBarProps {
+  blog?: boolean | undefined
+  categories?: String[] | undefined
+}
 
-const NavBar: React.FC<NavBarProps> = ({}) => {
+
+const NavBar: React.FC<NavBarProps> = ({ blog, categories = [] }) => {
   const classes = useStyles()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const handleChange = (newValue: boolean) => {
     setIsOpen(newValue)
   }
   return (
-    <nav className={classes.navBarRoot}>
+    
+    <>
+      { blog ?
+       <nav className={classes.categoryWrapper}>
+         <div  className={classes.linkWrapper}>
+        {categories.map((category, idx) => (
+         <React.Fragment key={idx}>
+            <Link
+              to={`blog/?category=${category.toLowerCase()}`}
+              style={{ textDecoration: 'none', color: '#2c2f48' }}
+            >
+              <Typography variant="body2">{category}</Typography>
+            </Link>
+        </React.Fragment>
+      ))}
+      </div>
+        </nav>
+      : 
+      <nav className={classes.navBarRoot}>
       <Grid item xs={2} md={4} className={classes.primaryLinks}>
         <div
           className={classes.dropdownWrapper}
@@ -110,7 +142,9 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
           </Typography>
         </Button>
       </Grid>
-    </nav>
+      </nav>
+    }
+    </>
   )
 }
 

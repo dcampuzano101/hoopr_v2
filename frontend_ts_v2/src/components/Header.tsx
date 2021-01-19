@@ -12,7 +12,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   headerRoot: {
     // border: `1px solid ${palette.secondary.main}`,
     // zIndex: 100,
-    height: '5em',
+    height: '6em',
     display: 'flex',
     alignItems: 'center',
     padding: '0 3%',
@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const classes = useStyles()
   return (
-    <Card style={{ borderRadius: '0px' }} raised={true}>
+    <Card style={{ borderRadius: '0px' }}  elevation={0}>
       <Grid container className={classes.headerRoot}>
         <Grid item xs={2} md={2} lg={2}>
           <Logo logoText="Hoopr" />
@@ -81,5 +81,3 @@ const Header: React.FC<HeaderProps> = ({}) => {
 }
 
 export default Header
-
-//style={{ marginRight: '5%' }}

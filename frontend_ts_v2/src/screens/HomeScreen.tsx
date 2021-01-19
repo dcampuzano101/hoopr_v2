@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography } from '@material-ui/core';
-
+import Hero from '../components/Hero';
 interface HomeScreenProps {
 
 }
@@ -12,10 +12,8 @@ interface HomeScreenProps {
 
  const HomeScreen: React.FC<HomeScreenProps> = ({}) => {
         return (
-            <>
-                <Typography variant="h1">Home Screen</Typography>
-
-
+            <>  
+                <Hero />
             </>
         );
 }

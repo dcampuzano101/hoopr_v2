@@ -1,5 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core';
+import StickyHeader from '../components/sanity_blog/StickyHeader';
+import Posts from '../components/sanity_blog/Posts';
 
 interface BlogScreenProps {
 
@@ -12,8 +14,8 @@ interface BlogScreenProps {
  const BlogScreen: React.FC<BlogScreenProps> = ({}) => {
         return (
             <>
-            <Typography variant="h1">Blog Screen</Typography>
-            
+            <StickyHeader />
+            <Posts />
             </>
         );
 }

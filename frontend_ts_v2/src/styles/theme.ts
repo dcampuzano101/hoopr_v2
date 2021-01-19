@@ -1,5 +1,6 @@
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
+import { createMuiTheme, responsiveFontSizes, } from '@material-ui/core/styles'
 import { green, red } from '@material-ui/core/colors'
+
 
 let theme = createMuiTheme({
   palette: {
@@ -38,7 +39,7 @@ caption
 overline
 */
   typography: {
-    fontFamily: ['Rubik', 'Karla', 'serif'].join(','),
+    fontFamily: ['Rubik', 'Karla', 'serif', 'Roboto'].join(','),
     h1: {
       fontFamily: 'Rubik',
       fontSize: '3rem',
@@ -56,6 +57,12 @@ overline
       letterSpacing: '-3.5px',
       textTransform: 'lowercase',
       color: '#2c2f48'
+    },
+    h3: {
+      fontFamily: 'Roboto',
+      fontSize: 'calc(1em / 16 * 15)',
+      lineHeight: 'calc(24 / 15)',
+      textTransform: 'uppercase'
     },
     body2: {
       fontFamily: 'Karla',
