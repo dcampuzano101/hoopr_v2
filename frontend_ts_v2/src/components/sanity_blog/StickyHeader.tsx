@@ -36,7 +36,8 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     borderBottom: `1px solid #808e95`, 
     width: '100%', 
     position: 'sticky', 
-    top: '0' 
+    top: '0',
+    zIndex: -1
   }
 }))
 

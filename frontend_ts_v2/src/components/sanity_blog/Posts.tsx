@@ -10,6 +10,8 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         padding: '5%',
         margin: '0 auto',
         gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        position: 'relative',
+        zIndex: -5
       },
 
       post: {
