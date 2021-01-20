@@ -47,19 +47,19 @@ interface DrawerProps {
                         <Typography variant="h3">Tools</Typography>
                         <div style={{ display: 'flex'}}>
                             <IconButton aria-label="edit">
-                                <SportsBasketball htmlColor={"#77bfed"}/>
+                                <SportsBasketball />
                                 <Typography variant="body2">Runs</Typography>
                             </IconButton>
                         </div>
                         <div style={{ display: 'flex'}}>
                             <IconButton aria-label="edit">
-                            <CardMembership htmlColor={"#77bfed"}/>
+                            <CardMembership />
                                 <Typography variant="body2">Users</Typography>
                             </IconButton>
                         </div>
                         <div style={{ display: 'flex'}}>
                             <IconButton aria-label="edit">
-                            <ShoppingBasket htmlColor={"#77bfed"}/>
+                            <ShoppingBasket />
                                 <Typography variant="body2">Orders</Typography>
                             </IconButton>
                         </div>
@@ -70,7 +70,7 @@ interface DrawerProps {
                             <IconButton
                                     aria-label="edit"
                                 >
-                                    <Send htmlColor={"#77bfed"}/>
+                                    <Send />
                                     <Typography variant="body2">Messages</Typography>
                             </IconButton>
                         </div>
@@ -78,7 +78,7 @@ interface DrawerProps {
                             <IconButton
                                 aria-label="edit"
                             >
-                                <SettingsApplications htmlColor={"#77bfed"}/>
+                                <SettingsApplications />
                                 <Typography variant="body2">Settings</Typography>
                             </IconButton>
                         </div>

@@ -5,7 +5,7 @@ import Drawer from '../components/Drawer';
 
 const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
     adminDashboardWrapper: {
-        
+        border: '1px solid black',
         height: '100vh',
         [breakpoints.down('sm')]: {
             display: 'flex',
@@ -13,11 +13,10 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         }
     },
     drawerPanelWrapper: {
-        
+        border: '1px solid black',
         height: '100%',
         display: 'flex',
         width: '100%',
-        // alignItems: 'center',
         boxSizing: 'border-box',
         [breakpoints.down('sm')]: {
             height: '10%',
@@ -27,7 +26,6 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         width: '100%',
         height: '98%',
         display: 'flex',
-        
         boxSizing: 'border-box',
         [breakpoints.down('sm')]: {
             height: '95%',
@@ -36,13 +34,11 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
             display: 'flex',
             padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
             boxSizing: 'border-box',
-            
         }
 
     },
     mainWrapper: {
-        
-        
+        border: '1px solid black',
         height: '100%',
         boxSizing: 'border-box',
         [breakpoints.down('sm')]: {
@@ -67,8 +63,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         }
     },
     activitiesWrapper: {
-        
-        
+        border: '1px solid black',
         height: '100%',
         boxSizing: 'border-box',
         [breakpoints.down('sm')]: {
@@ -78,10 +73,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
     activities: {
         height: '98%',
         display: 'flex',
-        
-        
         boxSizing: 'border-box',
-        
         [breakpoints.down('sm')]: {
             height: '95%',
             width: '95%',
@@ -89,11 +81,8 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
             display: 'flex',
             padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
             boxSizing: 'border-box',
-            
         }
-
     }
-
 }))
 
 interface DashboardScreenProps {
@@ -110,12 +99,12 @@ interface DashboardScreenProps {
                             <Drawer />
                         </Paper>
                     </Grid>
-                    <Grid item sm={12} md={6} className={classes.mainWrapper}>
+                    <Grid item sm={12} md={7} className={classes.mainWrapper}>
                         <Paper elevation={0} className={classes.main}>
 
                         </Paper>
                     </Grid>
-                    <Grid item sm={12} md={4} className={classes.activitiesWrapper}>
+                    <Grid item sm={12} md={3} className={classes.activitiesWrapper}>
                         <Paper elevation={0} className={classes.activities}>
                 
                         </Paper>
