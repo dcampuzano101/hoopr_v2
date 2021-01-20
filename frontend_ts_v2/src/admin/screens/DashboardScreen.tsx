@@ -22,6 +22,9 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         padding: 'calc(.625rem - -10px)',
         [breakpoints.down('sm')]: {
             height: '10%',
+        },
+        '& h3': {
+            fontSize: 'calc(1.1em / 16 * 15)',
         }
     },
     drawerPanel: {
@@ -51,10 +54,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
     main: {
         height: '98%',
         display: 'flex',
-        
-        
         boxSizing: 'border-box',
-        
         [breakpoints.down('sm')]: {
             height: '95%',
             width: '95%',
@@ -62,7 +62,6 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
             display: 'flex',
             padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
             boxSizing: 'border-box',
-            
         }
     },
     activitiesWrapper: {

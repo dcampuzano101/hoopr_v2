@@ -66,7 +66,7 @@ overline
     },
     body2: {
       fontFamily: 'Karla',
-      fontSize: '1.1rem',
+      fontSize: 'calc(.8em / 16 * 15)',
       lineHeight: 'calc(24 / 16)',
       color: '#2c2f48'
     },
