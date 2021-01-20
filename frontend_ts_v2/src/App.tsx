@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     color: theme.palette.secondary.light,
-    backgroundColor: theme.palette.primary.dark
+    // backgroundColor: theme.palette.primary.dark
   },
   main: {
     height: '100vh',
@@ -28,7 +28,7 @@ const App: React.FC<AppProps> = ({}) => {
   return (
     <Router>
       <main className={classes.main}>
-        <Header />
+        {/* <Header /> */}
         <Route path="/" component={HomeScreen} exact />
         <Route path="/blog" component={BlogScreen} />
         <Route path="/admin" component={DashboardScreen} />
