@@ -10,6 +10,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         flexDirection: 'column',
         width: '100%',
         padding: '5% 10%',
+        alignItems: 'center',
     },
     header: {
 
@@ -27,7 +28,9 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         width: '100%',
         height: '80%',
         boxSizing: 'border-box',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        alignItems: 'center'
+
     }
 }))
 

@@ -7,6 +7,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
     adminDashboardWrapper: {
         border: '1px solid black',
         height: '100vh',
+        padding: 'calc(.625rem - -10px)',
         [breakpoints.down('sm')]: {
             display: 'flex',
             flexDirection: 'column'
@@ -18,6 +19,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         display: 'flex',
         width: '100%',
         boxSizing: 'border-box',
+        padding: 'calc(.625rem - -10px)',
         [breakpoints.down('sm')]: {
             height: '10%',
         }
@@ -41,6 +43,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         border: '1px solid black',
         height: '100%',
         boxSizing: 'border-box',
+        padding: 'calc(.625rem - -10px)',
         [breakpoints.down('sm')]: {
             height: '45%',
         }
@@ -66,6 +69,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         border: '1px solid black',
         height: '100%',
         boxSizing: 'border-box',
+        padding: 'calc(.625rem - -10px)',
         [breakpoints.down('sm')]: {
             height: '45%',
         }
