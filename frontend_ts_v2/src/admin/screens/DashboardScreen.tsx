@@ -5,7 +5,7 @@ import Drawer from '../components/Drawer';
 
 const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
     adminDashboardWrapper: {
-        // border: '1px solid white',
+        
         height: '100vh',
         [breakpoints.down('sm')]: {
             display: 'flex',
@@ -13,7 +13,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         }
     },
     drawerPanelWrapper: {
-        // border: '1px solid white',
+        
         height: '100%',
         display: 'flex',
         width: '100%',
@@ -27,7 +27,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         width: '100%',
         height: '98%',
         display: 'flex',
-        // padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
+        
         boxSizing: 'border-box',
         [breakpoints.down('sm')]: {
             height: '95%',
@@ -36,13 +36,13 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
             display: 'flex',
             padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
             boxSizing: 'border-box',
-            // backgroundColor: '#313131',
+            
         }
 
     },
     mainWrapper: {
-        // border: '1px solid white',
-        // backgroundColor: palette.primary.dark,
+        
+        
         height: '100%',
         boxSizing: 'border-box',
         [breakpoints.down('sm')]: {
@@ -52,10 +52,10 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
     main: {
         height: '98%',
         display: 'flex',
-        // padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
-        // margin:  'calc(.625rem - 1px) calc(1rem - 1px)',
+        
+        
         boxSizing: 'border-box',
-        // backgroundColor: palette.primary.dark,
+        
         [breakpoints.down('sm')]: {
             height: '95%',
             width: '95%',
@@ -63,12 +63,12 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
             display: 'flex',
             padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
             boxSizing: 'border-box',
-            // backgroundColor: '#313131',
+            
         }
     },
     activitiesWrapper: {
-        // border: '1px solid white',
-        // backgroundColor: palette.primary.dark,
+        
+        
         height: '100%',
         boxSizing: 'border-box',
         [breakpoints.down('sm')]: {
@@ -78,10 +78,10 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
     activities: {
         height: '98%',
         display: 'flex',
-        // padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
-        // margin: 'calc(.625rem - 1px) calc(1rem - 1px)',
+        
+        
         boxSizing: 'border-box',
-        // backgroundColor: palette.primary.dark,
+        
         [breakpoints.down('sm')]: {
             height: '95%',
             width: '95%',
@@ -89,7 +89,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
             display: 'flex',
             padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
             boxSizing: 'border-box',
-            // backgroundColor: '#313131',
+            
         }
 
     }
@@ -125,3 +125,11 @@ interface DashboardScreenProps {
 }
 
 export default DashboardScreen
+
+/*
+// padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
+// padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
+// margin:  'calc(.625rem - 1px) calc(1rem - 1px)',
+// padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
+// margin: 'calc(.625rem - 1px) calc(1rem - 1px)',
+*/
