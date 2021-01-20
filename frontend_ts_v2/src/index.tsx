@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "./styles/theme";
+import theme from "./styles/themeDarkMode";
 import "typeface-rubik";
 import "typeface-karla";
 import "typeface-roboto";

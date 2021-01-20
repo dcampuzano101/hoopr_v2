@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/Header'
 import HomeScreen from './screens/HomeScreen'
 import BlogScreen from './screens/BlogScreen'
+import  DashboardScreen from './admin/screens/DashboardScreen'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,6 +31,7 @@ const App: React.FC<AppProps> = ({}) => {
         <Header />
         <Route path="/" component={HomeScreen} exact />
         <Route path="/blog" component={BlogScreen} />
+        <Route path="/admin" component={DashboardScreen} />
       </main>
     </Router>
   )
