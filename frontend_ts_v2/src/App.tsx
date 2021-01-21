@@ -126,13 +126,11 @@ const App: React.FC<AppProps> = ({}) => {
           </Grid>
           <Grid item sm={12} md={7} className={classes.mainWrapper}>
               <Paper elevation={0} className={classes.main}>
-                  {/* <MainDashboard> */}
                       <Switch>
                         <Route path="/admin/runs" component={Runs} />
                         <Route path="/admin/orders" component={Orders} />
                         <Route path="/admin/users" component={Users} />        
                       </Switch> 
-                  {/* </MainDashboard> */}
               </Paper>
           </Grid>
           <Grid item sm={12} md={3} className={classes.activitiesWrapper}>
