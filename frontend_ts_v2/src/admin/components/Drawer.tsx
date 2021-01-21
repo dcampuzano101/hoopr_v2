@@ -9,7 +9,6 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        padding: '5% 10%',
         alignItems: 'center',
     },
     header: {
@@ -39,6 +38,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     },
     button: {
         width: '100%',
+        margin: '2% 0',
         borderRadius: '3px',
         display: 'flex',
         justifyContent: 'flex-start',

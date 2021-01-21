@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, Grid, Typography, Avatar, Paper } from '@material-ui/core/'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import Drawer from '../components/Drawer';
+import MainDashboard from '../components/MainDashboard';
 
 const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
     adminDashboardWrapper: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         },
         '& h3': {
             fontSize: 'calc(1.1em / 16 * 15)',
+            marginBottom: '5%'
         }
     },
     drawerPanel: {
@@ -46,13 +48,13 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         border: '1px solid black',
         height: '100%',
         boxSizing: 'border-box',
-        padding: 'calc(.625rem - -10px)',
+        padding: 'calc(.625rem - -10px) calc(.625rem - -25px)',
         [breakpoints.down('sm')]: {
             height: '45%',
         }
     },
     main: {
-        height: '98%',
+        height: '100%',
         display: 'flex',
         boxSizing: 'border-box',
         [breakpoints.down('sm')]: {
@@ -74,7 +76,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         }
     },
     activities: {
-        height: '98%',
+        height: '100%',
         display: 'flex',
         boxSizing: 'border-box',
         [breakpoints.down('sm')]: {
@@ -104,12 +106,12 @@ interface DashboardScreenProps {
                     </Grid>
                     <Grid item sm={12} md={7} className={classes.mainWrapper}>
                         <Paper elevation={0} className={classes.main}>
-
+                            <MainDashboard />
                         </Paper>
                     </Grid>
                     <Grid item sm={12} md={3} className={classes.activitiesWrapper}>
                         <Paper elevation={0} className={classes.activities}>
-                
+
                         </Paper>
                     </Grid>
                 </Grid>
