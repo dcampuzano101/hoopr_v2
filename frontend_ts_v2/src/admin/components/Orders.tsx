@@ -1,16 +1,54 @@
-import React from 'react'
-import { Paper, Card, Grid, Typography } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Grid, Paper, Card, Typography } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
+
 const useStyles = makeStyles(({ palette }: Theme) => ({
+    mainInnerWrapper: {
+        border: '1px solid black',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    mainHeaderWrapper: {
+        maxWidth: '100%',
+        display: 'flex',
+    },
+    mainComponentWrapper: {
+        maxWidth: '100%',
+        display: 'flex'
+    },
+    mainFooterWrapper: {
+        maxWidth: '100%',
+        display: 'flex'
+    },
+    componentHeader: {
+        textTransform: 'none',
+        fontSize: 'calc(1rem + 1.5vw)'
+    }
 }))
 interface OrdersProps {
 
 }
 
+
+
  const Orders: React.FC<OrdersProps> = ({}) => {
-        const classes = useStyles();
+     const classes = useStyles();
+
         return (
-            <Typography variant="h1">Orders</Typography>
+            <Grid container className={classes.mainInnerWrapper}>
+                <Grid item xs={1} className={classes.mainHeaderWrapper}  style={{ border: '1px solid green'}}>
+            
+                    <Typography variant="h1" className={classes.componentHeader}>Orders</Typography>
+            
+                </Grid>
+                <Grid item xs={9} className={classes.mainComponentWrapper} style={{ border: '1px solid blue'}}>
+
+                </Grid>
+                <Grid item  xs={2} className={classes.mainFooterWrapper} style={{ border: '1px solid red'}}>
+
+                </Grid>
+            </Grid>
         );
 }
 
