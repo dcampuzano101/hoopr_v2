@@ -287,11 +287,6 @@ interface UsersProps {
         return false;
     }
     const handleFilter = (query:string) => {
-      // console.log(query)
-      // if (query.length === 0) {
-      //   setUserList(users);
-      // }
-
       query = query.toLowerCase();
       let usersCopy = [...userList];
       let filtered = usersCopy.filter((user, idx) => filterHelper(query, user))
@@ -301,15 +296,10 @@ interface UsersProps {
     const onKeyDown = (e: React.KeyboardEvent) => {
       const target = e.target as HTMLTextAreaElement;
       if (e.key === 'Backspace') {
-        // console.log(e);
         const query = target.value?.toLowerCase();
-        // console.log(query)
-        debugger;
         let usersCopy = [...userList];
         let filtered = usersCopy.filter((user, idx) => filterHelper(query, user))
-        // console.log(filtered);
         setUserList(filtered);
-        
       }
     }
 
