@@ -30,7 +30,7 @@ const useStyles = makeStyles(({ palette, breakpoints}: Theme) => ({
     border: '1px solid black',
     // height: '100vh',
     padding: 'calc(.625rem - -10px)',
-    [breakpoints.down('sm')]: {
+    [breakpoints.down('md')]: {
         display: 'flex',
         flexDirection: 'column'
     }
@@ -70,7 +70,7 @@ mainWrapper: {
     height: '100vh',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -3px) calc(.625rem - -25px)',
-    [breakpoints.down('sm')]: {
+    [breakpoints.down('md')]: {
         height: '15%',
         padding: '0',
     }
@@ -120,12 +120,12 @@ const App: React.FC<AppProps> = ({}) => {
     <Router>
       <main className={classes.body}>
         <Grid container spacing={0} className={classes.adminDashboardWrapper}>
-          <Grid item xs={12} md={2} className={classes.drawerPanelWrapper}>
+          <Grid item xs={12} md={12}  lg={2}className={classes.drawerPanelWrapper}>
               <Paper elevation={0} className={classes.drawerPanel}>
                   <Drawer />
               </Paper>
           </Grid>
-          <Grid item xs={12} md={9} className={classes.mainWrapper}>
+          <Grid item xs={12} md={12} lg={10} className={classes.mainWrapper}>
               <Paper elevation={0} className={classes.main}>
                       <Switch>
                         <Route path="/admin/runs" component={Runs} />
