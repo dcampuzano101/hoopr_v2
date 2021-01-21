@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Grid, Paper, Card, Typography } from '@material-ui/core'
+import React, { useState, useEffect } from 'react'
+import { Grid, Paper, Card, Typography, TextField, InputAdornment } from '@material-ui/core'
+import { Search, AccountCircle } from "@material-ui/icons";
 import { makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(({ palette }: Theme) => ({
@@ -13,7 +14,8 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         maxWidth: '100%',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 'calc(.625rem)'
     },
     mainComponentWrapper: {
         maxWidth: '100%',
@@ -39,8 +41,18 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     usersWrapper: {
         maxWidth: '100%',
         border: '1px solid purple',
-        padding: 'calc(.625rem - -10px)',
-    }
+        display: 'grid',
+        gridGap: '1rem',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+        padding: 'calc(.625rem)',
+        boxSizing: 'border-box',
+        position: 'relative'
+    },
+    user: {
+        display: 'grid',
+        placeItems: 'center',
+        border: '1px solid black',
+      },
 
 }))
 
@@ -53,6 +65,7 @@ interface UsersProps {
 
 
  const Users: React.FC<UsersProps> = ({}) => {
+    const [filterQuery, setFilterQuery] = useState<string | undefined>();
      const classes = useStyles();
      const users = [
         {
@@ -236,6 +249,10 @@ interface UsersProps {
           orders: {},
         },
       ];
+
+    useEffect(() => {
+      console.log(filterQuery)
+    }, [filterQuery])
         return (
             <Grid container className={classes.mainInnerWrapper}>
                 <Grid item xs={1} className={classes.mainHeaderWrapper}  style={{ border: '1px solid green'}}>
@@ -244,10 +261,29 @@ interface UsersProps {
                 </Grid>
                 <Grid item xs={9} className={classes.mainComponentWrapper} style={{ border: '1px solid blue'}}>
                     <Grid item xs={1} className={classes.filterTools}>
-
+                      <TextField 
+                        id="outlined-basic" 
+                        label="Filter Users By Name" 
+                        variant="outlined" 
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <Search />
+                            </InputAdornment>
+                          ),
+                        }} 
+                        onChange={(e) => setFilterQuery(e.target.value)}
+                      />
                     </Grid>
                     <Grid item xs={11} className={classes.usersWrapper}>
-                        
+                    <div className={classes.user}>1</div>
+                <div className={classes.user}>2</div>
+                <div className={classes.user}>3</div>
+                <div className={classes.user}>4</div>
+                <div className={classes.user}>5</div>
+                <div className={classes.user}>6</div>
+                <div className={classes.user}>7</div>
+                <div className={classes.user}>8</div>
                     </Grid>
                 </Grid>
                 <Grid item  xs={2} className={classes.mainFooterWrapper} style={{ border: '1px solid red'}}>

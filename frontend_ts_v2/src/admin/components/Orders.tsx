@@ -13,7 +13,8 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         maxWidth: '100%',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 'calc(.625rem)'
     },
     mainComponentWrapper: {
         maxWidth: '100%',
