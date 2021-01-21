@@ -12,10 +12,13 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     mainHeaderWrapper: {
         maxWidth: '100%',
         display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     mainComponentWrapper: {
         maxWidth: '100%',
-        display: 'flex'
+        display: 'flex',
+        flexDirection: 'column',
     },
     mainFooterWrapper: {
         maxWidth: '100%',
@@ -24,8 +27,25 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     componentHeader: {
         textTransform: 'none',
         fontSize: 'calc(1rem + 1.5vw)'
+    },
+    headerWrapper: {
+
+    },
+    filterTools: {
+        maxWidth: '100%',
+        border: '1px solid yellow',
+        padding: 'calc(.625rem)',
+    },
+    runsWrapper: {
+        maxWidth: '100%',
+        border: '1px solid purple',
+        padding: 'calc(.625rem - -10px)',
     }
+
 }))
+
+
+
 interface RunsProps {
 
 }
@@ -34,16 +54,20 @@ interface RunsProps {
 
  const Runs: React.FC<RunsProps> = ({}) => {
      const classes = useStyles();
-
+     const runs = ['','','','',''];
         return (
             <Grid container className={classes.mainInnerWrapper}>
                 <Grid item xs={1} className={classes.mainHeaderWrapper}  style={{ border: '1px solid green'}}>
-            
-                    <Typography variant="h1" className={classes.componentHeader}>Runs</Typography>
-            
+                        <Typography variant="h1" className={classes.componentHeader}>Runs</Typography>
+                        <Typography variant="h3">{runs.length} Results</Typography>
                 </Grid>
                 <Grid item xs={9} className={classes.mainComponentWrapper} style={{ border: '1px solid blue'}}>
+                    <Grid item xs={1} className={classes.filterTools}>
 
+                    </Grid>
+                    <Grid item xs={11} className={classes.runsWrapper}>
+                        
+                    </Grid>
                 </Grid>
                 <Grid item  xs={2} className={classes.mainFooterWrapper} style={{ border: '1px solid red'}}>
 

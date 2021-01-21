@@ -69,7 +69,7 @@ mainWrapper: {
     border: '1px solid black',
     height: '100%',
     boxSizing: 'border-box',
-    padding: 'calc(.625rem - -10px) calc(.625rem - -25px)',
+    padding: 'calc(.625rem - -3px) calc(.625rem - -25px)',
     [breakpoints.down('sm')]: {
         height: '45%',
     }
