@@ -3,7 +3,11 @@ import { Grid, Paper, Card, Typography, TextField, InputAdornment } from '@mater
 import { Search, AccountCircle } from "@material-ui/icons";
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import UserCard from './UserCard'
+import { UserInfo } from 'os';
 
+interface Result {
+  result: []
+}
 const useStyles = makeStyles(({ palette }: Theme) => ({
     mainInnerWrapper: {
         border: '1px solid black',
@@ -58,10 +62,21 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         backgroundColor: palette.primary.dark,
         opacity: '95%'
       },
-
+      paginationWrapper: {
+        display: 'flex',
+        justifyContent: 'center',
+        maxWidth: '100%'
+      }
 }))
 
-
+interface User {
+  username: string
+  email: string
+  waitList: string[] | undefined
+  isAdmin: boolean
+  profilePhoto: string
+  orders: {}
+} 
 
 interface UsersProps {
 
@@ -255,8 +270,54 @@ interface UsersProps {
         // },
       ];
 
+    const [userList, setUserList] = useState<any | undefined | null>(users)
+
+    const filterHelper = (query:string, user:User) => {
+        let endIndex = query.length - 1;
+        let start = 0;
+        let userName = user.username.toLowerCase()
+        while (start < userName.length) {
+          let possibleMatch = userName.slice(start, endIndex + 1) 
+          if (query === possibleMatch) {
+            return true;
+          }
+          start++;
+          endIndex++;
+        }
+        return false;
+    }
+    const handleFilter = (query:string) => {
+      // console.log(query)
+      // if (query.length === 0) {
+      //   setUserList(users);
+      // }
+
+      query = query.toLowerCase();
+      let usersCopy = [...userList];
+      let filtered = usersCopy.filter((user, idx) => filterHelper(query, user))
+      setUserList(filtered);
+    }
+
+    const onKeyDown = (e: React.KeyboardEvent) => {
+      const target = e.target as HTMLTextAreaElement;
+      if (e.key === 'Backspace') {
+        // console.log(e);
+        const query = target.value?.toLowerCase();
+        // console.log(query)
+        debugger;
+        let usersCopy = [...userList];
+        let filtered = usersCopy.filter((user, idx) => filterHelper(query, user))
+        // console.log(filtered);
+        setUserList(filtered);
+        
+      }
+    }
+
     useEffect(() => {
-      console.log(filterQuery)
+      console.log(filterQuery);
+      if (filterQuery?.length === 0) {
+        setUserList(users);
+      }
     }, [filterQuery])
         return (
             <Grid container className={classes.mainInnerWrapper}>
@@ -276,19 +337,23 @@ interface UsersProps {
                           <Search />
                         </InputAdornment>
                       ),
-                    }} 
-                    onChange={(e) => setFilterQuery(e.target.value)}
+                    }}
+                    onKeyDown={(e) => onKeyDown(e)} 
+                    onChange={(e) => handleFilter(e.target.value)}
                   />
                 </Grid>
-                    <Grid container className={classes.usersWrapper}>
-                          {users.map((user, idx) => (
-                        <Grid item xs={4} style={{ maxWidth: "100%", height: '100%'}}>
-                            <Card key={idx} className={classes.user}>
-                              <UserCard user={user} />
-                            </Card>
-                        </Grid>
-                          ))}
-                  </Grid>
+                <Grid container xs={10} className={classes.usersWrapper}>
+                    {userList.map((user: User, idx: number) => (
+                      <Grid item xs={4} style={{ maxWidth: "100%", height: '100%'}}>
+                          <Card key={idx} className={classes.user}>
+                            <UserCard user={user} />
+                          </Card>
+                      </Grid>
+                    ))}
+                </Grid>
+                <Grid item xs={1} className={classes.paginationWrapper}>
+                      {`<  *  >`}
+                </Grid>
                 </Grid>
                 <Grid item  xs={2} className={classes.mainFooterWrapper} style={{ border: '1px solid red'}}>
 
