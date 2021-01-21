@@ -10,19 +10,20 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         flexDirection: 'column',
     },
     mainHeaderWrapper: {
-        maxWidth: '100%',
+        width: '100%',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 'calc(.625rem)'
     },
     mainComponentWrapper: {
-        maxWidth: '100%',
+        width: '100%',
         display: 'flex',
         flexDirection: 'column',
+        maxWidth: 'none'
     },
     mainFooterWrapper: {
-        maxWidth: '100%',
+        width: '100%',
         display: 'flex'
     },
     componentHeader: {
@@ -33,12 +34,12 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
 
     },
     filterTools: {
-        maxWidth: '100%',
+        width: '100%',
         border: '1px solid yellow',
         padding: 'calc(.625rem)',
     },
     ordersWrapper: {
-        maxWidth: '100%',
+        width: '100%',
         border: '1px solid purple',
         padding: 'calc(.625rem - -10px)',
     }

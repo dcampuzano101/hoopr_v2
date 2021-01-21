@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 
 
 
-const useStyles = makeStyles(({ palette }: Theme) => ({
+const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     drawerWrap: {
         display: 'flex',
         flexDirection: 'column',
@@ -36,7 +36,11 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         height: '100%',
         boxSizing: 'border-box',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
+        [breakpoints.down('sm')]: {
+            flexDirection: 'row',
+        }
+
 
     },
     button: {

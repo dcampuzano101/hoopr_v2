@@ -16,7 +16,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
     },
     drawerPanelWrapper: {
         border: '1px solid black',
-        height: '100%',
+        // height: '100%',
         display: 'flex',
         width: '100%',
         boxSizing: 'border-box',
@@ -46,7 +46,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
     },
     mainWrapper: {
         border: '1px solid black',
-        height: '100%',
+        height: '100vh',
         boxSizing: 'border-box',
         padding: 'calc(.625rem - -10px) calc(.625rem - -25px)',
         [breakpoints.down('sm')]: {
@@ -54,7 +54,7 @@ const useStyles = makeStyles(({palette, breakpoints}: Theme) => ({
         }
     },
     main: {
-        height: '100%',
+        // height: '100%',
         display: 'flex',
         boxSizing: 'border-box',
         [breakpoints.down('sm')]: {

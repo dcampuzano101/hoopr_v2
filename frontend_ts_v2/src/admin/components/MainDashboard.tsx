@@ -10,15 +10,14 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         flexDirection: 'column',
     },
     mainHeaderWrapper: {
-        maxWidth: '100%',
+        width: '100%',
         display: 'flex',
     },
     mainComponentWrapper: {
-        maxWidth: '100%',
         display: 'flex'
     },
     mainFooterWrapper: {
-        maxWidth: '100%',
+        width: '100%',
         display: 'flex'
     },
     componentHeader: {

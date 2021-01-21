@@ -28,7 +28,7 @@ const useStyles = makeStyles(({ palette, breakpoints}: Theme) => ({
   },
   adminDashboardWrapper: {
     border: '1px solid black',
-    height: '100vh',
+    // height: '100vh',
     padding: 'calc(.625rem - -10px)',
     [breakpoints.down('sm')]: {
         display: 'flex',
@@ -37,7 +37,7 @@ const useStyles = makeStyles(({ palette, breakpoints}: Theme) => ({
 },
 drawerPanelWrapper: {
     border: '1px solid black',
-    height: '100%',
+    // height: '100%',
     display: 'flex',
     width: '100%',
     boxSizing: 'border-box',
@@ -67,24 +67,25 @@ drawerPanel: {
 },
 mainWrapper: {
     border: '1px solid black',
-    height: '100%',
+    height: '100vh',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -3px) calc(.625rem - -25px)',
     [breakpoints.down('sm')]: {
-        height: '45%',
+        height: '15%',
+        padding: '0',
     }
 },
 main: {
     height: '100%',
-    display: 'flex',
+    // display: 'flex',
     boxSizing: 'border-box',
     [breakpoints.down('sm')]: {
-        height: '95%',
-        width: '95%',
-        margin: '0 auto',
-        display: 'flex',
-        padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
-        boxSizing: 'border-box',
+        // height: '95%',
+        // width: '95%',
+        // margin: '0 auto',
+        // display: 'flex',
+        // padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
+        // boxSizing: 'border-box',
     }
 },
 activitiesWrapper: {
@@ -119,12 +120,12 @@ const App: React.FC<AppProps> = ({}) => {
     <Router>
       <main className={classes.body}>
         <Grid container spacing={0} className={classes.adminDashboardWrapper}>
-          <Grid item sm={12} md={2} className={classes.drawerPanelWrapper}>
+          <Grid item xs={12} md={2} className={classes.drawerPanelWrapper}>
               <Paper elevation={0} className={classes.drawerPanel}>
                   <Drawer />
               </Paper>
           </Grid>
-          <Grid item sm={12} md={7} className={classes.mainWrapper}>
+          <Grid item xs={12} md={9} className={classes.mainWrapper}>
               <Paper elevation={0} className={classes.main}>
                       <Switch>
                         <Route path="/admin/runs" component={Runs} />
@@ -133,11 +134,11 @@ const App: React.FC<AppProps> = ({}) => {
                       </Switch> 
               </Paper>
           </Grid>
-          <Grid item sm={12} md={3} className={classes.activitiesWrapper}>
+          {/* <Grid item sm={12} md={3} className={classes.activitiesWrapper}>
               <Paper elevation={0} className={classes.activities}>
 
               </Paper>
-            </Grid>
+            </Grid> */}
         </Grid>
       </main>
     </Router>

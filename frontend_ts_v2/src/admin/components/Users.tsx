@@ -11,9 +11,9 @@ interface Result {
 const useStyles = makeStyles(({ palette }: Theme) => ({
     mainInnerWrapper: {
         border: '1px solid black',
-        height: '100%',
-        display: 'flex',
+        // display: 'flex',
         flexDirection: 'column',
+        // height: '100%'
     },
     mainHeaderWrapper: {
         maxWidth: '100%',
@@ -23,9 +23,11 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         padding: 'calc(.625rem)'
     },
     mainComponentWrapper: {
-        maxWidth: '100%',
         display: 'flex',
         flexDirection: 'column',
+        margin: '0 auto',
+        // minWidth: '100%',
+
     },
     mainFooterWrapper: {
         maxWidth: '100%',
@@ -44,15 +46,11 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         padding: 'calc(.625rem)',
     },
     usersWrapper: {
-        maxWidth: '100%',
-        display: 'grid',
-        gridGap: '1rem',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(175px, 1fr))',
-        padding: 'calc(.625rem)',
-        boxSizing: 'border-box',
-        position: 'relative',
-        height: '100%',
-        alignItems: 'center',
+      padding: 'calc(.625rem)',
+        flexBasis: 'none',
+        width: '100%',
+        maxWidth: 'none',
+        margin: '0 auto'
     },
     user: {
         display: 'flex',
@@ -66,6 +64,11 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         display: 'flex',
         justifyContent: 'center',
         maxWidth: '100%'
+      },
+      userCardContainer: {
+        '&:hover': {
+          cursor: 'pointer'
+        }
       }
 }))
 
@@ -288,19 +291,11 @@ interface UsersProps {
     }
     const handleFilter = (query:string) => {
       query = query.toLowerCase();
-      let usersCopy = [...userList];
+      let usersCopy = [...users];
       let filtered = usersCopy.filter((user, idx) => filterHelper(query, user))
+      console.log(filtered);
       setUserList(filtered);
-    }
 
-    const onKeyDown = (e: React.KeyboardEvent) => {
-      const target = e.target as HTMLTextAreaElement;
-      if (e.key === 'Backspace') {
-        const query = target.value?.toLowerCase();
-        let usersCopy = [...userList];
-        let filtered = usersCopy.filter((user, idx) => filterHelper(query, user))
-        setUserList(filtered);
-      }
     }
 
     useEffect(() => {
@@ -313,9 +308,9 @@ interface UsersProps {
             <Grid container className={classes.mainInnerWrapper}>
                 <Grid item xs={1} className={classes.mainHeaderWrapper}  style={{ border: '1px solid green'}}>
                         <Typography variant="h1" className={classes.componentHeader}>Users</Typography>
-                        <Typography variant="h3">{users.length} Results</Typography>
+                        <Typography variant="h3">{userList.length} Results</Typography>
                 </Grid>
-                <Grid item xs={9} className={classes.mainComponentWrapper} style={{ border: '1px solid blue'}}>
+                <Grid item xs={10} className={classes.mainComponentWrapper} style={{ border: '1px solid blue'}}>
                 <Grid item xs={1} className={classes.filterTools}>
                   <TextField 
                     id="outlined-basic" 
@@ -328,13 +323,12 @@ interface UsersProps {
                         </InputAdornment>
                       ),
                     }}
-                    onKeyDown={(e) => onKeyDown(e)} 
                     onChange={(e) => handleFilter(e.target.value)}
                   />
                 </Grid>
-                <Grid container xs={10} className={classes.usersWrapper}>
+                <Grid container xs={12} spacing={3} className={classes.usersWrapper}>
                     {userList.map((user: User, idx: number) => (
-                      <Grid item xs={4} style={{ maxWidth: "100%", height: '100%'}}>
+                      <Grid item xs={12}  sm={12} md={6} lg={4} className={classes.userCardContainer}>
                           <Card key={idx} className={classes.user}>
                             <UserCard user={user} />
                           </Card>
@@ -345,9 +339,9 @@ interface UsersProps {
                       {`<  *  >`}
                 </Grid>
                 </Grid>
-                <Grid item  xs={2} className={classes.mainFooterWrapper} style={{ border: '1px solid red'}}>
+                  {/* <Grid item  xs={2} className={classes.mainFooterWrapper} style={{ border: '1px solid red'}}>
 
-                </Grid>
+                  </Grid> */}
             </Grid>
         );
 }
