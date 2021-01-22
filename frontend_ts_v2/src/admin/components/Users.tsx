@@ -8,23 +8,26 @@ import { UserInfo } from 'os';
 interface Result {
   result: []
 }
-const useStyles = makeStyles(({ palette }: Theme) => ({
+const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     mainInnerWrapper: {
-        border: '1px solid black',
+        // border: '1px solid black',
         // display: 'flex',
         flexDirection: 'column',
-        // height: '100%'
+        height: '100%'
     },
     mainHeaderWrapper: {
         maxWidth: '100%',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        // alignItems: 'center',
         padding: 'calc(.625rem)'
     },
     mainComponentWrapper: {
         display: 'flex',
         flexDirection: 'column',
+        [breakpoints.down('sm')]: {
+          display: 'block'
+        },
         margin: '0 auto',
         // minWidth: '100%',
 
@@ -57,8 +60,10 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         flexDirection: 'column',
         placeItems: 'center',
         height: '100%',
-        backgroundColor: palette.primary.dark,
-        opacity: '95%'
+        backgroundColor: palette.primary.light,
+        opacity: '95%',
+        maxWidth: '75%',
+
       },
       paginationWrapper: {
         display: 'flex',
@@ -66,8 +71,14 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         maxWidth: '100%'
       },
       userCardContainer: {
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        top: '0',
         '&:hover': {
-          cursor: 'pointer'
+          cursor: 'pointer',
+          transition: 'top .3s ease',
+          top: '-.5rem'
         }
       }
 }))
@@ -92,36 +103,16 @@ interface UsersProps {
      const classes = useStyles();
      const users = [
         // {
-        //   username: "merkyoass",
-        //   email: "dcampuzano101@gmail.com",
-        // //   password: bcrypt.hashSync("Zeu$1987", 10),
+        //   username: "Chris Carr",
+        //   email: "chris@gmail.com",
         //   waitList: [],
-        //   isAdmin: true,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/merkyoass.jpg",
+        //   isAdmin: false,
+        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/chris.jpg",
         //   orders: {},
         // },
-        // {
-        //   username: "ana furman",
-        //   email: "munya1386@gmail.com",
-        // //   password: bcrypt.hashSync("binx1986", 10),
-        //   waitList: [],
-        //   isAdmin: true,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/ana.jpg",
-        //   orders: {},
-        // },
-        {
-          username: "Chris Carr",
-          email: "chris@gmail.com",
-        //   password: bcrypt.hashSync("123456", 10),
-          waitList: [],
-          isAdmin: false,
-          profilePhoto: "https://hoopr2.s3.amazonaws.com/chris.jpg",
-          orders: {},
-        },
         {
           username: "Danan Capote",
           email: "danan@gmail.com",
-        //   password: bcrypt.hashSync("123456", 10),
           waitList: [],
           isAdmin: false,
           profilePhoto: "https://hoopr2.s3.amazonaws.com/danan.jpg",
@@ -130,7 +121,6 @@ interface UsersProps {
         {
           username: "Darko Lukacevic",
           email: "darko@gmail.com",
-        //   password: bcrypt.hashSync("123456", 10),
           waitList: [],
           isAdmin: false,
           profilePhoto: "https://hoopr2.s3.amazonaws.com/darko.jpg",
@@ -139,7 +129,6 @@ interface UsersProps {
         {
           username: "Ellis Chang",
           email: "ellis@gmail.com",
-        //   password: bcrypt.hashSync("123456", 10),
           waitList: [],
           isAdmin: false,
           profilePhoto: "https://hoopr2.s3.amazonaws.com/ellis.jpg",
@@ -148,7 +137,6 @@ interface UsersProps {
         {
           username: "Jared Schutz",
           email: "jared@gmail.com",
-        //   password: bcrypt.hashSync("123456", 10),
           waitList: [],
           isAdmin: false,
           profilePhoto: "https://hoopr2.s3.amazonaws.com/jared.jpg",
@@ -157,120 +145,20 @@ interface UsersProps {
         {
           username: "Jason Caps",
           email: "jason@gmail.com",
-        //   password: bcrypt.hashSync("123456", 10),
           waitList: [],
           isAdmin: false,
           profilePhoto: "https://hoopr2.s3.amazonaws.com/jason.jpg",
           orders: {},
         },
-        // {
-        //   username: "Jon Moreno",
-        //   email: "jon@gmail.com",
-        // //   password: bcrypt.hashSync("123456", 10),
-        //   waitList: [],
-        //   isAdmin: false,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/jonathan.jpg",
-        //   orders: {},
-        // },
-        {
-          username: "Jone Wong",
-          email: "jone@gmail.com",
-        //   password: bcrypt.hashSync("123456", 10),
-          waitList: [],
-          isAdmin: false,
-          profilePhoto: "https://hoopr2.s3.amazonaws.com/jone.jpg",
-          orders: {},
-        },
-        // {
-        //   username: "Kareem Hartl",
-        //   email: "kareem@gmail.com",
-        // //   password: bcrypt.hashSync("123456", 10),
-        //   waitList: [],
-        //   isAdmin: false,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/kareem.jpg",
-        //   orders: {},
-        // },
-        // {
-        //   username: "Danny Kegel",
-        //   email: "danny@gmail.com",
-        // //   password: bcrypt.hashSync("123456", 10),
-        //   waitList: [],
-        //   isAdmin: false,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/danny.jpg",
-        //   orders: {},
-        // },
-        // {
-        //   username: "Kenny L",
-        //   email: "kenny@gmail.com",
-        // //   password: bcrypt.hashSync("123456", 10),
-        //   waitList: [],
-        //   isAdmin: false,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/kenny.jpg",
-        //   orders: {},
-        // },
-        // {
-        //   username: "Lowg Racho",
-        //   email: "lowg@gmail.com",
-        // //   password: bcrypt.hashSync("123456", 10),
-        //   waitList: [],
-        //   isAdmin: false,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/lowg.jpg",
-        //   orders: {},
-        // },
-        // {
-        //   username: "Kevin Mersch",
-        //   email: "kevin@gmail.com",
-        // //   password: bcrypt.hashSync("123456", 10),
-        //   waitList: [],
-        //   isAdmin: false,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/kevin.jpg",
-        //   orders: {},
-        // },
-        // {
-        //   username: "Mike Yen",
-        //   email: "mike@gmail.com",
-        // //   password: bcrypt.hashSync("123456", 10),
-        //   waitList: [],
-        //   isAdmin: false,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/mike.jpg",
-        //   orders: {},
-        // },
+      
         {
           username: "Radu Negu",
           email: "radu@gmail.com",
-        //   password: bcrypt.hashSync("123456", 10),
           waitList: [],
           isAdmin: false,
           profilePhoto: "https://hoopr2.s3.amazonaws.com/radu.jpg",
           orders: {},
         },
-        // {
-        //   username: "Mike C",
-        //   email: "mikec@gmail.com",
-        // //   password: bcrypt.hashSync("123456", 10),
-        //   waitList: [],
-        //   isAdmin: false,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/mikec.jpg",
-        //   orders: {},
-        // },
-        // {
-        //   username: "Simon Leong",
-        //   email: "simon@gmail.com",
-        // //   password: bcrypt.hashSync("123456", 10),
-        //   waitList: [],
-        //   isAdmin: false,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/simon.jpg",
-        //   orders: {},
-        // },
-        // {
-        //   username: "Steve Song",
-        //   email: "steve@gmail.com",
-        // //   password: bcrypt.hashSync("123456", 10),
-        //   waitList: [],
-        //   isAdmin: false,
-        //   profilePhoto: "https://hoopr2.s3.amazonaws.com/steve.jpg",
-        //   orders: {},
-        // },
       ];
 
     const [userList, setUserList] = useState<any | undefined | null>(users)
@@ -306,11 +194,11 @@ interface UsersProps {
     }, [filterQuery])
         return (
             <Grid container className={classes.mainInnerWrapper}>
-                <Grid item xs={1} className={classes.mainHeaderWrapper}  style={{ border: '1px solid green'}}>
+                <Grid item xs={1} className={classes.mainHeaderWrapper} >
                         <Typography variant="h1" className={classes.componentHeader}>Users</Typography>
                         <Typography variant="h3">{userList.length} Results</Typography>
                 </Grid>
-                <Grid item xs={10} className={classes.mainComponentWrapper} style={{ border: '1px solid blue'}}>
+                <Grid item xs={10} className={classes.mainComponentWrapper} >
                 <Grid item xs={1} className={classes.filterTools}>
                   <TextField 
                     id="outlined-basic" 
@@ -329,7 +217,7 @@ interface UsersProps {
                 <Grid container xs={12} spacing={3} className={classes.usersWrapper}>
                     {userList.map((user: User, idx: number) => (
                       <Grid item xs={12}  sm={12} md={6} lg={4} className={classes.userCardContainer}>
-                          <Card key={idx} className={classes.user}>
+                          <Card elevation={3} key={idx} className={classes.user}>
                             <UserCard user={user} />
                           </Card>
                       </Grid>
@@ -339,9 +227,6 @@ interface UsersProps {
                       {`<  *  >`}
                 </Grid>
                 </Grid>
-                  {/* <Grid item  xs={2} className={classes.mainFooterWrapper} style={{ border: '1px solid red'}}>
-
-                  </Grid> */}
             </Grid>
         );
 }

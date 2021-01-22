@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import HomeScreen from './screens/HomeScreen'
 import BlogScreen from './screens/BlogScreen'
-import DashboardScreen from './admin/screens/DashboardScreen'
 import Runs from './admin/components/Runs'
 import Orders from './admin/components/Orders'
 import Users from './admin/components/Users'
@@ -19,31 +18,28 @@ const useStyles = makeStyles(({ palette, breakpoints}: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     color: palette.secondary.light,
-    // backgroundColor: palette.primary.dark
   },
   body: {
     height: '100vh',
-    // padding: '5%',
-    // border: '1px solid green'
   },
   adminDashboardWrapper: {
-    border: '1px solid black',
-    // height: '100vh',
+    // border: '1px solid black',
+    height: '100%',
     padding: 'calc(.625rem - -10px)',
     [breakpoints.down('md')]: {
         display: 'flex',
-        flexDirection: 'column'
+        // flexDirection: 'column'
     }
 },
 drawerPanelWrapper: {
-    border: '1px solid black',
+    // border: '1px solid black',
     // height: '100%',
     display: 'flex',
     width: '100%',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -10px)',
     [breakpoints.down('sm')]: {
-        height: '10%',
+        // height: '10%',
     },
     '& h3': {
         fontSize: 'calc(1.1em / 16 * 15)',
@@ -55,41 +51,34 @@ drawerPanel: {
     height: '98%',
     display: 'flex',
     boxSizing: 'border-box',
-    [breakpoints.down('sm')]: {
-        height: '95%',
-        width: '95%',
-        margin: '0 auto',
-        display: 'flex',
-        padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
-        boxSizing: 'border-box',
-    }
+    // [breakpoints.down('sm')]: {
+    //     height: '95%',
+    //     width: '95%',
+    //     margin: '0 auto',
+    //     display: 'flex',
+    //     padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
+    //     boxSizing: 'border-box',
+    // }
 
 },
 mainWrapper: {
-    border: '1px solid black',
-    height: '100vh',
+    // border: '1px solid black',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -3px) calc(.625rem - -25px)',
     [breakpoints.down('md')]: {
-        height: '15%',
+        // height: '15%',
         padding: '0',
     }
 },
 main: {
-    height: '100%',
-    // display: 'flex',
     boxSizing: 'border-box',
+    height: '100%',
     [breakpoints.down('sm')]: {
-        // height: '95%',
-        // width: '95%',
-        // margin: '0 auto',
-        // display: 'flex',
-        // padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
-        // boxSizing: 'border-box',
+        
     }
 },
 activitiesWrapper: {
-    border: '1px solid black',
+    // border: '1px solid black',
     height: '100%',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -10px)',
@@ -134,11 +123,6 @@ const App: React.FC<AppProps> = ({}) => {
                       </Switch> 
               </Paper>
           </Grid>
-          {/* <Grid item sm={12} md={3} className={classes.activitiesWrapper}>
-              <Paper elevation={0} className={classes.activities}>
-
-              </Paper>
-            </Grid> */}
         </Grid>
       </main>
     </Router>
@@ -150,5 +134,4 @@ export default App
 
 {/* <Route path="/" component={HomeScreen} exact />
 <Route path="/blog" component={BlogScreen} /> */}
-{/* <Route path="/admin" exact component={DashboardScreen} /> */}
 {/* <Header /> */}

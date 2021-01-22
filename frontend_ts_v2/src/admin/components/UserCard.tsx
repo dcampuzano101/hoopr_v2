@@ -3,11 +3,18 @@ import { Paper, Card, Grid, Avatar, Typography } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import userAvatar from '../../assets/images/user-avatar.png'
 
-const useStyles = makeStyles(({ palette, spacing }: Theme) => ({
+const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     cardFooter: {
         display: 'flex',
-        maxWidth: '100%',
         flexDirection: 'column',
+        height: '50%',
+        justifyContent: 'center',
+        alignItems: 'baseline',
+        padding: 'calc(.5rem)',
+        backgroundColor: palette.primary.main,
+        [breakpoints.down('sm')]: {
+            height: '100%',
+        }
     },
     userCardWrapper: {
         display: 'flex',
@@ -16,13 +23,26 @@ const useStyles = makeStyles(({ palette, spacing }: Theme) => ({
         width: '100%',
         boxSizing: 'border-box',
         position: 'relative',
-        padding: 'calc(.5rem)'
+        justifyContent: 'center',
+        [breakpoints.down('sm')]: {
+            flexDirection: 'row',
+        }
+        // padding: 'calc(.5rem)',
     },
     avatarWrapper: {
-        width: '100%',
-        height: '100%',
-        maxWidth: '100%',
         textAlign: 'center',
+        padding: 'calc(.5rem)',
+        display: 'grid',
+        placeItems: 'center',
+        height: '50%',
+        [breakpoints.down('sm')]: {
+            width: '50%',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            marginLeft: '15px',
+            boxSizing: 'border-box',
+            height: 'auto'
+        }
     },
     small: {
         width: spacing(3),
@@ -57,21 +77,21 @@ interface UserCardProps {
                         src={user.profilePhoto ? user.profilePhoto : userAvatar}
                         alt="avatar"
                         style={{
-                        width: "75%",
-                        borderRadius: "90px",
+                        width: "50%",
+                        borderRadius: "50%",
                         marginBottom: "2px",
                         opacity: '85%'
                         }}
                     />
                 </div>
                 <div className={classes.cardFooter}>
-                    <Typography variant="h3" style={{ fontSize: 'calc(.8em / 16 * 15)' }}>
+                    <Typography variant="h3" style={{ fontSize: 'calc(1em / 16 * 15)' }}>
                         {`username: ${user.username}`}
                     </Typography>
-                    <Typography variant="h3" style={{ fontSize: 'calc(.8em / 16 * 15)'}}>
+                    <Typography variant="h3" style={{ fontSize: 'calc(1em / 16 * 15)'}}>
                     {`email: ${user.email}`}
                     </Typography>
-                    <Typography variant="h3" style={{ fontSize: 'calc(.8em / 16 * 15)'}}>
+                    <Typography variant="h3" style={{ fontSize: 'calc(1em / 16 * 15)'}}>
                     {`isAdmin: ${user.isAdmin}`}
                     </Typography>
                 </div>
