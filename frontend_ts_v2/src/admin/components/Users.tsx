@@ -17,13 +17,13 @@ interface Result {
 }
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   mainInnerWrapper: {
-    border: '1px solid black',
+    // border: '1px solid black',
     // display: 'flex',
     // flexDirection: 'column',
     height: '100%'
   },
   mainHeaderWrapper: {
-    border: '1px solid black',
+    // border: '1px solid black',
     maxWidth: '100%',
     display: 'flex',
     justifyContent: 'space-between',
@@ -37,7 +37,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     }
   },
   mainComponentWrapper: {
-    border: '1px solid black',
+    // border: '1px solid black',
     display: 'flex',
     [breakpoints.down('sm')]: {
       display: 'block',
@@ -48,18 +48,21 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     minWidth: '100%'
   },
   mainFooterWrapper: {
-    border: '1px solid black',
+    // border: '1px solid black',
     maxWidth: '100%',
     display: 'flex'
   },
   componentHeader: {
     textTransform: 'none',
-    fontSize: 'calc(1rem + 1.5vw)'
+    fontSize: 'calc(1rem + 1.5vw)',
+    [breakpoints.down('sm')]: {
+      letterSpacing: '-1.5px'
+    }
   },
   headerWrapper: {},
   filterTools: {
     maxWidth: '100%',
-    border: '1px solid yellow',
+    // border: '1px solid yellow',
     padding: 'calc(.625rem)'
   },
   usersWrapper: {

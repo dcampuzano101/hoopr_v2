@@ -21,23 +21,24 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     height: '100vh'
   },
   adminDashboardWrapper: {
-    border: '1px solid black',
+    // border: '1px solid black',
     height: '100%',
     padding: 'calc(.625rem - -10px)',
     [breakpoints.down('md')]: {
-      display: 'flex'
-      // flexDirection: 'column'
+      display: 'flex',
+      padding: '0'
     }
   },
   drawerPanelWrapper: {
-    border: '1px solid black',
+    // border: '1px solid black',
     // height: '100%',
     display: 'flex',
     width: '100%',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -10px)',
     [breakpoints.down('sm')]: {
-      // height: '10%',
+      borderBottom: '1px solid rgba(0, 0, 0, 0.34)',
+      boxShadow: '0 6px 3px -6px black'
     },
     '& h3': {
       fontSize: 'calc(1.1em / 16 * 15)',
@@ -49,17 +50,9 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     height: '98%',
     display: 'flex',
     boxSizing: 'border-box'
-    // [breakpoints.down('sm')]: {
-    //     height: '95%',
-    //     width: '95%',
-    //     margin: '0 auto',
-    //     display: 'flex',
-    //     padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
-    //     boxSizing: 'border-box',
-    // }
   },
   mainWrapper: {
-    border: '1px solid black',
+    // border: '1px solid black',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -3px) calc(.625rem - -25px)',
     [breakpoints.down('md')]: {
@@ -73,7 +66,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     [breakpoints.down('sm')]: {}
   },
   activitiesWrapper: {
-    border: '1px solid black',
+    // border: '1px solid black',
     height: '100%',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -10px)',

@@ -25,7 +25,8 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   },
   headerLogo: {
     [breakpoints.down('sm')]: {
-      fontSize: '1.8rem'
+      fontSize: '1.8rem',
+      letterSpacing: '-1.5px'
     }
   },
   header: {},
