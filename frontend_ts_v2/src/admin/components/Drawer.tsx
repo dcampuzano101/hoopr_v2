@@ -43,8 +43,8 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   navOtherWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
-    height: '100%',
+    width: '70%',
+    margin: '85% 0',
     boxSizing: 'border-box',
     justifyContent: 'space-around',
     alignItems: 'center',

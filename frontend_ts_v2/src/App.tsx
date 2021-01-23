@@ -31,7 +31,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     }
   },
   drawerPanelWrapper: {
-    // border: '1px solid black',
+    border: '1px solid black',
     display: 'flex',
     width: '100%',
     boxSizing: 'border-box',
@@ -82,9 +82,7 @@ const App: React.FC<AppProps> = ({}) => {
       <main className={classes.body}>
         <Grid container spacing={0} className={classes.adminDashboardWrapper}>
           <Grid item xs={12} lg={2} className={classes.drawerPanelWrapper}>
-            <Paper elevation={0} className={classes.drawerPanel}>
-              <Drawer />
-            </Paper>
+            <Drawer />
           </Grid>
           {!isMobile ? <div className={classes.verticalDivider}></div> : null}
 
