@@ -104,18 +104,12 @@ const App: React.FC<AppProps> = ({}) => {
     <Router>
       <main className={classes.body}>
         <Grid container spacing={0} className={classes.adminDashboardWrapper}>
-          <Grid
-            item
-            xs={12}
-            md={12}
-            lg={2}
-            className={classes.drawerPanelWrapper}
-          >
+          <Grid item xs={12} lg={2} className={classes.drawerPanelWrapper}>
             <Paper elevation={0} className={classes.drawerPanel}>
               <Drawer />
             </Paper>
           </Grid>
-          <Grid item xs={12} md={12} lg={10} className={classes.mainWrapper}>
+          <Grid item xs={12} lg={10} className={classes.mainWrapper}>
             <Switch>
               <Route path="/admin/runs" component={Runs} />
               <Route path="/admin/orders" component={Orders} />

@@ -1,7 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import { green, red } from '@material-ui/core/colors'
 
-
 let theme = createMuiTheme({
   palette: {
     primary: {
@@ -76,6 +75,5 @@ overline
     }
   }
 })
-
 
 export default theme

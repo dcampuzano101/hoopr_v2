@@ -28,13 +28,20 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     height: '5%',
-    padding: 'calc(.625rem)'
+    padding: 'calc(.625rem)',
+    [breakpoints.down('sm')]: {
+      height: '3%'
+    },
+    [breakpoints.down('md')]: {
+      height: '5%'
+    }
   },
   mainComponentWrapper: {
     border: '1px solid black',
     display: 'flex',
     [breakpoints.down('sm')]: {
-      display: 'block'
+      display: 'block',
+      height: '100%'
     },
     height: '95%',
     marginTop: '1%',
@@ -69,7 +76,12 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     height: '300px',
     width: '300px',
     backgroundColor: palette.primary.light,
-    opacity: '95%'
+    opacity: '95%',
+    [breakpoints.down('sm')]: {
+      width: '200px',
+      height: '200px',
+      margin: '3%'
+    }
   },
   paginationWrapper: {
     display: 'flex',
@@ -91,7 +103,10 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'inline-flex',
     height: '95%',
     flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    [breakpoints.down('sm')]: {
+      justifyContent: 'center'
+    }
   }
 }))
 

@@ -24,10 +24,6 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     boxSizing: 'border-box',
     position: 'relative',
     justifyContent: 'center'
-    // [breakpoints.down('sm')]: {
-    //     flexDirection: 'row',
-    // }
-    // padding: 'calc(.5rem)',
   },
   avatarWrapper: {
     textAlign: 'center',
@@ -35,22 +31,13 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     display: 'grid',
     placeItems: 'center',
     height: '50%'
-    // [breakpoints.down('sm')]: {
-    //     width: '50%',
-    //     display: 'flex',
-    //     justifyContent: 'flex-start',
-    //     marginLeft: '15px',
-    //     boxSizing: 'border-box',
-    //     height: 'auto'
-    // }
   },
-  small: {
-    width: spacing(3),
-    height: spacing(3)
-  },
-  large: {
-    width: spacing(7),
-    height: spacing(7)
+
+  cardText: {
+    fontSize: 'calc(1em / 16 * 15)',
+    [breakpoints.down('sm')]: {
+      fontSize: 'calc(.8em / 16 * 15)'
+    }
   }
 }))
 
@@ -84,13 +71,13 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
         />
       </div>
       <div className={classes.cardFooter}>
-        <Typography variant="h3" style={{ fontSize: 'calc(1em / 16 * 15)' }}>
+        <Typography variant="h3" className={classes.cardText}>
           {`username: ${user.username}`}
         </Typography>
-        <Typography variant="h3" style={{ fontSize: 'calc(1em / 16 * 15)' }}>
+        <Typography variant="h3" className={classes.cardText}>
           {`email: ${user.email}`}
         </Typography>
-        <Typography variant="h3" style={{ fontSize: 'calc(1em / 16 * 15)' }}>
+        <Typography variant="h3" className={classes.cardText}>
           {`isAdmin: ${user.isAdmin}`}
         </Typography>
       </div>
