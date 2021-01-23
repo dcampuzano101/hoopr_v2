@@ -31,7 +31,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     }
   },
   drawerPanelWrapper: {
-    border: '1px solid black',
     display: 'flex',
     width: '100%',
     boxSizing: 'border-box',
@@ -100,11 +99,3 @@ const App: React.FC<AppProps> = ({}) => {
 }
 
 export default App
-
-{
-  /* <Route path="/" component={HomeScreen} exact />
-<Route path="/blog" component={BlogScreen} /> */
-}
-{
-  /* <Header /> */
-}

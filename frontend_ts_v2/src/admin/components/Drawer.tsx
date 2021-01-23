@@ -154,9 +154,3 @@ const Drawer: React.FC<DrawerProps> = ({ history }) => {
 }
 
 export default withRouter(Drawer)
-
-/*
- <div className={classes.otherWrapper}> <Typography variant="h3">Other</Typography></div> 
-
-<Typography variant="h3">Tools</Typography>
-*/

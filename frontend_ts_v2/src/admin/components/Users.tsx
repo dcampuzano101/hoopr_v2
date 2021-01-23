@@ -17,9 +17,6 @@ interface Result {
 }
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   mainInnerWrapper: {
-    // border: '1px solid black',
-    // display: 'flex',
-    // flexDirection: 'column',
     height: '100%'
   },
   mainHeaderWrapper: {
@@ -34,7 +31,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     }
   },
   mainComponentWrapper: {
-    // border: '1px solid black',
     display: 'flex',
     [breakpoints.down('sm')]: {
       display: 'block',
@@ -45,7 +41,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     minWidth: '100%'
   },
   mainFooterWrapper: {
-    // border: '1px solid black',
     maxWidth: '100%',
     display: 'flex'
   },
@@ -59,7 +54,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   headerWrapper: {},
   filterTools: {
     maxWidth: '100%',
-    // border: '1px solid yellow',
     padding: 'calc(.625rem)',
     display: 'flex',
     flexDirection: 'row',
@@ -100,7 +94,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   userCardContainer: {
     position: 'relative',
     display: 'flex',
-    // justifyContent: 'center',
     top: '0',
     '&:hover': {
       cursor: 'pointer',
