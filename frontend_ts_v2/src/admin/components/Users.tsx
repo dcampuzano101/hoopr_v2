@@ -86,6 +86,10 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
       width: '250px',
       height: '250px',
       margin: '3%'
+    },
+    [breakpoints.down('xs')]: {
+      width: '300px',
+      height: '300px'
     }
   },
   paginationWrapper: {
@@ -117,8 +121,10 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     marginRight: 'calc(1.7rem)',
     fontSize: '1.5rem',
     letterSpacing: '-1px',
-    fontWeight: 400
-    // textTransform: 'uppercase'
+    fontWeight: 400,
+    [breakpoints.down('sm')]: {
+      fontSize: '1rem'
+    }
   },
   basketballIcon: {
     marginRight: 'calc(1.7rem)',
@@ -253,6 +259,7 @@ const Users: React.FC<UsersProps> = ({}) => {
             id="outlined-basic"
             label="Filter Users By Name"
             variant="outlined"
+            style={{ height: '50px', width: '200px' }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

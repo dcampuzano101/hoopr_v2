@@ -1,6 +1,6 @@
 import React from 'react'
-import { Typography, Grid, Paper } from '@material-ui/core'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import { Typography, Grid, Paper, useMediaQuery } from '@material-ui/core'
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import HomeScreen from './screens/HomeScreen'
@@ -21,7 +21,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     height: '100vh'
   },
   adminDashboardWrapper: {
-    // border: '1px solid black',
     height: '100%',
     padding: 'calc(.625rem - -10px)',
     [breakpoints.down('md')]: {
@@ -30,8 +29,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     }
   },
   drawerPanelWrapper: {
-    // border: '1px solid black',
-    // height: '100%',
     display: 'flex',
     width: '100%',
     boxSizing: 'border-box',
@@ -53,11 +50,9 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   },
   mainWrapper: {
     maxWidth: '1180px',
-    // border: '1px solid black',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -3px) calc(.625rem - -25px)',
     [breakpoints.down('md')]: {
-      // height: '15%',
       padding: '0'
     }
   },
@@ -65,12 +60,19 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     boxSizing: 'border-box',
     height: '100%',
     [breakpoints.down('sm')]: {}
+  },
+  verticalDivider: {
+    height: '100%',
+    border: '1px solid rgba(0, 0, 0, 0.8)'
   }
 }))
 
 interface AppProps {}
 
 const App: React.FC<AppProps> = ({}) => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+
   const classes = useStyles()
   return (
     <Router>
@@ -81,6 +83,8 @@ const App: React.FC<AppProps> = ({}) => {
               <Drawer />
             </Paper>
           </Grid>
+          {!isMobile ? <div className={classes.verticalDivider}></div> : null}
+
           <Grid item xs={12} lg={10} className={classes.mainWrapper}>
             <Switch>
               <Route path="/admin/runs" component={Runs} />

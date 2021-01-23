@@ -1,32 +1,31 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import MaterialHeader from "./components/MaterialHeader";
-import styled from "styled-components";
-import LoginScreen from "./screens/LoginScreen";
-import RegisterScreen from "./screens/RegisterScreen";
-import ProfileDashboard from "./components/profile/ProfileDashboard";
-import Modal from "./components/Modal";
-import MainScreen from "./screens/MainScreen";
-import CartScreen from "./screens/CartScreen";
-import AdminScreen from "./screens/AdminScreen";
-import UserEditScreen from "./screens/UserEditScreen";
-import RunEditScreen from "./screens/RunEditScreen";
-import RunCreateScreen from "./screens/RunCreateScreen";
-import CheckoutScreen from "./screens/CheckoutScreen";
-import Oauth from "./components/Oauth";
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import MaterialHeader from './components/MaterialHeader'
+import styled from 'styled-components'
+import LoginScreen from './screens/LoginScreen'
+import RegisterScreen from './screens/RegisterScreen'
+import ProfileDashboard from './components/profile/ProfileDashboard'
+import Modal from './components/Modal'
+import MainScreen from './screens/MainScreen'
+import CartScreen from './screens/CartScreen'
+import AdminScreen from './screens/AdminScreen'
+import UserEditScreen from './screens/UserEditScreen'
+import RunEditScreen from './screens/RunEditScreen'
+import RunCreateScreen from './screens/RunCreateScreen'
+import CheckoutScreen from './screens/CheckoutScreen'
+import Oauth from './components/Oauth'
 
-import { ThemeProvider } from "@material-ui/core";
-import { muiTheme } from "./theme.js";
+import { ThemeProvider } from '@material-ui/core'
+import { muiTheme } from './theme.js'
 const Main = styled.div`
-  ${"" /* background: #e1e2e1; */}
+  ${'' /* background: #e1e2e1; */}
   max-width: 1300px;
   display: grid;
   width: 100%;
   margin: 0 auto;
   margin-top: 1%;
   border-radius: 4px;
-  ${"" /* border: 1px solid rgba(0, 0, 0, 0.34); */}
-`;
+`
 
 const App = () => {
   return (
@@ -53,7 +52,7 @@ const App = () => {
         </Main>
       </ThemeProvider>
     </Router>
-  );
-};
+  )
+}
 
-export default App;
+export default App
