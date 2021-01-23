@@ -91,7 +91,6 @@ const Drawer: React.FC<DrawerProps> = ({ history }) => {
       ) : (
         <div className={classes.navOtherWrapper}>
           <nav className={classes.navWrapper}>
-            <Typography variant="h3">Tools</Typography>
             <div>
               <IconButton
                 className={classes.button}
@@ -125,9 +124,6 @@ const Drawer: React.FC<DrawerProps> = ({ history }) => {
                 <Typography variant="body2">Orders</Typography>
               </IconButton>
             </div>
-          </nav>
-          <div className={classes.otherWrapper}>
-            <Typography variant="h3">Other</Typography>
             <div>
               <IconButton
                 className={classes.button}
@@ -150,7 +146,7 @@ const Drawer: React.FC<DrawerProps> = ({ history }) => {
                 <Typography variant="body2">Settings</Typography>
               </IconButton>
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </div>
@@ -158,3 +154,9 @@ const Drawer: React.FC<DrawerProps> = ({ history }) => {
 }
 
 export default withRouter(Drawer)
+
+/*
+ <div className={classes.otherWrapper}> <Typography variant="h3">Other</Typography></div> 
+
+<Typography variant="h3">Tools</Typography>
+*/

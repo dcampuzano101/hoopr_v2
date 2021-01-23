@@ -23,12 +23,15 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   adminDashboardWrapper: {
     height: '100%',
     padding: 'calc(.625rem - -10px)',
+    display: 'flex',
+    justifyContent: 'center',
     [breakpoints.down('md')]: {
       display: 'flex',
       padding: '0'
     }
   },
   drawerPanelWrapper: {
+    // border: '1px solid black',
     display: 'flex',
     width: '100%',
     boxSizing: 'border-box',
