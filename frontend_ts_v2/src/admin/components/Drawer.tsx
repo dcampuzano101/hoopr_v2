@@ -18,7 +18,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     flexDirection: 'column',
     width: '100%',
     alignItems: 'center',
-    [breakpoints.down('sm')]: {
+    [breakpoints.down('md')]: {
       flexDirection: 'row-reverse',
       justifyContent: 'space-between'
     }
@@ -78,7 +78,7 @@ interface DrawerProps {
 const Drawer: React.FC<DrawerProps> = ({ history }) => {
   const classes = useStyles()
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   return (
     <div className={classes.drawerWrap}>
       <div className={classes.header}>

@@ -7,7 +7,7 @@ import {
   TextField,
   InputAdornment
 } from '@material-ui/core'
-import { Search, AccountCircle } from '@material-ui/icons'
+import { Search, SportsBasketball } from '@material-ui/icons'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import UserCard from './UserCard'
 import { UserInfo } from 'os'
@@ -23,17 +23,14 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     height: '100%'
   },
   mainHeaderWrapper: {
-    // border: '1px solid black',
     maxWidth: '100%',
     display: 'flex',
     justifyContent: 'space-between',
-    height: '5%',
+    height: '7%',
+    alignItems: 'center',
     padding: 'calc(.625rem)',
     [breakpoints.down('sm')]: {
-      height: '3%'
-    },
-    [breakpoints.down('md')]: {
-      height: '5%'
+      height: 'auto'
     }
   },
   mainComponentWrapper: {
@@ -63,7 +60,11 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   filterTools: {
     maxWidth: '100%',
     // border: '1px solid yellow',
-    padding: 'calc(.625rem)'
+    padding: 'calc(.625rem)',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   usersWrapper: {
     padding: '0 calc(.625rem)',
@@ -76,13 +77,14 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     placeItems: 'center',
-    height: '300px',
-    width: '300px',
+    height: '250px',
+    width: '250px',
     backgroundColor: palette.primary.light,
     opacity: '95%',
+    margin: 'calc(1.2rem) calc(1.2rem) calc(1.2rem) 0',
     [breakpoints.down('sm')]: {
-      width: '200px',
-      height: '200px',
+      width: '250px',
+      height: '250px',
       margin: '3%'
     }
   },
@@ -106,10 +108,22 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'inline-flex',
     height: '95%',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     [breakpoints.down('sm')]: {
       justifyContent: 'center'
     }
+  },
+  filterResults: {
+    marginRight: 'calc(1.7rem)',
+    fontSize: '1.5rem',
+    letterSpacing: '-1px',
+    fontWeight: 400
+    // textTransform: 'uppercase'
+  },
+  basketballIcon: {
+    marginRight: 'calc(1.7rem)',
+    fontSize: '2.5rem',
+    opacity: '80%'
   }
 }))
 
@@ -231,7 +245,7 @@ const Users: React.FC<UsersProps> = ({}) => {
         <Typography variant="h1" className={classes.componentHeader}>
           Users
         </Typography>
-        <Typography variant="h3">{userList.length} Results</Typography>
+        <SportsBasketball className={classes.basketballIcon} />
       </Grid>
       <Grid container xs={12} className={classes.mainComponentWrapper}>
         <Grid item xs={12} className={classes.filterTools}>
@@ -248,6 +262,9 @@ const Users: React.FC<UsersProps> = ({}) => {
             }}
             onChange={(e) => handleFilter(e.target.value)}
           />
+          <Typography variant="h1" className={classes.filterResults}>
+            {userList.length} Results
+          </Typography>
         </Grid>
         <Grid item xs={12} spacing={3} className={classes.usersWrapper}>
           <div className={classes.cardWrapper}>
