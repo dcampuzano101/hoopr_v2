@@ -10,7 +10,6 @@ import {
 import { Search, SportsBasketball } from '@material-ui/icons'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import UserCard from './UserCard'
-import { UserInfo } from 'os'
 
 interface Result {
   result: []
