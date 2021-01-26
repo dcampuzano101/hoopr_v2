@@ -25,7 +25,7 @@ function paginatedResults(model) {
         limit: limit
       }
     }
-    console.log(next)
+    // console.log(next)
     next()
     try {
       results.results = await model

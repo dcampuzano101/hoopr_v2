@@ -195,9 +195,6 @@ const getUsers = asyncHandler(async (req, res) => {
   const page = parseInt(req.query.page)
   const limit = parseInt(req.query.limit)
   const results = await paginatedResults(User, page, limit)
-  console.log('*****')
-  console.log(results)
-  console.log('*****')
   const users = results.results
   // maybe just res.json(users)
   // const users = res.paginatedResults

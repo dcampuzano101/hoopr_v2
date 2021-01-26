@@ -10,6 +10,7 @@ import {
 import { Search, SportsBasketball } from '@material-ui/icons'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import UserCard from './UserCard'
+// import useGetUsers from '../../hooks/getUsers'
 
 interface Result {
   result: []
@@ -138,6 +139,9 @@ interface UsersProps {}
 
 const Users: React.FC<UsersProps> = ({}) => {
   const [filterQuery, setFilterQuery] = useState<string | undefined>()
+  const [page, setPage] = useState<any>(1)
+  const [limit, setLimit] = useState<any>(4)
+  // const { loading, error, users, hasMore } = useGetUsers(page, limit)
   const classes = useStyles()
   const users = [
     {
@@ -262,12 +266,12 @@ const Users: React.FC<UsersProps> = ({}) => {
             onChange={(e) => handleFilter(e.target.value)}
           />
           <Typography variant="h1" className={classes.filterResults}>
-            {userList.length} Results
+            {users.length} Results
           </Typography>
         </Grid>
         <Grid item xs={12} spacing={3} className={classes.usersWrapper}>
           <div className={classes.cardWrapper}>
-            {userList.map((user: User, idx: number) => (
+            {users.map((user: User, idx: number) => (
               <Card elevation={3} key={idx} className={classes.user}>
                 <UserCard user={user} />
               </Card>
