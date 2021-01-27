@@ -11,7 +11,7 @@ import { Search, SportsBasketball } from '@material-ui/icons'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import UserCard from './UserCard'
 import { listUsers } from '../../actions/userActions'
-import { userListState } from '../../reducers/userReducer'
+import { userListState } from '../../reducers/userReducers'
 import { useSelector, useDispatch } from 'react-redux'
 
 interface Result {
@@ -239,7 +239,6 @@ const Users: React.FC<UsersProps> = ({}) => {
   }
 
   useEffect(() => {
-    debugger
     dispatch(listUsers(page, limit))
     // setPage(page => page + 1)
   }, [users])

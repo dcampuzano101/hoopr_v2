@@ -196,13 +196,7 @@ const getUsers = asyncHandler(async (req, res) => {
   const limit = parseInt(req.query.limit)
   const results = await paginatedResults(User, page, limit)
   const data = results.results
-  // maybe just res.json(users)
-  // const users = res.paginatedResults
-  console.log(results.next)
-  console.log('*****')
-
   const users = {}
-
   const usersObject = {}
 
   if (results.next) {
@@ -214,11 +208,9 @@ const getUsers = asyncHandler(async (req, res) => {
   }
   console.log(data)
   data.forEach((user) => {
-    console.log(user)
     users[user._id] = user
   })
   usersObject['users'] = users
-  console.log(usersObject)
   if (data) {
     res.json(usersObject)
   } else {
