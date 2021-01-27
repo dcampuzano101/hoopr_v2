@@ -1,22 +1,22 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import 
+import { userListReducer } from './reducers/userReducer'
 
 const reducer = combineReducers({
-    userList: userListReducer,
+  userList: userListReducer
 })
 
 const composeEnhancers = composeWithDevTools({
-    trace: true,
-    traceLimit: 25,
-  });
+  trace: true,
+  traceLimit: 25
+})
 
 const middleware = [thunk]
 
 const store = createStore(
-    reducer,
-    composeEnhancers(applyMiddleware(...middleware))
+  reducer,
+  composeEnhancers(applyMiddleware(...middleware))
 )
 
 export default store

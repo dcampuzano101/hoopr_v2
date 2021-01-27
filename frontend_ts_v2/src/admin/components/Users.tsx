@@ -10,7 +10,9 @@ import {
 import { Search, SportsBasketball } from '@material-ui/icons'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import UserCard from './UserCard'
-// import useGetUsers from '../../hooks/getUsers'
+import { listUsers } from '../../actions/userActions'
+import { userListState } from '../../reducers/userReducer'
+import { useSelector, useDispatch } from 'react-redux'
 
 interface Result {
   result: []
@@ -143,75 +145,76 @@ const Users: React.FC<UsersProps> = ({}) => {
   const [limit, setLimit] = useState<any>(4)
   // const { loading, error, users, hasMore } = useGetUsers(page, limit)
   const classes = useStyles()
-  const users = [
-    {
-      username: 'Chris Carr',
-      email: 'chris@gmail.com',
-      waitList: [],
-      isAdmin: false,
-      profilePhoto: 'https://hoopr2.s3.amazonaws.com/chris.jpg',
-      orders: {}
-    },
-    {
-      username: 'Danan Capote',
-      email: 'danan@gmail.com',
-      waitList: [],
-      isAdmin: false,
-      profilePhoto: 'https://hoopr2.s3.amazonaws.com/danan.jpg',
-      orders: {}
-    },
-    {
-      username: 'Darko Lukacevic',
-      email: 'darko@gmail.com',
-      waitList: [],
-      isAdmin: false,
-      profilePhoto: 'https://hoopr2.s3.amazonaws.com/darko.jpg',
-      orders: {}
-    },
-    {
-      username: 'Ellis Chang',
-      email: 'ellis@gmail.com',
-      waitList: [],
-      isAdmin: false,
-      profilePhoto: 'https://hoopr2.s3.amazonaws.com/ellis.jpg',
-      orders: {}
-    },
-    {
-      username: 'Jared Schutz',
-      email: 'jared@gmail.com',
-      waitList: [],
-      isAdmin: false,
-      profilePhoto: 'https://hoopr2.s3.amazonaws.com/jared.jpg',
-      orders: {}
-    },
-    {
-      username: 'Jason Caps',
-      email: 'jason@gmail.com',
-      waitList: [],
-      isAdmin: false,
-      profilePhoto: 'https://hoopr2.s3.amazonaws.com/jason.jpg',
-      orders: {}
-    },
+  // const users = [
+  //   {
+  //     username: 'Chris Carr',
+  //     email: 'chris@gmail.com',
+  //     waitList: [],
+  //     isAdmin: false,
+  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/chris.jpg',
+  //     orders: {}
+  //   },
+  //   {
+  //     username: 'Danan Capote',
+  //     email: 'danan@gmail.com',
+  //     waitList: [],
+  //     isAdmin: false,
+  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/danan.jpg',
+  //     orders: {}
+  //   },
+  //   {
+  //     username: 'Darko Lukacevic',
+  //     email: 'darko@gmail.com',
+  //     waitList: [],
+  //     isAdmin: false,
+  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/darko.jpg',
+  //     orders: {}
+  //   },
+  //   {
+  //     username: 'Ellis Chang',
+  //     email: 'ellis@gmail.com',
+  //     waitList: [],
+  //     isAdmin: false,
+  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/ellis.jpg',
+  //     orders: {}
+  //   },
+  //   {
+  //     username: 'Jared Schutz',
+  //     email: 'jared@gmail.com',
+  //     waitList: [],
+  //     isAdmin: false,
+  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/jared.jpg',
+  //     orders: {}
+  //   },
+  //   {
+  //     username: 'Jason Caps',
+  //     email: 'jason@gmail.com',
+  //     waitList: [],
+  //     isAdmin: false,
+  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/jason.jpg',
+  //     orders: {}
+  //   },
 
-    {
-      username: 'Radu Negu',
-      email: 'radu@gmail.com',
-      waitList: [],
-      isAdmin: false,
-      profilePhoto: 'https://hoopr2.s3.amazonaws.com/radu.jpg',
-      orders: {}
-    },
-    {
-      username: 'Jone Wong',
-      email: 'jone@gmail.com',
-      waitList: [],
-      isAdmin: false,
-      profilePhoto: 'https://hoopr2.s3.amazonaws.com/jone.jpg',
-      orders: {}
-    }
-  ]
-
-  const [userList, setUserList] = useState<any | undefined | null>(users)
+  //   {
+  //     username: 'Radu Negu',
+  //     email: 'radu@gmail.com',
+  //     waitList: [],
+  //     isAdmin: false,
+  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/radu.jpg',
+  //     orders: {}
+  //   },
+  //   {
+  //     username: 'Jone Wong',
+  //     email: 'jone@gmail.com',
+  //     waitList: [],
+  //     isAdmin: false,
+  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/jone.jpg',
+  //     orders: {}
+  //   }
+  // ]
+  const dispatch = useDispatch()
+  const userList = useSelector((state: userListState) => state.users)
+  const [users, setUsers] = useState<any | undefined | null>(userList)
 
   const filterHelper = (query: string, user: User) => {
     let endIndex = query.length - 1
@@ -232,57 +235,60 @@ const Users: React.FC<UsersProps> = ({}) => {
     let usersCopy = [...users]
     let filtered = usersCopy.filter((user, idx) => filterHelper(query, user))
     console.log(filtered)
-    setUserList(filtered)
+    setUsers(filtered)
   }
 
   useEffect(() => {
-    console.log(filterQuery)
-    if (filterQuery?.length === 0) {
-      setUserList(users)
-    }
-  }, [filterQuery])
+    debugger
+    dispatch(listUsers(page, limit))
+    // setPage(page => page + 1)
+  }, [users])
   return (
-    <Grid container className={classes.mainInnerWrapper}>
-      <Grid item xs={12} className={classes.mainHeaderWrapper}>
-        <Typography variant="h1" className={classes.componentHeader}>
-          Users
-        </Typography>
-        <SportsBasketball className={classes.basketballIcon} />
-      </Grid>
-      <Grid container xs={12} className={classes.mainComponentWrapper}>
-        <Grid item xs={12} className={classes.filterTools}>
-          <TextField
-            id="outlined-basic"
-            label="Filter Users By Name"
-            variant="outlined"
-            style={{ height: '50px', width: '200px' }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search />
-                </InputAdornment>
-              )
-            }}
-            onChange={(e) => handleFilter(e.target.value)}
-          />
-          <Typography variant="h1" className={classes.filterResults}>
-            {users.length} Results
-          </Typography>
-        </Grid>
-        <Grid item xs={12} spacing={3} className={classes.usersWrapper}>
-          <div className={classes.cardWrapper}>
-            {users.map((user: User, idx: number) => (
-              <Card elevation={3} key={idx} className={classes.user}>
-                <UserCard user={user} />
-              </Card>
-            ))}
-          </div>
-          <Grid item xs={12} className={classes.paginationWrapper}>
-            {`<  *  >`}
+    <>
+      {users ? (
+        <Grid container className={classes.mainInnerWrapper}>
+          <Grid item xs={12} className={classes.mainHeaderWrapper}>
+            <Typography variant="h1" className={classes.componentHeader}>
+              Users
+            </Typography>
+            <SportsBasketball className={classes.basketballIcon} />
+          </Grid>
+          <Grid container xs={12} className={classes.mainComponentWrapper}>
+            <Grid item xs={12} className={classes.filterTools}>
+              <TextField
+                id="outlined-basic"
+                label="Filter Users By Name"
+                variant="outlined"
+                style={{ height: '50px', width: '200px' }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  )
+                }}
+                onChange={(e) => handleFilter(e.target.value)}
+              />
+              <Typography variant="h1" className={classes.filterResults}>
+                {users ? (users.length ? users.length : 0) : null} Results
+              </Typography>
+            </Grid>
+            <Grid item xs={12} spacing={3} className={classes.usersWrapper}>
+              <div className={classes.cardWrapper}>
+                {users.map((user: User, idx: number) => (
+                  <Card elevation={3} key={idx} className={classes.user}>
+                    <UserCard user={user} />
+                  </Card>
+                ))}
+              </div>
+              <Grid item xs={12} className={classes.paginationWrapper}>
+                {`<  *  >`}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Grid>
+      ) : null}
+    </>
   )
 }
 

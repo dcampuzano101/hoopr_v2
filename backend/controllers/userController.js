@@ -195,27 +195,32 @@ const getUsers = asyncHandler(async (req, res) => {
   const page = parseInt(req.query.page)
   const limit = parseInt(req.query.limit)
   const results = await paginatedResults(User, page, limit)
-  const users = results.results
+  const data = results.results
   // maybe just res.json(users)
   // const users = res.paginatedResults
   console.log(results.next)
   console.log('*****')
 
-  const userObj = {}
+  const users = {}
+
+  const usersObject = {}
 
   if (results.next) {
-    userObj['next'] = results.next
+    usersObject['next'] = results.next
   }
 
   if (results.previous) {
-    userObj['previous'] = results.previous
+    usersObject['previous'] = results.previous
   }
-
-  users.forEach((user) => {
-    userObj[user._id] = user
+  console.log(data)
+  data.forEach((user) => {
+    console.log(user)
+    users[user._id] = user
   })
-  if (users) {
-    res.json(userObj)
+  usersObject['users'] = users
+  console.log(usersObject)
+  if (data) {
+    res.json(usersObject)
   } else {
     res.status(400)
     throw new Error('Could not fetch users')

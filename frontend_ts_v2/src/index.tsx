@@ -1,22 +1,25 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "./styles/theme";
-import "typeface-rubik";
-import "typeface-karla";
-import "typeface-roboto";
-
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import { ThemeProvider } from '@material-ui/core/styles'
+import { Provider } from 'react-redux'
+import store from './store'
+import theme from './styles/theme'
+import 'typeface-rubik'
+import 'typeface-karla'
+import 'typeface-roboto'
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
-  document.getElementById("root")
-);
+  document.getElementById('root')
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

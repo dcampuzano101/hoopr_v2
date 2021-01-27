@@ -7,13 +7,18 @@ import {
   USER_LIST_SUCCESS
 } from '../constants/userConstants'
 
-export const listUsers = () => async (dispatch: Dispatch) => {
+export const listUsers = (page: number, limit: number) => async (
+  dispatch: Dispatch
+) => {
+  console.log('hello')
+  debugger
   try {
     dispatch({
       type: USER_LIST_REQUEST
     })
-    const { data } = await axios.get('/api/users')
-
+    debugger
+    const { data } = await axios.get(`/api/users?page=${page}&limit=${limit}`)
+    debugger
     dispatch({
       type: USER_LIST_SUCCESS,
       payload: data
