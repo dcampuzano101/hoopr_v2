@@ -28,7 +28,7 @@ import {
   USER_UPDATE_PROFILE_PHOTO_FAIL,
   USER_UPDATE_PROFILE_PHOTO_SUCCESS
 } from '../constants/userConstants'
-import { userLoginState } from '../reducers/userReducers'
+import { UserLoginState } from '../reducers/userReducers'
 
 export interface User {
   _id: string
@@ -184,7 +184,7 @@ export const register = (
 // getState === redux-thunk.Action || getState === redux.Action
 export const getUserDetails = (id: string) => async (
   dispatch: Dispatch,
-  getState: () => userLoginState
+  getState: () => UserLoginState
 ) => {
   try {
     dispatch({
@@ -225,7 +225,7 @@ export const getUserDetails = (id: string) => async (
 
 export const deleteUser = (id: string) => async (
   dispatch: Dispatch,
-  getState: () => userLoginState
+  getState: () => UserLoginState
 ) => {
   try {
     dispatch({
@@ -258,7 +258,7 @@ export const deleteUser = (id: string) => async (
 
 export const updateUser = (user) => async (
   dispatch: Dispatch,
-  getState: () => userLoginState
+  getState: () => UserLoginState
 ) => {
   try {
     dispatch({
@@ -293,7 +293,7 @@ export const updateUser = (user) => async (
 
 export const updateUserProfilePhoto = (formData: FormData) => async (
   dispatch: Dispatch,
-  getState: userLoginState
+  getState: UserLoginState
 ) => {
   try {
     dispatch({

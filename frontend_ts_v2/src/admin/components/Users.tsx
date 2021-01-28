@@ -11,7 +11,7 @@ import { Search, SportsBasketball } from '@material-ui/icons'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import UserCard from './UserCard'
 import { listUsers } from '../../actions/userActions'
-import { userListState } from '../../reducers/userReducers'
+import { UserListState } from '../../reducers/userReducers'
 import { useSelector, useDispatch } from 'react-redux'
 
 interface Result {
@@ -213,7 +213,7 @@ const Users: React.FC<UsersProps> = ({}) => {
   //   }
   // ]
   const dispatch = useDispatch()
-  const userList = useSelector((state: userListState) => state.users)
+  const userList = useSelector((state: UserListState) => state.users)
   const [users, setUsers] = useState<any | undefined | null>(userList)
 
   const filterHelper = (query: string, user: User) => {

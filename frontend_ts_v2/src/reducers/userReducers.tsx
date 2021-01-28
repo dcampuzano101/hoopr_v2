@@ -3,30 +3,13 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
-  USER_REGISTER_FAIL,
-  USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
   USER_DETAILS_RESET,
-  USER_UPDATE_PROFILE_REQUEST,
-  USER_UPDATE_PROFILE_SUCCESS,
-  USER_UPDATE_PROFILE_FAIL,
-  USER_UPDATE_PROFILE_RESET,
   USER_LIST_REQUEST,
   USER_LIST_SUCCESS,
-  USER_LIST_FAIL,
-  USER_DELETE_REQUEST,
-  USER_DELETE_SUCCESS,
-  USER_DELETE_FAIL,
-  USER_UPDATE_REQUEST,
-  USER_UPDATE_SUCCESS,
-  USER_UPDATE_FAIL,
-  USER_UPDATE_RESET,
-  USER_UPDATE_PROFILE_PHOTO_REQUEST,
-  USER_UPDATE_PROFILE_PHOTO_FAIL,
-  USER_UPDATE_PROFILE_PHOTO_SUCCESS
+  USER_LIST_FAIL
 } from '../constants/userConstants'
 import { Action } from 'redux'
 import { User } from '../actions/userActions'
@@ -54,7 +37,7 @@ export interface UserListState {
   }
 }
 
-export interface userLoginState {
+export interface UserLoginState {
   loading?: boolean
   userLogin?: {
     userInfo?: {
@@ -64,7 +47,7 @@ export interface userLoginState {
 }
 
 export const userLoginReducer = (
-  state: userLoginState,
+  state: UserLoginState,
   action: ReduxAction
 ) => {
   switch (action.type) {
@@ -83,7 +66,7 @@ export const userLoginReducer = (
 }
 
 export const userListReducer = (
-  state: userListState = { loading: true },
+  state: UserListState = { loading: true },
   action: ReduxAction
 ) => {
   switch (action.type) {
