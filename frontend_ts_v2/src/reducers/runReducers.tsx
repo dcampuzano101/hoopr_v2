@@ -112,3 +112,19 @@ interface ReduxAction extends Action {
         return state;
     }
   };
+
+  export const runUpdateReducer = (state = {}, action: ReduxAction) => {
+    switch (action.type) {
+      case RUN_UPDATE_REQUEST:
+        return { loading: true };
+      case RUN_UPDATE_SUCCESS:
+        return { loading: false, success: true, run: action.payload };
+      case RUN_UPDATE_FAIL:
+        return { loading: false, error: action.payload };
+      case RUN_UPDATE_RESET:
+        return {};
+      default:
+        return state;
+    }
+  };
+  
