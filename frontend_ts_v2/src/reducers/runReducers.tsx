@@ -92,4 +92,23 @@ interface ReduxAction extends Action {
     }
   };
   
- 
+  export const runDeleteReducer = (state = {}, action: ReduxAction) => {
+    switch (action.type) {
+      case RUN_DELETE_REQUEST:
+        return {
+          loading: true,
+        };
+      case RUN_DELETE_SUCCESS:
+        return {
+          loading: false,
+          success: true,
+        };
+      case RUN_DELETE_FAIL:
+        return {
+          loading: false,
+          error: action.payload,
+        };
+      default:
+        return state;
+    }
+  };
