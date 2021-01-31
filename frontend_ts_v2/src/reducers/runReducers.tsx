@@ -67,5 +67,29 @@ interface ReduxAction extends Action {
         return state;
     }
   };
+
+  export const runCreateReducer = (state = {}, action: ReduxAction) => {
+    switch (action.type) {
+      case RUN_CREATE_REQUEST:
+        return {
+          loading: true,
+        };
+      case RUN_CREATE_SUCCESS:
+        return {
+          loading: false,
+          success: true,
+          run: action.payload,
+        };
+      case RUN_CREATE_FAIL:
+        return {
+          loading: false,
+          error: action.payload,
+        };
+      case RUN_CREATE_RESET:
+        return {};
+      default:
+        return state;
+    }
+  };
   
  
