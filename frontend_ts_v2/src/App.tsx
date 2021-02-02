@@ -24,7 +24,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     height: '100%',
     padding: 'calc(.625rem - -10px)',
     display: 'flex',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     [breakpoints.down('md')]: {
       display: 'flex',
       padding: '0'
@@ -35,9 +35,15 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     width: '100%',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -10px)',
+    [breakpoints.down('sm')]: {
+      borderBottom: '1px solid rgba(0, 0, 0, 0.34)',
+      boxShadow: '0 6px 3px -6px black',
+      height: '65px'
+    },
     [breakpoints.down('md')]: {
       borderBottom: '1px solid rgba(0, 0, 0, 0.34)',
-      boxShadow: '0 6px 3px -6px black'
+      boxShadow: '0 6px 3px -6px black',
+      height: '65px'
     },
     '& h3': {
       fontSize: 'calc(1.1em / 16 * 15)',
@@ -55,7 +61,11 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -3px) calc(.625rem - -25px)',
     [breakpoints.down('md')]: {
-      padding: '0'
+      maxWidth: '100%',
+      display: 'flex',
+      padding: 'calc(.625rem - -10px)',
+      boxSizing: 'border-box',
+      height: '89%'
     }
   },
   main: {
