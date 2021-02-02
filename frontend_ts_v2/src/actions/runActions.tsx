@@ -1,6 +1,6 @@
+import axios from 'axios'
 import {
-    import axios from 'axios'
-RUN_LIST_REQUEST,
+    RUN_LIST_REQUEST,
     RUN_LIST_SUCCESS,
     RUN_LIST_FAIL,
     RUN_DETAILS_REQUEST,
@@ -18,9 +18,10 @@ RUN_LIST_REQUEST,
     RUN_DETAILS_RESET,
 } from '../constants/runConstants'
 import { Dispatch } from 'redux'
-import { RUN_LIST_FAIL, RUN_LIST_REQUEST, RUN_LIST_SUCCESS } from '../constants/runConstants'
+import { UserLoginState } from '../reducers/userReducers'
 
 export interface Run {
+    _id: string
     name: string
     location: string
     date: string
@@ -50,3 +51,90 @@ export const listRuns = () => async (dispatch: Dispatch) => {
     }
 }
 
+export const getRunDetails = (id: number) => async (dispatch: Dispatch, getState: () => UserLoginState) => {
+    try {
+        dispatch({
+            type: RUN_DETAILS_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = axios.get(`/api/users/${id}`, config)
+
+        dispatch({
+            type: RUN_DETAILS_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: RUN_DETAILS_FAIL,
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+export const deleteRun = (id: number) => async (dispatch: Dispatch, getState: () => userLoginState) => {
+    try {
+        dispatch({
+            type: RUN_DELETE_REQUEST
+        })
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        await axios.delete(`api/runs/${id}`, config)
+
+        dispatch({
+            type: RUN_DELETE_SUCCESS,
+        })
+    } catch (error) {
+        dispatch({
+            type: RUN_DELETE_FAIL,
+            error: error.message && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+export const updateRun = (run: Run) => async (dispatch: Dispatch, getState: () => UserLoginState) => {
+    try {
+        dispatch({
+            type: RUN_UPDATE_REQUEST
+        })
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.put(`/api/runs/${run._id}`, run, config)
+
+        dispatch({
+            type: RUN_UPDATE_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: RUN_UPDATE_FAIL,
+            error: error.message && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
