@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Dispatch } from 'redux'
+import { Dispatch, Action } from 'redux'
 import {
 	USER_LOGIN_FAIL,
 	USER_LOGIN_REQUEST,
@@ -29,6 +29,9 @@ import {
 	USER_UPDATE_PROFILE_PHOTO_SUCCESS,
 } from '../constants/userConstants'
 import { UserLoginState } from '../reducers/userReducers'
+interface ReduxAction extends Action {
+	payload?: any
+}
 
 export interface User {
 	_id: string
@@ -255,7 +258,7 @@ export const deleteUser = (id: string) => async (
 	}
 }
 
-export const updateUser = (user) => async (
+export const updateUser = (user: User) => async (
 	dispatch: Dispatch,
 	getState: () => UserLoginState
 ) => {
@@ -323,7 +326,7 @@ export const updateUserProfilePhoto = (formData: FormData) => async (
 	}
 }
 
-export const updateUserProfile = (user: User) => async (dispatch, getState) => {
+export const updateUserProfile = (user: User) => async (dispatch: Dispatch, getState: () => UserLoginState) => {
 	try {
 		dispatch({
 			type: USER_UPDATE_PROFILE_REQUEST,
@@ -360,7 +363,7 @@ export const updateUserProfile = (user: User) => async (dispatch, getState) => {
 				? error.response.data.message
 				: error.message
 		if (message === 'Not authorized, token failed') {
-			dispatch(logout())
+			dispatch({ type: USER_LOGOUT })
 		}
 		dispatch({
 			type: USER_UPDATE_PROFILE_FAIL,

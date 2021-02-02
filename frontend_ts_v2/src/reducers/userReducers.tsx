@@ -53,11 +53,11 @@ export interface UserListState {
 
 export interface UserLoginState {
   loading?: boolean
-  userLogin?: {
-    userInfo?: {
-      token?: string
-    }
-  }
+  userLogin?: {} | any
+}
+
+export interface UserInfo {
+  userInfo: {} | any
 }
 
 export const userLoginReducer = (

@@ -67,7 +67,7 @@ export const getRunDetails = (id: number) => async (dispatch: Dispatch, getState
             }
         }
 
-        const { data } = axios.get(`/api/users/${id}`, config)
+        const { data } = await axios.get(`/api/users/${id}`, config)
 
         dispatch({
             type: RUN_DETAILS_SUCCESS,
@@ -82,7 +82,7 @@ export const getRunDetails = (id: number) => async (dispatch: Dispatch, getState
     }
 }
 
-export const deleteRun = (id: number) => async (dispatch: Dispatch, getState: () => userLoginState) => {
+export const deleteRun = (id: number) => async (dispatch: Dispatch, getState: () => UserLoginState) => {
     try {
         dispatch({
             type: RUN_DELETE_REQUEST
