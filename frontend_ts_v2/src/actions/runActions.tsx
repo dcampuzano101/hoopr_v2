@@ -15,7 +15,6 @@ import {
     RUN_UPDATE_REQUEST,
     RUN_UPDATE_SUCCESS,
     RUN_UPDATE_FAIL,
-    RUN_DETAILS_RESET,
 } from '../constants/runConstants'
 import { Dispatch } from 'redux'
 import { UserLoginState } from '../reducers/userReducers'
@@ -79,6 +78,38 @@ export const getRunDetails = (id: number) => async (dispatch: Dispatch, getState
             type: RUN_DETAILS_FAIL,
             error: error.response && error.response.data.message ? error.response.data.message : error.message
         })
+    }
+}
+
+export const createRun = (run: Run) => async (dispatch: Dispatch, getState: () => UserLoginState) => {
+    try {
+        dispatch({
+            type: RUN_CREATE_REQUEST,
+        });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`,
+                "Content-Type": "application/json",
+            },
+        };
+        const { data } = await axios.post("/api/runs/create", run, config);
+        dispatch({
+            type: RUN_CREATE_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: RUN_CREATE_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
     }
 }
 
