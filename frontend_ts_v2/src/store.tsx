@@ -4,21 +4,18 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
   userListReducer,
 } from './reducers/userReducers'
+import { UserListState } from './reducers/userReducers';
 
 interface UserInfo {
-  userInfo: string
+  userInfo: string | null
 }
 
 interface InitialState {
-  // userLogin?: {
-  //   userInfo: any
-  // }
-  // userList?: UserListState
+  userLogin?: {} | any
+  userList?: UserListState | any
 }
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
-  : null
+const userInfoFromStorage = JSON.parse(localStorage.getItem('userInfo') || '{}')
 
 const reducer = combineReducers({
   userList: userListReducer
@@ -32,7 +29,7 @@ const composeEnhancers = composeWithDevTools({
 const middleware = [thunk]
 
 const initialState: InitialState = {
-  // userLogin: { userInfo: userInfoFromStorage }
+  userLogin: { userInfo: userInfoFromStorage },
   userList: null
 }
 
