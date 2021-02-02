@@ -19,6 +19,11 @@ import {
   runDeleteReducer
 } from './reducers/runReducers'
 
+import {
+  orderCreateReducer,
+  orderListMyReducer,
+  orderDetailsReducer,
+} from './reducers/orderReducers'
 
 interface InitialState {
   userLogin?: {} | any
@@ -38,7 +43,10 @@ const reducer = combineReducers({
   runCreate: runCreateReducer,
   runDetails: runDetailsReducer,
   runUpdate: runUpdateReducer,
-  runDelete: runDeleteReducer
+  runDelete: runDeleteReducer,
+  orderCreate: orderCreateReducer,
+  orderListMy: orderListMyReducer,
+  orderDetails: orderDetailsReducer
 
 })
 
