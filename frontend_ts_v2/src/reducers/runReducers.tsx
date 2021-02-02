@@ -19,12 +19,49 @@ import {
   RUN_DETAILS_RESET,
 } from "../constants/runConstants";
 import { Action } from 'redux'
+import { Run } from '../actions/runActions'
+
+
 interface ReduxAction extends Action {
   payload?: any
 }
 
+export interface RunState {
+  success?: boolean
+  run?: Run | {}
+  loading?: boolean
+  error?: string
+}
 
-export const runListReducer = (state = { loading: true }, action: ReduxAction) => {
+export interface RunListState extends RunState {
+  runs?: {}
+  next?: {
+    page: number
+    limit: number
+  }
+  previous?: {
+    page: number
+    limit: number
+  }
+}
+
+const runState: RunState = {
+  loading: false,
+  run: {}
+}
+
+const runListState: RunListState = {
+  loading: false,
+  runs: {},
+  next: {
+    page: 2,
+    limit: 4
+  }
+}
+
+
+
+export const runListReducer = (state = runListState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_LIST_REQUEST:
       return { loading: true };
@@ -38,11 +75,7 @@ export const runListReducer = (state = { loading: true }, action: ReduxAction) =
 };
 
 export const runDetailsReducer = (
-  state = {
-    loading: true,
-    success: false,
-    run: {},
-  },
+  state = runState,
   action: ReduxAction
 ) => {
   switch (action.type) {
@@ -68,7 +101,7 @@ export const runDetailsReducer = (
   }
 };
 
-export const runCreateReducer = (state = {}, action: ReduxAction) => {
+export const runCreateReducer = (state = runState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_CREATE_REQUEST:
       return {
@@ -92,7 +125,7 @@ export const runCreateReducer = (state = {}, action: ReduxAction) => {
   }
 };
 
-export const runDeleteReducer = (state = {}, action: ReduxAction) => {
+export const runDeleteReducer = (state = runState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_DELETE_REQUEST:
       return {
@@ -113,7 +146,7 @@ export const runDeleteReducer = (state = {}, action: ReduxAction) => {
   }
 };
 
-export const runUpdateReducer = (state = {}, action: ReduxAction) => {
+export const runUpdateReducer = (state = runState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_UPDATE_REQUEST:
       return { loading: true };
