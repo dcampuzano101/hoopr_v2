@@ -2,23 +2,27 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import {
-  userListReducer,
+  userListReducer, userLoginReducer, UserListState, userDetailsReducer, userDeleteReducer,
+  userUpdateReducer, userUpdateProfilePhotoReducer, userUpdateProfileReducer
 } from './reducers/userReducers'
-import { UserListState } from './reducers/userReducers';
 
-interface UserInfo {
-  userInfo: string | null
-}
 
 interface InitialState {
   userLogin?: {} | any
   userList?: UserListState | any
 }
 
-const userInfoFromStorage = JSON.parse(localStorage.getItem('userInfo') || '{}')
+const userInfoFromStorage = localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem('userInfo') || '{}') : null
 
 const reducer = combineReducers({
-  userList: userListReducer
+  userList: userListReducer,
+  userLogin: userLoginReducer,
+  userDetails: userDetailsReducer,
+  userDelete: userDeleteReducer,
+  userUpdate: userUpdateReducer,
+  userUpdateProfile: userUpdateProfileReducer,
+  userUpdateProfilePhoto: userUpdateProfilePhotoReducer,
+
 })
 
 const composeEnhancers = composeWithDevTools({
@@ -29,8 +33,8 @@ const composeEnhancers = composeWithDevTools({
 const middleware = [thunk]
 
 const initialState: InitialState = {
-  userLogin: { userInfo: userInfoFromStorage },
-  userList: null
+  userLogin: {} || userInfoFromStorage,
+
 }
 
 const store = createStore(

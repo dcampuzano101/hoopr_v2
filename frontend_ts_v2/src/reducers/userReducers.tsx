@@ -32,15 +32,15 @@ interface ReduxAction extends Action {
   payload?: any
 }
 
-export interface UserDetailsState {
+export interface UserState {
   success?: boolean
   user?: User
   loading?: boolean
+  error?: string
 }
 
-export interface UserListState {
-  loading: boolean
-  users?: []
+export interface UserListState extends UserState {
+  users?: User[]
   next?: {
     page: number
     limit: number
@@ -51,14 +51,10 @@ export interface UserListState {
   }
 }
 
-export interface UserLoginState {
-  loading?: boolean
+export interface UserLoginState extends User {
   userLogin?: {} | any
 }
 
-export interface UserInfo {
-  userInfo: {} | any
-}
 
 export const userLoginReducer = (
   state: UserLoginState,
@@ -75,7 +71,7 @@ export const userLoginReducer = (
       return {}
 
     default:
-      return state
+      return state || null
   }
 }
 
@@ -100,7 +96,7 @@ export const userListReducer = (
   }
 }
 
-export const userDetailsReducer = (state = {}, action: ReduxAction) => {
+export const userDetailsReducer = (state: UserState = {}, action: ReduxAction) => {
   switch (action.type) {
     case USER_DETAILS_REQUEST:
       return { ...state, loading: true }
@@ -115,7 +111,7 @@ export const userDetailsReducer = (state = {}, action: ReduxAction) => {
   }
 }
 
-export const userUpdateProfileReducer = (state = {}, action: ReduxAction) => {
+export const userUpdateProfileReducer = (state: UserState = {}, action: ReduxAction) => {
   switch (action.type) {
     case USER_UPDATE_PROFILE_REQUEST:
       return { loading: true };
@@ -130,7 +126,7 @@ export const userUpdateProfileReducer = (state = {}, action: ReduxAction) => {
   }
 };
 
-export const userDeleteReducer = (state = {}, action: ReduxAction) => {
+export const userDeleteReducer = (state: UserState = {}, action: ReduxAction) => {
   switch (action.type) {
     case USER_DELETE_REQUEST:
       return { loading: true };
@@ -144,7 +140,7 @@ export const userDeleteReducer = (state = {}, action: ReduxAction) => {
   }
 };
 
-export const userUpdateReducer = (state = { user: {} }, action: ReduxAction) => {
+export const userUpdateReducer = (state: UserState = {}, action: ReduxAction) => {
   switch (action.type) {
     case USER_UPDATE_REQUEST:
       return { loading: true };
@@ -161,7 +157,7 @@ export const userUpdateReducer = (state = { user: {} }, action: ReduxAction) => 
   }
 };
 
-export const userUpdateProfilePhotoReducer = (state = {}, action: ReduxAction) => {
+export const userUpdateProfilePhotoReducer = (state: UserState = {}, action: ReduxAction) => {
   switch (action.type) {
     case USER_UPDATE_PROFILE_PHOTO_REQUEST:
       return { loading: true, success: false };
