@@ -2,14 +2,26 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import {
-  userListReducer, userLoginReducer, UserListState, userDetailsReducer, userDeleteReducer,
-  userUpdateReducer, userUpdateProfilePhotoReducer, userUpdateProfileReducer
+  userListReducer,
+  userLoginReducer,
+  userDetailsReducer,
+  userDeleteReducer,
+  userUpdateReducer,
+  userUpdateProfilePhotoReducer,
+  userUpdateProfileReducer
 } from './reducers/userReducers'
+
+import {
+  runCreateReducer,
+  runListReducer,
+  runDetailsReducer,
+  runUpdateReducer,
+  runDeleteReducer
+} from './reducers/runReducers'
 
 
 interface InitialState {
   userLogin?: {} | any
-  userList?: UserListState | any
 }
 
 const userInfoFromStorage = localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem('userInfo') || '{}') : null
@@ -22,6 +34,11 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer,
   userUpdateProfile: userUpdateProfileReducer,
   userUpdateProfilePhoto: userUpdateProfilePhotoReducer,
+  runList: runListReducer,
+  runCreate: runCreateReducer,
+  runDetails: runDetailsReducer,
+  runUpdate: runUpdateReducer,
+  runDelete: runDeleteReducer
 
 })
 
@@ -33,7 +50,9 @@ const composeEnhancers = composeWithDevTools({
 const middleware = [thunk]
 
 const initialState: InitialState = {
-  userLogin: {} || userInfoFromStorage,
+  userLogin: {
+    userInfo: {}
+  } || userInfoFromStorage,
 
 }
 
