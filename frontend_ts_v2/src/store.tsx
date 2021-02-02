@@ -25,6 +25,10 @@ import {
   orderDetailsReducer,
 } from './reducers/orderReducers'
 
+import {
+  cartReducer
+} from './reducers/cartReducers'
+
 interface InitialState {
   userLogin?: {} | any
 }
@@ -46,7 +50,8 @@ const reducer = combineReducers({
   runDelete: runDeleteReducer,
   orderCreate: orderCreateReducer,
   orderListMy: orderListMyReducer,
-  orderDetails: orderDetailsReducer
+  orderDetails: orderDetailsReducer,
+  cart: cartReducer
 
 })
 

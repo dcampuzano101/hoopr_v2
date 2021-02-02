@@ -45,12 +45,12 @@ export interface RunListState extends RunState {
   }
 }
 
-const runState: RunState = {
+const runInitialState: RunState = {
   loading: false,
   run: {}
 }
 
-const runListState: RunListState = {
+const runListInitialState: RunListState = {
   loading: false,
   runs: {},
   next: {
@@ -61,7 +61,7 @@ const runListState: RunListState = {
 
 
 
-export const runListReducer = (state = runListState, action: ReduxAction) => {
+export const runListReducer = (state = runListInitialState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_LIST_REQUEST:
       return { loading: true };
@@ -75,7 +75,7 @@ export const runListReducer = (state = runListState, action: ReduxAction) => {
 };
 
 export const runDetailsReducer = (
-  state = runState,
+  state = runInitialState,
   action: ReduxAction
 ) => {
   switch (action.type) {
@@ -101,7 +101,7 @@ export const runDetailsReducer = (
   }
 };
 
-export const runCreateReducer = (state = runState, action: ReduxAction) => {
+export const runCreateReducer = (state = runInitialState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_CREATE_REQUEST:
       return {
@@ -125,7 +125,7 @@ export const runCreateReducer = (state = runState, action: ReduxAction) => {
   }
 };
 
-export const runDeleteReducer = (state = runState, action: ReduxAction) => {
+export const runDeleteReducer = (state = runInitialState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_DELETE_REQUEST:
       return {
@@ -146,7 +146,7 @@ export const runDeleteReducer = (state = runState, action: ReduxAction) => {
   }
 };
 
-export const runUpdateReducer = (state = runState, action: ReduxAction) => {
+export const runUpdateReducer = (state = runInitialState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_UPDATE_REQUEST:
       return { loading: true };

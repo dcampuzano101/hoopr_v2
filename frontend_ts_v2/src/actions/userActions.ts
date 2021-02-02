@@ -29,9 +29,7 @@ import {
 	USER_UPDATE_PROFILE_PHOTO_SUCCESS,
 } from '../constants/userConstants'
 import { UserLoginState } from '../reducers/userReducers'
-interface ReduxAction extends Action {
-	payload?: any
-}
+
 
 export interface User {
 	_id: string
