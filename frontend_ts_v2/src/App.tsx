@@ -24,7 +24,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     height: '100%',
     padding: 'calc(.625rem - -10px)',
     display: 'flex',
-    // justifyContent: 'center',
     [breakpoints.down('md')]: {
       display: 'flex',
       padding: '0'

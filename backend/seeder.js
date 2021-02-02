@@ -3,8 +3,8 @@ import dotenv from "dotenv";
 import colors from "colors";
 import users from "./data/users.js";
 import runs from "./data/runs.js";
-import User from "./models/userModel.js";
 import Run from "./models/runModel.js";
+import User from "./models/userModel.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();
