@@ -24,14 +24,72 @@ const addOrderItems = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: paginates results from API request 
+// @access: private
+
+const paginatedResults = async (model, page, limit) => {
+  const startIndex = (page - 1) * limit
+  const endIndex = page * limit
+
+  const results = {}
+
+  if (endIndex < (await model.countDocuments().exec())) {
+    results.next = {
+      page: page + 1,
+      limit: limit
+    }
+  }
+
+  if (startIndex > 0) {
+    results.previous = {
+      page: page - 1,
+      limit: limit
+    }
+  }
+  console.log(results)
+  try {
+    results.results = await model
+      .find()
+      .limit(limit)
+      .skip(startIndex)
+      .select('-password')
+      .exec()
+    return results
+  } catch (error) {
+    throw new Error('Problem returning paginated results')
+  }
+}
+
+
+
 // @description: get all orders
 // @route: GET /api/orders
 // @access: admin/private
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({});
+  const page = parseInt(req.query.page)
+  const limit = parseInt(req.query.limit)
+  const results = await paginatedResults(Order, page, limit)
+  const data = results.results
 
-  if (orders) {
-    res.json(orders);
+  const ordersObj = {};
+  const orders = {};
+
+  if (results.next) {
+    ordersObj['next'] = results.next
+  }
+
+  if (results.previous) {
+    ordersObj['previous'] = results.previous
+  }
+
+  data.forEach((order) => {
+    orders[order._id] = order
+  })
+
+  ordersObj['orders'] = orders
+
+  if (data) {
+    res.json(ordersObj);
   } else {
     res.status(404);
     throw new Error("Could not fetch all orders");

@@ -145,14 +145,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 })
 
-// @description: gets all users
-// @route: GET /api/users
-// @access: admin/private
+// @description: paginates results from API request 
+// @access: private
 
 const paginatedResults = async (model, page, limit) => {
-  // const page = parseInt(req.query.page)
-  // const limit = parseInt(req.query.limit)
-
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
 
@@ -172,8 +168,6 @@ const paginatedResults = async (model, page, limit) => {
     }
   }
   console.log(results)
-  // console.log(next)
-  // next()
   try {
     results.results = await model
       .find()
@@ -181,15 +175,16 @@ const paginatedResults = async (model, page, limit) => {
       .skip(startIndex)
       .select('-password')
       .exec()
-    // res.paginatedResults = results
-    //   next()
-    // console.log(results)
     return results
   } catch (error) {
-    // res.status(500).json({ message: error.message })
     throw new Error('Problem returning paginated results')
   }
 }
+
+
+// @description: gets all users
+// @route: GET /api/users
+// @access: admin/private
 
 const getUsers = asyncHandler(async (req, res) => {
   const page = parseInt(req.query.page)

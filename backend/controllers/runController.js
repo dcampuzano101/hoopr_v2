@@ -66,9 +66,6 @@ const createRun = asyncHandler(async (req, res) => {
 // @access: public
 
 const paginatedResults = async (model, page, limit) => {
-  // const page = parseInt(req.query.page)
-  // const limit = parseInt(req.query.limit)
-
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
 
@@ -88,8 +85,6 @@ const paginatedResults = async (model, page, limit) => {
     }
   }
   console.log(results)
-  // console.log(next)
-  // next()
   try {
     results.results = await model
       .find()
@@ -97,12 +92,8 @@ const paginatedResults = async (model, page, limit) => {
       .skip(startIndex)
       .select('-password')
       .exec()
-    // res.paginatedResults = results
-    //   next()
-    // console.log(results)
     return results
   } catch (error) {
-    // res.status(500).json({ message: error.message })
     throw new Error('Problem returning paginated results')
   }
 }
@@ -111,6 +102,7 @@ const paginatedResults = async (model, page, limit) => {
 // @description: get all runs
 // @route: GET /api/runs
 // @access: public
+
 const listRuns = asyncHandler(async (req, res) => {
   const page = parseInt(req.query.page)
   const limit = parseInt(req.query.limit)
