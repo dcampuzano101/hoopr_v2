@@ -33,6 +33,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     width: '100%',
     boxSizing: 'border-box',
+    height: '100%',
     [breakpoints.down('sm')]: {
       padding: 'calc(.625rem - -10px)',
       width: '100%',
