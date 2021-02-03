@@ -30,13 +30,13 @@ export interface Run {
     endTime: string
 }
 
-export const listRuns = () => async (dispatch: Dispatch) => {
+export const listRuns = (page: number, limit: number) => async (dispatch: Dispatch) => {
     try {
         dispatch({
             type: RUN_LIST_REQUEST
         })
 
-        const { data } = await axios.get(`/api/runs`)
+        const { data } = await axios.get(`/api/runs?page=${page}&limit=${limit}`)
 
         dispatch({
             type: RUN_LIST_SUCCESS,

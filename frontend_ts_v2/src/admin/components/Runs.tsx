@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import {
   Grid,
-  Paper,
+  // Paper,
   Card,
   Typography,
   TextField,
@@ -10,7 +10,11 @@ import {
 } from '@material-ui/core'
 import { Search, SportsBasketball } from '@material-ui/icons'
 import RunCard from './RunCard'
-import moment from 'moment'
+// import moment from 'moment'
+import { RunListState } from '../../reducers/runReducers'
+import { useDispatch, useSelector } from 'react-redux'
+import { listRuns } from '../../actions/runActions'
+
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   mainInnerWrapper: {
@@ -123,7 +127,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   }
 }))
 
-interface RunsProps {}
+interface RunsProps { }
 
 interface Run {
   name: string
@@ -138,76 +142,82 @@ interface Run {
   geoLocation: {}
 }
 
-const Runs: React.FC<RunsProps> = ({}) => {
+const Runs: React.FC<RunsProps> = () => {
   const classes = useStyles()
-  const runs = [
-    {
-      name: 'Wednesday Morning Run',
-      location: 'The Post',
-      date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
-      price: 10,
-      capacity: 15,
-      users: [],
-      waitList: [],
-      startTime: moment('08:00', 'h:mm a'),
-      endTime: moment('10:00', 'h:mm a'),
-      geoLocation: {
-        address: '100 Dobbin St, Brooklyn, NY 11222',
-        lat: 40.7251514,
-        lng: -73.9566612
-      }
-    },
-    {
-      name: 'Saturday Night Run',
-      location: 'Cooper Park',
-      date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
-      price: 10,
-      capacity: 15,
-      users: [],
-      waitList: [],
-      startTime: moment('18:00', 'h:mm a'),
-      endTime: moment('20:00', 'h:mm a'),
-      geoLocation: {
-        address: 'Cooper Park, Brooklyn, NY 11211',
-        lat: 40.715946,
-        lng: -73.9383233
-      }
-    },
-    {
-      name: 'Sunday Morning Run',
-      location: 'Grand Street Basketball Courts',
-      date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
-      price: 10,
-      capacity: 15,
-      users: [],
-      waitList: [],
-      startTime: moment('08:00', 'h:mm a'),
-      endTime: moment('10:00', 'h:mm a'),
-      geoLocation: {
-        address: 'Chrystie St &, Forsyth St, New York, NY 10002',
-        lat: 40.7217448,
-        lng: -73.9937312
-      }
-    },
-    {
-      name: 'Wednesday Night Run',
-      location: 'The Post',
-      date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
-      price: 10,
-      capacity: 15,
-      users: [],
-      waitList: [1, 2, 3],
-      startTime: moment('18:00', 'h:mm a'),
-      endTime: moment('20:00', 'h:mm a'),
-      geoLocation: {
-        address: '100 Dobbin St, Brooklyn, NY 11222',
-        lat: 40.7251514,
-        lng: -73.9566612
-      }
-    }
-  ]
+  // const runs = [
+  //   {
+  //     name: 'Wednesday Morning Run',
+  //     location: 'The Post',
+  //     date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
+  //     price: 10,
+  //     capacity: 15,
+  //     users: [],
+  //     waitList: [],
+  //     startTime: moment('08:00', 'h:mm a'),
+  //     endTime: moment('10:00', 'h:mm a'),
+  //     geoLocation: {
+  //       address: '100 Dobbin St, Brooklyn, NY 11222',
+  //       lat: 40.7251514,
+  //       lng: -73.9566612
+  //     }
+  //   },
+  //   {
+  //     name: 'Saturday Night Run',
+  //     location: 'Cooper Park',
+  //     date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
+  //     price: 10,
+  //     capacity: 15,
+  //     users: [],
+  //     waitList: [],
+  //     startTime: moment('18:00', 'h:mm a'),
+  //     endTime: moment('20:00', 'h:mm a'),
+  //     geoLocation: {
+  //       address: 'Cooper Park, Brooklyn, NY 11211',
+  //       lat: 40.715946,
+  //       lng: -73.9383233
+  //     }
+  //   },
+  //   {
+  //     name: 'Sunday Morning Run',
+  //     location: 'Grand Street Basketball Courts',
+  //     date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
+  //     price: 10,
+  //     capacity: 15,
+  //     users: [],
+  //     waitList: [],
+  //     startTime: moment('08:00', 'h:mm a'),
+  //     endTime: moment('10:00', 'h:mm a'),
+  //     geoLocation: {
+  //       address: 'Chrystie St &, Forsyth St, New York, NY 10002',
+  //       lat: 40.7217448,
+  //       lng: -73.9937312
+  //     }
+  //   },
+  //   {
+  //     name: 'Wednesday Night Run',
+  //     location: 'The Post',
+  //     date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
+  //     price: 10,
+  //     capacity: 15,
+  //     users: [],
+  //     waitList: [1, 2, 3],
+  //     startTime: moment('18:00', 'h:mm a'),
+  //     endTime: moment('20:00', 'h:mm a'),
+  //     geoLocation: {
+  //       address: '100 Dobbin St, Brooklyn, NY 11222',
+  //       lat: 40.7251514,
+  //       lng: -73.9566612
+  //     }
+  //   }
+  // ]
   const [filterQuery, setFilterQuery] = useState<string | undefined>()
-  const [runList, setRunList] = useState<any | undefined | null>(runs)
+  const [page, setPage] = useState<any>(1)
+  const [limit, setLimit] = useState<any>(4)
+
+
+  const dispatch = useDispatch();
+  const runList = useSelector((state: RunListState) => state.runs)
+  const [runs, setRuns] = useState<any | undefined | null>(runList)
 
   const filterHelper = (query: string, run: Run) => {
     let endIndex = query.length - 1
@@ -228,57 +238,59 @@ const Runs: React.FC<RunsProps> = ({}) => {
     let runsCopy = [...runs]
     let filtered = runsCopy.filter((run, idx) => filterHelper(query, run))
     console.log(filtered)
-    setRunList(filtered)
+    setRuns(filtered)
   }
 
-  //   useEffect(() => {
-  //     console.log(filterQuery)
-  //     if (filterQuery?.length === 0) {
-  //       setRunList(users)
-  //     }
-  //   }, [filterQuery])
+  useEffect(() => {
+    dispatch(listRuns(page, limit))
+  }, [dispatch, limit, page])
   return (
-    <Grid container className={classes.mainInnerWrapper}>
-      <Grid item xs={12} className={classes.mainHeaderWrapper}>
-        <Typography variant="h1" className={classes.componentHeader}>
-          Runs
+    <>
+      {runs ? (
+
+        <Grid container className={classes.mainInnerWrapper}>
+          <Grid item xs={12} className={classes.mainHeaderWrapper}>
+            <Typography variant="h1" className={classes.componentHeader}>
+              Runs
         </Typography>
-        <SportsBasketball className={classes.basketballIcon} />
-      </Grid>
-      <Grid container xs={12} className={classes.mainComponentWrapper}>
-        <Grid item xs={12} className={classes.filterTools}>
-          <TextField
-            id="outlined-basic"
-            label="Filter Users By Name"
-            variant="outlined"
-            style={{ height: '50px', width: '200px' }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search />
-                </InputAdornment>
-              )
-            }}
-            onChange={(e) => handleFilter(e.target.value)}
-          />
-          <Typography variant="h1" className={classes.filterResults}>
-            {runList.length} Runs
+            <SportsBasketball className={classes.basketballIcon} />
+          </Grid>
+          <Grid container xs={12} className={classes.mainComponentWrapper}>
+            <Grid item xs={12} className={classes.filterTools}>
+              <TextField
+                id="outlined-basic"
+                label="Filter Users By Name"
+                variant="outlined"
+                style={{ height: '50px', width: '200px' }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  )
+                }}
+                onChange={(e) => handleFilter(e.target.value)}
+              />
+              <Typography variant="h1" className={classes.filterResults}>
+                {runs.length} Runs
           </Typography>
-        </Grid>
-        <Grid item xs={12} spacing={3} className={classes.runsWrapper}>
-          <div className={classes.cardWrapper}>
-            {runList.map((run: Run, idx: number) => (
-              <Card elevation={3} key={idx} className={classes.run}>
-                <RunCard run={run} />
-              </Card>
-            ))}
-          </div>
-          <Grid item xs={12} className={classes.paginationWrapper}>
-            {`<  *  >`}
+            </Grid>
+            <Grid item xs={12} spacing={3} className={classes.runsWrapper}>
+              <div className={classes.cardWrapper}>
+                {runs.map((run: Run, idx: number) => (
+                  <Card elevation={3} key={idx} className={classes.run}>
+                    <RunCard run={run} />
+                  </Card>
+                ))}
+              </div>
+              <Grid item xs={12} className={classes.paginationWrapper}>
+                {`<  *  >`}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Grid>
+      ) : null}
+    </>
   )
 }
 

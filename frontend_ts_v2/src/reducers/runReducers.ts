@@ -66,7 +66,12 @@ export const runListReducer = (state = runListInitialState, action: ReduxAction)
     case RUN_LIST_REQUEST:
       return { loading: true };
     case RUN_LIST_SUCCESS:
-      return { loading: false, runs: action.payload };
+      return {
+        loading: false,
+        runs: action.payload.runs,
+        next: action.payload.next ? action.payload.next : null,
+        previous: action.payload.previous ? action.payload.previous : null
+      }
     case RUN_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:

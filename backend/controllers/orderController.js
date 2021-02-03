@@ -46,7 +46,6 @@ const paginatedResults = async (model, page, limit) => {
       limit: limit
     }
   }
-  console.log(results)
   try {
     results.results = await model
       .find()

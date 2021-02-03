@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {
   Grid,
-  Paper,
+  // Paper,
   Card,
   Typography,
   TextField,
@@ -14,9 +14,9 @@ import { listUsers } from '../../actions/userActions'
 import { UserListState } from '../../reducers/userReducers'
 import { useSelector, useDispatch } from 'react-redux'
 
-interface Result {
-  result: []
-}
+// interface Result {
+//   result: []
+// }
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   mainInnerWrapper: {
     height: '100%'
@@ -137,81 +137,13 @@ interface User {
   orders: {}
 }
 
-interface UsersProps {}
+interface UsersProps { }
 
-const Users: React.FC<UsersProps> = ({}) => {
+const Users: React.FC<UsersProps> = ({ }) => {
   const [filterQuery, setFilterQuery] = useState<string | undefined>()
   const [page, setPage] = useState<any>(1)
   const [limit, setLimit] = useState<any>(4)
-  // const { loading, error, users, hasMore } = useGetUsers(page, limit)
   const classes = useStyles()
-  // const users = [
-  //   {
-  //     username: 'Chris Carr',
-  //     email: 'chris@gmail.com',
-  //     waitList: [],
-  //     isAdmin: false,
-  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/chris.jpg',
-  //     orders: {}
-  //   },
-  //   {
-  //     username: 'Danan Capote',
-  //     email: 'danan@gmail.com',
-  //     waitList: [],
-  //     isAdmin: false,
-  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/danan.jpg',
-  //     orders: {}
-  //   },
-  //   {
-  //     username: 'Darko Lukacevic',
-  //     email: 'darko@gmail.com',
-  //     waitList: [],
-  //     isAdmin: false,
-  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/darko.jpg',
-  //     orders: {}
-  //   },
-  //   {
-  //     username: 'Ellis Chang',
-  //     email: 'ellis@gmail.com',
-  //     waitList: [],
-  //     isAdmin: false,
-  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/ellis.jpg',
-  //     orders: {}
-  //   },
-  //   {
-  //     username: 'Jared Schutz',
-  //     email: 'jared@gmail.com',
-  //     waitList: [],
-  //     isAdmin: false,
-  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/jared.jpg',
-  //     orders: {}
-  //   },
-  //   {
-  //     username: 'Jason Caps',
-  //     email: 'jason@gmail.com',
-  //     waitList: [],
-  //     isAdmin: false,
-  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/jason.jpg',
-  //     orders: {}
-  //   },
-
-  //   {
-  //     username: 'Radu Negu',
-  //     email: 'radu@gmail.com',
-  //     waitList: [],
-  //     isAdmin: false,
-  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/radu.jpg',
-  //     orders: {}
-  //   },
-  //   {
-  //     username: 'Jone Wong',
-  //     email: 'jone@gmail.com',
-  //     waitList: [],
-  //     isAdmin: false,
-  //     profilePhoto: 'https://hoopr2.s3.amazonaws.com/jone.jpg',
-  //     orders: {}
-  //   }
-  // ]
   const dispatch = useDispatch()
   const userList = useSelector((state: UserListState) => state.users)
   const [users, setUsers] = useState<any | undefined | null>(userList)
@@ -241,7 +173,7 @@ const Users: React.FC<UsersProps> = ({}) => {
   useEffect(() => {
     dispatch(listUsers(page, limit))
     // setPage(page => page + 1)
-  }, [users])
+  }, [dispatch, limit, page])
   return (
     <>
       {users ? (
