@@ -24,7 +24,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     height: '100%',
     padding: 'calc(.625rem - -10px)',
     display: 'flex',
-    [breakpoints.down('md')]: {
+    [breakpoints.down('sm')]: {
       display: 'flex',
       padding: '0'
     }
@@ -33,17 +33,18 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     width: '100%',
     boxSizing: 'border-box',
-    padding: 'calc(.625rem - -10px)',
     [breakpoints.down('sm')]: {
+      padding: 'calc(.625rem - -10px)',
+      width: '100%',
       borderBottom: '1px solid rgba(0, 0, 0, 0.34)',
       boxShadow: '0 6px 3px -6px black',
       height: '65px'
     },
-    [breakpoints.down('md')]: {
-      borderBottom: '1px solid rgba(0, 0, 0, 0.34)',
-      boxShadow: '0 6px 3px -6px black',
-      height: '65px'
-    },
+    // [breakpoints.down('md')]: {
+    //   borderBottom: '1px solid rgba(0, 0, 0, 0.34)',
+    //   boxShadow: '0 6px 3px -6px black',
+    //   height: '65px'
+    // },
     '& h3': {
       fontSize: 'calc(1.1em / 16 * 15)',
       marginBottom: '5%'
@@ -59,7 +60,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     maxWidth: '1180px',
     boxSizing: 'border-box',
     padding: 'calc(.625rem - -3px) calc(.625rem - -25px)',
-    [breakpoints.down('md')]: {
+    [breakpoints.down('sm')]: {
       maxWidth: '100%',
       display: 'flex',
       padding: 'calc(.625rem - -10px)',
@@ -78,23 +79,23 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   }
 }))
 
-interface AppProps {}
+interface AppProps { }
 
-const App: React.FC<AppProps> = ({}) => {
+const App: React.FC<AppProps> = ({ }) => {
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   const classes = useStyles()
   return (
     <Router>
       <main className={classes.body}>
         <Grid container spacing={0} className={classes.adminDashboardWrapper}>
-          <Grid item xs={12} lg={2} className={classes.drawerPanelWrapper}>
+          <Grid item xs={12} md={3} className={classes.drawerPanelWrapper}>
             <Drawer />
+            {!isMobile ? <div className={classes.verticalDivider}></div> : null}
           </Grid>
-          {!isMobile ? <div className={classes.verticalDivider}></div> : null}
 
-          <Grid item xs={12} lg={10} className={classes.mainWrapper}>
+          <Grid item xs={12} md={9} className={classes.mainWrapper}>
             <Switch>
               <Route path="/admin/runs" component={Runs} />
               <Route path="/admin/orders" component={Orders} />

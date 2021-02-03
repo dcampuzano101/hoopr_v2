@@ -18,7 +18,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     flexDirection: 'column',
     width: '100%',
     alignItems: 'center',
-    [breakpoints.down('md')]: {
+    [breakpoints.down('sm')]: {
       flexDirection: 'row-reverse',
       justifyContent: 'space-between'
     }
@@ -53,7 +53,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     }
   },
   button: {
-    width: '100%',
+    width: '90%',
     margin: '2% 0',
     borderRadius: '3px',
     display: 'flex',
@@ -78,7 +78,7 @@ interface DrawerProps {
 const Drawer: React.FC<DrawerProps> = ({ history }) => {
   const classes = useStyles()
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   return (
     <div className={classes.drawerWrap}>
       <div className={classes.header}>
@@ -89,66 +89,66 @@ const Drawer: React.FC<DrawerProps> = ({ history }) => {
       {isMobile ? (
         <Menu />
       ) : (
-        <div className={classes.navOtherWrapper}>
-          <nav className={classes.navWrapper}>
-            <div>
-              <IconButton
-                className={classes.button}
-                onClick={() => {
-                  history.push(`/admin/runs`)
-                }}
-              >
-                <SportsBasketball fontSize="small" />
-                <Typography variant="body2">Runs</Typography>
-              </IconButton>
-            </div>
-            <div>
-              <IconButton
-                className={classes.button}
-                onClick={() => {
-                  history.push(`/admin/users`)
-                }}
-              >
-                <CardMembership fontSize="small" />
-                <Typography variant="body2">Users</Typography>
-              </IconButton>
-            </div>
-            <div>
-              <IconButton
-                className={classes.button}
-                onClick={() => {
-                  history.push(`/admin/orders`)
-                }}
-              >
-                <ShoppingBasket fontSize="small" />
-                <Typography variant="body2">Orders</Typography>
-              </IconButton>
-            </div>
-            <div>
-              <IconButton
-                className={classes.button}
-                onClick={() => {
-                  history.push(`/admin/messages`)
-                }}
-              >
-                <Send fontSize="small" />
-                <Typography variant="body2">Messages</Typography>
-              </IconButton>
-            </div>
-            <div>
-              <IconButton
-                className={classes.button}
-                onClick={() => {
-                  history.push(`/admin/settings`)
-                }}
-              >
-                <SettingsApplications fontSize="small" />
-                <Typography variant="body2">Settings</Typography>
-              </IconButton>
-            </div>
-          </nav>
-        </div>
-      )}
+          <div className={classes.navOtherWrapper}>
+            <nav className={classes.navWrapper}>
+              <div>
+                <IconButton
+                  className={classes.button}
+                  onClick={() => {
+                    history.push(`/admin/runs`)
+                  }}
+                >
+                  <SportsBasketball fontSize="small" />
+                  <Typography variant="body2">Runs</Typography>
+                </IconButton>
+              </div>
+              <div>
+                <IconButton
+                  className={classes.button}
+                  onClick={() => {
+                    history.push(`/admin/users`)
+                  }}
+                >
+                  <CardMembership fontSize="small" />
+                  <Typography variant="body2">Users</Typography>
+                </IconButton>
+              </div>
+              <div>
+                <IconButton
+                  className={classes.button}
+                  onClick={() => {
+                    history.push(`/admin/orders`)
+                  }}
+                >
+                  <ShoppingBasket fontSize="small" />
+                  <Typography variant="body2">Orders</Typography>
+                </IconButton>
+              </div>
+              <div>
+                <IconButton
+                  className={classes.button}
+                  onClick={() => {
+                    history.push(`/admin/messages`)
+                  }}
+                >
+                  <Send fontSize="small" />
+                  <Typography variant="body2">Messages</Typography>
+                </IconButton>
+              </div>
+              <div>
+                <IconButton
+                  className={classes.button}
+                  onClick={() => {
+                    history.push(`/admin/settings`)
+                  }}
+                >
+                  <SettingsApplications fontSize="small" />
+                  <Typography variant="body2">Settings</Typography>
+                </IconButton>
+              </div>
+            </nav>
+          </div>
+        )}
     </div>
   )
 }
