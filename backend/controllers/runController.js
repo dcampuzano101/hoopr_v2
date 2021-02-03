@@ -61,17 +61,78 @@ const createRun = asyncHandler(async (req, res) => {
   }
 });
 
+
+// @description: paginates results from API request 
+// @access: public
+
+const paginatedResults = async (model, page, limit) => {
+  // const page = parseInt(req.query.page)
+  // const limit = parseInt(req.query.limit)
+
+  const startIndex = (page - 1) * limit
+  const endIndex = page * limit
+
+  const results = {}
+
+  if (endIndex < (await model.countDocuments().exec())) {
+    results.next = {
+      page: page + 1,
+      limit: limit
+    }
+  }
+
+  if (startIndex > 0) {
+    results.previous = {
+      page: page - 1,
+      limit: limit
+    }
+  }
+  console.log(results)
+  // console.log(next)
+  // next()
+  try {
+    results.results = await model
+      .find()
+      .limit(limit)
+      .skip(startIndex)
+      .select('-password')
+      .exec()
+    // res.paginatedResults = results
+    //   next()
+    // console.log(results)
+    return results
+  } catch (error) {
+    // res.status(500).json({ message: error.message })
+    throw new Error('Problem returning paginated results')
+  }
+}
+
+
 // @description: get all runs
 // @route: GET /api/runs
-// @access: private
+// @access: public
 const listRuns = asyncHandler(async (req, res) => {
-  const runs = await Run.find({});
+  const page = parseInt(req.query.page)
+  const limit = parseInt(req.query.limit)
+  const results = await paginatedResults(Run, page, limit)
+  const data = results.results
+  
   const runsObj = {};
+  const runs = {};
 
-  runs.forEach((run) => {
-    runsObj[run._id] = run;
-  });
-  if (runs) {
+  if (results.next) {
+    runsObj['next'] = results.next
+  }
+
+  if (results.previous) {
+    runsObj['previous'] = results.previous
+  }
+
+  data.forEach((run) => {
+    runs[run._id] = run
+  })
+  runsObj['runs'] = runs
+  if (data) {
     res.json(runsObj);
   } else {
     res.status(404);
