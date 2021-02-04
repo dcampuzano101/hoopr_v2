@@ -33,15 +33,18 @@ export interface RunState {
   error?: string
 }
 
-export interface RunListState extends RunState {
-  runs?: {}
-  next?: {
-    page: number
-    limit: number
-  }
-  previous?: {
-    page: number
-    limit: number
+export interface RunListState {
+  runList: {
+    loading?: boolean
+    runs?: {}
+    next?: {
+      page: number
+      limit: number
+    }
+    previous?: {
+      page: number
+      limit: number
+    }
   }
 }
 
@@ -51,11 +54,14 @@ const runInitialState: RunState = {
 }
 
 const runListInitialState: RunListState = {
-  loading: false,
-  runs: {},
-  next: {
-    page: 2,
-    limit: 4
+  runList: {
+
+    loading: false,
+    runs: {},
+    next: {
+      page: 2,
+      limit: 4
+    }
   }
 }
 

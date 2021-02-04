@@ -161,24 +161,11 @@ const Users: React.FC<UsersProps> = ({ }) => {
 
   let userList = useSelector((state: UserListState) => state.userList.users) as User || {};
 
-  // const filterHelper = (query: string, user: User) => {
-  //   let userName = user.username.toLowerCase()
-  //   return userName.includes(query) ? true : false
-  // }
-  // const handleFilter = (query: string) => {
-  //   query = query.toLowerCase()
-  //   // let usersCopy = [...Object.values(userList)]
-  //   let userListTwo = Object.values(userList).filter((user, idx) => filterHelper(query, user))
-  //   // console.log(filtered)
-  //   console.log(userListTwo)
-  // }
-
   const fuse = new Fuse(Object.values(userList), {
     keys: [
       'username'
     ]
   })
-
 
   const results = fuse.search(filterQuery)
 
@@ -189,6 +176,7 @@ const Users: React.FC<UsersProps> = ({ }) => {
     dispatch(listUsers(page, limit))
   }, [page, limit, dispatch])
   console.log(userResults)
+  console.log(Object.values(userList))
   return (
     <>
       {userResults && Object.values(userList).length > 0 ? (

@@ -110,7 +110,7 @@ const listRuns = asyncHandler(async (req, res) => {
   const data = results.results
   
   const runsObj = {};
-  const runs = {};
+  const runs = [];
 
   if (results.next) {
     runsObj['next'] = results.next
@@ -121,7 +121,7 @@ const listRuns = asyncHandler(async (req, res) => {
   }
 
   data.forEach((run) => {
-    runs[run._id] = run
+      runs.push(run)
   })
   runsObj['runs'] = runs
   if (data) {

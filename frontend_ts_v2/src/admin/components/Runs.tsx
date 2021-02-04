@@ -25,8 +25,8 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     height: '7%',
-    alignItems: 'center',
-    padding: 'calc(.625rem)',
+    // alignItems: 'center',
+    // padding: 'calc(.625rem)',
     [breakpoints.down('sm')]: {
       height: 'auto'
     }
@@ -72,8 +72,8 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     placeItems: 'center',
-    height: '250px',
-    width: '250px',
+    height: '93%',
+    width: '100%',
     backgroundColor: palette.primary.light,
     opacity: '95%',
     margin: 'calc(1.2rem) calc(1.2rem) calc(1.2rem) 0',
@@ -104,7 +104,9 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   },
   cardWrapper: {
     display: 'inline-flex',
-    height: '95%',
+    height: '300px',
+    width: '500px',
+    border: '1px solid black',
     flexWrap: 'wrap',
     // justifyContent: 'space-between',
     [breakpoints.down('sm')]: {
@@ -144,109 +146,23 @@ interface Run {
 
 const Runs: React.FC<RunsProps> = () => {
   const classes = useStyles()
-  // const runs = [
-  //   {
-  //     name: 'Wednesday Morning Run',
-  //     location: 'The Post',
-  //     date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
-  //     price: 10,
-  //     capacity: 15,
-  //     users: [],
-  //     waitList: [],
-  //     startTime: moment('08:00', 'h:mm a'),
-  //     endTime: moment('10:00', 'h:mm a'),
-  //     geoLocation: {
-  //       address: '100 Dobbin St, Brooklyn, NY 11222',
-  //       lat: 40.7251514,
-  //       lng: -73.9566612
-  //     }
-  //   },
-  //   {
-  //     name: 'Saturday Night Run',
-  //     location: 'Cooper Park',
-  //     date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
-  //     price: 10,
-  //     capacity: 15,
-  //     users: [],
-  //     waitList: [],
-  //     startTime: moment('18:00', 'h:mm a'),
-  //     endTime: moment('20:00', 'h:mm a'),
-  //     geoLocation: {
-  //       address: 'Cooper Park, Brooklyn, NY 11211',
-  //       lat: 40.715946,
-  //       lng: -73.9383233
-  //     }
-  //   },
-  //   {
-  //     name: 'Sunday Morning Run',
-  //     location: 'Grand Street Basketball Courts',
-  //     date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
-  //     price: 10,
-  //     capacity: 15,
-  //     users: [],
-  //     waitList: [],
-  //     startTime: moment('08:00', 'h:mm a'),
-  //     endTime: moment('10:00', 'h:mm a'),
-  //     geoLocation: {
-  //       address: 'Chrystie St &, Forsyth St, New York, NY 10002',
-  //       lat: 40.7217448,
-  //       lng: -73.9937312
-  //     }
-  //   },
-  //   {
-  //     name: 'Wednesday Night Run',
-  //     location: 'The Post',
-  //     date: moment('01-11-2021', 'MM-DD-YYYY').format('LL'),
-  //     price: 10,
-  //     capacity: 15,
-  //     users: [],
-  //     waitList: [1, 2, 3],
-  //     startTime: moment('18:00', 'h:mm a'),
-  //     endTime: moment('20:00', 'h:mm a'),
-  //     geoLocation: {
-  //       address: '100 Dobbin St, Brooklyn, NY 11222',
-  //       lat: 40.7251514,
-  //       lng: -73.9566612
-  //     }
-  //   }
-  // ]
+
   const [filterQuery, setFilterQuery] = useState<string | undefined>()
   const [page, setPage] = useState<any>(1)
   const [limit, setLimit] = useState<any>(4)
 
 
   const dispatch = useDispatch();
-  const runList = useSelector((state: RunListState) => state.runs)
-  const [runs, setRuns] = useState<any | undefined | null>(runList)
-
-  const filterHelper = (query: string, run: Run) => {
-    let endIndex = query.length - 1
-    let start = 0
-    let runName = run.name.toLowerCase()
-    while (start < runName.length) {
-      let possibleMatch = runName.slice(start, endIndex + 1)
-      if (query === possibleMatch) {
-        return true
-      }
-      start++
-      endIndex++
-    }
-    return false
-  }
-  const handleFilter = (query: string) => {
-    query = query.toLowerCase()
-    let runsCopy = [...runs]
-    let filtered = runsCopy.filter((run, idx) => filterHelper(query, run))
-    console.log(filtered)
-    setRuns(filtered)
-  }
+  const runList = useSelector((state: RunListState) => state.runList.runs) as Run || {}
+  // const [runs, setRuns] = useState<any | undefined | null>(runList)
 
   useEffect(() => {
     dispatch(listRuns(page, limit))
   }, [dispatch, limit, page])
+  console.log(runList)
   return (
     <>
-      {runs ? (
+      {runList ? (
 
         <Grid container className={classes.mainInnerWrapper}>
           <Grid item xs={12} className={classes.mainHeaderWrapper}>
@@ -269,15 +185,15 @@ const Runs: React.FC<RunsProps> = () => {
                     </InputAdornment>
                   )
                 }}
-                onChange={(e) => handleFilter(e.target.value)}
+                onChange={(e) => setFilterQuery(e.target.value)}
               />
               <Typography variant="h1" className={classes.filterResults}>
-                {runs.length} Runs
+                {Object.values(runList).length} Runs
           </Typography>
             </Grid>
             <Grid item xs={12} spacing={3} className={classes.runsWrapper}>
               <div className={classes.cardWrapper}>
-                {runs.map((run: Run, idx: number) => (
+                {Object.values(runList).map((run: Run, idx: number) => (
                   <Card elevation={3} key={idx} className={classes.run}>
                     <RunCard run={run} />
                   </Card>

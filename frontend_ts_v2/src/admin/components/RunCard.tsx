@@ -19,8 +19,6 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   runCardWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100%',
-    width: '100%',
     boxSizing: 'border-box',
     position: 'relative',
     justifyContent: 'center'
@@ -47,18 +45,18 @@ interface Run {
   date: any
   price: number
   capacity: number
-  users: [] | undefined
-  waitList: [] | undefined
+  users: []
+  waitList: []
   startTime: any
   endTime: any
   geoLocation: {}
 }
 
 interface RunCardProps {
-  run: Run | undefined
+  run: Run
 }
 
-const RunCard: React.FC<RunCardProps> = ({ run = {} }) => {
+const RunCard: React.FC<RunCardProps> = ({ run }) => {
   const classes = useStyles()
   return (
     <div className={classes.runCardWrapper}>
@@ -66,9 +64,9 @@ const RunCard: React.FC<RunCardProps> = ({ run = {} }) => {
       <Typography variant="h1">{run.location}</Typography>
       <Typography variant="h1">{run.date}</Typography>
       <Typography variant="h1">{run.price}</Typography>
-      {/* <Typography variant="h1">
+      <Typography variant="h1">
         {run.users.length} / {run.capacity}
-      </Typography> */}
+      </Typography>
     </div>
   )
 }
