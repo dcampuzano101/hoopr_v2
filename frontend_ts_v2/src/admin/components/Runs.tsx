@@ -19,7 +19,7 @@ import GoogleMap from './GoogleMap'
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   mainInnerWrapper: {
-    height: '100%'
+    height: '90%'
   },
   mainHeaderWrapper: {
     maxWidth: '100%',
@@ -200,7 +200,7 @@ const Runs: React.FC<RunsProps> = () => {
               <div className={classes.cardWrapper}>
                 {Object.values(runList).map((run: Run, idx: number) => (
                   <Card elevation={3} key={idx} className={classes.run}>
-                    <GoogleMap name={run.name} geoLocation={run.geoLocation} zoomLevel={15} />
+                    <GoogleMap name={run.location} geoLocation={run.geoLocation} zoomLevel={15} />
                     <RunInfoCard run={run} />
                   </Card>
                 ))}
