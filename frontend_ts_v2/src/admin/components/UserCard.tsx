@@ -2,6 +2,7 @@ import React from 'react'
 import { Paper, Card, Grid, Avatar, Typography } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import userAvatar from '../../assets/images/user-avatar.png'
+import { User } from './Users';
 
 const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   cardFooter: {
@@ -41,14 +42,14 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   }
 }))
 
-interface User {
-  username: string
-  email: string
-  waitList: string[] | undefined
-  isAdmin: boolean
-  profilePhoto: string
-  orders: {}
-}
+// interface User {
+//   username: string
+//   email: string
+//   waitList: string[] | undefined
+//   isAdmin: boolean
+//   profilePhoto: string
+//   orders: {}
+// }
 
 interface UserCardProps {
   user: User

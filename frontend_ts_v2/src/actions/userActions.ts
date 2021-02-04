@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Dispatch, Action } from 'redux'
+import { Dispatch } from 'redux'
 import {
 	USER_LOGIN_FAIL,
 	USER_LOGIN_REQUEST,

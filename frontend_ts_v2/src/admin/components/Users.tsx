@@ -13,10 +13,8 @@ import UserCard from './UserCard'
 import { listUsers } from '../../actions/userActions'
 import { UserListState } from '../../reducers/userReducers'
 import { useSelector, useDispatch } from 'react-redux'
+import Fuse from 'fuse.js'
 
-// interface Result {
-//   result: []
-// }
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   mainInnerWrapper: {
     height: '100%'
@@ -26,8 +24,8 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     height: '7%',
-    alignItems: 'center',
-    padding: 'calc(.625rem)',
+    // alignItems: 'center',
+    // padding: 'calc(.625rem)',
     [breakpoints.down('sm')]: {
       height: 'auto'
     }
@@ -128,55 +126,72 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   }
 }))
 
-interface User {
-  username: string
+// interface User {
+//   username: string
+//   email: string
+//   waitList: string[] | undefined
+//   isAdmin: boolean
+//   profilePhoto: string
+//   orders: {}
+// }
+
+export interface User {
+  createdAt: string
   email: string
-  waitList: string[] | undefined
   isAdmin: boolean
   profilePhoto: string
-  orders: {}
+  runs: []
+  updatedAt: string
+  username: string
+  waitList: [] | undefined
+  __v: number
+  _id: string
+  orders: []
+  map: any
 }
 
 interface UsersProps { }
 
 const Users: React.FC<UsersProps> = ({ }) => {
-  const [filterQuery, setFilterQuery] = useState<string | undefined>()
-  const [page, setPage] = useState<any>(1)
+  const [filterQuery, setFilterQuery] = useState<string | any>('')
+  const [page, setPage] = useState<any>(2)
   const [limit, setLimit] = useState<any>(4)
   const classes = useStyles()
   const dispatch = useDispatch()
-  const userList = useSelector((state: UserListState) => state.users)
-  const [users, setUsers] = useState<any | undefined | null>(userList)
 
-  const filterHelper = (query: string, user: User) => {
-    let endIndex = query.length - 1
-    let start = 0
-    let userName = user.username.toLowerCase()
-    while (start < userName.length) {
-      let possibleMatch = userName.slice(start, endIndex + 1)
-      if (query === possibleMatch) {
-        return true
-      }
-      start++
-      endIndex++
-    }
-    return false
-  }
-  const handleFilter = (query: string) => {
-    query = query.toLowerCase()
-    let usersCopy = [...users]
-    let filtered = usersCopy.filter((user, idx) => filterHelper(query, user))
-    console.log(filtered)
-    setUsers(filtered)
-  }
+  let userList = useSelector((state: UserListState) => state.userList.users) as User || {};
+
+  // const filterHelper = (query: string, user: User) => {
+  //   let userName = user.username.toLowerCase()
+  //   return userName.includes(query) ? true : false
+  // }
+  // const handleFilter = (query: string) => {
+  //   query = query.toLowerCase()
+  //   // let usersCopy = [...Object.values(userList)]
+  //   let userListTwo = Object.values(userList).filter((user, idx) => filterHelper(query, user))
+  //   // console.log(filtered)
+  //   console.log(userListTwo)
+  // }
+
+  const fuse = new Fuse(Object.values(userList), {
+    keys: [
+      'username'
+    ]
+  })
+
+
+  const results = fuse.search(filterQuery)
+
+  const userResults = filterQuery ? results.map(user => user.item) : Object.values(userList);
+
 
   useEffect(() => {
     dispatch(listUsers(page, limit))
-    // setPage(page => page + 1)
-  }, [dispatch, limit, page])
+  }, [page, limit, dispatch])
+  console.log(userResults)
   return (
     <>
-      {users ? (
+      {userResults && Object.values(userList).length > 0 ? (
         <Grid container className={classes.mainInnerWrapper}>
           <Grid item xs={12} className={classes.mainHeaderWrapper}>
             <Typography variant="h1" className={classes.componentHeader}>
@@ -198,15 +213,15 @@ const Users: React.FC<UsersProps> = ({ }) => {
                     </InputAdornment>
                   )
                 }}
-                onChange={(e) => handleFilter(e.target.value)}
+                onChange={(e) => setFilterQuery(e.target.value)}
               />
               <Typography variant="h1" className={classes.filterResults}>
-                {users ? (users.length ? users.length : 0) : null} Results
+                {userList ? (Object.values(userList).length ? Object.values(userList).length : 0) : null} Results
               </Typography>
             </Grid>
             <Grid item xs={12} spacing={3} className={classes.usersWrapper}>
               <div className={classes.cardWrapper}>
-                {users.map((user: User, idx: number) => (
+                {userResults.map((user: User | any, idx: number) => (
                   <Card elevation={3} key={idx} className={classes.user}>
                     <UserCard user={user} />
                   </Card>

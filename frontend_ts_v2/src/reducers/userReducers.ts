@@ -44,14 +44,17 @@ const userState: UserState = {
   loading: false,
 }
 export interface UserListState extends UserState {
-  users?: User[]
-  next?: {
-    page: number
-    limit: number
-  }
-  previous?: {
-    page: number
-    limit: number
+  userList: {
+    loading?: boolean
+    users?: object
+    next?: {
+      page: number
+      limit: number
+    }
+    previous?: {
+      page: number
+      limit: number
+    }
   }
 }
 
@@ -80,7 +83,7 @@ export const userLoginReducer = (
 }
 
 export const userListReducer = (
-  state: UserListState = { loading: true },
+  state: UserListState = { userList: { loading: true }},
   action: ReduxAction
 ) => {
   switch (action.type) {

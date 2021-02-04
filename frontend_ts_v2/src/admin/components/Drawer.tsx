@@ -3,7 +3,6 @@ import { Typography, IconButton, useMediaQuery } from '@material-ui/core'
 import {
   Send,
   Menu,
-  Settings,
   SettingsApplications,
   SportsBasketball,
   ShoppingBasket,
@@ -17,10 +16,12 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    maxWidth: '250px',
     alignItems: 'center',
     [breakpoints.down('sm')]: {
       flexDirection: 'row-reverse',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      maxWidth: '100%',
     }
   },
   headerLogo: {

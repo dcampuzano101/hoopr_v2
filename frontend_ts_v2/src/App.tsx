@@ -1,15 +1,15 @@
 import React from 'react'
-import { Typography, Grid, Paper, useMediaQuery } from '@material-ui/core'
+import { Grid, useMediaQuery } from '@material-ui/core'
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Header from './components/Header'
-import HomeScreen from './screens/HomeScreen'
-import BlogScreen from './screens/BlogScreen'
+// import Header from './components/Header'
+// import HomeScreen from './screens/HomeScreen'
+// import BlogScreen from './screens/BlogScreen'
 import Runs from './admin/components/Runs'
 import Orders from './admin/components/Orders'
 import Users from './admin/components/Users'
 import Drawer from './admin/components/Drawer'
-import MainDashboard from './admin/components/MainDashboard'
+// import MainDashboard from './admin/components/MainDashboard'
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   root: {
@@ -41,11 +41,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
       boxShadow: '0 6px 3px -6px black',
       height: '65px'
     },
-    // [breakpoints.down('md')]: {
-    //   borderBottom: '1px solid rgba(0, 0, 0, 0.34)',
-    //   boxShadow: '0 6px 3px -6px black',
-    //   height: '65px'
-    // },
     '& h3': {
       fontSize: 'calc(1.1em / 16 * 15)',
       marginBottom: '5%'
@@ -82,7 +77,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
 
 interface AppProps { }
 
-const App: React.FC<AppProps> = ({ }) => {
+const App: React.FC<AppProps> = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
