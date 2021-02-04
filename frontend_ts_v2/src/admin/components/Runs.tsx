@@ -72,8 +72,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   },
   run: {
     display: 'flex',
-    flexDirection: 'column',
-    placeItems: 'center',
+    flexDirection: 'row',
     height: '300px',
     width: '100%',
     backgroundColor: palette.primary.light,
@@ -143,7 +142,11 @@ interface Run {
   waitList: any
   startTime: any
   endTime: any
-  geoLocation: {}
+  geoLocation: {
+    address: string
+    lat: number
+    lng: number
+  }
 }
 
 const Runs: React.FC<RunsProps> = () => {
@@ -197,7 +200,7 @@ const Runs: React.FC<RunsProps> = () => {
               <div className={classes.cardWrapper}>
                 {Object.values(runList).map((run: Run, idx: number) => (
                   <Card elevation={3} key={idx} className={classes.run}>
-                    <GoogleMap />
+                    <GoogleMap name={run.name} geoLocation={run.geoLocation} zoomLevel={15} />
                     <RunInfoCard run={run} />
                   </Card>
                 ))}

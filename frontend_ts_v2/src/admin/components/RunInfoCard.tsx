@@ -4,39 +4,14 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 // import userAvatar from '../../assets/images/user-avatar.png'
 
 const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
-  cardFooter: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '50%',
-    justifyContent: 'center',
-    alignItems: 'baseline',
-    padding: 'calc(.5rem)',
-    backgroundColor: palette.primary.main,
-    [breakpoints.down('sm')]: {
-      height: '100%'
-    }
-  },
-  runCardWrapper: {
+  runInfoWrapper: {
     display: 'flex',
     flexDirection: 'column',
     boxSizing: 'border-box',
     position: 'relative',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: '50%'
   },
-  avatarWrapper: {
-    textAlign: 'center',
-    padding: 'calc(.5rem)',
-    display: 'grid',
-    placeItems: 'center',
-    height: '50%'
-  },
-
-  cardText: {
-    fontSize: 'calc(1em / 16 * 15)',
-    [breakpoints.down('sm')]: {
-      fontSize: 'calc(.8em / 16 * 15)'
-    }
-  }
 }))
 
 interface Run {
@@ -59,7 +34,7 @@ interface RunCardProps {
 const RunInfoCard: React.FC<RunCardProps> = ({ run }) => {
   const classes = useStyles()
   return (
-    <div className={classes.runCardWrapper}>
+    <div className={classes.runInfoWrapper}>
       <Typography variant="h1">{run.name}</Typography>
       <Typography variant="h1">{run.location}</Typography>
       <Typography variant="h1">{run.date}</Typography>

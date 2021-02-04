@@ -1,19 +1,78 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core/'
 import { makeStyles, Theme } from '@material-ui/core/styles'
+// @ts-ignore
+import GoogleMapReact from "google-map-react";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+
+const GOOGLE_MAP_API_KEY: string = 'AIzaSyCHBNfg-xsj9eQI5X7H5v09vDrU9Q0oJxE'
+
+
 const useStyles = makeStyles(({ palette }: Theme) => ({
+    mapWrapper: {
+        width: '50%',
+        // borderRight: '1px solid black'
+    },
+    googleMap: {
+        /* width: 60%; */
+        // height: 30vh;
+    },
+    pin: {
+        display: 'flex',
+        alignItems: "center",
+        width: '180px',
+    },
+    pinIcon: {
+        fontSize: '.5rem'
+    },
+    pinText: {
+        fontWeight: 650
+    }
 }))
 
-interface GoogleMapProps {
 
+
+interface GoogleMapProps {
+    geoLocation: {
+        address: string
+        lat: number
+        lng: number
+    }
+    zoomLevel: number
+    name: string
 }
 
-const GoogleMap: React.FC<GoogleMapProps> = ({ }) => {
+interface LocationPinProps {
+    pinText: string
+    lat: number
+    lng: number
+}
+
+const LocationPin: React.FC<LocationPinProps> = ({ pinText }) => {
+
     const classes = useStyles();
     return (
-        <>
-            <Typography variant="h1">Google Map :)</Typography>
-        </>
+        <div className={classes.pin}>
+            <LocationOnIcon />
+            <p className={classes.pinIcon}></p>
+            <Typography variant="h3" className={classes.pinText}>{pinText}</Typography>
+        </div>
+
+    )
+}
+
+const GoogleMap: React.FC<GoogleMapProps> = ({ geoLocation, zoomLevel, name }) => {
+    const classes = useStyles();
+    return (
+        <div className={classes.mapWrapper}>
+            <GoogleMapReact
+                bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
+                center={geoLocation}
+                zoom={zoomLevel}
+            >
+                <LocationPin lat={geoLocation.lat} lng={geoLocation.lng} pinText={name} />
+            </GoogleMapReact>
+        </div >
     );
 }
 

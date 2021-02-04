@@ -22,6 +22,10 @@
     "jsx": "react-jsx",
     "noEmit": true
   },
+  "typeRoots": [
+    "../node_modules/@types",
+    "../@types"
+],
   "include": [
     "src"
   ]
