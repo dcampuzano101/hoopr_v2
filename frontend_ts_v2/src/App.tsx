@@ -55,6 +55,8 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   mainWrapper: {
     maxWidth: '1180px',
     boxSizing: 'border-box',
+    height: '100%',
+    overflow: 'hidden',
     padding: 'calc(.625rem - -3px) calc(.625rem - -25px)',
     [breakpoints.down('sm')]: {
       maxWidth: '100%',
@@ -86,12 +88,12 @@ const App: React.FC<AppProps> = () => {
     <Router>
       <main className={classes.body}>
         <Grid container spacing={0} className={classes.adminDashboardWrapper}>
-          <Grid item xs={12} md={3} className={classes.drawerPanelWrapper}>
+          <Grid item xs={12} md={2} className={classes.drawerPanelWrapper}>
             <Drawer />
             {!isMobile ? <div className={classes.verticalDivider}></div> : null}
           </Grid>
 
-          <Grid item xs={12} md={9} className={classes.mainWrapper}>
+          <Grid item xs={12} md={10} className={classes.mainWrapper}>
             <Switch>
               <Route path="/admin/runs" component={Runs} />
               <Route path="/admin/orders" component={Orders} />

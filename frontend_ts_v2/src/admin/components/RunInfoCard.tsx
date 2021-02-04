@@ -56,7 +56,7 @@ interface RunCardProps {
   run: Run
 }
 
-const RunCard: React.FC<RunCardProps> = ({ run }) => {
+const RunInfoCard: React.FC<RunCardProps> = ({ run }) => {
   const classes = useStyles()
   return (
     <div className={classes.runCardWrapper}>
@@ -71,4 +71,4 @@ const RunCard: React.FC<RunCardProps> = ({ run }) => {
   )
 }
 
-export default RunCard
+export default RunInfoCard

@@ -9,11 +9,12 @@ import {
   InputAdornment
 } from '@material-ui/core'
 import { Search, SportsBasketball } from '@material-ui/icons'
-import RunCard from './RunCard'
+import RunInfoCard from './RunInfoCard'
 // import moment from 'moment'
 import { RunListState } from '../../reducers/runReducers'
 import { useDispatch, useSelector } from 'react-redux'
 import { listRuns } from '../../actions/runActions'
+import GoogleMap from './GoogleMap'
 
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
@@ -24,7 +25,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     maxWidth: '100%',
     display: 'flex',
     justifyContent: 'space-between',
-    height: '7%',
+    // height: '7%',
     // alignItems: 'center',
     // padding: 'calc(.625rem)',
     [breakpoints.down('sm')]: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   },
   mainComponentWrapper: {
     display: 'flex',
+    overflow: 'auto',
     [breakpoints.down('sm')]: {
       display: 'block',
       height: '100%'
@@ -72,11 +74,11 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     placeItems: 'center',
-    height: '93%',
+    height: '300px',
     width: '100%',
     backgroundColor: palette.primary.light,
     opacity: '95%',
-    margin: 'calc(1.2rem) calc(1.2rem) calc(1.2rem) 0',
+    margin: 'calc(1.2rem) 0',
     [breakpoints.down('sm')]: {
       width: '250px',
       height: '250px',
@@ -104,8 +106,8 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   },
   cardWrapper: {
     display: 'inline-flex',
-    height: '300px',
-    width: '500px',
+    height: '100%',
+    width: '100%',
     border: '1px solid black',
     flexWrap: 'wrap',
     // justifyContent: 'space-between',
@@ -171,37 +173,38 @@ const Runs: React.FC<RunsProps> = () => {
         </Typography>
             <SportsBasketball className={classes.basketballIcon} />
           </Grid>
-          <Grid container xs={12} className={classes.mainComponentWrapper}>
-            <Grid item xs={12} className={classes.filterTools}>
-              <TextField
-                id="outlined-basic"
-                label="Filter Users By Name"
-                variant="outlined"
-                style={{ height: '50px', width: '200px' }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Search />
-                    </InputAdornment>
-                  )
-                }}
-                onChange={(e) => setFilterQuery(e.target.value)}
-              />
-              <Typography variant="h1" className={classes.filterResults}>
-                {Object.values(runList).length} Runs
+          <Grid item xs={12} className={classes.filterTools}>
+            <TextField
+              id="outlined-basic"
+              label="Filter Users By Name"
+              variant="outlined"
+              style={{ height: '50px', width: '200px' }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                )
+              }}
+              onChange={(e) => setFilterQuery(e.target.value)}
+            />
+            <Typography variant="h1" className={classes.filterResults}>
+              {Object.values(runList).length} Runs
           </Typography>
-            </Grid>
+          </Grid>
+          <Grid container xs={12} className={classes.mainComponentWrapper}>
             <Grid item xs={12} spacing={3} className={classes.runsWrapper}>
               <div className={classes.cardWrapper}>
                 {Object.values(runList).map((run: Run, idx: number) => (
                   <Card elevation={3} key={idx} className={classes.run}>
-                    <RunCard run={run} />
+                    <GoogleMap />
+                    <RunInfoCard run={run} />
                   </Card>
                 ))}
               </div>
-              <Grid item xs={12} className={classes.paginationWrapper}>
+              {/* <Grid item xs={12} className={classes.paginationWrapper}>
                 {`<  *  >`}
-              </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
         </Grid>
