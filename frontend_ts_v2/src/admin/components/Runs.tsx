@@ -176,7 +176,7 @@ const Runs: React.FC<RunsProps> = () => {
   const [filterQuery, setFilterQuery] = useState<string | any>('')
   const [runs, setRuns] = useState<Run[]>([])
   const [page, setPage] = useState<number>(1)
-  const [limit, setLimit] = useState<any>(4)
+  const [limit, setLimit] = useState<any>(3)
   const [intersecting, setIntersecting] = useState<boolean>(false)
 
 
@@ -199,8 +199,13 @@ const Runs: React.FC<RunsProps> = () => {
     console.log(e);
     if (e.isIntersecting) {
       setIntersecting(true);
+      if (next) {
+        console.log('inside if')
+        setPage(prevPage => prevPage + 1)
+        dispatch(listRuns(page, limit))
+      }
     }
-    debugger;
+    // debugger;
   }
 
   // const options = {
@@ -212,9 +217,8 @@ const Runs: React.FC<RunsProps> = () => {
   const runResults = filterQuery ? results.map(user => user.item) : runList;
   useEffect(() => {
     dispatch(listRuns(page, limit))
-    // setRuns(runList)
-  }, [dispatch, limit, page])
-  console.log(runList)
+  }, [])
+  console.log(runs)
   console.log(intersecting)
   return (
     <>

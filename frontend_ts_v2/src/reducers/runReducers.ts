@@ -62,7 +62,8 @@ export interface RunListState {
       page: number
       limit: number
     }
-  }
+  },
+  runs: Run[]
 }
 
 const runInitialState: RunState = {
@@ -72,33 +73,46 @@ const runInitialState: RunState = {
 
 const runListInitialState: RunListState = {
   runList: {
-
     loading: false,
     runs: [],
     next: {
       page: 2,
       limit: 4
     }
-  }
+  },
+  runs: []
 }
 
 
 
-export const runListReducer = (state = runListInitialState, action: ReduxAction) => {
+export const runListReducer = (state: RunListState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_LIST_REQUEST:
-      return { loading: true };
-    case RUN_LIST_SUCCESS:
+      debugger;
+      return { 
+        loading: true,
+        runs: state.runs
+
+      };
+      case RUN_LIST_SUCCESS:
+        debugger;
+        console.log(state);
+        let appendedResults: Run[] = [];
+        if (state.runs) {
+          debugger;
+          console.log(state.runs)
+          appendedResults = [...state.runs, ...action.payload.runs]
+    }
       return {
         loading: false,
-        runs: action.payload.runs,
+        runs: appendedResults.length > 0 ? appendedResults : action.payload.runs,
         next: action.payload.next ? action.payload.next : null,
         previous: action.payload.previous ? action.payload.previous : null
       }
     case RUN_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
-      return state;
+      return runListInitialState;
   }
 };
 
