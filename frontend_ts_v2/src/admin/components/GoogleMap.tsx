@@ -5,7 +5,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 import GoogleMapReact from "google-map-react";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 
-const GOOGLE_MAP_API_KEY: string = 'AIzaSyCHBNfg-xsj9eQI5X7H5v09vDrU9Q0oJxE'
+const GOOGLE_MAP_API_KEY: string = 'apikey'
 
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
