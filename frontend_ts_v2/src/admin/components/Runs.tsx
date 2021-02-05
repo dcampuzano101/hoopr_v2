@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listRuns } from '../../actions/runActions'
 import GoogleMap from './GoogleMap'
 import Fuse from 'fuse.js'
+// @ts-ignore
+import Observer from '@researchgate/react-intersection-observer';
 
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
@@ -27,9 +29,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     maxWidth: '100%',
     display: 'flex',
     justifyContent: 'space-between',
-    // height: '7%',
-    // alignItems: 'center',
-    // padding: 'calc(.625rem)',
     [breakpoints.down('sm')]: {
       height: 'auto'
     }
@@ -53,7 +52,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
       backgroundColor: 'rgba(0,0,0,.1)',
       outline: '1px solid slategrey'
     },
-    // height: '95%',
     marginTop: '1%',
     minWidth: '100%'
   },
@@ -81,7 +79,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     padding: '0 calc(.625rem)',
     flexBasis: 'none',
     width: '100%',
-    // height: '90%',
     maxWidth: 'none'
   },
   run: {
@@ -93,13 +90,9 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     opacity: '95%',
     margin: 'calc(1.2rem) 0',
     [breakpoints.down('sm')]: {
-      // width: '250px',
-      // height: '250px',
       margin: '3%'
     },
     [breakpoints.down('xs')]: {
-      // width: '300px',
-      // height: '300px'
       display: 'flex',
       flexDirection: 'column'
     },
@@ -130,9 +123,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'inline-flex',
     height: '100%',
     width: '100%',
-    border: '1px solid black',
     flexWrap: 'wrap',
-    // justifyContent: 'space-between',
     [breakpoints.down('sm')]: {
       justifyContent: 'center'
     }
@@ -183,14 +174,17 @@ export interface Run {
 const Runs: React.FC<RunsProps> = () => {
   const classes = useStyles()
   const [filterQuery, setFilterQuery] = useState<string | any>('')
-
-  const [page, setPage] = useState<any>(1)
+  const [runs, setRuns] = useState<Run[]>([])
+  const [page, setPage] = useState<number>(1)
   const [limit, setLimit] = useState<any>(4)
+  const [intersecting, setIntersecting] = useState<boolean>(false)
 
 
   const dispatch = useDispatch();
+  const next = useSelector((state: RunListState) => state.runList.next) || {}
+  const previous = useSelector((state: RunListState) => state.runList.previous) || {}
+
   const runList = useSelector((state: RunListState) => state.runList.runs) || []
-  // const [runs, setRuns] = useState<any | undefined | null>(runList)
   const fuse = new Fuse(runList, {
     keys: [
       'location',
@@ -201,11 +195,27 @@ const Runs: React.FC<RunsProps> = () => {
 
   const results = fuse.search(filterQuery)
 
+  const handlePageChange = (e: any) => {
+    console.log(e);
+    if (e.isIntersecting) {
+      setIntersecting(true);
+    }
+    debugger;
+  }
+
+  // const options = {
+  //   onChange: handlePageChange,
+  //   // root: '#scrolling-container',
+  //   // rootMargin: '0% 0% -25%',
+  // }
+
   const runResults = filterQuery ? results.map(user => user.item) : runList;
   useEffect(() => {
     dispatch(listRuns(page, limit))
+    // setRuns(runList)
   }, [dispatch, limit, page])
   console.log(runList)
+  console.log(intersecting)
   return (
     <>
       {runResults ? (
@@ -218,9 +228,7 @@ const Runs: React.FC<RunsProps> = () => {
           </Grid>
           <Grid item xs={12} className={classes.filterTools}>
             <TextField
-              // className={classes.textField}
-              // id="outlined-basic"
-              label="Filter Users By Name"
+              label="Filter Runs"
               variant="outlined"
               style={{ height: '50px', width: '200px' }}
               InputProps={{
@@ -239,7 +247,7 @@ const Runs: React.FC<RunsProps> = () => {
 
 
           <Grid container xs={12} className={classes.mainComponentWrapper}>
-            <Grid item xs={12} spacing={3} className={classes.runsWrapper}>
+            <Grid item id="scrolling-container" xs={12} spacing={3} className={classes.runsWrapper}>
               <div className={classes.cardWrapper}>
                 {runResults.map((run: Run, idx: number) => (
                   <Card elevation={3} key={idx} className={classes.run}>
@@ -248,9 +256,9 @@ const Runs: React.FC<RunsProps> = () => {
                   </Card>
                 ))}
               </div>
-              {/* <Grid item xs={12} className={classes.paginationWrapper}>
-                {`<  *  >`}
-              </Grid> */}
+              <Observer onChange={handlePageChange}>
+                <div>target</div>
+              </Observer>
             </Grid>
           </Grid>
         </Grid>
