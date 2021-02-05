@@ -191,7 +191,8 @@ const Runs: React.FC<RunsProps> = () => {
     keys: [
       'location',
       'date',
-      'price'
+      'price',
+      'name'
     ]
   })
 

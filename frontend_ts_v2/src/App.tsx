@@ -9,6 +9,8 @@ import Runs from './admin/components/Runs'
 import Orders from './admin/components/Orders'
 import Users from './admin/components/Users'
 import Drawer from './admin/components/Drawer'
+import Modal from './admin/components/Modal'
+import RunScreen from './admin/components/RunScreen'
 // import MainDashboard from './admin/components/MainDashboard'
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
@@ -95,9 +97,14 @@ const App: React.FC<AppProps> = () => {
 
           <Grid item xs={12} md={10} className={classes.mainWrapper}>
             <Switch>
-              <Route path="/admin/runs" component={Runs} />
+              <Route path="/admin/runs" exact component={Runs} />
               <Route path="/admin/orders" component={Orders} />
-              <Route path="/admin/users" component={Users} />
+              <Route path="/admin/users" exact component={Users} />
+              <Route
+                path="/admin/runs/:id?"
+                render={(props) => <Modal Component={RunScreen} />}
+                exact
+              />
             </Switch>
           </Grid>
         </Grid>
