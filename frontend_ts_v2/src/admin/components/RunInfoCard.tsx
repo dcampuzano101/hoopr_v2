@@ -14,7 +14,11 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     position: 'relative',
     justifyContent: 'center',
     width: '50%',
-    alignItems: 'center'
+    alignItems: 'center',
+    [breakpoints.down('xs')]: {
+      width: '100%',
+      height: '50%'
+    }
   },
   runInfoWrapper: {
     height: '80%',
@@ -23,6 +27,7 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     width: '100%',
     justifyContent: 'center',
     // height: '80%'
+
 
   },
   infoTag: {

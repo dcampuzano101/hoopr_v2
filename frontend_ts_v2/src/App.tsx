@@ -26,7 +26,8 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     [breakpoints.down('sm')]: {
       display: 'flex',
-      padding: '0'
+      padding: '0',
+      height: 'auto'
     }
   },
   drawerPanelWrapper: {

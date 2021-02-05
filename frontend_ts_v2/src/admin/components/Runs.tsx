@@ -19,7 +19,7 @@ import GoogleMap from './GoogleMap'
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   mainInnerWrapper: {
-    height: '90%'
+    height: '100%'
   },
   mainHeaderWrapper: {
     maxWidth: '100%',
@@ -35,11 +35,12 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   mainComponentWrapper: {
     display: 'flex',
     overflow: 'auto',
+    height: '80%',
     [breakpoints.down('sm')]: {
       display: 'block',
       height: '100%'
     },
-    height: '95%',
+    // height: '95%',
     marginTop: '1%',
     minWidth: '100%'
   },
@@ -67,7 +68,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     padding: '0 calc(.625rem)',
     flexBasis: 'none',
     width: '100%',
-    height: '90%',
+    // height: '90%',
     maxWidth: 'none'
   },
   run: {
@@ -79,13 +80,15 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     opacity: '95%',
     margin: 'calc(1.2rem) 0',
     [breakpoints.down('sm')]: {
-      width: '250px',
-      height: '250px',
+      // width: '250px',
+      // height: '250px',
       margin: '3%'
     },
     [breakpoints.down('xs')]: {
-      width: '300px',
-      height: '300px'
+      // width: '300px',
+      // height: '300px'
+      display: 'flex',
+      flexDirection: 'column'
     }
   },
   paginationWrapper: {
