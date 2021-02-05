@@ -177,11 +177,13 @@ const Runs: React.FC<RunsProps> = () => {
   const [runs, setRuns] = useState<Run[]>([])
   const [page, setPage] = useState<number>(1)
   const [limit, setLimit] = useState<any>(3)
-  const [intersecting, setIntersecting] = useState<boolean>(false)
 
 
   const dispatch = useDispatch();
-  const next = useSelector((state: RunListState) => state.runList.next) || {}
+  const next = useSelector((state: RunListState) => state.runList.next) || {
+    page: null,
+    limit: null
+  }
   const previous = useSelector((state: RunListState) => state.runList.previous) || {}
 
   const runList = useSelector((state: RunListState) => state.runList.runs) || []
@@ -196,30 +198,18 @@ const Runs: React.FC<RunsProps> = () => {
   const results = fuse.search(filterQuery)
 
   const handlePageChange = (e: any) => {
-    console.log(e);
     if (e.isIntersecting) {
-      setIntersecting(true);
-      if (next) {
-        console.log('inside if')
+      if (next.page !== null) {
         setPage(prevPage => prevPage + 1)
-        dispatch(listRuns(page, limit))
+        dispatch(listRuns(next.page, limit))
       }
     }
-    // debugger;
   }
-
-  // const options = {
-  //   onChange: handlePageChange,
-  //   // root: '#scrolling-container',
-  //   // rootMargin: '0% 0% -25%',
-  // }
 
   const runResults = filterQuery ? results.map(user => user.item) : runList;
   useEffect(() => {
     dispatch(listRuns(page, limit))
   }, [])
-  console.log(runs)
-  console.log(intersecting)
   return (
     <>
       {runResults ? (

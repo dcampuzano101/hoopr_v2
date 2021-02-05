@@ -88,21 +88,15 @@ const runListInitialState: RunListState = {
 export const runListReducer = (state: RunListState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_LIST_REQUEST:
-      debugger;
       return { 
         loading: true,
         runs: state.runs
-
       };
       case RUN_LIST_SUCCESS:
-        debugger;
-        console.log(state);
         let appendedResults: Run[] = [];
         if (state.runs) {
-          debugger;
-          console.log(state.runs)
           appendedResults = [...state.runs, ...action.payload.runs]
-    }
+         }
       return {
         loading: false,
         runs: appendedResults.length > 0 ? appendedResults : action.payload.runs,

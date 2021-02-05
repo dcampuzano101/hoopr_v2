@@ -2,7 +2,7 @@ import moment from "moment";
 const runs = [
   {
     name: "Wednesday Morning Run",
-    location: "The Post",
+    location: "1",
     date: moment("01-11-2021", "MM-DD-YYYY").format("LL"),
     price: 10,
     capacity: 15,
@@ -18,7 +18,7 @@ const runs = [
   },
   {
     name: "Saturday Night Run",
-    location: "Cooper Park",
+    location: "2",
     date: moment("01-11-2021", "MM-DD-YYYY").format("LL"),
     price: 10,
     capacity: 15,
@@ -34,7 +34,7 @@ const runs = [
   },
   {
     name: "Sunday Morning Run",
-    location: "Grand Street Basketball Courts",
+    location: "3",
     date: moment("01-11-2021", "MM-DD-YYYY").format("LL"),
     price: 10,
     capacity: 15,
@@ -50,7 +50,7 @@ const runs = [
   },
   {
     name: "Wednesday Night Run",
-    location: "The Post",
+    location: "4",
     date: moment("01-11-2021", "MM-DD-YYYY").format("LL"),
     price: 10,
     capacity: 15,
@@ -66,7 +66,7 @@ const runs = [
   },
   {
     name: "Wednesday Night Run",
-    location: "The Post",
+    location: "5",
     date: moment("01-11-2021", "MM-DD-YYYY").format("LL"),
     price: 10,
     capacity: 15,
@@ -82,7 +82,7 @@ const runs = [
   },
   {
     name: "Saturday Night Run",
-    location: "Cooper Park",
+    location: "6",
     date: moment("01-11-2021", "MM-DD-YYYY").format("LL"),
     price: 10,
     capacity: 15,
@@ -98,7 +98,7 @@ const runs = [
   },
   {
     name: "Sunday Morning Run",
-    location: "Grand Street Basketball Courts",
+    location: "7",
     date: moment("01-11-2021", "MM-DD-YYYY").format("LL"),
     price: 10,
     capacity: 15,
