@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Typography, Grid } from '@material-ui/core/'
-import { ReactNode } from 'react'
+import { useParams } from 'react-router-dom'
 
 
 const useStyles = makeStyles(({ palette }: Theme) => ({
@@ -18,16 +18,26 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         display: "flex",
     }
 }))
+
+export interface match<Params extends { [K in keyof Params]?: string } = {}> {
+    params: Params;
+    isExact: boolean;
+    path: string;
+    url: string;
+}
 interface ModalProps {
     Component: React.ElementType
+    // match: match
 }
 
 const Modal: React.FC<ModalProps> = ({ Component }) => {
     const classes = useStyles();
+    const params = useParams();
+
+    console.log(params)
     console.log('hiiiii modal')
     return (
         <div className={classes.modalOverlay}>
-
             <Typography variant='h2'>I AM ZE MODAL</Typography>
             <Component />
         </div>
