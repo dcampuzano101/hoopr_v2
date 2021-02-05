@@ -76,12 +76,22 @@ const paginatedResults = async (model, page, limit) => {
       page: page + 1,
       limit: limit
     }
+  } else {
+    results.next = {
+      page: null,
+      limit: null
+    }
   }
 
   if (startIndex > 0) {
     results.previous = {
       page: page - 1,
       limit: limit
+    }
+  } else {
+    results.previous = {
+      page: null,
+      limit: null
     }
   }
 
