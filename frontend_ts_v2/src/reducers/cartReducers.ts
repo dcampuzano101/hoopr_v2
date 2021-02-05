@@ -3,7 +3,7 @@ import {
     CART_REMOVE_ITEM,
     CART_RESET,
   } from "../constants/cartConstants";
-  import { Run } from '../actions/runActions'
+  // import { Run } from '../admin/components/Runs'
 
  import { Action } from 'redux'
  interface ReduxAction extends Action {

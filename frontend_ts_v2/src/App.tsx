@@ -54,7 +54,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     boxSizing: 'border-box'
   },
   mainWrapper: {
-    maxWidth: '1180px',
     boxSizing: 'border-box',
     height: '100%',
     overflow: 'hidden',

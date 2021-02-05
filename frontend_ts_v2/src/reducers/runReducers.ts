@@ -19,8 +19,25 @@ import {
   RUN_DETAILS_RESET,
 } from "../constants/runConstants";
 import { Action } from 'redux'
-import { Run } from '../actions/runActions'
+import { Run } from '../admin/components/Runs'
 
+// interface Run {
+//   _id: string
+//   name: string
+//   location: string
+//   date: any
+//   price: number
+//   capacity: number
+//   users: any
+//   waitList: any
+//   startTime: any
+//   endTime: any
+//   geoLocation: {
+//     address: string
+//     lat: number
+//     lng: number
+//   }
+// }
 
 interface ReduxAction extends Action {
   payload?: any
@@ -36,7 +53,7 @@ export interface RunState {
 export interface RunListState {
   runList: {
     loading?: boolean
-    runs?: {}
+    runs: Run[]
     next?: {
       page: number
       limit: number
@@ -57,7 +74,7 @@ const runListInitialState: RunListState = {
   runList: {
 
     loading: false,
-    runs: {},
+    runs: [],
     next: {
       page: 2,
       limit: 4

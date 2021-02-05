@@ -5,6 +5,8 @@ import {
   ShoppingCart
 } from '@material-ui/icons'
 // import userAvatar from '../../assets/images/user-avatar.png'
+import { Run } from './Runs'
+
 
 const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   runWrapper: {
@@ -107,18 +109,18 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   }
 }))
 
-interface Run {
-  name: string
-  location: string
-  date: any
-  price: number
-  capacity: number
-  users: []
-  waitList: []
-  startTime: any
-  endTime: any
-  geoLocation: {}
-}
+// interface Run {
+//   name: string
+//   location: string
+//   date: any
+//   price: number
+//   capacity: number
+//   users: []
+//   waitList: []
+//   startTime: any
+//   endTime: any
+//   geoLocation: {}
+// }
 
 interface RunCardProps {
   run: Run

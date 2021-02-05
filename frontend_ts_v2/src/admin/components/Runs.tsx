@@ -15,6 +15,7 @@ import { RunListState } from '../../reducers/runReducers'
 import { useDispatch, useSelector } from 'react-redux'
 import { listRuns } from '../../actions/runActions'
 import GoogleMap from './GoogleMap'
+import Fuse from 'fuse.js'
 
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
@@ -22,6 +23,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     height: '100%'
   },
   mainHeaderWrapper: {
+    padding: '0 calc(.625rem)',
     maxWidth: '100%',
     display: 'flex',
     justifyContent: 'space-between',
@@ -39,6 +41,17 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     [breakpoints.down('sm')]: {
       display: 'block',
       height: '100%'
+    },
+    '&::-webkit-scrollbar': {
+      width: '0.4em'
+    },
+    '&::-webkit-scrollbar-track': {
+      boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+      webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(0,0,0,.1)',
+      outline: '1px solid slategrey'
     },
     // height: '95%',
     marginTop: '1%',
@@ -130,12 +143,18 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     marginRight: 'calc(1.7rem)',
     fontSize: '2.5rem',
     opacity: '80%'
+  },
+  root: {
+    '&$focused': {
+      borderColor: 'orange'
+    }
   }
 }))
 
 interface RunsProps { }
 
-interface Run {
+export interface Run {
+  _id: string
   name: string
   location: string
   date: any
@@ -152,26 +171,37 @@ interface Run {
   }
 }
 
+
+
 const Runs: React.FC<RunsProps> = () => {
   const classes = useStyles()
+  const [filterQuery, setFilterQuery] = useState<string | any>('')
 
-  const [filterQuery, setFilterQuery] = useState<string | undefined>()
   const [page, setPage] = useState<any>(1)
   const [limit, setLimit] = useState<any>(4)
 
 
   const dispatch = useDispatch();
-  const runList = useSelector((state: RunListState) => state.runList.runs) as Run || {}
+  const runList = useSelector((state: RunListState) => state.runList.runs) || []
   // const [runs, setRuns] = useState<any | undefined | null>(runList)
+  const fuse = new Fuse(runList, {
+    keys: [
+      'location',
+      'date',
+      'price'
+    ]
+  })
 
+  const results = fuse.search(filterQuery)
+
+  const runResults = filterQuery ? results.map(user => user.item) : runList;
   useEffect(() => {
     dispatch(listRuns(page, limit))
   }, [dispatch, limit, page])
   console.log(runList)
   return (
     <>
-      {runList ? (
-
+      {runResults ? (
         <Grid container className={classes.mainInnerWrapper}>
           <Grid item xs={12} className={classes.mainHeaderWrapper}>
             <Typography variant="h1" className={classes.componentHeader}>
@@ -181,7 +211,8 @@ const Runs: React.FC<RunsProps> = () => {
           </Grid>
           <Grid item xs={12} className={classes.filterTools}>
             <TextField
-              id="outlined-basic"
+              // className={classes.textField}
+              // id="outlined-basic"
               label="Filter Users By Name"
               variant="outlined"
               style={{ height: '50px', width: '200px' }}
@@ -195,13 +226,15 @@ const Runs: React.FC<RunsProps> = () => {
               onChange={(e) => setFilterQuery(e.target.value)}
             />
             <Typography variant="h1" className={classes.filterResults}>
-              {Object.values(runList).length} Runs
+              {runResults.length} Runs
           </Typography>
           </Grid>
+
+
           <Grid container xs={12} className={classes.mainComponentWrapper}>
             <Grid item xs={12} spacing={3} className={classes.runsWrapper}>
               <div className={classes.cardWrapper}>
-                {Object.values(runList).map((run: Run, idx: number) => (
+                {runResults.map((run: Run, idx: number) => (
                   <Card elevation={3} key={idx} className={classes.run}>
                     <GoogleMap name={run.location} geoLocation={run.geoLocation} zoomLevel={15} />
                     <RunInfoCard run={run} />

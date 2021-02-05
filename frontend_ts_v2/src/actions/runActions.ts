@@ -18,17 +18,9 @@ import {
 } from '../constants/runConstants'
 import { Dispatch } from 'redux'
 import { UserLoginState } from '../reducers/userReducers'
+import { Run } from '../admin/components/Runs'
 
-export interface Run {
-    _id: string
-    name: string
-    location: string
-    date: string
-    price: string
-    capacity: string
-    startTime: string
-    endTime: string
-}
+
 
 export const listRuns = (page: number, limit: number) => async (dispatch: Dispatch) => {
     try {

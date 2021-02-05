@@ -5,24 +5,17 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 import GoogleMapReact from "google-map-react";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 
-const GOOGLE_MAP_API_KEY: string = 'INSERTAPIKEY'
+const GOOGLE_MAP_API_KEY: string = 'AIzaSyCHBNfg-xsj9eQI5X7H5v09vDrU9Q0oJxE'
 
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     mapWrapper: {
         width: '50%',
-        // borderRight: '1px solid black'
         [breakpoints.down('xs')]: {
-            // width: '300px',
-            // height: '300px'
             width: '100%',
             height: '50%'
 
         }
-    },
-    googleMap: {
-        /* width: 60%; */
-        // height: 30vh;
     },
     pin: {
         display: 'flex',
