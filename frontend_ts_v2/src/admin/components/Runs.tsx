@@ -102,7 +102,14 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
       // height: '300px'
       display: 'flex',
       flexDirection: 'column'
+    },
+    '&:first-child': {
+      marginTop: '0',
+    },
+    '&:last-child': {
+      marginTop: '0',
     }
+
   },
   paginationWrapper: {
     display: 'flex',
