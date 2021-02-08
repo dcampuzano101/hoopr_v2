@@ -6,9 +6,10 @@ import {
   Card,
   Typography,
   TextField,
-  InputAdornment
+  InputAdornment,
+  CircularProgress
 } from '@material-ui/core'
-import { Search, SportsBasketball } from '@material-ui/icons'
+import { Search, SportsBasketball, FiberManualRecord } from '@material-ui/icons'
 import RunInfoCard from './RunInfoCard'
 // import moment from 'moment'
 import { RunListState } from '../../reducers/runReducers'
@@ -145,6 +146,9 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     '&$focused': {
       borderColor: 'orange'
     }
+  },
+  circularProgress: {
+    color: palette.secondary.dark
   }
 }))
 
@@ -184,6 +188,7 @@ const Runs: React.FC<RunsProps> = () => {
     limit: null
   }
   const previous = useSelector((state: RunListState) => state.runList.previous) || {}
+  const loading = useSelector((state: RunListState) => state.runList.loading) || false
 
   const runList = useSelector((state: RunListState) => state.runList.runs) || []
   const fuse = new Fuse(runList, {
@@ -251,7 +256,12 @@ const Runs: React.FC<RunsProps> = () => {
                 ))}
               </div>
               <Observer onChange={handlePageChange}>
-                <div>target</div>
+
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+                  {loading ? <CircularProgress className={classes.circularProgress} /> : <FiberManualRecord color="disabled" />}
+                </div>
+
               </Observer>
             </Grid>
           </Grid>
