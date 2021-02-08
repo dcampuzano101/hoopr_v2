@@ -56,19 +56,19 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     [breakpoints.down('sm')]: {
       height: '85%',
       justifyContent: 'space-evenly'
-    },
+    }
   },
   show: {
     display: 'flex',
     borderRadius: '3px',
-    width: '102%',
+    width: '102%'
   },
   optionWrap: {
     padding: '2% 10%',
     '&:hover': {
       backgroundColor: palette.primary.dark,
       cursor: 'pointer'
-    },
+    }
     // '&:first-child': {
     //   marginTop: '5%'
     // },
@@ -87,7 +87,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     [breakpoints.up('sm')]: {
       width: '60%',
       margin: '0 auto'
-    },
+    }
   },
   dropdownStyle: {
     padding: 'calc(.625rem - 1px) calc(1rem - 1px)',
@@ -223,7 +223,12 @@ const Dropdown: React.FC<DropdownProps> = ({
                   to={option.path}
                   style={{ textDecoration: 'none', color: '#2c2f48' }}
                 >
-                  <Typography variant="body2" onClick={() => handleChange(false)}>{option.title}</Typography>
+                  <Typography
+                    variant="body2"
+                    onClick={() => handleChange(false)}
+                  >
+                    {option.title}
+                  </Typography>
                   <Typography variant="subtitle1">{option.subTitle}</Typography>
                 </Link>
               </div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
   Grid,
-  // Paper,
   Card,
   Typography,
   TextField,
@@ -24,8 +23,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     height: '7%',
-    // alignItems: 'center',
-    // padding: 'calc(.625rem)',
     [breakpoints.down('sm')]: {
       height: 'auto'
     }
@@ -105,7 +102,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'inline-flex',
     height: '95%',
     flexWrap: 'wrap',
-    // justifyContent: 'space-between',
     [breakpoints.down('sm')]: {
       justifyContent: 'center'
     }
@@ -126,15 +122,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   }
 }))
 
-// interface User {
-//   username: string
-//   email: string
-//   waitList: string[] | undefined
-//   isAdmin: boolean
-//   profilePhoto: string
-//   orders: {}
-// }
-
 export interface User {
   createdAt: string
   email: string
@@ -150,27 +137,27 @@ export interface User {
   map: any
 }
 
-interface UsersProps { }
+interface UsersProps {}
 
-const Users: React.FC<UsersProps> = ({ }) => {
+const Users: React.FC<UsersProps> = ({}) => {
   const [filterQuery, setFilterQuery] = useState<string | any>('')
   const [page, setPage] = useState<any>(2)
   const [limit, setLimit] = useState<any>(4)
   const classes = useStyles()
   const dispatch = useDispatch()
 
-  let userList = useSelector((state: UserListState) => state.userList.users) as User || {};
+  let userList =
+    (useSelector((state: UserListState) => state.userList.users) as User) || {}
 
   const fuse = new Fuse(Object.values(userList), {
-    keys: [
-      'username'
-    ]
+    keys: ['username']
   })
 
   const results = fuse.search(filterQuery)
 
-  const userResults = filterQuery ? results.map(user => user.item) : Object.values(userList);
-
+  const userResults = filterQuery
+    ? results.map((user) => user.item)
+    : Object.values(userList)
 
   useEffect(() => {
     dispatch(listUsers(page, limit))
@@ -204,7 +191,12 @@ const Users: React.FC<UsersProps> = ({ }) => {
                 onChange={(e) => setFilterQuery(e.target.value)}
               />
               <Typography variant="h1" className={classes.filterResults}>
-                {userList ? (Object.values(userList).length ? Object.values(userList).length : 0) : null} Results
+                {userList
+                  ? Object.values(userList).length
+                    ? Object.values(userList).length
+                    : 0
+                  : null}{' '}
+                Results
               </Typography>
             </Grid>
             <Grid item xs={12} spacing={3} className={classes.usersWrapper}>

@@ -2,16 +2,13 @@ import React from 'react'
 import { Grid, useMediaQuery } from '@material-ui/core'
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-// import Header from './components/Header'
-// import HomeScreen from './screens/HomeScreen'
-// import BlogScreen from './screens/BlogScreen'
+
 import Runs from './admin/components/Runs'
 import Orders from './admin/components/Orders'
 import Users from './admin/components/Users'
 import Drawer from './admin/components/Drawer'
 import Modal from './admin/components/Modal'
 import RunScreen from './admin/components/RunScreen'
-// import MainDashboard from './admin/components/MainDashboard'
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   root: {
@@ -79,7 +76,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   }
 }))
 
-interface AppProps { }
+interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
   const theme = useTheme()

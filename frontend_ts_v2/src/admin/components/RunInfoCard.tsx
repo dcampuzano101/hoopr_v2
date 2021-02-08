@@ -1,18 +1,19 @@
 import React from 'react'
-import { Paper, Card, Grid, Avatar, Typography, IconButton } from '@material-ui/core'
-import { makeStyles, Theme } from '@material-ui/core/styles'
 import {
-  ShoppingCart
-} from '@material-ui/icons'
-// import userAvatar from '../../assets/images/user-avatar.png'
+  Paper,
+  Card,
+  Grid,
+  Avatar,
+  Typography,
+  IconButton
+} from '@material-ui/core'
+import { makeStyles, Theme } from '@material-ui/core/styles'
+import { ShoppingCart } from '@material-ui/icons'
 import { Run } from './Runs'
-
 
 const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   runWrapper: {
     display: 'flex',
-    // flexDirection: 'column',
-    // boxSizing: 'border-box',
     position: 'relative',
     justifyContent: 'center',
     width: '50%',
@@ -23,8 +24,7 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     }
   },
   runInfoWrapper: {
-    // height: '80%',
-    display: "flex",
+    display: 'flex',
     flexDirection: 'column',
     width: '100%',
     justifyContent: 'center',
@@ -33,8 +33,6 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
       height: 'auto',
       flexDirection: 'row'
     }
-
-
   },
   infoTag: {
     fontSize: '1.3rem',
@@ -97,7 +95,7 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   buttonText: {
     fontSize: '1rem',
     [breakpoints.down('xs')]: {
-      fontSize: '.8rem',
+      fontSize: '.8rem'
     }
   },
   infoLineWrapper: {
@@ -109,19 +107,6 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   }
 }))
 
-// interface Run {
-//   name: string
-//   location: string
-//   date: any
-//   price: number
-//   capacity: number
-//   users: []
-//   waitList: []
-//   startTime: any
-//   endTime: any
-//   geoLocation: {}
-// }
-
 interface RunCardProps {
   run: Run
 }
@@ -132,49 +117,61 @@ const RunInfoCard: React.FC<RunCardProps> = ({ run }) => {
     <Grid container className={classes.runWrapper}>
       <Grid container className={classes.runInfoWrapper}>
         <Grid item xs={12} md={12} className={classes.infoLineWrapper}>
-
           <div className={classes.infoLine}>
             <Grid item xs={4} md={3} className={classes.infoWrap}>
-              <Typography variant="h1" className={classes.infoTag}  >location:</Typography>
+              <Typography variant="h1" className={classes.infoTag}>
+                location:
+              </Typography>
             </Grid>
             <Grid item xs={8} md={9} className={classes.infoWrap}>
-              <Typography variant="h3" className={classes.infoDetail}>{run.location}</Typography>
+              <Typography variant="h3" className={classes.infoDetail}>
+                {run.location}
+              </Typography>
             </Grid>
           </div>
           <div className={classes.infoLine}>
-
             <Grid item xs={4} md={3} className={classes.infoWrap}>
-              <Typography variant="h1" className={classes.infoTag}  >date:</Typography>
+              <Typography variant="h1" className={classes.infoTag}>
+                date:
+              </Typography>
             </Grid>
             <Grid item xs={8} md={9} className={classes.infoWrap}>
-              <Typography variant="h3" className={classes.infoDetail}>{run.date}</Typography>
+              <Typography variant="h3" className={classes.infoDetail}>
+                {run.date}
+              </Typography>
             </Grid>
           </div>
           <div className={classes.infoLine}>
-
             <Grid item xs={4} md={3} className={classes.infoWrap}>
-              <Typography variant="h1" className={classes.infoTag}  >price:</Typography>
+              <Typography variant="h1" className={classes.infoTag}>
+                price:
+              </Typography>
             </Grid>
             <Grid item xs={8} md={9} className={classes.infoWrap}>
-              <Typography variant="h3" className={classes.infoDetail}>${run.price}</Typography>
+              <Typography variant="h3" className={classes.infoDetail}>
+                ${run.price}
+              </Typography>
             </Grid>
           </div>
           <div className={classes.infoLine}>
-
             <Grid item xs={4} md={3} className={classes.infoWrap}>
-              <Typography variant="h1" className={classes.infoTag}  >spots:</Typography>
+              <Typography variant="h1" className={classes.infoTag}>
+                spots:
+              </Typography>
             </Grid>
             <Grid item xs={8} md={9} className={classes.infoWrap}>
-              <Typography variant="h3" className={classes.infoDetail}>{run.users.length}/{run.capacity}</Typography>
+              <Typography variant="h3" className={classes.infoDetail}>
+                {run.users.length}/{run.capacity}
+              </Typography>
             </Grid>
           </div>
         </Grid>
         <Grid item xs={7} md={12} className={classes.buttonWrapper}>
-          <IconButton
-            className={classes.button}
-          >
+          <IconButton className={classes.button}>
             <ShoppingCart fontSize="small" />
-            <Typography variant="h3" className={classes.buttonText}>ADD TO CART</Typography>
+            <Typography variant="h3" className={classes.buttonText}>
+              ADD TO CART
+            </Typography>
           </IconButton>
         </Grid>
       </Grid>
