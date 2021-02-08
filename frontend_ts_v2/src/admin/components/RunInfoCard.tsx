@@ -10,6 +10,7 @@ import {
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { ShoppingCart } from '@material-ui/icons'
 import { Run } from './Runs'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   runWrapper: {
@@ -113,8 +114,11 @@ interface RunCardProps {
 
 const RunInfoCard: React.FC<RunCardProps> = ({ run }) => {
   const classes = useStyles()
+  const history = useHistory()
   return (
-    <Grid container className={classes.runWrapper}>
+    <Grid container className={classes.runWrapper} onClick={() => {
+      history.push(`/admin/runs/${run._id}/`);
+    }}>
       <Grid container className={classes.runInfoWrapper}>
         <Grid item xs={12} md={12} className={classes.infoLineWrapper}>
           <div className={classes.infoLine}>

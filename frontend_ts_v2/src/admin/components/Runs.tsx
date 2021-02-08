@@ -88,7 +88,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     height: '300px',
     width: '100%',
     backgroundColor: palette.primary.light,
-    opacity: '95%',
+    opacity: '90%',
     margin: 'calc(1.2rem) 0',
     [breakpoints.down('sm')]: {
       margin: '3%'
@@ -102,6 +102,12 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     },
     '&:last-child': {
       marginTop: '0',
+    },
+    '&:hover': {
+      cursor: 'pointer',
+      transition: 'top .3s ease',
+      top: '-.5rem',
+      opacity: '100%'
     }
 
   },
@@ -109,16 +115,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     maxWidth: '100%'
-  },
-  userCardContainer: {
-    position: 'relative',
-    display: 'flex',
-    top: '0',
-    '&:hover': {
-      cursor: 'pointer',
-      transition: 'top .3s ease',
-      top: '-.5rem'
-    }
   },
   cardWrapper: {
     display: 'inline-flex',
@@ -180,8 +176,6 @@ const Runs: React.FC<RunsProps> = () => {
   const [runs, setRuns] = useState<Run[]>([])
   const [page, setPage] = useState<number>(1)
   const [limit, setLimit] = useState<any>(3)
-
-
   const dispatch = useDispatch();
   const next = useSelector((state: RunListState) => state.runList.next) || {
     page: null,
