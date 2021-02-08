@@ -51,7 +51,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     },
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: 'rgba(0,0,0,.1)',
-      outline: '1px solid slategrey'
+      outline: '1px solid rgba(10, 10, 10, 0.3)'
     },
     marginTop: '1%',
     minWidth: '100%'
@@ -90,6 +90,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     backgroundColor: palette.primary.light,
     opacity: '90%',
     margin: 'calc(1.2rem) 0',
+    border: '1px solid rgba(10, 10, 10, 0.3)',
     [breakpoints.down('sm')]: {
       margin: '3%'
     },
