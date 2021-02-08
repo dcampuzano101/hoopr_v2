@@ -72,7 +72,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   },
   verticalDivider: {
     height: '100%',
-    border: '1px solid rgba(0, 0, 0, 0.8)'
+    border: '1px solid rgba(0, 0, 0, 0.3)'
   }
 }))
 

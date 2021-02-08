@@ -21,24 +21,6 @@ import {
 import { Action } from 'redux'
 import { Run } from '../admin/components/Runs'
 
-// interface Run {
-//   _id: string
-//   name: string
-//   location: string
-//   date: any
-//   price: number
-//   capacity: number
-//   users: any
-//   waitList: any
-//   startTime: any
-//   endTime: any
-//   geoLocation: {
-//     address: string
-//     lat: number
-//     lng: number
-//   }
-// }
-
 interface ReduxAction extends Action {
   payload?: any
 }
@@ -94,12 +76,22 @@ export const runListReducer = (state: RunListState, action: ReduxAction) => {
       };
       case RUN_LIST_SUCCESS:
         let appendedResults: Run[] = [];
+        let filteredResults: Run[] = [];
         if (state.runs) {
           appendedResults = [...state.runs, ...action.payload.runs]
+          debugger;
+          //ask Mike
+          let runs: any = {};
+          appendedResults.forEach((run) => {
+            if (!runs[run._id]) {
+              filteredResults.push(run);
+            }
+            runs[run._id] = true;
+          })
          }
       return {
         loading: false,
-        runs: appendedResults.length > 0 ? appendedResults : action.payload.runs,
+        runs: filteredResults.length > 0 ? filteredResults : action.payload.runs,
         next: action.payload.next ? action.payload.next : null,
         previous: action.payload.previous ? action.payload.previous : null
       }
