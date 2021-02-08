@@ -79,7 +79,6 @@ export const runListReducer = (state: RunListState, action: ReduxAction) => {
         let filteredResults: Run[] = [];
         if (state.runs) {
           appendedResults = [...state.runs, ...action.payload.runs]
-          debugger;
           //ask Mike
           let runs: any = {};
           appendedResults.forEach((run) => {

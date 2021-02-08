@@ -13,7 +13,6 @@ interface RunScreenProps {
 
 const RunScreen: React.FC<RunScreenProps> = () => {
     const classes = useStyles();
-    console.log('hiiiii runscreen')
     return (
         <>
             <Typography variant="h2" className={classes.heading} >RUNSCREEN</Typography>

@@ -127,7 +127,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     }
   },
   filterResults: {
-    marginRight: 'calc(1.7rem)',
     fontSize: '1.5rem',
     letterSpacing: '-1px',
     fontWeight: 400,
