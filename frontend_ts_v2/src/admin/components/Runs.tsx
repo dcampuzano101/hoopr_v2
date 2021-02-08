@@ -138,7 +138,6 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     }
   },
   basketballIcon: {
-    marginRight: 'calc(1.7rem)',
     fontSize: '2.5rem',
     opacity: '80%'
   },

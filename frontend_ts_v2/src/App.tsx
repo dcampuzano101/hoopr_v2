@@ -56,7 +56,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     boxSizing: 'border-box',
     height: '100%',
     overflow: 'hidden',
-    padding: 'calc(.625rem - -3px) calc(.625rem - -25px)',
+    padding: 'calc(.625rem - 3px) calc(.625rem - -25px)',
     [breakpoints.down('sm')]: {
       maxWidth: '100%',
       display: 'flex',
@@ -76,7 +76,7 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   }
 }))
 
-interface AppProps {}
+interface AppProps { }
 
 const App: React.FC<AppProps> = () => {
   const theme = useTheme()
