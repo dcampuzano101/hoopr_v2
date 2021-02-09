@@ -20,6 +20,10 @@ import {
 } from './reducers/runReducers'
 
 import {
+  modalReducer
+} from './reducers/modalReducer'
+
+import {
   orderCreateReducer,
   orderListMyReducer,
   orderDetailsReducer,
@@ -51,8 +55,8 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderListMy: orderListMyReducer,
   orderDetails: orderDetailsReducer,
-  cart: cartReducer
-
+  cart: cartReducer,
+  modal: modalReducer
 })
 
 const composeEnhancers = composeWithDevTools({

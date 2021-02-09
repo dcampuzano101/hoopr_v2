@@ -14,7 +14,11 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     backgroundColor: 'rgba(10, 10, 10, 0.6)',
     justifyContent: 'center',
     alignItems: 'center',
-    display: 'flex'
+    display: 'flex',
+    padding: 'calc(.625rem - -10px)'
+  },
+  modalComponentWrapper: {
+
   }
 }))
 
@@ -35,10 +39,16 @@ const Modal: React.FC<ModalProps> = ({ Component }) => {
   console.log(params)
   console.log('hiiiii modal')
   return (
-    <div className={classes.modalOverlay}>
-      <Typography variant="h2">I AM ZE MODAL</Typography>
-      <Component />
-    </div>
+    <Grid container className={classes.modalOverlay}>
+      <Grid item xs={12} md={2}>
+
+      </Grid>
+      <Grid item xs={12} md={10} className={classes.modalComponentWrapper}>
+
+        <Typography variant="h2">I AM ZE MODAL</Typography>
+        <Component />
+      </Grid>
+    </Grid>
   )
 }
 

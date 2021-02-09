@@ -11,6 +11,9 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 import { ShoppingCart } from '@material-ui/icons'
 import { Run } from './Runs'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { openModal } from '../../actions/modalActions'
+// import RunScreen from './RunScreen'
 
 const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   runWrapper: {
@@ -115,8 +118,10 @@ interface RunCardProps {
 const RunInfoCard: React.FC<RunCardProps> = ({ run }) => {
   const classes = useStyles()
   const history = useHistory()
+  const dispatch = useDispatch();
   return (
     <Grid container className={classes.runWrapper} onClick={() => {
+      dispatch(openModal('RunScreen'))
       history.push(`/admin/runs/${run._id}/`);
     }}>
       <Grid container className={classes.runInfoWrapper}>

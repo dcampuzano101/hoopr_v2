@@ -2,13 +2,14 @@ import React from 'react'
 import { Grid, useMediaQuery } from '@material-ui/core'
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
+import { useSelector } from 'react-redux'
 import Runs from './admin/components/Runs'
 import Orders from './admin/components/Orders'
 import Users from './admin/components/Users'
 import Drawer from './admin/components/Drawer'
 import Modal from './admin/components/Modal'
 import RunScreen from './admin/components/RunScreen'
+import { ModalState } from './reducers/modalReducer'
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   root: {
@@ -82,7 +83,12 @@ const App: React.FC<AppProps> = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
+  const isActive = useSelector((state: ModalState) => state.modal.isActive) || false
+  // const componentName = useSelector((state: ModalState) => state.componentName) || null
+
+
   const classes = useStyles()
+  console.log(isActive)
   return (
     <Router>
       <main className={classes.body}>
@@ -94,17 +100,25 @@ const App: React.FC<AppProps> = () => {
 
           <Grid item xs={12} md={10} className={classes.mainWrapper}>
             <Switch>
-              <Route path="/admin/runs" exact component={Runs} />
+              <Route path="/admin/runs" component={Runs} />
               <Route path="/admin/orders" component={Orders} />
               <Route path="/admin/users" exact component={Users} />
-              <Route
-                path="/admin/runs/:id?"
-                render={(props) => <Modal Component={RunScreen} />}
-                exact
-              />
             </Switch>
           </Grid>
         </Grid>
+
+        {
+          isActive ? (
+            <Route
+              exact
+              // strict
+              path="/admin/runs/:id?"
+              render={(props) => <Modal Component={RunScreen} />}
+            />
+          ) : (
+              null
+            )
+        }
       </main>
     </Router>
   )
