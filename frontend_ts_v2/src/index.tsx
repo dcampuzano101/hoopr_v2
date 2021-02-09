@@ -9,12 +9,20 @@ import theme from './styles/theme'
 import 'typeface-rubik'
 import 'typeface-karla'
 import 'typeface-roboto'
+import { BrowserRouter as Router } from 'react-router-dom'
+// import { useLocation } from 'react-router-dom'
+// import { ModalLocation } from './App'
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
+// const location = useLocation() as ModalLocation
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <App />
+        <Router>
+
+          <App />
+        </Router>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,

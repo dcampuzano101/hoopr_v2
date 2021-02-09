@@ -118,11 +118,11 @@ interface RunCardProps {
 const RunInfoCard: React.FC<RunCardProps> = ({ run }) => {
   const classes = useStyles()
   const history = useHistory()
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   return (
     <Grid container className={classes.runWrapper} onClick={() => {
-      dispatch(openModal('RunScreen'))
-      history.push(`/admin/runs/${run._id}/`);
+      // dispatch(openModal('RunScreen'))
+      history.push(`/admin/runs/${run._id}/`, { modal: true })
     }}>
       <Grid container className={classes.runInfoWrapper}>
         <Grid item xs={12} md={12} className={classes.infoLineWrapper}>

@@ -29,15 +29,13 @@ export interface match<Params extends { [K in keyof Params]?: string } = {}> {
   url: string
 }
 interface ModalProps {
-  Component: React.ElementType
+  // Component: React.ElementType
+  isModal: boolean
 }
 
-const Modal: React.FC<ModalProps> = ({ Component }) => {
+const Modal: React.FC<ModalProps> = () => {
   const classes = useStyles()
   const params = useParams()
-
-  console.log(params)
-  console.log('hiiiii modal')
   return (
     <Grid container className={classes.modalOverlay}>
       <Grid item xs={12} md={2}>
@@ -46,7 +44,6 @@ const Modal: React.FC<ModalProps> = ({ Component }) => {
       <Grid item xs={12} md={10} className={classes.modalComponentWrapper}>
 
         <Typography variant="h2">I AM ZE MODAL</Typography>
-        <Component />
       </Grid>
     </Grid>
   )

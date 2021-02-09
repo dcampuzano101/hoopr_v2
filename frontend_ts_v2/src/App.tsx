@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Grid, useMediaQuery } from '@material-ui/core'
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Route, Switch, useLocation } from 'react-router-dom'
+// import { useSelector } from 'react-redux'
 import Runs from './admin/components/Runs'
 import Orders from './admin/components/Orders'
 import Users from './admin/components/Users'
 import Drawer from './admin/components/Drawer'
 import Modal from './admin/components/Modal'
-import RunScreen from './admin/components/RunScreen'
-import { ModalState } from './reducers/modalReducer'
+// import RunScreen from './admin/components/RunScreen'
+// import { ModalState } from './reducers/modalReducer'
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   root: {
@@ -77,50 +77,71 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
   }
 }))
 
-interface AppProps { }
+
+export interface ModalLocation extends Location {
+  modal: boolean
+}
+interface AppProps {
+}
+
 
 const App: React.FC<AppProps> = () => {
+
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
-  const isActive = useSelector((state: ModalState) => state.modal.isActive) || false
+  // const isActive = useSelector((state: ModalState) => state.modal.isActive) || false
   // const componentName = useSelector((state: ModalState) => state.componentName) || null
 
+  const location = useLocation<ModalLocation>();
+  let prevLocation = useRef(location);
+  // let prevLocation = location;
+  React.useEffect(() => {
+    console.log(location.state)
+    if (!(location.state && location.state.modal)) {
+      prevLocation.current = location as any;
+    }
+  }, [location])
+
+  const isModal = (
+    location.state &&
+    location.state.modal as boolean
+  );
 
   const classes = useStyles()
-  console.log(isActive)
+  console.log(isModal)
+  console.log(prevLocation.current)
   return (
-    <Router>
-      <main className={classes.body}>
-        <Grid container spacing={0} className={classes.adminDashboardWrapper}>
-          <Grid item xs={12} md={2} className={classes.drawerPanelWrapper}>
-            <Drawer />
-            {!isMobile ? <div className={classes.verticalDivider}></div> : null}
-          </Grid>
-
-          <Grid item xs={12} md={10} className={classes.mainWrapper}>
-            <Switch>
-              <Route path="/admin/runs" component={Runs} />
-              <Route path="/admin/orders" component={Orders} />
-              <Route path="/admin/users" exact component={Users} />
-            </Switch>
-          </Grid>
+    <main className={classes.body}>
+      <Grid container spacing={0} className={classes.adminDashboardWrapper}>
+        <Grid item xs={12} md={2} className={classes.drawerPanelWrapper}>
+          <Drawer />
+          {!isMobile ? <div className={classes.verticalDivider}></div> : null}
         </Grid>
-
-        {
-          isActive ? (
+        <Grid item xs={12} md={10} className={classes.mainWrapper}>
+          <Switch location={isModal ? prevLocation.current : location}>
+            <Route path="/admin/runs" component={Runs} />
+            <Route path="/admin/orders" component={Orders} />
+            <Route path="/admin/users" exact component={Users} />
             <Route
               exact
-              // strict
-              path="/admin/runs/:id?"
-              render={(props) => <Modal Component={RunScreen} />}
-            />
-          ) : (
-              null
-            )
-        }
-      </main>
-    </Router>
+              path="/admin/runs/:id"
+            ><Modal isModal={isModal} /> </Route>
+          </Switch>
+          {
+            isModal ? (
+              <Route
+                exact
+                path="/admin/runs/:id"
+              ><Modal isModal={isModal} /></Route>
+            ) : (
+                null
+              )
+          }
+        </Grid>
+      </Grid>
+
+    </main>
   )
 }
 
