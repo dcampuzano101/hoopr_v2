@@ -244,7 +244,7 @@ const Runs: React.FC<RunsProps> = () => {
               <div className={classes.cardWrapper}>
                 {runResults.map((run: Run, idx: number) => (
                   <Card elevation={3} key={idx} className={classes.run}>
-                    <GoogleMap name={run.location} geoLocation={run.geoLocation} zoomLevel={15} />
+                    <GoogleMap name={run.location} geoLocation={run.geoLocation} />
                     <RunInfoCard run={run} />
                   </Card>
                 ))}

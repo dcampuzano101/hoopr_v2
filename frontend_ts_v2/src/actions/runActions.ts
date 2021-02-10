@@ -42,23 +42,24 @@ export const listRuns = (page: number, limit: number) => async (dispatch: Dispat
     }
 }
 
-export const getRunDetails = (id: number) => async (dispatch: Dispatch, getState: () => UserLoginState) => {
+export const getRunDetails = (id: string) => async (dispatch: Dispatch, getState: () => UserLoginState) => {
     try {
         dispatch({
             type: RUN_DETAILS_REQUEST
         })
 
-        const {
-            userLogin: { userInfo },
-        } = getState()
+        // PUBLIC ROUTE!!!
+        // const {
+        //     userLogin: { userInfo },
+        // } = getState()
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        }
+        // const config = {
+        //     headers: {
+        //         Authorization: `Bearer ${userInfo.token}`
+        //     }
+        // }
 
-        const { data } = await axios.get(`/api/users/${id}`, config)
+        const { data } = await axios.get(`/api/runs/${id}`)
 
         dispatch({
             type: RUN_DETAILS_SUCCESS,

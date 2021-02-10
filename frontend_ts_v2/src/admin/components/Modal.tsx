@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import { Typography, Grid } from '@material-ui/core/'
+import { Typography, Grid, Card } from '@material-ui/core/'
 import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles(({ palette }: Theme) => ({
@@ -18,7 +18,28 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     padding: 'calc(.625rem - -10px)'
   },
   modalComponentWrapper: {
-
+    height: '100%',
+    padding: 'calc(.625rem - 3px) calc(.625rem - -25px)',
+    overflow: 'hidden',
+    boxSizing: 'border-box',
+    border: '1px solid red',
+    display: 'flex',
+    alignItems: 'center'
+  },
+  drawerWrapper: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    boxSizing: 'border-box',
+    border: '1px solid black'
+  },
+  mainComponent: {
+    height: '80%',
+    width: '100%',
+    border: '1px solid green',
+    backgroundColor: palette.primary.main,
+    display: 'flex',
+    alignContent: 'center'
   }
 }))
 
@@ -29,21 +50,22 @@ export interface match<Params extends { [K in keyof Params]?: string } = {}> {
   url: string
 }
 interface ModalProps {
-  // Component: React.ElementType
+  Component: React.ElementType
   isModal: boolean
 }
 
-const Modal: React.FC<ModalProps> = () => {
+const Modal: React.FC<ModalProps> = ({ Component, isModal }) => {
   const classes = useStyles()
   const params = useParams()
   return (
     <Grid container className={classes.modalOverlay}>
-      <Grid item xs={12} md={2}>
+      <Grid item xs={12} md={2} className={classes.drawerWrapper}>
 
       </Grid>
       <Grid item xs={12} md={10} className={classes.modalComponentWrapper}>
-
-        <Typography variant="h2">I AM ZE MODAL</Typography>
+        <Card className={classes.mainComponent}>
+          <Component params={params} />
+        </Card>
       </Grid>
     </Grid>
   )

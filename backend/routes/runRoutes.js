@@ -15,7 +15,7 @@ router.route("/create").post(protect, admin, createRun);
 
 router
   .route("/:id")
-  .get(protect, getRunById)
+  .get(getRunById)
   .put(protect, updateRun)
   .delete(protect, admin, deleteRun);
 

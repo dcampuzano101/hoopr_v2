@@ -8,7 +8,7 @@ import Orders from './admin/components/Orders'
 import Users from './admin/components/Users'
 import Drawer from './admin/components/Drawer'
 import Modal from './admin/components/Modal'
-// import RunScreen from './admin/components/RunScreen'
+import RunScreen from './admin/components/RunScreen'
 // import { ModalState } from './reducers/modalReducer'
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
@@ -95,7 +95,7 @@ const App: React.FC<AppProps> = () => {
 
   const location = useLocation<ModalLocation>();
   let prevLocation = useRef(location);
-  // let prevLocation = location;
+
   React.useEffect(() => {
     console.log(location.state)
     if (!(location.state && location.state.modal)) {
@@ -126,14 +126,14 @@ const App: React.FC<AppProps> = () => {
             <Route
               exact
               path="/admin/runs/:id"
-            ><Modal isModal={isModal} /> </Route>
+            ><Modal isModal={isModal} Component={RunScreen} /> </Route>
           </Switch>
           {
             isModal ? (
               <Route
                 exact
                 path="/admin/runs/:id"
-              ><Modal isModal={isModal} /></Route>
+              ><Modal isModal={isModal} Component={RunScreen} /></Route>
             ) : (
                 null
               )

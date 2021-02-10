@@ -5,7 +5,8 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 import GoogleMapReact from "google-map-react";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 
-const GOOGLE_MAP_API_KEY: string = '-'
+const GOOGLE_MAP_API_KEY: string = ''
+
 
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     mapWrapper: {
@@ -37,7 +38,7 @@ interface GoogleMapProps {
         lat: number
         lng: number
     }
-    zoomLevel: number
+    // zoomLevel: number
     name: string
 }
 
@@ -60,7 +61,7 @@ const LocationPin: React.FC<LocationPinProps> = ({ pinText }) => {
     )
 }
 
-const GoogleMap: React.FC<GoogleMapProps> = ({ geoLocation, zoomLevel, name }) => {
+const GoogleMap: React.FC<GoogleMapProps> = ({ geoLocation, name }) => {
     const classes = useStyles();
     return (
         <div className={classes.mapWrapper}>

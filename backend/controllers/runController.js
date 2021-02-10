@@ -147,7 +147,7 @@ const listRuns = asyncHandler(async (req, res) => {
 // @access: private
 const getRunById = asyncHandler(async (req, res) => {
   const run = await Run.findById(req.params.id);
-
+  console.log('helloRUn')
   if (run) {
     res.json(run);
   } else {
