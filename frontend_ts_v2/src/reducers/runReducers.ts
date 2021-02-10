@@ -48,6 +48,15 @@ export interface RunListState {
   runs: Run[]
 }
 
+export interface RunDetailsState {
+  runDetails: {
+    run?: Run
+    success?: boolean
+    loading?: boolean
+    error?: string
+  }
+}
+
 const runInitialState: RunState = {
   loading: false,
   run: {}
@@ -63,6 +72,13 @@ const runListInitialState: RunListState = {
     }
   },
   runs: []
+}
+
+const runDetailsInitialState: RunDetailsState = {
+  runDetails: {
+    // run: {},
+    loading: false
+  }
 }
 
 
@@ -102,7 +118,7 @@ export const runListReducer = (state: RunListState, action: ReduxAction) => {
 };
 
 export const runDetailsReducer = (
-  state = runInitialState,
+  state: RunDetailsState,
   action: ReduxAction
 ) => {
   switch (action.type) {
@@ -124,7 +140,7 @@ export const runDetailsReducer = (
     case RUN_DETAILS_RESET:
       return {};
     default:
-      return state;
+      return runDetailsInitialState;
   }
 };
 

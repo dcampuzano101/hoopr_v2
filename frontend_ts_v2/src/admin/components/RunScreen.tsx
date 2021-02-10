@@ -4,11 +4,21 @@ import { Typography, Grid } from '@material-ui/core/'
 import GoogleMap from './GoogleMap'
 import { getRunDetails } from '../../actions/runActions'
 import { useSelector, useDispatch } from 'react-redux'
-import { RunState } from '../../reducers/runReducers'
+import { RunDetailsState } from '../../reducers/runReducers'
 import { Run } from '../components/Runs'
 const useStyles = makeStyles(({ palette }: Theme) => ({
     heading: {
         color: 'red',
+    },
+    runScreenWrapper: {
+        height: '100%',
+        border: '1px solid green',
+        boxSizing: 'border-box'
+    },
+    mapWrapper: {
+        height: '50%',
+        border: '1px solid black',
+        boxSizing: 'border-box'
     }
 }))
 interface RunScreenProps {
@@ -23,21 +33,24 @@ const RunScreen: React.FC<RunScreenProps> = ({ params }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const run = useSelector((state: RunState) => state.run) || {}
+    const run = useSelector((state: RunDetailsState) => state.runDetails) as Run || {} as Run
 
     useEffect(() => {
         dispatch(getRunDetails(params.id))
-    })
-    debugger;
-    console.log(params)
+    }, [])
+    console.log(run)
     return (
         <>
-            <Grid container>
-                <Grid item xs={12} md={6}>
-                    {/* <GoogleMap geoLocation={run?.geoLocation} name={run?.name} /> */}
-                </Grid>
+            {run ? (
+                <Grid container className={classes.runScreenWrapper}>
+                    <Grid item xs={12} className={classes.mapWrapper}>
+                        {/* <GoogleMap geoLocation={run?.geoLocation} name={run?.name} /> */}
+                    </Grid>
 
-            </Grid>
+                </Grid>
+            ) : (
+                    null
+                )}
         </>
     );
 }

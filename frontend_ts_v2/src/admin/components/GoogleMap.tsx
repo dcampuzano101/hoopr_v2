@@ -7,7 +7,6 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 const GOOGLE_MAP_API_KEY: string = ''
 
-
 const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
     mapWrapper: {
         width: '50%',
