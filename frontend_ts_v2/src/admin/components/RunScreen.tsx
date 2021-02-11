@@ -42,11 +42,91 @@ const RunScreen: React.FC<RunScreenProps> = ({ params }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+
+    // const buttonToDisplay = (run, userInfo) => {
+    //     if (userInfo !== null) {
+    //       if (
+    //         run.users.some((id) => id === userInfo._id) ||
+    //         run.waitList.some((id) => id === userInfo._id)
+    //       ) {
+    //         return (
+    //           <Button
+    //             type="submit"
+    //             variant="contained"
+    //             color="primary"
+    //             className={classes.submit}
+    //             onClick={() => setDeleteAlert(userInfo._id)}
+    //           >
+    //             Cancel
+    //           </Button>
+    //         );
+    //       } else if (
+    //         run.capacity === run.users.length &&
+    //         run.waitList.length === 3
+    //       ) {
+    //         return (
+    //           <Button
+    //             type="submit"
+    //             variant="contained"
+    //             color="primary"
+    //             disabled="true"
+    //             className={classes.submit}
+    //           >
+    //             FULL!
+    //           </Button>
+    //         );
+    //       } else if (
+    //         run.capacity === run.users.length &&
+    //         run.waitList.length !== 3
+    //       ) {
+    //         return (
+    //           <Button
+    //             type="submit"
+    //             variant="contained"
+    //             color="primary"
+    //             className={classes.submit}
+    //             onClick={() => waitListHandler(run, userInfo)}
+    //             disabled={disableButton(run, userInfo)}
+    //           >
+    //             JOIN WAITLIST
+    //           </Button>
+    //         );
+    //       } else {
+    //         return (
+    //           <Button
+    //             type="submit"
+    //             variant="contained"
+    //             color="primary"
+    //             className={classes.submit}
+    //             onClick={() => addToCartHandler(run._id, userInfo)}
+    //             disabled={disableButton(run, userInfo)}
+    //           >
+    //             ADD TO CART
+    //           </Button>
+    //         );
+    //       }
+    //     } else {
+    //       return (
+    //         <Button
+    //           type="submit"
+    //           variant="contained"
+    //           color="primary"
+    //           className={classes.submit}
+    //           onClick={() => addToCartHandler(run._id, userInfo)}
+    //           disabled={disableButton(run, userInfo)}
+    //         >
+    //           ADD TO CART
+    //         </Button>
+    //       );
+    //     }
+    //   };
+
+
     const run = useSelector((state: RunDetailsState) => state.runDetails.run) as Run || {} as Run
 
     useEffect(() => {
         dispatch(getRunDetails(params.id))
-    }, [])
+    }, [dispatch, params.id])
     return (
         <>
             {run?.geoLocation && (

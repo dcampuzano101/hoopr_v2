@@ -58,8 +58,10 @@ const Modal: React.FC<ModalProps> = ({ Component, isModal }) => {
   const classes = useStyles()
   const params = useParams()
   const history = useHistory()
-  const handleClickOutside = () => {
+  const handleClickOutside = (e: React.MouseEvent) => {
+    console.log(e)
     history.goBack()
+    e.stopPropagation()
   }
   return (
     <Grid container className={classes.modalOverlay} onClick={handleClickOutside}>
