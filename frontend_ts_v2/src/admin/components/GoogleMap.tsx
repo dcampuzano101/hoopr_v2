@@ -39,12 +39,15 @@ interface GoogleMapProps {
     }
     // zoomLevel: number
     name: string
+    width: string
+    height?: string
 }
 
 interface LocationPinProps {
     pinText: string
     lat: number
     lng: number
+
 }
 
 const LocationPin: React.FC<LocationPinProps> = ({ pinText }) => {
@@ -60,10 +63,11 @@ const LocationPin: React.FC<LocationPinProps> = ({ pinText }) => {
     )
 }
 
-const GoogleMap: React.FC<GoogleMapProps> = ({ geoLocation, name }) => {
+const GoogleMap: React.FC<GoogleMapProps> = ({ geoLocation, name, width, height }) => {
     const classes = useStyles();
+    console.log(geoLocation)
     return (
-        <div className={classes.mapWrapper}>
+        <div className={classes.mapWrapper} style={{ width: `${width}`, height: `${height}` }}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
                 center={{ 'lat': geoLocation.lat, 'lng': geoLocation.lng }}

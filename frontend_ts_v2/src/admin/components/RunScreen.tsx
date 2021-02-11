@@ -17,6 +17,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     },
     mapWrapper: {
         height: '50%',
+        width: '100%',
         border: '1px solid black',
         boxSizing: 'border-box'
     }
@@ -44,7 +45,7 @@ const RunScreen: React.FC<RunScreenProps> = ({ params }) => {
             {run?.geoLocation && (
                 <Grid container className={classes.runScreenWrapper}>
                     <Grid item xs={12} className={classes.mapWrapper}>
-                        <GoogleMap geoLocation={run?.geoLocation} name={run?.name} />
+                        <GoogleMap geoLocation={run?.geoLocation} name={run?.name} width={'100%'} height={'100%'} />
                     </Grid>
 
                 </Grid>
