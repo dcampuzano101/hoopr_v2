@@ -13,7 +13,7 @@ import {
   getUserById,
   updateUser,
   deleteUser,
-  googleAuthUser
+  googleAuthUser,
 } from '../controllers/userController.js'
 
 router.route('/google').get(async (req, res) => {
@@ -38,8 +38,9 @@ router
   .route('/profile')
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile)
+
 router
-  .route('/:id')
+  .route('/:id?')
   .get(protect, admin, getUserById)
   .delete(protect, admin, deleteUser)
   .put(protect, updateUser)

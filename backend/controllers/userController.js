@@ -200,7 +200,7 @@ const getUsers = asyncHandler(async (req, res) => {
   if (results.previous) {
     usersObject['previous'] = results.previous
   }
-  console.log(data)
+  // console.log(data)
   data.forEach((user) => {
     users[user._id] = user
   })
@@ -212,6 +212,8 @@ const getUsers = asyncHandler(async (req, res) => {
     throw new Error('Could not fetch users')
   }
 })
+
+
 
 // @description: get user by id
 // @route: GET /api/users/:id
@@ -326,5 +328,5 @@ export {
   getUserById,
   updateUser,
   deleteUser,
-  googleAuthUser
+  googleAuthUser,
 }

@@ -1,4 +1,6 @@
 import Run from "../models/runModel.js";
+import User from "../models/userModel.js";
+
 import asyncHandler from "express-async-handler";
 import axios from "axios";
 
@@ -155,6 +157,31 @@ const getRunById = asyncHandler(async (req, res) => {
   }
 });
 
+
+// @description: gets all users for specific run
+// @route: GET /api/run/:id/users
+// @access: protected
+
+const getUsersById = asyncHandler(async (req, res) => {
+  const { userIds } = req.body
+  // console.log(req.body)
+  const users = await User.find({ _id: userIds }).select("-password");
+
+  // const usersObject = {}
+  // debugger;
+  // users.forEach((user) => {
+  //   usersObject[user._id] = user
+  // })
+  if (users) {
+    res.json(users)
+  } else {
+    res.status(400)
+    throw new Error('Could not fetch users')
+  }
+})
+
+
+
 // @description: updates run
 // @route: PUT /api/runs/:id
 // @access: admin/private
@@ -210,4 +237,4 @@ const deleteRun = asyncHandler(async (req, res) => {
   }
 });
 
-export { createRun, listRuns, getRunById, updateRun, deleteRun };
+export { createRun, listRuns, getRunById, updateRun, deleteRun, getUsersById };

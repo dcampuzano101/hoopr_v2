@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import { Typography, Grid } from '@material-ui/core/'
+import { Typography, Grid, Avatar } from '@material-ui/core/'
 import GoogleMap from './GoogleMap'
 import { getRunDetails } from '../../actions/runActions'
 import { useSelector, useDispatch } from 'react-redux'
 import { RunDetailsState } from '../../reducers/runReducers'
 import { Run } from '../components/Runs'
+import { User } from '../components/Users'
+// import { getUserDetails } from '../../actions/userActions'
 const useStyles = makeStyles(({ palette }: Theme) => ({
     heading: {
         color: 'red',
@@ -28,6 +30,10 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     runUserListWrapper: {
         border: '1px solid red',
         height: '100%'
+    },
+    avatarWrapper: {
+        display: 'flex',
+
     }
 }))
 interface RunScreenProps {
@@ -134,10 +140,20 @@ const RunScreen: React.FC<RunScreenProps> = ({ params }) => {
                     <Grid item xs={12} className={classes.mapWrapper}>
                         <GoogleMap geoLocation={run?.geoLocation} name={run?.name} screen={true} />
                     </Grid>
-                    <Grid item xs={6} className={classes.runInfoWrapper}>
-
-                    </Grid>
                     <Grid item xs={6} className={classes.runUserListWrapper}>
+                        <Grid item xs={12}><Typography variant="h1" style={{ textTransform: 'capitalize', textAlign: 'center' }}>Players</Typography></Grid>
+                        <div className={classes.avatarWrapper}>
+                            {run.users.map((user: User, idx: number) => (
+                                <React.Fragment key={idx}>
+                                    <Avatar
+                                        alt={user.username}
+                                        src={user.profilePhoto}
+                                    />
+                                </React.Fragment>
+                            ))}
+                        </div>
+                    </Grid>
+                    <Grid item xs={6} className={classes.runInfoWrapper}>
 
                     </Grid>
                 </Grid>

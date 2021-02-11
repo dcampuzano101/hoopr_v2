@@ -7,7 +7,9 @@ import {
   getRunById,
   updateRun,
   deleteRun,
+  getUsersById
 } from "../controllers/runController.js";
+
 
 router.route("/").get(listRuns);
 
@@ -18,5 +20,7 @@ router
   .get(getRunById)
   .put(protect, updateRun)
   .delete(protect, admin, deleteRun);
+
+router.route("/:id/users").get(getUsersById)
 
 export default router;
