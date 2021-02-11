@@ -1,6 +1,6 @@
 import React from 'react'
-import { Typography, Grid } from '@material-ui/core/'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import { Typography, Grid, useMediaQuery } from '@material-ui/core/'
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
 // @ts-ignore
 import GoogleMapReact from "google-map-react";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
@@ -13,8 +13,11 @@ const useStyles = makeStyles(({ palette, breakpoints }: Theme) => ({
         [breakpoints.down('xs')]: {
             width: '100%',
             height: '50%'
-
         }
+    },
+    runScreenMap: {
+        width: '100%',
+        height: '100%'
     },
     pin: {
         display: 'flex',
@@ -39,8 +42,7 @@ interface GoogleMapProps {
     }
     // zoomLevel: number
     name: string
-    width: string
-    height?: string
+    screen?: boolean
 }
 
 interface LocationPinProps {
@@ -63,10 +65,12 @@ const LocationPin: React.FC<LocationPinProps> = ({ pinText }) => {
     )
 }
 
-const GoogleMap: React.FC<GoogleMapProps> = ({ geoLocation, name, width, height }) => {
+const GoogleMap: React.FC<GoogleMapProps> = ({ geoLocation, name, screen }) => {
     const classes = useStyles();
+    // const theme = useTheme()
+    // const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
     return (
-        <div className={classes.mapWrapper} style={{ width: `${width}`, height: `${height}` }}>
+        <div className={screen ? classes.runScreenMap : classes.mapWrapper} >
             <GoogleMapReact
                 bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
                 center={{ 'lat': geoLocation.lat, 'lng': geoLocation.lng }}

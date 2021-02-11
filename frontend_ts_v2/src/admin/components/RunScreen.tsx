@@ -132,7 +132,7 @@ const RunScreen: React.FC<RunScreenProps> = ({ params }) => {
             {run?.geoLocation && (
                 <Grid container className={classes.runScreenWrapper}>
                     <Grid item xs={12} className={classes.mapWrapper}>
-                        <GoogleMap geoLocation={run?.geoLocation} name={run?.name} width={'100%'} height={'100%'} />
+                        <GoogleMap geoLocation={run?.geoLocation} name={run?.name} screen={true} />
                     </Grid>
                     <Grid item xs={6} className={classes.runInfoWrapper}>
 
