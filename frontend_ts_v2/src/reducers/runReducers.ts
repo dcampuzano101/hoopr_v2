@@ -20,6 +20,7 @@ import {
 } from "../constants/runConstants";
 import { Action } from 'redux'
 import { Run } from '../admin/components/Runs'
+import { AssignmentInd } from "@material-ui/icons";
 
 interface ReduxAction extends Action {
   payload?: any
@@ -50,7 +51,7 @@ export interface RunListState {
 
 export interface RunDetailsState {
   runDetails: {
-    run?: Run
+    run?: Run | null
     success?: boolean
     loading?: boolean
     error?: string
@@ -76,34 +77,34 @@ const runListInitialState: RunListState = {
 
 const runDetailsInitialState: RunDetailsState = {
   runDetails: {
-    // run: {},
+    run: null,
     loading: false
   }
 }
 
 
 
-export const runListReducer = (state: RunListState, action: ReduxAction) => {
+export const runListReducer = (state: RunListState = runListInitialState, action: ReduxAction) => {
   switch (action.type) {
     case RUN_LIST_REQUEST:
       return { 
         loading: true,
         runs: state.runs
       };
-      case RUN_LIST_SUCCESS:
-        let appendedResults: Run[] = [];
-        let filteredResults: Run[] = [];
-        if (state.runs) {
-          appendedResults = [...state.runs, ...action.payload.runs]
-          //ask Mike
-          let runs: any = {};
-          appendedResults.forEach((run) => {
-            if (!runs[run._id]) {
-              filteredResults.push(run);
-            }
-            runs[run._id] = true;
-          })
-         }
+    case RUN_LIST_SUCCESS:
+      let appendedResults: Run[] = [];
+      let filteredResults: Run[] = [];
+      if (state.runs) {
+        appendedResults = [...state.runs, ...action.payload.runs]
+        //ask Mike
+        let runs: any = {};
+        appendedResults.forEach((run) => {
+          if (!runs[run._id]) {
+            filteredResults.push(run);
+          }
+          runs[run._id] = true;
+        })
+        }
       return {
         loading: false,
         runs: filteredResults.length > 0 ? filteredResults : action.payload.runs,
@@ -113,12 +114,12 @@ export const runListReducer = (state: RunListState, action: ReduxAction) => {
     case RUN_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
-      return runListInitialState;
+      return state;
   }
 };
 
 export const runDetailsReducer = (
-  state: RunDetailsState,
+  state: RunDetailsState = runDetailsInitialState,
   action: ReduxAction
 ) => {
   switch (action.type) {
@@ -140,7 +141,7 @@ export const runDetailsReducer = (
     case RUN_DETAILS_RESET:
       return {};
     default:
-      return runDetailsInitialState;
+      return state;
   }
 };
 

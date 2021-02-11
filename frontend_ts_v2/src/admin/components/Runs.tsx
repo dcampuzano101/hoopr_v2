@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listRuns } from '../../actions/runActions'
 import GoogleMap from './GoogleMap'
 import Fuse from 'fuse.js'
+import { useLocation } from 'react-router-dom'
 // @ts-ignore
 import Observer from '@researchgate/react-intersection-observer';
 
@@ -204,11 +205,13 @@ const Runs: React.FC<RunsProps> = () => {
       }
     }
   }
-
+  // const location = useLocation();
   const runResults = filterQuery ? results.map(user => user.item) : runList;
   useEffect(() => {
     dispatch(listRuns(page, limit))
-  }, [])
+  }, [page, limit, dispatch])
+
+  console.log(runList);
   return (
     <>
       {runResults ? (

@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Typography, Grid, Card } from '@material-ui/core/'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(({ palette }: Theme) => ({
   modalOverlay: {
@@ -57,12 +57,13 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ Component, isModal }) => {
   const classes = useStyles()
   const params = useParams()
+  const history = useHistory()
   return (
-    <Grid container className={classes.modalOverlay}>
+    <Grid container className={classes.modalOverlay} onClick={() => history.goBack()}>
       <Grid item xs={12} md={2} className={classes.drawerWrapper}>
 
       </Grid>
-      <Grid item xs={12} md={10} className={classes.modalComponentWrapper}>
+      <Grid item xs={12} md={10} className={classes.modalComponentWrapper} onClick={e => e.stopPropagation()}>
         <Card className={classes.mainComponent}>
           <Component params={params} />
         </Card>
