@@ -17,10 +17,14 @@ import {
   RUN_UPDATE_FAIL,
   RUN_UPDATE_RESET,
   RUN_DETAILS_RESET,
+  RUN_USERS_FAIL,
+  RUN_USERS_REQUEST,
+  RUN_USERS_SUCCESS
 } from "../constants/runConstants";
 import { Action } from 'redux'
 import { Run } from '../admin/components/Runs'
-import { AssignmentInd } from "@material-ui/icons";
+import { User } from '../actions/userActions'
+
 
 interface ReduxAction extends Action {
   payload?: any
@@ -82,6 +86,25 @@ const runDetailsInitialState: RunDetailsState = {
   }
 }
 
+export interface UsersState {
+  runUsers: {
+
+    success?: boolean
+    users?: User[] | null
+    loading?: boolean
+    error?: string | null
+  }
+}
+
+const usersInitialState: UsersState = {
+  runUsers: {
+
+    success: false,
+    loading: false,
+    users: null,
+    error: null
+  }
+}
 
 
 export const runListReducer = (state: RunListState = runListInitialState, action: ReduxAction) => {
@@ -144,6 +167,30 @@ export const runDetailsReducer = (
       return state;
   }
 };
+
+export const runUsersReducer = (
+  state: UsersState = usersInitialState, action: ReduxAction
+) => {
+  switch (action.type) {
+    case RUN_USERS_REQUEST:
+        return {
+          loading: true
+        }
+    case RUN_USERS_SUCCESS: 
+        return {
+          loading: false,
+          success: true,
+          users: action.payload
+        }
+    case RUN_USERS_FAIL:
+        return {
+          loading: false,
+          error: action.payload
+        }
+    default:
+      return state
+  }
+}
 
 export const runCreateReducer = (state = runInitialState, action: ReduxAction) => {
   switch (action.type) {

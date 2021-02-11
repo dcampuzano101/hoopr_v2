@@ -15,6 +15,9 @@ import {
     RUN_UPDATE_REQUEST,
     RUN_UPDATE_SUCCESS,
     RUN_UPDATE_FAIL,
+    RUN_USERS_FAIL,
+    RUN_USERS_REQUEST,
+    RUN_USERS_SUCCESS
 } from '../constants/runConstants'
 import { Dispatch } from 'redux'
 import { UserLoginState } from '../reducers/userReducers'
@@ -60,7 +63,6 @@ export const getRunDetails = (id: string) => async (dispatch: Dispatch, getState
         // }
 
         const { data } = await axios.get(`/api/runs/${id}`)
-
         dispatch({
             type: RUN_DETAILS_SUCCESS,
             payload: data
@@ -74,6 +76,34 @@ export const getRunDetails = (id: string) => async (dispatch: Dispatch, getState
     }
 }
 
+declare module 'axios' {
+    export interface AxiosRequestConfig {
+      userIds?: string[]
+    }
+  }
+
+
+export const getUsersForRun = (id: string, userIds: string[]) => async (dispatch: Dispatch) => {
+    try {
+        dispatch({
+            type: RUN_USERS_REQUEST
+        })
+        const users = userIds.map((userId, idx) =>  (
+            `${idx}=${userId}`
+        ))
+        const usersString = users.join("&");
+        const { data } = await axios.get(`/api/runs/${id}/users?${usersString}`)
+        dispatch({
+            type: RUN_USERS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: RUN_USERS_FAIL,
+            error: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
 export const createRun = (run: Run) => async (dispatch: Dispatch, getState: () => UserLoginState) => {
     try {
         dispatch({

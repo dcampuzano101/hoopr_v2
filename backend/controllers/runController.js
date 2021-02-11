@@ -163,8 +163,9 @@ const getRunById = asyncHandler(async (req, res) => {
 // @access: protected
 
 const getUsersById = asyncHandler(async (req, res) => {
-  const { userIds } = req.body
+  debugger;
   // console.log(req.body)
+  const userIds = Object.values(req.query)
   const users = await User.find({ _id: userIds }).select("-password");
 
   // const usersObject = {}

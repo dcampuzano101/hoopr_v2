@@ -16,7 +16,8 @@ import {
   runListReducer,
   runDetailsReducer,
   runUpdateReducer,
-  runDeleteReducer
+  runDeleteReducer,
+  runUsersReducer
 } from './reducers/runReducers'
 
 import {
@@ -52,6 +53,7 @@ const reducer = combineReducers({
   runDetails: runDetailsReducer,
   runUpdate: runUpdateReducer,
   runDelete: runDeleteReducer,
+  runUsers: runUsersReducer,
   orderCreate: orderCreateReducer,
   orderListMy: orderListMyReducer,
   orderDetails: orderDetailsReducer,

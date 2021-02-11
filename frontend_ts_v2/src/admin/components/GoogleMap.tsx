@@ -1,6 +1,6 @@
 import React from 'react'
-import { Typography, Grid, useMediaQuery } from '@material-ui/core/'
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
+import { Typography, } from '@material-ui/core/'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 // @ts-ignore
 import GoogleMapReact from "google-map-react";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
