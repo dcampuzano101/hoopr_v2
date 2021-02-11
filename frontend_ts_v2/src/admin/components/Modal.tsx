@@ -60,10 +60,10 @@ const Modal: React.FC<ModalProps> = ({ Component, isModal }) => {
   const history = useHistory()
   return (
     <Grid container className={classes.modalOverlay} onClick={() => history.goBack()}>
-      <Grid item xs={12} md={2} className={classes.drawerWrapper}>
+      {/* <Grid item xs={12} md={2} className={classes.drawerWrapper}>
 
-      </Grid>
-      <Grid item xs={12} md={10} className={classes.modalComponentWrapper} onClick={e => e.stopPropagation()}>
+      </Grid> */}
+      <Grid item xs={12} className={classes.modalComponentWrapper} onClick={e => e.stopPropagation()}>
         <Card className={classes.mainComponent}>
           <Component params={params} />
         </Card>
