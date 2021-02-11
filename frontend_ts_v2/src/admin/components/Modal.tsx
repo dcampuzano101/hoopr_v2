@@ -58,13 +58,13 @@ const Modal: React.FC<ModalProps> = ({ Component, isModal }) => {
   const classes = useStyles()
   const params = useParams()
   const history = useHistory()
+  const handleClickOutside = () => {
+    history.goBack()
+  }
   return (
-    <Grid container className={classes.modalOverlay} onClick={() => history.goBack()}>
-      {/* <Grid item xs={12} md={2} className={classes.drawerWrapper}>
-
-      </Grid> */}
-      <Grid item xs={12} className={classes.modalComponentWrapper} onClick={e => e.stopPropagation()}>
-        <Card className={classes.mainComponent}>
+    <Grid container className={classes.modalOverlay} onClick={handleClickOutside}>
+      <Grid item xs={12} className={classes.modalComponentWrapper} onClick={handleClickOutside}>
+        <Card className={classes.mainComponent} onClick={e => e.stopPropagation()}>
           <Component params={params} />
         </Card>
       </Grid>
