@@ -123,10 +123,10 @@ const App: React.FC<AppProps> = () => {
             <Route path="/admin/runs" component={Runs} />
             <Route path="/admin/orders" component={Orders} />
             <Route path="/admin/users" exact component={Users} />
-            <Route
+            {/* <Route
               exact
               path="/admin/runs/:id"
-            ><Modal isModal={isModal} Component={RunScreen} /> </Route>
+            ><Modal isModal={isModal} Component={RunScreen} /> </Route> */}
           </Switch>
           {
             isModal ? (

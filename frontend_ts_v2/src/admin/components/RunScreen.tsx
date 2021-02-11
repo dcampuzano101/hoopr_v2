@@ -33,7 +33,7 @@ const RunScreen: React.FC<RunScreenProps> = ({ params }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const run = useSelector((state: RunDetailsState) => state.runDetails) as Run || {} as Run
+    const run = useSelector((state: RunDetailsState) => state.runDetails.run) as Run || {} as Run
 
     useEffect(() => {
         dispatch(getRunDetails(params.id))
@@ -41,16 +41,14 @@ const RunScreen: React.FC<RunScreenProps> = ({ params }) => {
     console.log(run)
     return (
         <>
-            {run ? (
+            {run?.geoLocation && (
                 <Grid container className={classes.runScreenWrapper}>
                     <Grid item xs={12} className={classes.mapWrapper}>
-                        {/* <GoogleMap geoLocation={run?.geoLocation} name={run?.name} /> */}
+                        <GoogleMap geoLocation={run?.geoLocation} name={run?.name} />
                     </Grid>
 
                 </Grid>
-            ) : (
-                    null
-                )}
+            )}
         </>
     );
 }
