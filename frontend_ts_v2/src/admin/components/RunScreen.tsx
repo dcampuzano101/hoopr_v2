@@ -47,7 +47,6 @@ const RunScreen: React.FC<RunScreenProps> = ({ params }) => {
     useEffect(() => {
         dispatch(getRunDetails(params.id))
     }, [])
-    console.log(run)
     return (
         <>
             {run?.geoLocation && (

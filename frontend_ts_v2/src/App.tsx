@@ -97,7 +97,6 @@ const App: React.FC<AppProps> = () => {
   let prevLocation = useRef(location);
 
   React.useEffect(() => {
-    console.log(location.state)
     if (!(location.state && location.state.modal)) {
       prevLocation.current = location as any;
     }
@@ -109,8 +108,6 @@ const App: React.FC<AppProps> = () => {
   );
 
   const classes = useStyles()
-  console.log(isModal)
-  console.log(prevLocation.current)
   return (
     <main className={classes.body}>
       <Grid container spacing={0} className={classes.adminDashboardWrapper}>

@@ -137,9 +137,9 @@ export interface User {
   map: any
 }
 
-interface UsersProps {}
+interface UsersProps { }
 
-const Users: React.FC<UsersProps> = ({}) => {
+const Users: React.FC<UsersProps> = ({ }) => {
   const [filterQuery, setFilterQuery] = useState<string | any>('')
   const [page, setPage] = useState<any>(2)
   const [limit, setLimit] = useState<any>(4)
@@ -162,8 +162,6 @@ const Users: React.FC<UsersProps> = ({}) => {
   useEffect(() => {
     dispatch(listUsers(page, limit))
   }, [page, limit, dispatch])
-  console.log(userResults)
-  console.log(Object.values(userList))
   return (
     <>
       {userResults && Object.values(userList).length > 0 ? (

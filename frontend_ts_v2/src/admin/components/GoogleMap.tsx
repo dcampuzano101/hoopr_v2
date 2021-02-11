@@ -65,7 +65,6 @@ const LocationPin: React.FC<LocationPinProps> = ({ pinText }) => {
 
 const GoogleMap: React.FC<GoogleMapProps> = ({ geoLocation, name, width, height }) => {
     const classes = useStyles();
-    console.log(geoLocation)
     return (
         <div className={classes.mapWrapper} style={{ width: `${width}`, height: `${height}` }}>
             <GoogleMapReact

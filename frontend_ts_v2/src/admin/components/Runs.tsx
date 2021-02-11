@@ -211,7 +211,6 @@ const Runs: React.FC<RunsProps> = () => {
     dispatch(listRuns(page, limit))
   }, [page, limit, dispatch])
 
-  console.log(runList);
   return (
     <>
       {runResults ? (
