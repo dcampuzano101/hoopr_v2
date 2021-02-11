@@ -20,6 +20,14 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
         width: '100%',
         border: '1px solid black',
         boxSizing: 'border-box'
+    },
+    runInfoWrapper: {
+        border: '1px solid blue',
+        height: '100%'
+    },
+    runUserListWrapper: {
+        border: '1px solid red',
+        height: '100%'
     }
 }))
 interface RunScreenProps {
@@ -47,7 +55,12 @@ const RunScreen: React.FC<RunScreenProps> = ({ params }) => {
                     <Grid item xs={12} className={classes.mapWrapper}>
                         <GoogleMap geoLocation={run?.geoLocation} name={run?.name} width={'100%'} height={'100%'} />
                     </Grid>
+                    <Grid item xs={6} className={classes.runInfoWrapper}>
 
+                    </Grid>
+                    <Grid item xs={6} className={classes.runUserListWrapper}>
+
+                    </Grid>
                 </Grid>
             )}
         </>
