@@ -2,6 +2,8 @@ import React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Typography, Grid, Card } from '@material-ui/core/'
 import { useParams, useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { RUN_USERS_RESET, RUN_DETAILS_RESET } from '../../constants/runConstants'
 
 const useStyles = makeStyles(({ palette }: Theme) => ({
   modalOverlay: {
@@ -58,9 +60,13 @@ const Modal: React.FC<ModalProps> = ({ Component, isModal }) => {
   const classes = useStyles()
   const params = useParams()
   const history = useHistory()
+  const dispatch = useDispatch();
   const handleClickOutside = (e: React.MouseEvent) => {
     console.log(e)
     history.goBack()
+    dispatch({
+      type: RUN_DETAILS_RESET
+    })
     e.stopPropagation()
   }
   return (

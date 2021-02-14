@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import colors from 'colors'
 import passport from 'passport'
 import connectDB from './config/db.js'
+import { asyncDispatchMiddleware } from './middleware/dispatchMiddleware.js'
+
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import userRoutes from './routes/userRoutes.js'
 import runRoutes from './routes/runRoutes.js'

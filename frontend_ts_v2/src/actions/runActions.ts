@@ -23,8 +23,6 @@ import { Dispatch } from 'redux'
 import { UserLoginState } from '../reducers/userReducers'
 import { Run } from '../admin/components/Runs'
 
-
-
 export const listRuns = (page: number, limit: number) => async (dispatch: Dispatch) => {
     try {
         dispatch({
@@ -63,12 +61,14 @@ export const getRunDetails = (id: string) => async (dispatch: Dispatch, getState
         // }
 
         const { data } = await axios.get(`/api/runs/${id}`)
+        // getUsersForRun(data._id, data.users)
         dispatch({
             type: RUN_DETAILS_SUCCESS,
             payload: data
         })
 
     } catch (error) {
+
         dispatch({
             type: RUN_DETAILS_FAIL,
             error: error.response && error.response.data.message ? error.response.data.message : error.message
@@ -76,11 +76,11 @@ export const getRunDetails = (id: string) => async (dispatch: Dispatch, getState
     }
 }
 
-declare module 'axios' {
-    export interface AxiosRequestConfig {
-      userIds?: string[]
-    }
-  }
+// declare module 'axios' {
+//     export interface AxiosRequestConfig {
+//       userIds?: string[]
+//     }
+//   }
 
 
 export const getUsersForRun = (id: string, userIds: string[]) => async (dispatch: Dispatch) => {
@@ -88,6 +88,7 @@ export const getUsersForRun = (id: string, userIds: string[]) => async (dispatch
         dispatch({
             type: RUN_USERS_REQUEST
         })
+        debugger;
         const users = userIds.map((userId, idx) =>  (
             `${idx}=${userId}`
         ))
@@ -98,6 +99,8 @@ export const getUsersForRun = (id: string, userIds: string[]) => async (dispatch
             payload: data
         })
     } catch (error) {
+        console.log(error)
+        debugger;
         dispatch({
             type: RUN_USERS_FAIL,
             error: error.response && error.response.data.message ? error.response.data.message : error.message

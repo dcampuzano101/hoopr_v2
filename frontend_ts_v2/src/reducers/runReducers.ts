@@ -19,7 +19,8 @@ import {
   RUN_DETAILS_RESET,
   RUN_USERS_FAIL,
   RUN_USERS_REQUEST,
-  RUN_USERS_SUCCESS
+  RUN_USERS_SUCCESS,
+  RUN_USERS_RESET
 } from "../constants/runConstants";
 import { Action } from 'redux'
 import { Run } from '../admin/components/Runs'
@@ -187,6 +188,8 @@ export const runUsersReducer = (
           loading: false,
           error: action.payload
         }
+    case RUN_USERS_RESET: 
+        return {}
     default:
       return state
   }

@@ -51,6 +51,10 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     avatar: {
         width: spacing(7),
         height: spacing(7),
+        '&:hover': {
+            cursor: 'pointer',
+            transition: 'top .3s ease',
+        }
     },
     verticalDivider: {
         height: '95%',
@@ -225,15 +229,15 @@ const RunScreen: React.FC<RunScreenProps> = ({ params }) => {
 
     const run = useSelector((state: RunDetailsState) => state.runDetails.run) as Run || {} as Run
 
+
     useEffect(() => {
         dispatch(getRunDetails(params.id))
-        if (run) {
-            dispatch(getUsersForRun(params.id, run.users))
-        }
+        // dispatch(getUsersForRun(params.id, run.users))
+
     }, [dispatch, params.id])
     return (
         <>
-            {run?.geoLocation && runUsers && (
+            {run?.geoLocation && run?.users && (
                 <Grid container className={classes.runScreenWrapper}>
                     <Grid item xs={12} className={classes.mapWrapper}>
                         <GoogleMap geoLocation={run?.geoLocation} name={run?.name} screen={true} />
