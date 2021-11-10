@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "5fa43b8624b3da0a5d02797d"
+  },
+  "totalPrice": 10,
+  "isPaid": true,
+  "orderItems": [
+    {
+      "_id": {
+        "$oid": "5fa43b8624b3da0a5d02797e"
+      },
+      "run": {
+        "$oid": "5fa436adf1047f07cc1af8d1"
+      },
+      "name": "Wednesday Night Run",
+      "price": 10,
+      "location": "The Post",
+      "date": "11-04-2020"
+    }
+  ],
+  "userId": {
+    "$oid": "5fa436adf1047f07cc1af8cd"
+  },
+  "createdAt": {
+    "$date": "2020-11-05T17:51:02.153Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-05T17:51:13.380Z"
+  },
+  "__v": 0,
+  "paidAt": {
+    "$date": "2020-11-05T17:51:13.378Z"
+  }
+}]
