@@ -5,7 +5,7 @@ import GoogleMapReact from 'google-map-react';
 // import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 //fill in
-const GOOGLE_MAP_API_KEY = '';
+const GOOGLE_MAP_API_KEY = 'AIzaSyCHBNfg-xsj9eQI5X7H5v09vDrU9Q0oJxE';
 
 const LocationPin = ({ pinText }) => {
   // const classes = useStyles();
@@ -25,7 +25,8 @@ const GoogleMap = ({ geoLocation, name, screen }) => {
   // const theme = useTheme()
   // const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
   return (
-    <div className='lg:w-1/2 lg:h-full sm:w-full sm:h-1/2'>
+    // <div className='lg:w-1/2 lg:h-full sm:w-full sm:h-1/2'>
+    <div className='w-full h-full'>
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
         center={{ lat: geoLocation.lat, lng: geoLocation.lng }}

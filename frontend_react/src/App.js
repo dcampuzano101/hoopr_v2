@@ -37,6 +37,11 @@ const App = () => {
           <Route path='/orders' component={Orders} />
           <Route path='/users' exact component={Users} />
         </Switch>
+        {isModal ? (
+          <Route exact path='/admin/runs/:id'>
+            <Modal isModal={isModal} Component={RunScreen} />
+          </Route>
+        ) : null}
       </div>
       <Footer />
     </div>

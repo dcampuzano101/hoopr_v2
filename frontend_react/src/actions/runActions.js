@@ -56,7 +56,7 @@ export const getRunDetails = (id) => async (dispatch) => {
     // usersData;
 
     // console.log(usersData);
-    // debugger;
+    //
     // getUsersForRun(data._id, data.users)
     dispatch({
       type: RUN_DETAILS_SUCCESS,
@@ -78,7 +78,7 @@ export const getUsersForRun = (id, userIds) => async (dispatch) => {
     dispatch({
       type: RUN_USERS_REQUEST,
     });
-    debugger;
+
     const users = [
       '6026b9622fab2757a85df105',
       '6026b9622fab2757a85df118',
@@ -97,17 +97,17 @@ export const getUsersForRun = (id, userIds) => async (dispatch) => {
       '6026b9622fab2757a85df114',
     ];
     const usersInfo = users.map((userId, idx) => `${idx}=${userId}`);
-    debugger;
+
     const usersString = usersInfo.join('&');
     const { data } = await axios.get(`/api/runs/${id}/users?${usersString}`);
-    debugger;
+
     dispatch({
       type: RUN_USERS_SUCCESS,
       payload: data,
     });
   } catch (error) {
     console.log(error);
-    debugger;
+
     dispatch({
       type: RUN_USERS_FAIL,
       error:

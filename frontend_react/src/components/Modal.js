@@ -70,15 +70,15 @@ const Modal = ({ Component, isModal }) => {
     e.stopPropagation();
   };
   return (
-    <div className='{classes.modalOverlay}' onClick={handleClickOutside}>
+    <div
+      className='flex z-10 w-full h-full bg-gray-200 justify-center items-center p-2'
+      onClick={handleClickOutside}
+    >
       <div
-        className='{classes.modalComponentWrapper}'
+        className='h-full w-full flex justify-center'
         onClick={handleClickOutside}
       >
-        <div
-          className='{classes.mainComponent}'
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className='h-full w-11/12' onClick={(e) => e.stopPropagation()}>
           <Component params={params} />
         </div>
       </div>

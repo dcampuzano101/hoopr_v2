@@ -246,90 +246,115 @@ const RunScreen = ({ params }) => {
       ])
     );
   }, [dispatch, params.id]);
+
+  console.log(run);
   return (
     <>
       {run?.geoLocation && run?.users && (
-        <div container className='{classes.runScreenWrapper}'>
-          <div item xs={12} className='{classes.mapWrapper}'>
+        <div className='p-2 xl:w-full lg:w-full md:w-2/3 sm:w-full sm:h-1/2 xl:h-full flex flex-wrap flex-col m-2 shadow-lg border border-black border-opacity-50 rounded'>
+          <div
+            item
+            xs={12}
+            className='w-1/2 h-full border-2 border-red-500 p-2'
+          >
             <GoogleMap
               geoLocation={run?.geoLocation}
               name={run?.name}
               screen={true}
             />
           </div>
-          <div style={{ display: 'flex', width: '100%', height: '50%' }}>
-            <div item xs={6} className='{classes.runUserListWrapper}'>
+          <div className='w-1/2 h-full flex flex-wrap flex-row p-2'>
+            <div className='h-1/2 w-full'>
               <div item xs={12} style={{ marginBottom: '10px' }}>
                 <h1
                   variant='h1'
-                  style={{ textTransform: 'capitalize', textAlign: 'center' }}
+                  className='font-rubik text-2xl sm:text-lg uppercase tracking-tight font-medium leading-6 w-1/2'
                 >
                   Players
                 </h1>
               </div>
-              <div className='{classes.avatarWrapper}'>
+              <div className='grid grid-cols-5 gap-3 place-items-center'>
                 {runUsers?.map((user, idx) => (
-                  <div className='{classes.avatarBox}'>
-                    <h3>AVATAR ICON</h3>
+                  <div className=''>
+                    <div
+                      className='shadow rounded h-28 w-28 align-middle border-none'
+                      style={{
+                        backgroundImage: `url(${user.profilePhoto})`,
+                        backgroundSize: 'cover',
+                      }}
+                    ></div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className='{classes.verticalDivider}'></div>
-            <div item xs={6} className='{classes.runInfoWrapper}'>
+            <div className='h-1/2 w-full'>
               <div item xs={12} style={{ marginBottom: '10px' }}>
                 <h1
                   variant='h1'
-                  style={{ textTransform: 'capitalize', textAlign: 'center' }}
+                  className='font-rubik text-2xl sm:text-lg uppercase tracking-tight font-medium leading-6 w-1/2'
                 >
                   Run Details
                 </h1>
               </div>
-              <div item xs={12} md={12} className='{classes.infoLineWrapper}'>
+              <div>
                 <div className='{classes.infoLine}'>
-                  <div item xs={4} md={3} className='{classes.infoWrap}'>
-                    <h1 variant='h1' className='{classes.infoTag}'>
+                  <div className='flex flex-row lg:w-1/2 sm:w-full p-2'>
+                    <h1
+                      variant='h1'
+                      className='font-rubik text-2xl sm:text-lg lowercase tracking-tight font-medium leading-6 w-1/2'
+                    >
                       location:
                     </h1>
-                  </div>
-                  <div item xs={8} md={9} className='{classes.infoWrap}'>
-                    <h3 variant='h3' className='{classes.infoDetail}'>
+
+                    <h3
+                      variant='h3'
+                      className='font-roboto text-xl sm:text-base tracking-tight leading-6 w-1/2 flex items-center'
+                    >
                       {run.location}
                     </h3>
                   </div>
-                </div>
-                <div className='{classes.infoLine}'>
-                  <div item xs={4} md={3} className='{classes.infoWrap}'>
-                    <h1 variant='h1' className='{classes.infoTag}'>
+                  <div className='flex flex-row  lg:w-1/2 sm:w-full p-2'>
+                    <h1
+                      variant='h1'
+                      className='font-rubik text-2xl sm:text-lg lowercase tracking-tight font-medium leading-6 w-1/2'
+                    >
                       date:
                     </h1>
-                  </div>
-                  <div item xs={8} md={9} className='{classes.infoWrap}'>
-                    <h3 variant='h3' className='{classes.infoDetail}'>
+
+                    <h3
+                      variant='h3'
+                      className='font-roboto text-xl sm:text-base tracking-tight leading-6 w-1/2 flex items-center'
+                    >
                       {run.date}
                     </h3>
                   </div>
-                </div>
-                <div className='{classes.infoLine}'>
-                  <div item xs={4} md={3} className='{classes.infoWrap}'>
-                    <h1 variant='h1' className='{classes.infoTag}'>
+                  <div className='flex flex-row  lg:w-1/2 sm:w-full p-2'>
+                    <h1
+                      variant='h1'
+                      className='font-rubik text-2xl sm:text-lg lowercase tracking-tight font-medium leading-6 w-1/2'
+                    >
                       price:
                     </h1>
-                  </div>
-                  <div item xs={8} md={9} className='{classes.infoWrap}'>
-                    <h3 variant='h3' className='{classes.infoDetail}'>
+
+                    <h3
+                      variant='h3'
+                      className='font-roboto text-xl sm:text-base tracking-tight leading-6 w-1/2 flex items-center'
+                    >
                       ${run.price}
                     </h3>
                   </div>
-                </div>
-                <div className='{classes.infoLine}'>
-                  <div item xs={4} md={3} className='{classes.infoWrap}'>
-                    <h1 variant='h1' className='{classes.infoTag}'>
+                  <div className='flex flex-row  lg:w-1/2 sm:w-full p-2'>
+                    <h1
+                      variant='h1'
+                      className='font-rubik text-2xl sm:text-lg lowercase tracking-tight font-medium leading-6 w-1/2'
+                    >
                       spots:
                     </h1>
-                  </div>
-                  <div item xs={8} md={9} className='{classes.infoWrap}'>
-                    <h3 variant='h3' className='{classes.infoDetail}'>
+
+                    <h3
+                      variant='h3'
+                      className='font-roboto text-xl sm:text-base tracking-tight leading-6 w-1/2 flex items-center'
+                    >
                       {run.users.length}/{run.capacity}
                     </h3>
                   </div>
