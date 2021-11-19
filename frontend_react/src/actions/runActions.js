@@ -52,12 +52,7 @@ export const getRunDetails = (id) => async (dispatch) => {
     });
 
     const { data } = await axios.get(`/api/runs/${id}`);
-    // const { usersData: any } = await axios.get(`/api/runs/${id}/users?${usersString}`)
-    // usersData;
 
-    // console.log(usersData);
-    //
-    // getUsersForRun(data._id, data.users)
     dispatch({
       type: RUN_DETAILS_SUCCESS,
       payload: data,
@@ -79,24 +74,7 @@ export const getUsersForRun = (id, userIds) => async (dispatch) => {
       type: RUN_USERS_REQUEST,
     });
 
-    const users = [
-      '6026b9622fab2757a85df105',
-      '6026b9622fab2757a85df118',
-      '6026b9622fab2757a85df112',
-      '6026b9622fab2757a85df10a',
-      '6026b9622fab2757a85df107',
-      '6026b9622fab2757a85df10b',
-      '6026b9622fab2757a85df111',
-      '6026b9622fab2757a85df10f',
-      '6026b9622fab2757a85df115',
-      '6026b9622fab2757a85df10d',
-      '6026b9622fab2757a85df110',
-      '6026b9622fab2757a85df113',
-      '6026b9622fab2757a85df117',
-      '6026b9622fab2757a85df106',
-      '6026b9622fab2757a85df114',
-    ];
-    const usersInfo = users.map((userId, idx) => `${idx}=${userId}`);
+    const usersInfo = userIds.map((userId, idx) => `${idx}=${userId}`);
 
     const usersString = usersInfo.join('&');
     const { data } = await axios.get(`/api/runs/${id}/users?${usersString}`);

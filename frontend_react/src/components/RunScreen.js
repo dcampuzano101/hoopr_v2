@@ -222,34 +222,14 @@ const RunScreen = ({ params }) => {
   //     }
   //   };
 
-  const runUsers = useSelector((state) => state.runUsers.users); // //User[] || [] as User[]
+  const runUsers = useSelector((state) => state.runUsers.users);
 
   const run = useSelector((state) => state.runDetails.run) || {};
 
   useEffect(() => {
     dispatch(getRunDetails(params.id));
-    dispatch(
-      getUsersForRun(params.id, [
-        '6026b9622fab2757a85df105',
-        '6026b9622fab2757a85df118',
-        '6026b9622fab2757a85df112',
-        '6026b9622fab2757a85df10a',
-        '6026b9622fab2757a85df107',
-        '6026b9622fab2757a85df10b',
-        '6026b9622fab2757a85df111',
-        '6026b9622fab2757a85df10f',
-        '6026b9622fab2757a85df115',
-        '6026b9622fab2757a85df10d',
-        '6026b9622fab2757a85df110',
-        '6026b9622fab2757a85df113',
-        '6026b9622fab2757a85df117',
-        '6026b9622fab2757a85df106',
-        '6026b9622fab2757a85df114',
-      ])
-    );
   }, [dispatch, params.id]);
 
-  console.log(run);
   return (
     <>
       {run?.geoLocation && run?.users && (

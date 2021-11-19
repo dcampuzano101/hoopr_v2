@@ -5,6 +5,7 @@ import { MdShoppingCart } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../actions/modalActions';
+import { getUsersForRun } from '../actions/runActions';
 import RunScreen from './RunScreen';
 
 const RunInfoCard = ({ run }) => {
@@ -15,6 +16,7 @@ const RunInfoCard = ({ run }) => {
       className='lg:w-1/2 sm:w-full sm:h-1/2 lg:h-full flex cursor-pointer'
       onClick={() => {
         dispatch(openModal('RunScreen'));
+        dispatch(getUsersForRun(run._id, run.users));
         history.push(`/admin/runs/${run._id}/`, { modal: true });
       }}
     >
