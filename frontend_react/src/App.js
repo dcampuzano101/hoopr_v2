@@ -10,6 +10,7 @@ import Modal from './components/Modal';
 import RunScreen from './components/RunScreen';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import Account from './components/Account';
 
 // import { ModalState } from './reducers/modalReducer'
 
@@ -35,7 +36,7 @@ const App = () => {
         <Switch>
           <Route path='/runs' component={Runs} />
           <Route path='/orders' component={Orders} />
-          <Route path='/users' exact component={Users} />
+          <Route path='/account' exact component={Account} />
         </Switch>
         {isModal ? (
           <Route exact path='/admin/runs/:id'>
