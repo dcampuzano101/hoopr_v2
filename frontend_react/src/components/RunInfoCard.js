@@ -84,7 +84,10 @@ const RunInfoCard = ({ run }) => {
           </div>
         </div>
         <div className='w-full flex justify-center p-2 sm:items-center'>
-          <div className='transition-all duration-300 lg:w-1/2 sm:w-4/6 sm:h-12 sm:items-center flex flex-row align-middle justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white lg:py-2 lg:px-4 border border-black hover:border-transparent rounded'>
+          <button
+            type='submit'
+            className='transition-all duration-300 lg:w-1/2 sm:w-4/6 sm:h-12 sm:items-center flex flex-row align-middle justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white lg:py-2 lg:px-4 border border-black hover:border-transparent rounded'
+          >
             <IconContext.Provider value={{ style: { fontSize: '1.7rem' } }}>
               <MdShoppingCart />
             </IconContext.Provider>
@@ -95,7 +98,7 @@ const RunInfoCard = ({ run }) => {
             >
               ADD TO CART
             </h3>
-          </div>
+          </button>
         </div>
       </div>
     </div>

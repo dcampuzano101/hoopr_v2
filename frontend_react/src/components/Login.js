@@ -3,7 +3,7 @@ import React from 'react';
 const Login = () => {
   return (
     <div className='w-full h-full flex justify-center items-center'>
-      <div className='h-1/2 w-3/4 border-2 border-blue-600'>
+      <div className='w-1/2 border-2 border-blue-600'>
         <div
           className='
           flex flex-col
@@ -15,12 +15,10 @@ const Login = () => {
           lg:px-10
           py-8
           rounded-3xl
-          w-50
-          max-w-md
         '
         >
-          <div className='font-medium self-center text-xl sm:text-3xl text-gray-800'>
-            Join us Now
+          <div className='font-medium self-center text-xl sm:text-3xl text-gray-800 font-karla'>
+            Join HOOPR
           </div>
           <div className='mt-4 self-center text-xl sm:text-sm text-gray-800'>
             Enter your credentials to get access account
@@ -49,7 +47,7 @@ const Login = () => {
                     text-gray-400
                   '
                   >
-                    <i className='fas fa-user text-blue-500'></i>
+                    <i className='fas fa-user text-gray-900'></i>
                   </div>
 
                   <input
@@ -61,11 +59,11 @@ const Login = () => {
                     placeholder-gray-500
                     pl-10
                     pr-4
-                    rounded-2xl
+                    rounded
                     border border-gray-400
                     w-full
                     py-2
-                    focus:outline-none focus:border-blue-400
+                    focus:outline-none focus:border-gray-900
                   '
                     placeholder='Enter your name'
                   />
@@ -92,7 +90,7 @@ const Login = () => {
                     text-gray-400
                   '
                   >
-                    <i className='fas fa-at text-blue-500'></i>
+                    <i className='fas fa-at text-gray-900'></i>
                   </div>
 
                   <input
@@ -104,11 +102,11 @@ const Login = () => {
                     placeholder-gray-500
                     pl-10
                     pr-4
-                    rounded-2xl
+                    rounded
                     border border-gray-400
                     w-full
                     py-2
-                    focus:outline-none focus:border-blue-400
+                    focus:outline-none focus:border-gray-900
                   '
                     placeholder='Enter your email'
                   />
@@ -136,7 +134,7 @@ const Login = () => {
                   '
                   >
                     <span>
-                      <i className='fas fa-lock text-blue-500'></i>
+                      <i className='fas fa-lock text-gray-900'></i>
                     </span>
                   </div>
 
@@ -149,36 +147,71 @@ const Login = () => {
                     placeholder-gray-500
                     pl-10
                     pr-4
-                    rounded-2xl
+                    rounded
                     border border-gray-400
                     w-full
                     py-2
-                    focus:outline-none focus:border-blue-400
+                    focus:outline-none focus:border-gray-900
                   '
                     placeholder='Enter your password'
                   />
                 </div>
               </div>
+              <div className='flex flex-col mb-6'>
+                <label
+                  for='confirmPassword'
+                  className='mb-1 text-xs sm:text-sm tracking-wide text-gray-600'
+                >
+                  Confirm Password:
+                </label>
+                <div className='relative'>
+                  <div
+                    className='
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  '
+                  >
+                    <span>
+                      <i className='fas fa-lock text-gray-900'></i>
+                    </span>
+                  </div>
 
-              <div className='flex w-full'>
+                  <input
+                    id='password'
+                    type='password'
+                    name='password'
+                    className='
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-gray-900
+                  '
+                    placeholder='Confirm your password'
+                  />
+                </div>
+              </div>
+
+              <div className='flex w-full justify-center'>
                 <button
                   type='submit'
                   className='
-                  flex
+                  
                   mt-2
                   items-center
-                  justify-center
                   focus:outline-none
-                  text-white text-sm
-                  sm:text-base
-                  bg-blue-500
-                  hover:bg-blue-600
-                  rounded-2xl
-                  py-2
-                  w-full
-                  transition
-                  duration-150
-                  ease-in
+                transition-all duration-300 lg:w-1/2 sm:w-4/6 sm:h-12 sm:items-center flex flex-row align-middle justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white lg:py-2 lg:px-4 border border-black hover:border-transparent rounded
                 '
                 >
                   <span className='mr-2 uppercase'>Sign Up</span>
@@ -214,7 +247,7 @@ const Login = () => {
           >
             <span className='ml-2'>
               You have an account?
-              <a href='#' className='text-xs ml-2 text-blue-500 font-semibold'>
+              <a href='#' className='text-xs ml-2 text-gray-900 font-semibold'>
                 Login here
               </a>
             </span>

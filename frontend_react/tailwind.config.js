@@ -16,6 +16,9 @@ module.exports = {
         // 'coding-card': "url('images/simple_setup.jpeg')",
         // 'lifestyle-card': "url('images/medellin.jpeg')",
       },
+      gridTemplateRows: {
+        pancake: '1fr 4fr 1fr',
+      },
     },
   },
   variants: {
