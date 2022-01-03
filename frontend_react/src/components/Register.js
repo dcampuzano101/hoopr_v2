@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Login = () => {
+const Register = () => {
   return (
     <div className='w-full h-full flex justify-center items-center'>
       <div className='w-1/2 border-2 border-blue-600'>
@@ -18,11 +18,57 @@ const Login = () => {
         '
         >
           <div className='font-medium self-center text-xl sm:text-3xl text-gray-800 font-karla'>
-            Log in to HOOPR
+            Join HOOPR
+          </div>
+          <div className='mt-4 self-center text-xl sm:text-sm text-gray-800'>
+            Enter your credentials to create an account
           </div>
 
           <div className='mt-10'>
             <form action='#'>
+              <div className='flex flex-col mb-5'>
+                <label
+                  for='name'
+                  className='mb-1 text-xs tracking-wide text-gray-600'
+                >
+                  Name:
+                </label>
+                <div className='relative'>
+                  <div
+                    className='
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  '
+                  >
+                    <i className='fas fa-user text-gray-900'></i>
+                  </div>
+
+                  <input
+                    id='name'
+                    type='name'
+                    name='name'
+                    className='
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-gray-900
+                  '
+                    placeholder='Enter your name'
+                  />
+                </div>
+              </div>
               <div className='flex flex-col mb-5'>
                 <label
                   for='email'
@@ -111,6 +157,51 @@ const Login = () => {
                   />
                 </div>
               </div>
+              <div className='flex flex-col mb-6'>
+                <label
+                  for='confirmPassword'
+                  className='mb-1 text-xs sm:text-sm tracking-wide text-gray-600'
+                >
+                  Confirm Password:
+                </label>
+                <div className='relative'>
+                  <div
+                    className='
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  '
+                  >
+                    <span>
+                      <i className='fas fa-lock text-gray-900'></i>
+                    </span>
+                  </div>
+
+                  <input
+                    id='confirmPassword'
+                    type='confirmPassword'
+                    name='confirmPassword'
+                    className='
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-gray-900
+                  '
+                    placeholder='Confirm your password'
+                  />
+                </div>
+              </div>
 
               <div className='flex w-full justify-center'>
                 <button
@@ -123,7 +214,7 @@ const Login = () => {
                 transition-all duration-300 lg:w-1/2 sm:w-4/6 sm:h-12 sm:items-center flex flex-row align-middle justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white lg:py-2 lg:px-4 border border-black hover:border-transparent rounded
                 '
                 >
-                  <span className='mr-2 uppercase'>Log in</span>
+                  <span className='mr-2 uppercase'>Sign Up</span>
                   <span>
                     <svg
                       className='h-6 w-6'
@@ -155,12 +246,12 @@ const Login = () => {
           '
           >
             <span className='ml-2'>
-              Dont have an account?
+              Have an account?
               <a
-                href='/account'
+                href='/login'
                 className='text-xs ml-2 text-gray-900 font-semibold'
               >
-                Register here
+                Login here
               </a>
             </span>
           </a>
@@ -170,4 +261,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

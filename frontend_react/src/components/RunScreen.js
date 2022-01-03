@@ -246,17 +246,17 @@ const RunScreen = ({ params }) => {
             />
           </div>
           <div className='w-1/2 h-full flex flex-wrap flex-row'>
-            <div className='h-2/3 w-full'>
+            <div className='h-1/2 w-full flex flex-col justify-center'>
               <div className='flex justify-center'>
                 <h1 className='font-rubik xl:text-2xl sm:text-lg uppercase tracking-tight font-medium leading-6'>
                   Players
                 </h1>
               </div>
-              <div className='grid grid-cols-3 gap-3 place-items-center'>
+              <div className='grid grid-cols-5 gap-3 place-items-center'>
                 {runUsers?.map((user, idx) => (
                   <div className=''>
                     <div
-                      className='shadow rounded h-28 w-28 align-middle border-none'
+                      className='shadow rounded 2xl:h-28 2xl:w-28 xl:h-24 xl:w-24 lg:h-20 lg:w-20 align-middle border-none'
                       style={{
                         backgroundImage: `url(${user.profilePhoto})`,
                         backgroundSize: 'cover',
@@ -266,13 +266,13 @@ const RunScreen = ({ params }) => {
                 ))}
               </div>
             </div>
-            <div className='h-1/3 w-full'>
+            <div className='h-1/2 w-full flex flex-col justify-center'>
               <div className='flex justify-center'>
                 <h1 className='font-rubik xl:text-2xl sm:text-lg uppercase tracking-tight font-medium leading-6'>
                   Run Details
                 </h1>
               </div>
-              <div className='flex flex-col items-center justify-center h-3/5'>
+              <div className='flex flex-col items-center justify-center'>
                 <div className='flex flex-row lg:w-1/2 sm:w-full p-2'>
                   <h1
                     variant='h1'

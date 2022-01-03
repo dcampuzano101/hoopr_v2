@@ -11,6 +11,7 @@ import RunScreen from './components/RunScreen';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Account from './components/Account';
+import Login from './components/Login';
 
 // import { ModalState } from './reducers/modalReducer'
 
@@ -34,6 +35,8 @@ const App = () => {
           <Route path='/runs' component={Runs} />
           <Route path='/orders' component={Orders} />
           <Route path='/account' exact component={Account} />
+          <Route path='/login' exact component={Login} />
+          {/*Temporarily Have Login Component here  */}
         </Switch>
         {isModal ? (
           <Route exact path='/admin/runs/:id'>
