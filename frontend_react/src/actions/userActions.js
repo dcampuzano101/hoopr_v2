@@ -64,6 +64,7 @@ export const listUsers = (page, limit) => async (dispatch) => {
 };
 
 export const login = (email, password) => async (dispatch) => {
+  debugger;
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,

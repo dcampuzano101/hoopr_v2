@@ -1,6 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../actions/userActions';
 
-const Login = () => {
+const Login = ({ location, history }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo, loading, error } = userLogin;
+
+  const redirect = location.search ? location.search.split('=')[1] : '/';
+  console.log(userLogin);
+
+  useEffect(() => {
+    console.log(userInfo);
+    if (userInfo) {
+      if (Object.keys(userInfo).length > 0) {
+        history.push(redirect);
+      }
+    }
+  }, [history, userInfo, redirect]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(login(email, password));
+  };
+
   return (
     <div className='w-full h-full flex justify-center items-center'>
       <div className='w-1/2 border-2 border-blue-600'>
@@ -22,7 +48,7 @@ const Login = () => {
           </div>
 
           <div className='mt-10'>
-            <form action='#'>
+            <form onSubmit={submitHandler}>
               <div className='flex flex-col mb-5'>
                 <label
                   for='email'
@@ -50,7 +76,13 @@ const Login = () => {
                   <input
                     id='email'
                     type='email'
+                    id='email'
+                    label='Email Address'
                     name='email'
+                    autoComplete='email'
+                    autoFocus
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className='
                     text-sm
                     placeholder-gray-500
@@ -94,8 +126,13 @@ const Login = () => {
 
                   <input
                     id='password'
-                    type='password'
                     name='password'
+                    label='Password'
+                    type='password'
+                    id='password'
+                    autoComplete='current-password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className='
                     text-sm
                     placeholder-gray-500
@@ -116,7 +153,6 @@ const Login = () => {
                 <button
                   type='submit'
                   className='
-                  
                   mt-2
                   items-center
                   focus:outline-none
