@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Register from './Register';
 import { Route, Switch, useLocation } from 'react-router-dom';
+import { getUserDetails } from '../actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Account = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
 
-  console.log(location.pathname);
+  // const userId = useSelector((state) => state.userLogin.userInfo._id) || null;
+
+  useEffect(() => {
+    dispatch(getUserDetails());
+  }, [dispatch]);
+
+  // console.log(location.pathname);
   return (
     <>
       <div className='max-w-full flex justify-center h-full'>

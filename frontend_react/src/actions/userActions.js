@@ -30,18 +30,6 @@ import {
 } from '../constants/userConstants';
 import { UserLoginState } from '../reducers/userReducers';
 
-// export interface User {
-//   _id
-//   password?: string
-//   isAdmin: boolean
-//   runs: []
-//   waitList?: []
-//   username: string
-//   email: string
-//   profilePhoto: string
-//   orders?: {}
-// }
-
 export const listUsers = (page, limit) => async (dispatch) => {
   try {
     dispatch({
@@ -190,7 +178,10 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/users/${id}`, config);
+    debugger;
+    // const { data } = await axios.get(`/api/users/${id}`, config);
+    const { data } = await axios.get(`/api/users/profile`, config);
+
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data,
