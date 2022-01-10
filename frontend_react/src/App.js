@@ -12,6 +12,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Account from './components/Account';
 import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 
 // import { ModalState } from './reducers/modalReducer'
 
@@ -36,6 +37,7 @@ const App = () => {
           <Route path='/orders' component={Orders} />
           <Route path='/account' exact component={Account} />
           <Route path='/login' exact component={Login} />
+          <Route path='/register' exact component={Register} />
           {/*Temporarily Have Login Component here  */}
         </Switch>
         {isModal ? (

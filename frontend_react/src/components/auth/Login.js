@@ -193,7 +193,7 @@ const Login = ({ location, history }) => {
             <span className='ml-2'>
               Dont have an account?
               <a
-                href='/account'
+                href='/register'
                 className='text-xs ml-2 text-gray-900 font-semibold'
               >
                 Register here
