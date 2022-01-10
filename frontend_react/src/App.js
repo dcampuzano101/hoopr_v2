@@ -11,7 +11,7 @@ import RunScreen from './components/RunScreen';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Account from './components/Account';
-import Login from './components/Login';
+import Login from './components/auth/Login';
 
 // import { ModalState } from './reducers/modalReducer'
 
