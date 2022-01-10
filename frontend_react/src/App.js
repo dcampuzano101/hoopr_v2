@@ -2,12 +2,12 @@ import React, { useRef } from 'react';
 
 import { Route, Switch, useLocation } from 'react-router-dom';
 // import { useSelector } from 'react-redux'
-import Runs from './components/Runs';
+import Runs from './components/runs/Runs';
 import Orders from './components/Orders';
 import Users from './components/Users';
 import Drawer from './components/Drawer';
 import Modal from './components/Modal';
-import RunScreen from './components/RunScreen';
+import RunScreen from './components/runs/RunScreen';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Account from './components/Account';

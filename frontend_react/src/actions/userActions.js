@@ -178,7 +178,6 @@ export const getUserDetails = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    debugger;
     // const { data } = await axios.get(`/api/users/${id}`, config);
     const { data } = await axios.get(`/api/users/profile`, config);
 

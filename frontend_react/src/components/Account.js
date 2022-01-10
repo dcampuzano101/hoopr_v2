@@ -15,13 +15,34 @@ const Account = ({ location, history }) => {
   const redirect = location.search ? location.search.split('=')[1] : '/login';
   //  console.log(userLogin);
 
+  const userDetails = useSelector((state) => state.userDetails);
+  const { detailsError, user, success: successDetails } = userDetails;
+
   useEffect(() => {
     console.log(userInfo);
-    if (userInfo === undefined || Object.keys(userInfo).length > 0) {
+    // if (userInfo === undefined || Object.keys(userInfo).length > 0) {
+    //   debugger;
+    //   history.push(redirect);
+    //   console.log('userInfo != null');
+    // } else {
+    //   debugger;
+    //   dispatch(getUserDetails());
+    // }
+    debugger;
+    // if (!userInfo) {
+    if (userInfo === undefined || Object.keys(userInfo).length === 0) {
       history.push(redirect);
-      console.log('userInfo != null');
+    } else {
+      if (!user) {
+        dispatch(getUserDetails('profile'));
+      }
+
+      if (successDetails) {
+        // setUsername(user.username);
+        // setEmail(user.email);
+        // setProfilePhoto(user.profilePhoto || avatar);
+      }
     }
-    dispatch(getUserDetails());
   }, [history, userInfo, redirect, dispatch]);
 
   // useEffect(() => {

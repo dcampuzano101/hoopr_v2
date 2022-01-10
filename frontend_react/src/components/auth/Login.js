@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../actions/userActions';
+import Spinner from '../util/spinner';
 
 const Login = ({ location, history }) => {
   const [email, setEmail] = useState('');
@@ -10,13 +11,15 @@ const Login = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, loading, error } = userLogin;
 
-  const redirect = location.search ? location.search.split('=')[1] : '/';
-  console.log(userLogin);
+  const redirect = location.search ? location.search.split('=')[1] : '/account';
+  const redirectToAccount = location.search
+    ? location.search.split('=')[1]
+    : '/account';
 
   useEffect(() => {
     console.log(userInfo);
     if (userInfo) {
-      if (Object.keys(userInfo).length > 0) {
+      if (Object.keys(userInfo).length > 0 && !loading) {
         history.push(redirect);
       }
     }
@@ -159,20 +162,26 @@ const Login = ({ location, history }) => {
                 transition-all duration-300 lg:w-1/2 sm:w-4/6 sm:h-12 sm:items-center flex flex-row align-middle justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white lg:py-2 lg:px-4 border border-black hover:border-transparent rounded
                 '
                 >
-                  <span className='mr-2 uppercase'>Log in</span>
-                  <span>
-                    <svg
-                      className='h-6 w-6'
-                      fill='none'
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                    >
-                      <path d='M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z' />
-                    </svg>
-                  </span>
+                  {loading ? (
+                    <Spinner />
+                  ) : (
+                    <>
+                      <span className='mr-2 uppercase'>Log in</span>
+                      <span>
+                        <svg
+                          className='h-6 w-6'
+                          fill='none'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          viewBox='0 0 24 24'
+                          stroke='currentColor'
+                        >
+                          <path d='M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z' />
+                        </svg>
+                      </span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>

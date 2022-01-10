@@ -14,8 +14,8 @@ import RunInfoCard from './RunInfoCard';
 // import moment from 'moment'
 // import { RunListState } from '../reducers/runReducers';
 import { useDispatch, useSelector } from 'react-redux';
-import { listRuns } from '../actions/runActions';
-import GoogleMap from './GoogleMap';
+import { listRuns } from '../../actions/runActions';
+import GoogleMap from '../GoogleMap';
 
 // import { useLocation } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';

@@ -4,9 +4,8 @@ import { MdShoppingCart } from 'react-icons/md';
 // import { Run } from './Runs';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { openModal } from '../actions/modalActions';
-import { getUsersForRun } from '../actions/runActions';
-import RunScreen from './RunScreen';
+import { openModal } from '../../actions/modalActions';
+import { getUsersForRun } from '../../actions/runActions';
 
 const RunInfoCard = ({ run }) => {
   const history = useHistory();
