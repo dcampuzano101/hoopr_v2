@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
-import Register from './auth/Register';
+// import Register from './auth/Register';
 import { Route, Switch, useLocation } from 'react-router-dom';
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails } from '../../actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
+import ProfileCard from './ProfileCard';
+import UpcomingRuns from './UpcomingRuns';
+// import UserRuns from './UserRuns';
 
 const Account = ({ location, history }) => {
   // const location = useLocation();
@@ -19,21 +22,11 @@ const Account = ({ location, history }) => {
   const { detailsError, user, success: successDetails } = userDetails;
 
   useEffect(() => {
-    console.log(userInfo);
-    // if (userInfo === undefined || Object.keys(userInfo).length > 0) {
-    //   debugger;
-    //   history.push(redirect);
-    //   console.log('userInfo != null');
-    // } else {
-    //   debugger;
-    //   dispatch(getUserDetails());
-    // }
     debugger;
-    // if (!userInfo) {
     if (userInfo === undefined || Object.keys(userInfo).length === 0) {
       history.push(redirect);
     } else {
-      if (!user) {
+      if (user) {
         dispatch(getUserDetails('profile'));
       }
 
@@ -45,18 +38,13 @@ const Account = ({ location, history }) => {
     }
   }, [history, userInfo, redirect, dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(getUserDetails());
-  // }, [dispatch]);
-
-  // console.log(location.pathname);
   return (
     <>
       <div className='max-w-full flex justify-center h-full'>
         <div className='w-11/12 sm:p-0 h-full flex p-5 items-center'>
           <div className='box-border h-full flex flex-row flex-wrap w-full align-middle justify-center border-black border-4'>
-            {/* <Register /> */}
-            ACCOUNT PROFILE
+            <ProfileCard user={user} />
+            <UpcomingRuns />
           </div>
         </div>
       </div>

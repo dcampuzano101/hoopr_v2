@@ -30,7 +30,7 @@ const NavBar = ({ history }) => {
           </div>
         </Link>
         <Link
-          to='/account'
+          to='/profile'
           className='w-1/6 font-karla xl:text-3xl lg:text-2xl md:text-xl flex justify-center'
         >
           <div className='transition-all p-2 border-transparent border-b-2 hover:border-black'>

@@ -11,7 +11,7 @@ const Login = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, loading, error } = userLogin;
 
-  const redirect = location.search ? location.search.split('=')[1] : '/account';
+  const redirect = location.search ? location.search.split('=')[1] : '/profile';
   const redirectToAccount = location.search
     ? location.search.split('=')[1]
     : '/account';

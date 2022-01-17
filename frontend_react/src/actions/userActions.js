@@ -163,6 +163,7 @@ export const register = (username, email, password) => async (dispatch) => {
 };
 
 export const getUserDetails = () => async (dispatch, getState) => {
+  debugger;
   try {
     dispatch({
       type: USER_DETAILS_REQUEST,
