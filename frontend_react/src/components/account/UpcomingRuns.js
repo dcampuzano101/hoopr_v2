@@ -11,7 +11,6 @@ const UpcomingRuns = () => {
   const { runs, loading: loadingRuns } = runList;
 
   useEffect(() => {
-    debugger;
     if (successDetails) {
       setMyRuns(user.runs);
       setWaitList(user.waitList);
@@ -20,12 +19,9 @@ const UpcomingRuns = () => {
   }, [successDetails]);
 
   const displayRunsForUser = () => {
-    debugger;
     const userRuns = [];
     user.runs.forEach((runId, i) => {
-      debugger;
       if (runId === runs[i]['_id']) {
-        debugger;
         userRuns.push(runs[i]);
       }
     });
@@ -33,16 +29,36 @@ const UpcomingRuns = () => {
       return <h1>No Upcoming Runs</h1>;
     } else {
       return (
-        <>
-          <div className='flex h'>
+        <div>
+          <div className='flex'>
             <h1>Upcoming Runs</h1>
-            <table class='table-auto'>
-              <thead>
+            <table class='table-auto min-w-full'>
+              <thead className='border-b'>
                 <tr>
-                  <th>Date</th>
-                  <th>Location</th>
-                  <th>Price</th>
-                  <th>Capacity</th>
+                  <th
+                    scope='col'
+                    className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                  >
+                    Date
+                  </th>
+                  <th
+                    scope='col'
+                    className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                  >
+                    Location
+                  </th>
+                  <th
+                    scope='col'
+                    className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                  >
+                    Price
+                  </th>
+                  <th
+                    scope='col'
+                    className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                  >
+                    Capacity
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -50,29 +66,35 @@ const UpcomingRuns = () => {
                   runs &&
                   userRuns.map((run) => (
                     <React.Fragment key={run._id}>
-                      <tr>
-                        <td>{run.date}</td>
-                        <td>{run.location}</td>
-                        <td>${run.price}</td>
-                        <td>{run.capacity}</td>
+                      <tr className='border-b'>
+                        <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+                          {run.date}
+                        </td>
+                        <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+                          {run.location}
+                        </td>
+                        <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+                          ${run.price}
+                        </td>
+                        <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+                          {run.capacity}
+                        </td>
                       </tr>
                     </React.Fragment>
                   ))}
               </tbody>
             </table>
           </div>
-        </>
+        </div>
       );
     }
   };
 
   const displayWaitListForUser = () => {
-    debugger;
     const userWaitList = [];
 
     user.waitList.forEach((runId, i) => {
       if (runId === runs[i]['_id']) {
-        debugger;
         userWaitList.push(runs[i]);
       }
     });
@@ -82,13 +104,33 @@ const UpcomingRuns = () => {
       return (
         <>
           <h2>Wait listed runs</h2>
-          <table class='table-auto'>
-            <thead>
+          <table className='table-auto min-w-full'>
+            <thead className='border-b'>
               <tr>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Price</th>
-                <th>Capacity</th>
+                <th
+                  scope='col'
+                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                >
+                  Date
+                </th>
+                <th
+                  scope='col'
+                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                >
+                  Location
+                </th>
+                <th
+                  scope='col'
+                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                >
+                  Price
+                </th>
+                <th
+                  scope='col'
+                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                >
+                  Capacity
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -112,7 +154,7 @@ const UpcomingRuns = () => {
   };
 
   return (
-    <div className='flex'>
+    <div className='flex w-2/3 flex-row'>
       <div className='xl:w-full xl:h-full'>
         {!loading && !loadingRuns && user && successDetails ? (
           displayRunsForUser()

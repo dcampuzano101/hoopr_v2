@@ -22,7 +22,6 @@ const Account = ({ location, history }) => {
   const { detailsError, user, success: successDetails } = userDetails;
 
   useEffect(() => {
-    debugger;
     if (userInfo === undefined || Object.keys(userInfo).length === 0) {
       history.push(redirect);
     } else {
@@ -42,9 +41,11 @@ const Account = ({ location, history }) => {
     <>
       <div className='max-w-full flex justify-center h-full'>
         <div className='w-11/12 sm:p-0 h-full flex p-5 items-center'>
-          <div className='box-border h-full flex flex-row flex-wrap w-full align-middle justify-center border-black border-4'>
-            <ProfileCard user={user} />
-            <UpcomingRuns />
+          <div className='box-border h-full flex flex-row flex-wrap w-full align-middle justify-center border-black border-4 px-5'>
+            <div className='w-3/4 border-blue border-4 flex flex-row p-5'>
+              <ProfileCard />
+              <UpcomingRuns />
+            </div>
           </div>
         </div>
       </div>
