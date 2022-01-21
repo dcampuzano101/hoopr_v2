@@ -32,7 +32,7 @@ const UpcomingRuns = () => {
         <div>
           <div className='flex'>
             <h1>Upcoming Runs</h1>
-            <table class='table-auto min-w-full'>
+            <table className='table-auto min-w-full'>
               <thead className='border-b'>
                 <tr>
                   <th

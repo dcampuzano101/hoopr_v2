@@ -7,7 +7,7 @@
   "proxy": "http://localhost:5000",
   "scripts": {
     "start": "node backend/server",
-    "server": "nodemon backend/server",
+    "server": "set PORT=5006 && nodemon backend/server",
     "server:debug": "nodemon --inspect backend/server.js",
     "client": "npm start --prefix frontend_react",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
