@@ -24,7 +24,7 @@ const RunInfoCard = ({ run }) => {
           <div className='flex flex-row lg:w-1/2 sm:w-full p-2'>
             <h1
               variant='h1'
-              className='font-rubik text-2xl sm:text-lg lowercase tracking-tight font-medium leading-6 w-1/2'
+              className='font-rubik text-2xl sm:text-sm lowercase tracking-tight font-medium leading-6 w-1/2'
             >
               location:
             </h1>

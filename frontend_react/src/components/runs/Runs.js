@@ -57,8 +57,8 @@ const Runs = () => {
           <div className='w-11/12 sm:p-0 h-full flex p-5 items-center'>
             <div className='box-border h-full flex flex-row flex-wrap w-full justify-evenly overflow-y-auto scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-100 scrollbar-thin'>
               {runList.map((run, idx) => (
-                <div className='xl:w-full lg:w-full md:w-2/3 sm:w-full sm:h-1/2 xl:h-1/3 flex flex-wrap m-2 shadow-lg border border-black border-opacity-50 rounded'>
-                  <div className='lg:w-1/2 lg:h-full sm:w-full sm:h-1/2'>
+                <div className='w-full h-5/6 sm:h-1/2 xl:h-48% flex flex-wrap m-2 shadow-lg border border-black border-opacity-50 rounded'>
+                  <div className='lg:w-1/2 lg:h-full sm:w-full sm:h-1/2 w-full h-1/2'>
                     <GoogleMap
                       name={run.location}
                       geoLocation={run.geoLocation}

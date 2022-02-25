@@ -12,7 +12,7 @@ const NavBar = ({ history }) => {
           HOOPR
         </Link>
       </div>
-      <div className='w-full border-red-300 border-4 h-full flex flex-row justify-end items-center'>
+      <div className='w-full border-red-300 border-4 h-full flex flex-row justify-evenly xl:justify-end lg:justify-end items-center sm:justify-evenly'>
         <Link
           to='/runs'
           className='w-1/6 font-karla xl:text-3xl lg:text-2xl md:text-xl flex justify-center'
