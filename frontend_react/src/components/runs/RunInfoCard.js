@@ -12,71 +12,71 @@ const RunInfoCard = ({ run }) => {
   const dispatch = useDispatch();
   return (
     <div
-      className='lg:w-1/2 sm:w-full sm:h-1/2 lg:h-full flex cursor-pointer'
+      className='w-full h-1/3 flex cursor-pointer'
       onClick={() => {
         dispatch(openModal('RunScreen'));
         dispatch(getUsersForRun(run._id, run.users));
         history.push(`/admin/runs/${run._id}/`, { modal: true });
       }}
     >
-      <div className='w-full flex justify-center lg:flex-col sm:flex-row p-2'>
+      <div className='w-full flex justify-center flex-col p-2'>
         <div className='flex h-4/5 flex-col w-full sm:h-full justify-center lg:items-center sm:items-start'>
-          <div className='flex flex-row lg:w-1/2 sm:w-full p-2'>
+          <div className='flex flex-row p-0.5'>
             <h1
               variant='h1'
-              className='font-rubik text-2xl sm:text-sm lowercase tracking-tight font-medium leading-6 w-1/2'
+              className='font-rubik lowercase tracking-tight font-medium leading-2 w-1/2'
             >
               location:
             </h1>
 
             <h3
               variant='h3'
-              className='font-roboto text-xl sm:text-base tracking-tight leading-6 w-1/2 flex items-center'
+              className='font-roboto tracking-tight leading-2 w-1/2'
             >
               {run.location}
             </h3>
           </div>
-          <div className='flex flex-row  lg:w-1/2 sm:w-full p-2'>
+          <div className='flex flex-row p-0.5'>
             <h1
               variant='h1'
-              className='font-rubik text-2xl sm:text-lg lowercase tracking-tight font-medium leading-6 w-1/2'
+              className='font-rubik lowercase tracking-tight font-medium leading-2 w-1/2'
             >
               date:
             </h1>
 
             <h3
               variant='h3'
-              className='font-roboto text-xl sm:text-base tracking-tight leading-6 w-1/2 flex items-center'
+              className='font-roboto tracking-tight leading-2 w-1/2'
             >
               {run.date}
             </h3>
           </div>
-          <div className='flex flex-row  lg:w-1/2 sm:w-full p-2'>
+          <div className='flex flex-row p-0.5'>
             <h1
               variant='h1'
-              className='font-rubik text-2xl sm:text-lg lowercase tracking-tight font-medium leading-6 w-1/2'
+              className='font-rubik lowercase tracking-tight font-medium leading-2 w-1/2'
             >
               price:
             </h1>
 
             <h3
               variant='h3'
-              className='font-roboto text-xl sm:text-base tracking-tight leading-6 w-1/2 flex items-center'
+              className='font-roboto tracking-tight leading-2 w-1/2'
             >
               ${run.price}
             </h3>
           </div>
-          <div className='flex flex-row  lg:w-1/2 sm:w-full p-2'>
+          <div className='flex flex-row p-0.5'>
             <h1
               variant='h1'
-              className='font-rubik text-2xl sm:text-lg lowercase tracking-tight font-medium leading-6 w-1/2'
+              className='font-rubik lowercase tracking-tight font-medium leading-2 w-1/2'
             >
               spots:
             </h1>
 
             <h3
               variant='h3'
-              className='font-roboto text-xl sm:text-base tracking-tight leading-6 w-1/2 flex items-center'
+              className='font-roboto tracking-tight leading-2 w-1/2'
             >
               {run.users.length}/{run.capacity}
             </h3>
@@ -85,15 +85,15 @@ const RunInfoCard = ({ run }) => {
         <div className='w-full flex justify-center p-2 sm:items-center'>
           <button
             type='submit'
-            className='transition-all duration-300 lg:w-1/2 sm:w-4/6 sm:h-12 sm:items-center flex flex-row align-middle justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white lg:py-2 lg:px-4 border border-black hover:border-transparent rounded'
+            className='w-2/3 transition-all duration-300 flex flex-row align-middle items-center justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white border border-black hover:border-transparent rounded'
           >
-            <IconContext.Provider value={{ style: { fontSize: '1.7rem' } }}>
+            <IconContext.Provider value={{ style: { fontSize: '1.2rem' } }}>
               <MdShoppingCart />
             </IconContext.Provider>
 
             <h3
               variant='h3'
-              className='font-roboto tracking-tight leading-6 p-1 sm:text-sm'
+              className='font-roboto tracking-tight leading-6 p-1 text-sm'
             >
               ADD TO CART
             </h3>
