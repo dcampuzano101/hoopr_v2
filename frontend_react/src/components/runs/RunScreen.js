@@ -26,9 +26,9 @@ const RunScreen = ({ params }) => {
   return (
     <>
       {run?.geoLocation && run?.users && (
-        <div className='p-0.5 h-full w-full flex flex-col shadow-lg border border-black border-opacity-50 rounded'>
+        <div className='p-0.5 h-full w-full flex flex-col xl:flex-row shadow-lg border border-black border-opacity-50 rounded'>
           <div
-            className='w-full h-1/2 border-2 border-red-500'
+            className='w-full h-1/2 xl:h-full border-2 border-red-500'
           >
             <GoogleMap
               geoLocation={run?.geoLocation}
@@ -36,18 +36,18 @@ const RunScreen = ({ params }) => {
               screen={true}
             />
           </div>
-          <div className='w-full h-1/2 flex flex-wrap flex-row'>
+          <div className='w-full h-1/2 xl:h-full flex flex-wrap flex-row'>
             <div className='h-1/2 w-full flex flex-col justify-center'>
               <div className='flex justify-center'>
                 <h1 className='font-rubik uppercase tracking-tight font-medium leading-6'>
                   Players
                 </h1>
               </div>
-              <div className='grid grid-cols-5 gap-0.5 justify-items-center'>
+              <div className='grid grid-cols-5 gap-0.5 xl:gap-5 justify-items-center'>
                 {runUsers?.map((user, idx) => (
                   <div className=''>
                     <div
-                      className='shadow rounded w-8 h-8 align-middle border-none'
+                      className='shadow rounded w-8 h-8 xl:w-20 xl:h-20 align-middle border-none'
                       style={{
                         backgroundImage: `url(${user.profilePhoto})`,
                         backgroundSize: 'cover',
@@ -58,66 +58,68 @@ const RunScreen = ({ params }) => {
               </div>
             </div>
             <div className='h-1/2 w-full flex flex-col justify-center'>
-              <div className='ml-4 h-4/5 w-full xl:w-1/4  justify-center flex flex-col'>
-                <div className='flex flex-row p-0.5'>
-                  <h1
-                    variant='h1'
-                    className='font-rubik  lowercase tracking-tight font-medium leading-2 w-1/2'
-                  >
-                    location:
-                  </h1>
+              <div className="xl:h-full xl:w-full flex justify-center">
+                <div className='ml-4 h-4/5 w-full xl:w-1/2  justify-center flex flex-col'>
+                  <div className='flex flex-row p-0.5'>
+                    <h1
+                      variant='h1'
+                      className='font-rubik xl:text-xl lowercase tracking-tight font-medium leading-2 w-1/2'
+                    >
+                      location:
+                    </h1>
 
-                  <h3
-                    variant='h3'
-                    className='font-roboto  tracking-tight leading-2 w-1/2'
-                  >
-                    {run.location}
-                  </h3>
-                </div>
-                <div className='flex flex-row p-0.5'>
-                  <h1
-                    variant='h1'
-                    className='font-rubik  lowercase tracking-tight font-medium leading-2 w-1/2'
-                  >
-                    date:
-                  </h1>
+                    <h3
+                      variant='h3'
+                      className='font-roboto xl:text-xl tracking-tight leading-2 w-1/2'
+                    >
+                      {run.location}
+                    </h3>
+                  </div>
+                  <div className='flex flex-row p-0.5'>
+                    <h1
+                      variant='h1'
+                      className='font-rubik xl:text-xl lowercase tracking-tight font-medium leading-2 w-1/2'
+                    >
+                      date:
+                    </h1>
 
-                  <h3
-                    variant='h3'
-                    className='font-roboto  tracking-tight leading-2 w-1/2'
-                  >
-                    {run.date}
-                  </h3>
-                </div>
-                <div className='flex flex-row p-0.5'>
-                  <h1
-                    variant='h1'
-                    className='font-rubik  lowercase tracking-tight font-medium leading-2 w-1/2'
-                  >
-                    price:
-                  </h1>
+                    <h3
+                      variant='h3'
+                      className='font-roboto xl:text-xl tracking-tight leading-2 w-1/2'
+                    >
+                      {run.date}
+                    </h3>
+                  </div>
+                  <div className='flex flex-row p-0.5'>
+                    <h1
+                      variant='h1'
+                      className='font-rubik xl:text-xl lowercase tracking-tight font-medium leading-2 w-1/2'
+                    >
+                      price:
+                    </h1>
 
-                  <h3
-                    variant='h3'
-                    className='font-roboto  tracking-tight leading-2 w-1/2'
-                  >
-                    ${run.price}
-                  </h3>
-                </div>
-                <div className='flex flex-row p-0.5'>
-                  <h1
-                    variant='h1'
-                    className='font-rubik  lowercase tracking-tight font-medium leading-2 w-1/2'
-                  >
-                    spots:
-                  </h1>
+                    <h3
+                      variant='h3'
+                      className='font-roboto xl:text-xl tracking-tight leading-2 w-1/2'
+                    >
+                      ${run.price}
+                    </h3>
+                  </div>
+                  <div className='flex flex-row p-0.5'>
+                    <h1
+                      variant='h1'
+                      className='font-rubik xl:text-xl lowercase tracking-tight font-medium leading-2 w-1/2'
+                    >
+                      spots:
+                    </h1>
 
-                  <h3
-                    variant='h3'
-                    className='font-roboto  tracking-tight leading-2 w-1/2'
-                  >
-                    {run.users.length}/{run.capacity}
-                  </h3>
+                    <h3
+                      variant='h3'
+                      className='font-roboto xl:text-xl tracking-tight leading-2 w-1/2'
+                    >
+                      {run.users.length}/{run.capacity}
+                    </h3>
+                  </div>
                 </div>
               </div>
               <div className='w-full flex justify-center p-2 sm:items-center'>
