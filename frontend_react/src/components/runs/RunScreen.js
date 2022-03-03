@@ -26,7 +26,7 @@ const RunScreen = ({ params }) => {
   return (
     <>
       {run?.geoLocation && run?.users && (
-        <div className='p-0.5 h-full w-full flex flex-wrap flex-col shadow-lg border border-black border-opacity-50 rounded'>
+        <div className='p-0.5 h-full w-full flex flex-col shadow-lg border border-black border-opacity-50 rounded'>
           <div
             className='w-full h-1/2 border-2 border-red-500'
           >
@@ -58,7 +58,7 @@ const RunScreen = ({ params }) => {
               </div>
             </div>
             <div className='h-1/2 w-full flex flex-col justify-center'>
-              <div className='h-4/5 w-1/2 xl:w-1/4  justify-center flex flex-col'>
+              <div className='ml-4 h-4/5 w-full xl:w-1/4  justify-center flex flex-col'>
                 <div className='flex flex-row p-0.5'>
                   <h1
                     variant='h1'
