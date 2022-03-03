@@ -71,7 +71,7 @@ const Modal = ({ Component, isModal }) => {
   };
   return (
     <div
-      className='flex z-10 w-full h-full bg-gray-200 justify-center items-center p-2'
+      className='flex z-10 w-full h-full bg-gray-200 justify-center items-center'
       onClick={handleClickOutside}
     >
       <div
