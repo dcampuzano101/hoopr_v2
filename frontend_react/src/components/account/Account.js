@@ -39,9 +39,9 @@ const Account = ({ location, history }) => {
 
   return (
     <>
-      <div className='w-full h-full'>
-        <div className='w-full h-full flex'>
-          <div className='border-blue border-4'>
+      <div className='max-w-full flex justify-center h-full'>
+        <div className='w-11/12 sm:p-0 h-full flex p-1 items-center'>
+          <div className='box-border h-full w-full flex flex-row flex-wrap justify-evenly overflow-y-auto scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-100 scrollbar-thin'>
             <ProfileCard />
             <UpcomingRuns />
           </div>

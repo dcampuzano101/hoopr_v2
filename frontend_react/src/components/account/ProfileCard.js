@@ -98,10 +98,10 @@ const ProfileCard = ({ location, history, match }) => {
   ]);
 
   return (
-    <div className='max-w-max m-2'>
-      <div className='flex flex-wrap w-full border-4 border-black h-full'>
+    <div className='box-border w-full h-full xl:w-4/5 xl:h-1/2 flex flex-wrap shadow-lg mb-3 mr-3 ml-3 xl:m-2 xl:mt-0 p-0.5 border border-black border-opacity-50 rounded'>
+      <div className='w-full h-full flex flex-wrap'>
         <div className='flex'>
-          <div className='h-full flex overflow-auto flex-col justify-between w-64 w-max-64 p-4'>
+          <div className='h-full flex overflow-auto flex-col justify-between w-max-full p-4'>
             <img
               src={profilePhoto}
               alt='avatar'
@@ -149,21 +149,6 @@ const ProfileCard = ({ location, history, match }) => {
               style={{ width: '100%', marginBottom: '9%' }}
               value='Save Photo'
             />
-            <button
-              type='submit'
-              className='transition-all duration-300 lg:w-1/2 sm:w-4/6 sm:h-12 sm:items-center flex flex-row align-middle justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white lg:py-2 lg:px-4 border border-black hover:border-transparent rounded'
-            >
-              <IconContext.Provider value={{ style: { fontSize: '1.7rem' } }}>
-                <MdShoppingCart />
-              </IconContext.Provider>
-
-              <h3
-                variant='h3'
-                className='font-roboto tracking-tight leading-6 p-1 sm:text-sm'
-              >
-                ADD TO CART
-              </h3>
-            </button>
           </div>
         </div>
       </div>
