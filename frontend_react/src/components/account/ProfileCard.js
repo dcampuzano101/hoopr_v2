@@ -65,6 +65,7 @@ const ProfileCard = ({ location, history, match }) => {
 
   const [open, setOpen] = React.useState(false);
   useEffect(() => {
+    console.log(open)
     if (!userInfo) {
       history.push('/login');
     } else {
@@ -141,14 +142,20 @@ const ProfileCard = ({ location, history, match }) => {
               showPreviews={true}
               showFileNamesInPreview={true}
             />
-
-            <input
+            {open || profilePhotoFile !== '' ? <input
               type='button'
               onClick={imgUploadHandler}
               disabled={btnDisabled}
               style={{ width: '100%', marginBottom: '9%' }}
               value='Save Photo'
-            />
+            /> : null}
+            {/* <input
+              type='button'
+              onClick={imgUploadHandler}
+              disabled={btnDisabled}
+              style={{ width: '100%', marginBottom: '9%' }}
+              value='Save Photo'
+            /> */}
           </div>
         </div>
       </div>
