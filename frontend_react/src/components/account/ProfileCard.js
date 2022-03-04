@@ -73,7 +73,6 @@ const ProfileCard = ({ location, history, match }) => {
       }
 
       if (successDetails) {
-        debugger;
         setUsername(user.username);
         setEmail(user.email);
         setProfilePhoto(user.profilePhoto || null);

@@ -39,13 +39,11 @@ const Account = ({ location, history }) => {
 
   return (
     <>
-      <div className='max-w-full flex justify-center h-full'>
-        <div className='w-11/12 sm:p-0 h-full flex p-5 items-center'>
-          <div className='box-border h-full flex flex-row flex-wrap w-full align-middle justify-center border-black border-4 px-5'>
-            <div className='w-3/4 border-blue border-4 flex flex-row p-5'>
-              <ProfileCard />
-              <UpcomingRuns />
-            </div>
+      <div className='w-full h-full'>
+        <div className='w-full h-full flex'>
+          <div className='border-blue border-4'>
+            <ProfileCard />
+            <UpcomingRuns />
           </div>
         </div>
       </div>

@@ -52,7 +52,6 @@ export const listUsers = (page, limit) => async (dispatch) => {
 };
 
 export const login = (email, password) => async (dispatch) => {
-  debugger;
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
@@ -163,7 +162,6 @@ export const register = (username, email, password) => async (dispatch) => {
 };
 
 export const getUserDetails = () => async (dispatch, getState) => {
-  debugger;
   try {
     dispatch({
       type: USER_DETAILS_REQUEST,
