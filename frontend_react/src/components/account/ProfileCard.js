@@ -99,67 +99,74 @@ const ProfileCard = ({ location, history, match }) => {
   ]);
 
   return (
-    <div className='box-border w-full h-full xl:w-4/5 xl:h-1/2 flex flex-wrap shadow-lg mb-3 mr-3 ml-3 xl:m-2 xl:mt-0 p-0.5 border border-black border-opacity-50 rounded'>
+    <div className='box-border w-full h-fit xl:w-4/5 xl:h-1/2 flex flex-wrap shadow-lg m-3 xl:m-2 xl:mt-0 p-0.5 border border-black border-opacity-50 rounded'>
       <div className='w-full h-full flex flex-wrap'>
-        <div className='flex'>
-          <div className='h-full flex overflow-auto flex-col justify-between w-max-full p-4'>
-            <img
-              src={profilePhoto}
-              alt='avatar'
-              style={{
-                width: '100%',
-                borderRadius: '5px',
-                marginBottom: '2px',
-              }}
-            />
+        <div className='box-content h-fit flex justify-center overflow-auto flex-col w-max-full p-0.5'>
+          <img
+            src={profilePhoto}
+            alt='avatar'
+            style={{
+              width: '100%',
+              borderRadius: '5px',
+              marginBottom: '2px',
+            }}
 
-            <input
-              type='button'
+          />
+          <div className='w-full flex justify-center p-2 sm:items-center'>
+            <button
+              type='submit'
               onClick={() => setOpen(true)}
-              style={{ width: '100%', marginBottom: '9%' }}
-              value='Change Photo'
-            />
+              className='w-2/3 xl:w-1/4 transition-all duration-300 flex flex-row align-middle items-center justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white border border-black hover:border-transparent rounded'
+            >
 
-            <DropzoneDialog
-              acceptedFiles={['image/*']}
-              cancelButtonText={'cancel'}
-              submitButtonText={'submit'}
-              maxFileSize={5000000}
-              open={open}
-              onClose={() => setOpen(false)}
-              onSave={(files) => {
-                const file = files[0];
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onloadend = () => {
-                  setBtnDisabled(false);
-                  setProfilePhotoFile(file);
-                  setProfilePhoto(reader.result);
-                };
+              <h3
+                variant='h3'
+                className='font-roboto tracking-tight uppercase leading-6 p-1 text-sm'
+              >
+                change photo
+              </h3>
+            </button>
+          </div>
+          <DropzoneDialog
+            acceptedFiles={['image/*']}
+            cancelButtonText={'cancel'}
+            submitButtonText={'submit'}
+            maxFileSize={5000000}
+            open={open}
+            onClose={() => setOpen(false)}
+            onSave={(files) => {
+              const file = files[0];
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onloadend = () => {
+                setBtnDisabled(false);
+                setProfilePhotoFile(file);
+                setProfilePhoto(reader.result);
+              };
 
-                setOpen(false);
-              }}
-              showPreviews={true}
-              showFileNamesInPreview={true}
-            />
-            {open || profilePhotoFile !== '' ? <input
-              type='button'
-              onClick={imgUploadHandler}
-              disabled={btnDisabled}
-              style={{ width: '100%', marginBottom: '9%' }}
-              value='Save Photo'
-            /> : null}
-            {/* <input
+              setOpen(false);
+            }}
+            showPreviews={true}
+            showFileNamesInPreview={true}
+          />
+          {open || profilePhotoFile !== '' ? <input
+            type='button'
+            onClick={imgUploadHandler}
+            disabled={btnDisabled}
+            style={{ width: '100%', marginBottom: '9%' }}
+            value='Save Photo'
+          /> : null}
+          {/* <input
               type='button'
               onClick={imgUploadHandler}
               disabled={btnDisabled}
               style={{ width: '100%', marginBottom: '9%' }}
               value='Save Photo'
             /> */}
-          </div>
         </div>
+
       </div>
-    </div>
+    </div >
   );
 };
 
