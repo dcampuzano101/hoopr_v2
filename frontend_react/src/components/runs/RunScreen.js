@@ -36,8 +36,8 @@ const RunScreen = ({ params }) => {
               screen={true}
             />
           </div>
-          <div className='w-full h-1/2 xl:h-full flex flex-wrap flex-row'>
-            <div className='h-1/2 w-full flex flex-col justify-center'>
+          <div className='w-full h-fit xl:h-full flex flex-wrap flex-row'>
+            <div className='h-fit w-full flex flex-col justify-center'>
               <div className='flex justify-center'>
                 <h1 className='font-rubik uppercase tracking-tight font-medium leading-6'>
                   Players
@@ -59,7 +59,7 @@ const RunScreen = ({ params }) => {
             </div>
             <div className='h-1/2 w-full flex flex-col justify-center'>
               <div className="xl:h-full xl:w-full flex justify-center">
-                <div className='ml-4 h-4/5 w-full xl:w-1/2  justify-center flex flex-col'>
+                <div className='ml-4 h-fit w-full xl:w-1/2  justify-center flex flex-col'>
                   <div className='flex flex-row p-0.5'>
                     <h1
                       variant='h1'
@@ -122,7 +122,7 @@ const RunScreen = ({ params }) => {
                   </div>
                 </div>
               </div>
-              <div className='w-full flex justify-center p-2 sm:items-center'>
+              <div className='w-full flex justify-center sm:items-center'>
                 <button
                   type='submit'
                   className='w-2/3 xl:w-1/4 transition-all duration-300 flex flex-row align-middle items-center justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white border border-black hover:border-transparent rounded'
