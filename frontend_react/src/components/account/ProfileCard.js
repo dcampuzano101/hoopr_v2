@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetails, updateUserProfile } from '../../actions/userActions';
 import { mediaToAWS } from '../../actions/awsAction';
-import { IconContext } from 'react-icons';
-import { MdShoppingCart } from 'react-icons/md';
-
 // import avatar from '../../assets/user-avatar.png';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import { DropzoneDialog } from 'material-ui-dropzone';
 
 // import { Button, TextField } from '@material-ui/core';
