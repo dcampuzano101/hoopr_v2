@@ -29,62 +29,61 @@ const UpcomingRuns = () => {
       return <h1>No Upcoming Runs</h1>;
     } else {
       return (
-        <div>
-          <div className='flex'>
-            <h1>Upcoming Runs</h1>
-            <table className='table-auto min-w-full'>
-              <thead className='border-b'>
-                <tr>
-                  <th
-                    scope='col'
-                    className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                  >
-                    Date
-                  </th>
-                  <th
-                    scope='col'
-                    className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                  >
-                    Location
-                  </th>
-                  <th
-                    scope='col'
-                    className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                  >
-                    Price
-                  </th>
-                  <th
-                    scope='col'
-                    className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                  >
-                    Capacity
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {user &&
-                  runs &&
-                  userRuns.map((run) => (
-                    <React.Fragment key={run._id}>
-                      <tr className='border-b'>
-                        <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
-                          {run.date}
-                        </td>
-                        <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
-                          {run.location}
-                        </td>
-                        <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
-                          ${run.price}
-                        </td>
-                        <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
-                          {run.capacity}
-                        </td>
-                      </tr>
-                    </React.Fragment>
-                  ))}
-              </tbody>
-            </table>
-          </div>
+
+        <div className='flex w-full flex-col'>
+          <h1>Upcoming Runs</h1>
+          <table className='table-auto'>
+            <thead className='border-b'>
+              <tr>
+                <th
+                  scope='col'
+                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                >
+                  Date
+                </th>
+                <th
+                  scope='col'
+                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                >
+                  Location
+                </th>
+                <th
+                  scope='col'
+                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                >
+                  Price
+                </th>
+                <th
+                  scope='col'
+                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
+                >
+                  Capacity
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {user &&
+                runs &&
+                userRuns.map((run) => (
+                  <React.Fragment key={run._id}>
+                    <tr className='border-b'>
+                      <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+                        {run.date}
+                      </td>
+                      <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+                        {run.location}
+                      </td>
+                      <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+                        ${run.price}
+                      </td>
+                      <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+                        {run.capacity}
+                      </td>
+                    </tr>
+                  </React.Fragment>
+                ))}
+            </tbody>
+          </table>
         </div>
       );
     }
@@ -154,8 +153,8 @@ const UpcomingRuns = () => {
   };
 
   return (
-    <div className='flex w-2/3 flex-row'>
-      <div className='xl:w-full xl:h-full'>
+    <div className='box-border w-full h-fit xl:w-4/5 xl:h-1/2 flex flex-wrap shadow-lg m-3 xl:m-2 xl:mt-0 p-0.5 border border-black border-opacity-50 rounded'>
+      <div className='w-full h-full flex flex-wrap'>
         {!loading && !loadingRuns && user && successDetails ? (
           displayRunsForUser()
         ) : (
@@ -169,7 +168,7 @@ const UpcomingRuns = () => {
           <Spinner />
         )}
       </div>
-    </div>
+    </div >
   );
 };
 
