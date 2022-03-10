@@ -32,11 +32,16 @@ const UpcomingRuns = () => {
       return (
 
         <div className='flex w-full flex-col'>
-          <h1>Upcoming Runs</h1>
+          <div className="flex justify-center">
+            <h1>Upcoming Runs</h1>
+          </div>
+
           {user &&
             runs &&
             userRuns.map((run) => (
-              <RunInfoCard run={run} />
+              <div className="m-1 w-fit h-fit xl:w-4/5 xl:h-1/2 flex flex-wrap shadow-lg p-0.5 border border-black border-opacity-50 rounded">
+                <RunInfoCard run={run} profile />
+              </div>
             ))}
 
         </div>
@@ -78,7 +83,7 @@ const UpcomingRuns = () => {
           <Spinner />
         )}
       </div>
-      <div className='xl:w-full xl:h-full'>
+      <div className='w-full h-fit flex flex-wrap'>
         {!loading && !loadingRuns && user && successDetails ? (
           displayWaitListForUser()
         ) : (

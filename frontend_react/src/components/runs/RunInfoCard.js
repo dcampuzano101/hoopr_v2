@@ -7,12 +7,14 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '../../actions/modalActions';
 import { getUsersForRun } from '../../actions/runActions';
 
-const RunInfoCard = ({ run }) => {
+const RunInfoCard = ({ run, profile }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+
   return (
     <div
-      className='w-full h-1/3 xl:h-1/2 flex cursor-pointer'
+      // className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}
+      className={!profile ? 'w-full h-1/3 xl:h-1/2 flex cursor-pointer' : 'w-full h-full'}
       onClick={() => {
         dispatch(openModal('RunScreen'));
         dispatch(getUsersForRun(run._id, run.users));
@@ -82,23 +84,26 @@ const RunInfoCard = ({ run }) => {
             </h3>
           </div>
         </div>
-        <div className='w-full flex justify-center p-2 sm:items-center'>
-          <button
-            type='submit'
-            className='w-2/3 xl:w-1/4 transition-all duration-300 flex flex-row align-middle items-center justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white border border-black hover:border-transparent rounded'
-          >
-            <IconContext.Provider value={{ style: { fontSize: '1.2rem' } }}>
-              <MdShoppingCart />
-            </IconContext.Provider>
-
-            <h3
-              variant='h3'
-              className='font-roboto tracking-tight leading-6 p-1 text-sm'
+        {!profile &&
+          <div className='w-full flex justify-center p-2 sm:items-center'>
+            <button
+              type='submit'
+              className='w-2/3 xl:w-1/4 transition-all duration-300 flex flex-row align-middle items-center justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white border border-black hover:border-transparent rounded'
             >
-              ADD TO CART
-            </h3>
-          </button>
-        </div>
+              <IconContext.Provider value={{ style: { fontSize: '1.2rem' } }}>
+                <MdShoppingCart />
+              </IconContext.Provider>
+
+              <h3
+                variant='h3'
+                className='font-roboto tracking-tight leading-6 p-1 text-sm'
+              >
+                ADD TO CART
+              </h3>
+            </button>
+          </div>
+        }
+
       </div>
     </div>
   );
