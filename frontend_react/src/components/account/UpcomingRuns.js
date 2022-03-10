@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Spinner from '../util/spinner';
+import RunInfoCard from '../runs/RunInfoCard'
 
 const UpcomingRuns = () => {
   const userDetails = useSelector((state) => state.userDetails);
@@ -32,58 +33,12 @@ const UpcomingRuns = () => {
 
         <div className='flex w-full flex-col'>
           <h1>Upcoming Runs</h1>
-          <table className='table-auto'>
-            <thead className='border-b'>
-              <tr>
-                <th
-                  scope='col'
-                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                >
-                  Date
-                </th>
-                <th
-                  scope='col'
-                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                >
-                  Location
-                </th>
-                <th
-                  scope='col'
-                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                >
-                  Price
-                </th>
-                <th
-                  scope='col'
-                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                >
-                  Capacity
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {user &&
-                runs &&
-                userRuns.map((run) => (
-                  <React.Fragment key={run._id}>
-                    <tr className='border-b'>
-                      <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
-                        {run.date}
-                      </td>
-                      <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
-                        {run.location}
-                      </td>
-                      <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
-                        ${run.price}
-                      </td>
-                      <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
-                        {run.capacity}
-                      </td>
-                    </tr>
-                  </React.Fragment>
-                ))}
-            </tbody>
-          </table>
+          {user &&
+            runs &&
+            userRuns.map((run) => (
+              <RunInfoCard run={run} />
+            ))}
+
         </div>
       );
     }
