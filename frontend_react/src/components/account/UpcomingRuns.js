@@ -56,53 +56,15 @@ const UpcomingRuns = () => {
       return <h1>Wait list is empty</h1>;
     } else {
       return (
-        <>
-          <h2>Wait listed runs</h2>
-          <table className='table-auto min-w-full'>
-            <thead className='border-b'>
-              <tr>
-                <th
-                  scope='col'
-                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                >
-                  Date
-                </th>
-                <th
-                  scope='col'
-                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                >
-                  Location
-                </th>
-                <th
-                  scope='col'
-                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                >
-                  Price
-                </th>
-                <th
-                  scope='col'
-                  className='text-sm font-medium text-gray-900 px-6 py-4 text-left'
-                >
-                  Capacity
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {user &&
-                runs &&
-                userWaitList.map((run) => (
-                  <React.Fragment key={run._id}>
-                    <tr>
-                      <td>{run.date}</td>
-                      <td>{run.location}</td>
-                      <td>${run.price}</td>
-                      <td>{run.capacity}</td>
-                    </tr>
-                  </React.Fragment>
-                ))}
-            </tbody>
-          </table>
-        </>
+        <div className='flex w-full flex-col'>
+          <h1>Upcoming Runs</h1>
+          {user &&
+            runs &&
+            userWaitList.map((run) => (
+              <RunInfoCard run={run} />
+            ))}
+
+        </div>
       );
     }
   };
