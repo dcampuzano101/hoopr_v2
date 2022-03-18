@@ -156,6 +156,39 @@ const ProfileCard = ({ location, history, match }) => {
           style={{ width: '100%', marginBottom: '9%' }}
           value='Save Photo'
         /> : null}
+        <div id="userInfo" className="w-full flex flex-wrap p-1">
+          <div className="flex w-full">
+            <h1
+              variant='h1'
+              className='w-1/4 font-rubik  lowercase tracking-tight font-medium leading-2 w-1/2'
+            >
+              username:
+            </h1>
+
+            <h3
+              variant='h3'
+              className='w-3/4 pl-1 font-roboto  tracking-tight leading-2 w-1/2'
+            >
+              {username}
+            </h3>
+          </div>
+          <div className="flex w-full">
+            <h1
+              variant='h1'
+              className='w-1/4 font-rubik  lowercase tracking-tight font-medium leading-2 w-1/2'
+            >
+              email:
+            </h1>
+
+            <h3
+              variant='h3'
+              className='w-3/4 pl-1 font-roboto  tracking-tight leading-2 w-1/2'
+            >
+              {email}
+            </h3>
+          </div>
+
+        </div>
         {/* <input
               type='button'
               onClick={imgUploadHandler}
@@ -164,6 +197,7 @@ const ProfileCard = ({ location, history, match }) => {
               value='Save Photo'
             /> */}
       </div>
+
     </div >
   );
 };
