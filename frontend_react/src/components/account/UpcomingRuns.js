@@ -75,7 +75,7 @@ const UpcomingRuns = () => {
   };
 
   return (
-    <div className='box-border w-full h-fit xl:w-4/5 xl:h-1/2 flex flex-wrap shadow-lg m-3 xl:m-2 xl:mt-0 p-0.5 border border-black border-opacity-50 rounded'>
+    <div className='box-border w-full h-fit xl:w-3/4 xl:h-full flex flex-wrap shadow-lg m-3 xl:m-2 xl:mt-0 p-0.5 border border-black border-opacity-50 rounded'>
       <div className='w-full h-full flex flex-wrap'>
         {!loading && !loadingRuns && user && successDetails ? (
           displayRunsForUser()
