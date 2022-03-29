@@ -14,7 +14,7 @@ const RunInfoCard = ({ run, profile }) => {
   return (
     <div
       // className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}
-      className={!profile ? 'w-full h-1/3 xl:h-1/2 flex cursor-pointer' : 'w-full h-full'}
+      className={!profile ? 'w-full h-1/3 xl:h-full flex cursor-pointer' : 'w-full h-full'}
       onClick={() => {
         dispatch(openModal('RunScreen'));
         dispatch(getUsersForRun(run._id, run.users));
@@ -22,7 +22,7 @@ const RunInfoCard = ({ run, profile }) => {
       }}
     >
       <div className='w-full flex justify-center items-center flex-col p-2'>
-        <div className='h-4/5 w-1/2 xl:w-1/4  justify-center flex flex-col'>
+        <div className='h-4/5 w-1/2 xl:w-1/2  justify-center flex flex-col'>
           <div className='flex flex-row p-0.5'>
             <h1
               variant='h1'
@@ -88,7 +88,7 @@ const RunInfoCard = ({ run, profile }) => {
           <div className='w-full flex justify-center p-2 sm:items-center'>
             <button
               type='submit'
-              className='w-2/3 xl:w-1/4 transition-all duration-300 flex flex-row align-middle items-center justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white border border-black hover:border-transparent rounded'
+              className='w-2/3 xl:w-1/2 transition-all duration-300 flex flex-row align-middle items-center justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white border border-black hover:border-transparent rounded'
             >
               <IconContext.Provider value={{ style: { fontSize: '1.2rem' } }}>
                 <MdShoppingCart />

@@ -19,6 +19,10 @@ module.exports = {
       gridTemplateRows: {
         pancake: '1fr 4fr 1fr',
       },
+      spacing: {
+        '9/10': '90%',
+        '95/100': '95%',
+      }
     },
   },
   variants: {
