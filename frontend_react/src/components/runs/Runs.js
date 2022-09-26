@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 // import { makeStyles, Theme } from '@material-ui/core/styles'
 // import {
 //   Grid,
@@ -10,15 +10,15 @@ import React, { useState, useEffect } from 'react';
 //   CircularProgress
 // } from '@material-ui/core'
 // import { Search, SportsBasketball, FiberManualRecord } from '@material-ui/icons'
-import RunInfoCard from './RunInfoCard';
+import RunInfoCard from "./RunInfoCard";
 // import moment from 'moment'
 // import { RunListState } from '../reducers/runReducers';
-import { useDispatch, useSelector } from 'react-redux';
-import { listRuns } from '../../actions/runActions';
-import GoogleMap from '../GoogleMap';
+import { useDispatch, useSelector } from "react-redux";
+import { listRuns } from "../../actions/runActions";
+import GoogleMap from "../GoogleMap";
 
 // import { useLocation } from 'react-router-dom'
-import { useInView } from 'react-intersection-observer';
+import { useInView } from "react-intersection-observer";
 
 const Runs = () => {
   const [ref, inView, entry] = useInView({
@@ -47,6 +47,7 @@ const Runs = () => {
     }
   };
   useEffect(() => {
+    console.log(runList);
     dispatch(listRuns(page, limit));
   }, [page, limit, dispatch]);
 
@@ -56,10 +57,10 @@ const Runs = () => {
         <div className='max-w-full flex justify-center h-full'>
           <div className='w-11/12 sm:p-0 h-full flex p-1 items-center'>
             <div className='box-border h-full w-full flex flex-row flex-wrap justify-evenly overflow-y-auto scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-100 scrollbar-thin'>
-              <div className="w-full h-full flex flex-wrap">
+              <div className='w-full h-full flex flex-wrap'>
                 {runList.map((run, idx) => (
                   <div className='box-border w-full h-full xl:w-1/2 xl:h-1/2'>
-                    <div className="h-95/100 w-95/100 flex flex-wrap shadow-lg p-0.5 border border-black border-opacity-50 rounded">
+                    <div className='h-95/100 w-95/100 flex flex-wrap shadow-lg p-0.5 border border-black border-opacity-50 rounded'>
                       <div className='w-full h-full xl:h-1/2'>
                         <GoogleMap
                           name={run.location}
