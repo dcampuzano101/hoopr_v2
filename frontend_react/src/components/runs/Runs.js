@@ -1,23 +1,8 @@
 import React, { useState, useEffect } from "react";
-// import { makeStyles, Theme } from '@material-ui/core/styles'
-// import {
-//   Grid,
-//   // Paper,
-//   Card,
-//   Typography,
-//   TextField,
-//   InputAdornment,
-//   CircularProgress
-// } from '@material-ui/core'
-// import { Search, SportsBasketball, FiberManualRecord } from '@material-ui/icons'
 import RunInfoCard from "./RunInfoCard";
-// import moment from 'moment'
-// import { RunListState } from '../reducers/runReducers';
 import { useDispatch, useSelector } from "react-redux";
 import { listRuns } from "../../actions/runActions";
 import GoogleMap from "../GoogleMap";
-
-// import { useLocation } from 'react-router-dom'
 import { useInView } from "react-intersection-observer";
 
 const Runs = () => {
@@ -55,7 +40,7 @@ const Runs = () => {
     <>
       {runList ? (
         <div className='max-w-full flex justify-center h-full'>
-          <div className='w-11/12 sm:p-0 h-full flex p-1 items-center'>
+          <div className='sm:p-0 h-full flex p-1 items-center'>
             <div className='box-border h-full w-full flex flex-row flex-wrap justify-evenly overflow-y-auto scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-100 scrollbar-thin'>
               <div className='w-full h-full flex flex-wrap'>
                 {runList.map((run, idx) => (

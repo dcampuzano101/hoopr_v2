@@ -29,9 +29,9 @@ const App = () => {
 
   const isModal = location.state && location.state.modal;
   return (
-    <div className='w-screen border-black border-4 h-screen bg-gray-200 bg-opacity-25 flex flex-col justify-between'>
+    <div className='h-screen flex flex-col justify-between'>
       <NavBar />
-      <div className='h-6/8'>
+      <div className='h-full my-3'>
         <Switch>
           <Route path='/runs' component={Runs} />
           <Route path='/orders' component={Orders} />
