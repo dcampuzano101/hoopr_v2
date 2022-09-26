@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = ({ history }) => {
   return (
-    <div className='border-white border-4 flex flex-row box-border w-screen h-1/6'>
+    <div className='border-white border-4 flex flex-row box-border w-screen h-1/8'>
       <div className='w-1/3 h-full flex-initial border-black border-4 flex justify-center items-center'>
         <Link
           to='/'

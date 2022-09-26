@@ -1,18 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation } from "react-router-dom";
 // import { useSelector } from 'react-redux'
-import Runs from './components/runs/Runs';
-import Orders from './components/Orders';
-import Users from './components/Users';
-import Drawer from './components/Drawer';
-import Modal from './components/Modal';
-import RunScreen from './components/runs/RunScreen';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
-import Account from './components/account/Account';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
+import Runs from "./components/runs/Runs";
+import Orders from "./components/Orders";
+import Users from "./components/Users";
+import Drawer from "./components/Drawer";
+import Modal from "./components/Modal";
+import RunScreen from "./components/runs/RunScreen";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import Account from "./components/account/Account";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 // import { ModalState } from './reducers/modalReducer'
 
@@ -31,7 +31,7 @@ const App = () => {
   return (
     <div className='w-screen border-black border-4 h-screen bg-gray-200 bg-opacity-25 flex flex-col justify-between'>
       <NavBar />
-      <div className='h-4/6'>
+      <div className='h-6/8'>
         <Switch>
           <Route path='/runs' component={Runs} />
           <Route path='/orders' component={Orders} />
