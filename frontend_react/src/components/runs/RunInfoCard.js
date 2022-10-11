@@ -15,9 +15,7 @@ const RunInfoCard = ({ run, profile }) => {
     <div
       // className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}
       className={
-        !profile
-          ? "w-full h-1/2 xl:h-full flex cursor-pointer"
-          : "w-full h-full"
+        !profile ? "w-full h-1/2 xl:h-1/2 flex cursor-pointer" : "w-full h-full"
       }
       onClick={() => {
         dispatch(openModal("RunScreen"));
