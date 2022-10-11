@@ -44,7 +44,7 @@ const Runs = () => {
             <div className='box-border h-full w-full flex flex-row flex-wrap justify-evenly overflow-y-auto scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-100 scrollbar-thin'>
               <div className='w-full h-full flex flex-wrap'>
                 {runList.map((run, idx) => (
-                  <div className='m-3 mb-10 box-border w-5/6 h-4/6 xl:w-1/2 xl:h-1/2 mx-auto '>
+                  <div className='m-3 mb-10 box-border w-5/6 h-4/6 xl:w-5/12 xl:h-1/2 mx-auto '>
                     <div className='h-full w-full flex flex-wrap shadow-lg p-0.5 border border-black border-opacity-50 rounded'>
                       <div className='w-full h-full xl:h-1/2'>
                         <GoogleMap
