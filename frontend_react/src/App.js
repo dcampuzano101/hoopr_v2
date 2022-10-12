@@ -31,7 +31,7 @@ const App = () => {
   return (
     <div className='h-screen flex flex-col justify-between'>
       <NavBar />
-      <div className='h-full xl:h-160 my-3'>
+      <div className='h-124 xl:h-160 xl:my-3'>
         <Switch>
           <Route path='/runs' component={Runs} />
           <Route path='/orders' component={Orders} />

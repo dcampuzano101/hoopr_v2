@@ -39,9 +39,9 @@ const Runs = () => {
   return (
     <>
       {runList ? (
-        <div className='max-w-full h-full flex flex-wrap scroll-auto scrollbar-thin'>
+        <div className='max-w-full h-full flex flex-wrap justify-center scroll-auto scrollbar-thin'>
           {runList.map((run, idx) => (
-            <div className='w-1/2 h-1/2 flex flex-wrap shadow-lg p-0.5 border border-black border-opacity-50 rounded'>
+            <div className='w-10/12 h-95/100 m-4 xl:w-5/12 xl:h-1/2 flex flex-wrap shadow-lg p-0.5 border border-black border-opacity-50 rounded'>
               <GoogleMap name={run.location} geoLocation={run.geoLocation} />
 
               <RunInfoCard run={run} />
