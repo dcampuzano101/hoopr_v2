@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 // import { makeStyles, Theme } from '@material-ui/core/styles';
 // import { Grid, Card } from '@material-ui/core/';
-import { useParams, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { RUN_DETAILS_RESET } from '../constants/runConstants';
+import { useParams, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { RUN_DETAILS_RESET } from "../constants/runConstants";
 
 // const useStyles = makeStyles(({ palette }: Theme) => ({
 //   modalOverlay: {
@@ -71,7 +71,7 @@ const Modal = ({ Component, isModal }) => {
   };
   return (
     <div
-      className='flex z-10 w-full h-full bg-gray-200 justify-center items-center'
+      className='flex z-10 w-full h-full justify-center items-center'
       onClick={handleClickOutside}
     >
       <div

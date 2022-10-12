@@ -21,12 +21,8 @@ const LocationPin = ({ pinText }) => {
 };
 
 const GoogleMap = ({ geoLocation, name, screen }) => {
-  // const classes = useStyles();
-  // const theme = useTheme()
-  // const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
   return (
-    // <div className='lg:w-1/2 lg:h-full sm:w-full sm:h-1/2'>
-    <div className='w-full h-1/2'>
+    <div className={screen ? "w-full h-full" : "w-full h-1/2"}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
         center={{ lat: geoLocation.lat, lng: geoLocation.lng }}

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 // import { makeStyles, Theme } from '@material-ui/core/styles';
 // import { Typography, Grid, Avatar, IconButton } from '@material-ui/core/';
-import GoogleMap from '../GoogleMap';
-import { getRunDetails, getUsersForRun } from '../../actions/runActions';
-import { MdShoppingCart } from 'react-icons/md';
-import { IconContext } from 'react-icons';
-import { useSelector, useDispatch } from 'react-redux';
+import GoogleMap from "../GoogleMap";
+import { getRunDetails, getUsersForRun } from "../../actions/runActions";
+import { MdShoppingCart } from "react-icons/md";
+import { IconContext } from "react-icons";
+import { useSelector, useDispatch } from "react-redux";
 // import { RunDetailsState, UsersState } from '../../reducers/runReducers';
 // import { Run } from './Runs';
 // import { User } from './Users';
@@ -27,16 +27,14 @@ const RunScreen = ({ params }) => {
     <>
       {run?.geoLocation && run?.users && (
         <div className='p-0.5 h-full w-full flex flex-col xl:flex-row shadow-lg border border-black border-opacity-50 rounded'>
-          <div
-            className='w-full h-1/2 xl:h-full border-2 border-red-500'
-          >
+          <div className='w-full h-1/2 xl:h-full '>
             <GoogleMap
               geoLocation={run?.geoLocation}
               name={run?.name}
               screen={true}
             />
           </div>
-          <div className='w-full h-fit xl:h-full flex flex-wrap flex-row'>
+          <div className='w-full h-fit xl:h-full flex flex-wrap content-center flex-row'>
             <div className='h-fit w-full flex flex-col justify-center'>
               <div className='flex justify-center'>
                 <h1 className='font-rubik uppercase tracking-tight font-medium leading-6'>
@@ -50,7 +48,7 @@ const RunScreen = ({ params }) => {
                       className='shadow rounded w-8 h-8 xl:w-20 xl:h-20 align-middle border-none'
                       style={{
                         backgroundImage: `url(${user.profilePhoto})`,
-                        backgroundSize: 'cover',
+                        backgroundSize: "cover",
                       }}
                     ></div>
                   </div>
@@ -58,7 +56,7 @@ const RunScreen = ({ params }) => {
               </div>
             </div>
             <div className='h-1/2 w-full flex flex-col justify-center'>
-              <div className="xl:h-full xl:w-full flex justify-center">
+              <div className='xl:h-full xl:w-full flex justify-center'>
                 <div className='ml-4 h-fit w-full xl:w-1/2  justify-center flex flex-col'>
                   <div className='flex flex-row p-0.5'>
                     <h1
@@ -127,7 +125,9 @@ const RunScreen = ({ params }) => {
                   type='submit'
                   className='w-2/3 xl:w-1/4 transition-all duration-300 flex flex-row align-middle items-center justify-center cursor-pointer bg-transparent hover:bg-gray-900 font-semibold hover:text-white border border-black hover:border-transparent rounded'
                 >
-                  <IconContext.Provider value={{ style: { fontSize: '1.2rem' } }}>
+                  <IconContext.Provider
+                    value={{ style: { fontSize: "1.2rem" } }}
+                  >
                     <MdShoppingCart />
                   </IconContext.Provider>
 
